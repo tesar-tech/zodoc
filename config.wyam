@@ -1,7 +1,8 @@
 #recipe Docs
 
 // Customize your settings and add new ones here
-Settings[Keys.Host] = "host.com";
+Settings[Keys.Host] = "tesar-tech.github.io/zodoc";
 Settings[DocsKeys.Title] = "ZODOC";
+Settings[Keys.LinkRoot] = "/zodoc";
 
 // Add any pipeline customizations here
