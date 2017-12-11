@@ -1,16 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-	<link rel="self" href="http://tesar-tech.github.io/zodoc" />
-	<id>http://tesar-tech.github.io/zodoc</id>
+	<link rel="self" href="http://tesar-tech.github.io/zodoc/zodoc" />
+	<id>http://tesar-tech.github.io/zodoc/zodoc</id>
 	<title>ZODOC</title>
 	<rights>2017</rights>
-	<updated>2017-12-11T16:30:29Z</updated>
+	<updated>2017-12-11T16:35:03Z</updated>
 	<entry>
 		<author>
 			<name>me</name>
 		</author>
-		<link href="http://tesar-tech.github.io/zodoc/blog/new-release" />
-		<id>http://tesar-tech.github.io/zodoc/blog/new-release</id>
+		<link href="http://tesar-tech.github.io/zodoc/zodoc/blog/new-release" />
+		<id>http://tesar-tech.github.io/zodoc/zodoc/blog/new-release</id>
 		<title>New Release</title>
 		<updated>2016-01-01T00:00:00Z</updated>
 		<content>&lt;p&gt;There is a new release out, go get it now.&lt;/p&gt;
