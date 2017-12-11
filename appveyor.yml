@@ -5,7 +5,7 @@ branches:
 environment:
   access_token:
     # EDIT the encrypted version of your GitHub access token
-    secure: 440ed6aa43e51bb34f5fa3672463e16d6d809f52
+    secure: hTsWWC76zLQo/yk0xXODhPyDVUIH5sXOFYLb907zfvVDVqFhp1tY0t5C8QeklUG1
 
 install:
   - git submodule update --init --recursive
@@ -27,8 +27,8 @@ on_success:
   # See http://www.appveyor.com/docs/how-to/git-push for more info
   - git config --global credential.helper store
   # EDIT your Git email and name
-  - git config --global user.email $env:op_build_user_email
-  - git config --global user.name $env:op_build_user
+  - git config --global user.email "jan@tesar.tech"
+  - git config --global user.name "tesar-tech"
   - ps: Add-Content "$env:USERPROFILE\.git-credentials" "https://$($env:access_token):x-oauth-basic@github.com`n"
   - git checkout gh-pages
   - git rm -rf .
