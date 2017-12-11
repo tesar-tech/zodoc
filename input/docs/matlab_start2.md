@@ -1,7 +1,7 @@
 title: Basic Operations on Images 2
 Description: Second part of basic operation on images
 ---
->This whole document works with [image](../../assets/img/kytka256.jpg) in `A` variable. `A=imread('kytka256.jpg');`
+>This whole document works with [image](/zodoc/assets/img/kytka256.jpg) in `A` variable. `A=imread('kytka256.jpg');`
 
 
 

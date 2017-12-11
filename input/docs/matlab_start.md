@@ -1,13 +1,13 @@
 title: Basic Operations on Images 1
 Description: First part of basic operation on images
 ---
->This whole document works with [image](../../assets/img/kytka256.jpg) in `A` variable.
+>This whole document works with [image](/zodoc/assets/img/kytka256.jpg) in `A` variable.
 # Load and show image 
 ```matlab
 A=imread('kytka256.jpg');
 imshow(A))
 ```
-![](../../assets/img/kytka256.jpg)
+![](/zodoc/assets/img/kytka256.jpg)
 
 Image has to be in current folder !
 # Conver RGB image to gray scale 
