@@ -4,5 +4,5 @@
 Settings[Keys.Host] = "tesar-tech.github.io/zodoc";
 Settings[DocsKeys.Title] = "ZODOC";
 Settings[Keys.LinkRoot] = "/zodoc";
+Settings[DocsKeys.Logo] = "/assets/img/logo.png";
 
-// Add any pipeline customizations here
