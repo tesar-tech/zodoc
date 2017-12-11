@@ -6,6 +6,7 @@ Description: Second part of basic operation on images
 
 
 # Image values to range from 0 to 1 in double
+
 ```
 A = mat2gray(A);
 imshow(A)
