@@ -1,22 +1,20 @@
-﻿<!DOCTYPE html>
-<html>
-    <head>
+﻿<!DOCTYPE html><html><head>
         <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-        <meta name="description" />
-        <meta name="keywords" content="static content generator,static site generator,static site,HTML,web development,.NET,C#,Razor,Markdown,YAML" />
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+        <meta name="description">
+        <meta name="keywords" content="static content generator,static site generator,static site,HTML,web development,.NET,C#,Razor,Markdown,YAML">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="shortcut icon" href="/zodoc/assets/img/favicon.ico" type="image/x-icon">
         <link rel="icon" href="/zodoc/assets/img/favicon.ico" type="image/x-icon">
-        <title>ZODOC - Home</title>
+        <title>ZODOC - ZODOC</title>
         <link href="/zodoc/assets/css/mermaid.css" rel="stylesheet">
         <link href="/zodoc/assets/css/highlight.css" rel="stylesheet">
-        <link href="/zodoc/assets/css/bootstrap/bootstrap.css" rel="stylesheet" />
-        <link href="/zodoc/assets/css/adminlte/AdminLTE.css" rel="stylesheet" />
-        <link href="/zodoc/assets/css/theme/theme.css" rel="stylesheet" />
+        <link href="/zodoc/assets/css/bootstrap/bootstrap.css" rel="stylesheet">
+        <link href="/zodoc/assets/css/adminlte/AdminLTE.css" rel="stylesheet">
+        <link href="/zodoc/assets/css/theme/theme.css" rel="stylesheet">
         <link href="//fonts.googleapis.com/css?family=Roboto+Mono:400,700|Roboto:400,400i,700,700i" rel="stylesheet">
         <link href="/zodoc/assets/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-        <link href="/zodoc/assets/css/override.css" rel="stylesheet" />
+        <link href="/zodoc/assets/css/override.css" rel="stylesheet">
         <script src="/zodoc/assets/js/jquery-2.2.3.min.js"></script>
         <script src="/zodoc/assets/js/bootstrap.min.js"></script>        
         <script src="/zodoc/assets/js/app.min.js"></script>         
@@ -70,7 +68,11 @@
             <aside class="main-sidebar hidden">
                 <section class="infobar" data-spy="affix" data-offset-top="60" data-offset-bottom="200"> 
                     	
-    <div id="infobar-headings"></div>
+    <div id="infobar-headings"><h6>On This Page</h6><p><a href="#ucel">Účel</a></p>
+<p><a href="#prispivani">Přispívání</a></p>
+<p><a href="#technologie-jak-to-funguje">Technologie - jak to funguje</a></p>
+<hr class="infobar-hidden">
+</div>
 
                 </section>
                 <section class="sidebar">                    
@@ -90,12 +92,47 @@
 
 
 	<section class="content-header">
-		<h1>Home</h1>
+		<h1>ZODOC</h1>
 	</section>
 	<section class="content">
-		<h1>Welcome!</h1>
+		<blockquote class="blockquote">
+<p>Vznikající dokumentace k předmětu <a href="https://predmety.fbmi.cvut.cz/cs/17pbizod">BIZOD</a></p>
+</blockquote>
+<blockquote class="blockquote">
+<p>Pro otevření dokumentace přejděte na záložku <a href="zodoc/docs">Docs</a></p>
+</blockquote>
+<h1 id="ucel">Účel</h1>
+<p>Během výuky Zpracování obrazových dat (ZOD) především pro obor Biomedicínská informatika na fbmi.cvut.cz vzniká spoustu kódu, který je dobré archivovat a udržovat a to včetně vysvětlujících poznámek a výstupu většinou ve formě obrazu.
+Nyní jsou poznámky udržované v <a href="https://campuscvut-my.sharepoint.com/personal/tesarj13_cvut_cz/_layouts/15/guestaccess.aspx?docid=0bfb2bdf298624cfd958ecec0995ad1e1&amp;authkey=ARqZgO9VFIV1R9b1jJJu8Yc&amp;e=4073622bdf1a474caf92164e278c5744">jednom .docx souboru</a> "hostovaném" na OneDrivu, což s sebou přináší značné výhody (snadná editace, automatické zvýraznění syntaxe, obrázky rovnou v souboru, minimální požadavky na nasazení), tak též nevýhody (webově špatně prezentovatelný a nesnadno dohledatelný formát, složité přispívání více lidí, linearita - chybějící struktura).</p>
+<h1 id="prispivani">Přispívání</h1>
+<p>Máte - li zájem získat body navíc stačí přispět předěláním nějaké kapitoly z mateřského souboru do markdownu.</p>
+<h2 id="co-je-to-markdown.md">Co je to Markdown (.md)?</h2>
+<p>Markdown je jednoduchý značkovací jazyk využívající několik "značek" pro snadnější naformátování dokumentu. Zvládá vytvořit odkazy, zvýraznit syntaxi, přidat obrázky a mnohem víc. <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet#links">Markdown tahák</a>.</p>
+<h2 id="kde-zacit">Kde začít</h2>
+<p>Pro inspiraci jak vytvořit článek odpovídající zdejším (velice čerstvým a kujným) pravidlům se podívejte <a href="https://raw.githubusercontent.com/tesar-tech/zodoc/master/input/docs/matlab_start.md">zde</a>. K uvedenému souboru se dostanete přes repositář na mém <a href="https://github.com/tesar-tech/zodoc/tree/master/input/docs">githubu</a>, vybrání souboru a kliknutí na <code>Raw</code></p>
+<h2 id="jak-tvorit">Jak tvořit</h2>
+<p>Existuje spoustu způsobů a editorů, které Markdown zvládají. Já mohu doporučit <a href="https://code.visualstudio.com/">Visual Studio Code</a> (multiplatformní záležitost) a doplňky pro usnadnění práce s .md soubory. <a href="https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one">Markdown All in One</a> a <a href="https://marketplace.visualstudio.com/items?itemName=telesoho.vscode-markdown-paste-image">Markdown Paste</a> pro snadnější vkládání obrázků.
+Obrázky je dobré vkládat vždy do složky <code>media</code> ve stejné složce jako je článek (opět zřete <a href="https://github.com/tesar-tech/zodoc/tree/master/input/docs">repozitář</a>).</p>
+<h3 id="jak-maji-soubory-vypadat">Jak mají soubory vypadat</h3>
+<p>Nejde jenom o to, abyste překopírovali text z wordu do .md. Jde také o to, abyste kód spustili, opravili (třeba názvy proměnných), zadokumentovali (obrázky). Inspirujte se v již vytvořených souborech.</p>
+<h2 id="jak-publikovat">Jak publikovat</h2>
+<ul>
+<li>Nejlépe Forkem repositáře a pull requestou. Je k tomu nutný účet na githubu a lehká znalost jak to celé funguje. Návodů je všude fůra a samotný github vás směle navede. Tuto cestu vřele doporučuji (ve skutečnosti je to jeden z důvodů proč dokumentaci přesouvám tímto směrem) - jestli se chcete programování do budoucna věnovat, bude se vám tento základ hodit.</li>
+<li>Můžete mi poslat e-mail s patřičnými soubory (nejlépe zip obsahující .md soubor a složku <code>media</code> s obrázky)</li>
+</ul>
+<h2 id="co-z-toho">Co z toho?</h2>
+<ul>
+<li>Především dobrý pocit, že jste přispěli k zvyšování kvality výuky a naučili jste se něco nového.</li>
+<li>7 bodů do vašeho celoročního skóre za každý precizně vytvořený soubor (čím méně práce s tím budu mít já při editaci, tím více se přiblížíte těm 7 bodům)</li>
+<li>Připomínám, že během 14. výukového týdne bude zápočtové klání uzavřené. Stíhejte to včas.</li>
+</ul>
+<h1 id="technologie-jak-to-funguje">Technologie - jak to funguje</h1>
+<ul>
+<li><a href="https://wyam.io">https://wyam.io</a> pro generování statických stánek</li>
+<li><a href="https://github.io">https://github.io</a> pro hostování a sdílení</li>
+<li><a href="https://appveyor.com">https://appveyor.com</a> pro buildění a nasazení</li>
+</ul>
 
-<p>You can explore the documentation by selecting sections from the navigation bar above.</p>
 	</section>
                 
             </div>           
@@ -150,5 +187,5 @@
                 }, 500);
             });
         </script>
-    </body>
-</html>
+    
+</body></html>
