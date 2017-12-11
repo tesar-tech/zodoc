@@ -5,16 +5,16 @@
 		<link>http://tesar-tech.github.io/zodoc/zodoc</link>
 		<description />
 		<copyright>2017</copyright>
-		<pubDate>Mon, 11 Dec 2017 20:12:48 GMT</pubDate>
-		<lastBuildDate>Mon, 11 Dec 2017 20:12:48 GMT</lastBuildDate>
+		<pubDate>Mon, 11 Dec 2017 22:18:27 GMT</pubDate>
+		<lastBuildDate>Mon, 11 Dec 2017 22:18:27 GMT</lastBuildDate>
 		<item>
-			<title>New Release</title>
-			<link>http://tesar-tech.github.io/zodoc/zodoc/blog/new-release</link>
-			<description>&lt;p&gt;There is a new release out, go get it now.&lt;/p&gt;</description>
-			<author>me</author>
-			<guid>http://tesar-tech.github.io/zodoc/zodoc/blog/new-release</guid>
-			<pubDate>Fri, 01 Jan 2016 00:00:00 GMT</pubDate>
-			<content:encoded>&lt;p&gt;There is a new release out, go get it now.&lt;/p&gt;
+			<title>First Deploy</title>
+			<link>http://tesar-tech.github.io/zodoc/zodoc/blog/first</link>
+			<description>&lt;p&gt;ZODOC was fist launched on December 11th.&lt;/p&gt;</description>
+			<author>tesar-tech</author>
+			<guid>http://tesar-tech.github.io/zodoc/zodoc/blog/first</guid>
+			<pubDate>Mon, 11 Dec 2017 00:00:00 GMT</pubDate>
+			<content:encoded>&lt;p&gt;ZODOC was fist launched on December 11th.&lt;/p&gt;
 </content:encoded>
 		</item>
 	</channel>
