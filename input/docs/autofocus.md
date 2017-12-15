@@ -1,7 +1,7 @@
 
 # Image sharpness detection and autofocus 
 
->This document works with an [image](zodoc/input/docs/media/kytka256.jpg) in `A` variable and a [video](zodoc/input/docs/media/podzimni_kvetena_focus_test.mp4) in `v` variable.
+>This document works with an [image](input/docs/media/kytka256.jpg) in `A` variable and a [video](input/docs/media/podzimni_kvetena_focus_test.mp4) in `v` variable.
  If you have MATLAB2015a or newer version, use *imgaussfilt(A, sigma)* instead of *fspecial()* and *imfilter()*.
 
 ## detect image sharpness -> use edges to compare sharpness of 2 images
@@ -30,7 +30,7 @@ colormap('hot')
 subplot(rows,cols,s);s=s+1;imshow(Ae);title(['edges: ', num2str(sum(Ae(:))), ' px' ]);
 subplot(rows,cols,s);s=s+1;imshow(Aef);title(['edges: ', num2str(sum(Aef(:))), ' px' ]);
 ```
-![](zodoc/input/docs/media/kytka.png)
+![](input/docs/media/kytka.png)
 
 
 ## Autofocus – finding sharpest frames of a video
