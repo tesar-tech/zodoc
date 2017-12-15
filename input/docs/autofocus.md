@@ -2,7 +2,7 @@ title: Image sharpness detection and autofocus
 Description: Comparing sharpness of images and findinf sharpest image in a video sequence
 ---
 >This document works with an [image](media/kytka256.jpg) in `A` variable and a [video](media/podzimni_kvetena_focus_test.mp4) in `v` variable.
-## Detect image sharpness -> use edges to compare sharpness of 2 images
+# Detect image sharpness -> use edges to compare sharpness of 2 images
 ``` matlab
 A = imread('kytka256.jpg');
 A = rgb2gray(A);
@@ -19,7 +19,7 @@ s = 1;
 cols = 3;
 rows = 2;
 ```
-## Plotting results
+# Plotting the results
 ``` matlab
 subplot(rows,cols,s);s=s+1;imshow(A);title('original');
 subplot(rows,cols,s);s=s+1;imshow(Af);title('filtered');
@@ -30,18 +30,18 @@ subplot(rows,cols,s);s=s+1;imshow(Aef);title(['edges: ', num2str(sum(Aef(:))), '
 ```
 ![](media/kytka1_gauss_autofocus.png)
 
-## Autofocus – finding sharpest frames of a video
+# Autofocus – finding sharpest frames of a video
 ``` matlab
 v = VideoReader('podzimni_kvetena_focus_test.mp4');
 vHeight = v.Height;
 vWidth = v.Width;
 ```
-### determining the standard deviation of the middle quarter
+## Determining the standard deviation of the middle quarter
 ```
 centerX = [vHeight/4:vHeight*3/4];
 centerY = [vWidth/4:vWidth*3/4];
 ```
-### struct to load each frame
+## Struct to load each frame
 ``` matlab
 s = struct('frame',zeros(vHeight,vWidth,3,'uint8'));
 k = 1;
@@ -60,11 +60,11 @@ end
 D = ['Sharpest one probably: ',num2str(i),'. snimek.'];
 disp(D)
 ```
-### sharpest frame display
+## Sharpest frame display
 ```matlab
 imshow(s(i).frame);
 ```
-### write results 
+## Write results 
 ``` matlab
 w = VideoWriter('autofocus');
 open(w);
