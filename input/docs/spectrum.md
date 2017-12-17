@@ -82,13 +82,12 @@ im_gr= rgb2gray(A); % creating grayscale image
 ``` 
 spektrum_img = fft2(im_gr);
 spektrum_img_adj = log(fftshift(abs(spektrum_img)));
-
 ``` 
 ## Filtration, mask creation
 ``` 
 im_size = size(im_gr); % image size
 d = 20; % interval width for binary mask square
-maska_dp = zeros(im_size(1), im_size(2)); % mask creation
+mask_lp = zeros(im_size(1), im_size(2)); % mask creation
 % mask creation from the middle
 mask_lp((im_size(1)/2)-d:(im_size(1)/2)+d, (im_size(2)/2)-d:(im_size(2)/2)+d) = 1; 
 ``` 
@@ -97,14 +96,12 @@ mask_lp((im_size(1)/2)-d:(im_size(1)/2)+d, (im_size(2)/2)-d:(im_size(2)/2)+d) = 
 % spectrum multiplied by mask
 spektrum_filt_lp = fftshift(spektrum_img) .* mask_lp; 
 img_lp = ifft2(spektrum_filt_lp); % inverse fourier transform
-
-
 ``` 
 ## Inverse mask using, high-pass filter
 ``` matlab
-% pouziti inverzni masky, horni propust
-spektrum_filt_hp = fftshift(spektrum_obr) .* (~maska_dp);
-img_hp = ifft2(spektrum_filt_hp); %zpetna fourierova transformace
+% using inverse mask
+spektrum_filt_hp = fftshift(spektrum_img) .* (~mask_lp);
+img_hp = ifft2(spektrum_filt_hp); % inverse  fourier transform
 ```
 ## Plotting results
 ``` matlab
@@ -112,21 +109,21 @@ subplot(3,3,1)
 imshow(im_gr)
 title('Original grayscale img')
 subplot(3,3,2)
-imshow(spektrum_obr_uprava, [])
+imshow(spektrum_img_adj, [])
 title('spectrum')
 
-% vykresleni vysledku filtrace DP
+% display of low-pass filtration result
 subplot(3, 3, 4)
-imshow((abs(img_dp)), []),title('after low-pass filter')
+imshow((abs(img_lp)), []),title('after low-pass filter')
 title('after low-pass filter')
 subplot(3,3,5)
-imshow(log(abs(spektrum_filt_dp)), [])
+imshow(log(abs(spektrum_filt_lp)), [])
 title('spectrum')
 subplot(3, 3, 6)
-imshow(maska_dp)
+imshow(mask_lp)
 title('mask')
 
-% vykresleni vysledku filtrace HP
+% display of high-pass filtration result
 subplot(3, 3, 7)
 imshow((abs(img_hp)), []),title('after high-pass filter')
 title('after high-pass filter')
@@ -134,7 +131,7 @@ subplot(3,3,8)
 imshow(log(abs(spektrum_filt_hp)), [])
 title('spectrum')
 subplot(3, 3, 9)
-imshow(~maska_dp)
+imshow(~mask_lp)
 title('mask') 
 ```
 ![](media/spect2.png)
