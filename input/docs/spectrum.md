@@ -47,116 +47,94 @@ stem(faxis_konst, abs(sp_konst), '.')
 title('constant function spectre')
 ```
 ![](media/spect1.png)
-#
+# 2D fast fourier transform to create spectrum of corrugated iron image
 ``` matlab
 close all
+
+% sin creates sine signal, linspace creates a vector with 1 and 50 limits
 num_points = 256;
-corr_iron = sin(linspace(1,50,num_points)); % vytvori sinusovy signal s poctem bodu si, linspace vytvori vektor s hranicemi 1 a 50 a poctem bodu si
-A = repmat(corr_iron, num_points, 1); % vytvori matici, ktera vznikne spojenim sin_plech v pocet_bodu-krat
+sine_corr_iron = sin(linspace(1,50,num_points)); 
+% creates a matrix combining sine_corr_iron num_points - times
+corr_iron = repmat(sine_corr_iron, num_points, 1); 
 
 figure
 subplot(1, 2, 1)
-imshow(A, [])
+imshow(corr_iron, [])
 title('corrugated iron ')
-% vypocet spektra
 
-spektrum_obr = fft2(A); % vypocet spektra pomoci rychle fourierovy transformace pro 2D obraz
+% spectrum calculation
 
+spektrum_img = fft2(corr_iron); % spectrum calculation using Fast 2D fourier transform
 subplot(1, 2, 2)
-
-imshow(fftshift(abs(spektrum_obr)), []) % posouva nulove frekvence do stredu
-
+imshow(fftshift(abs(spektrum_img)), []) % shifts zero frequences to the middle
 title('spektrum')
 
-% vysoke frekvence jsou na krajich, nulova ve stredu 
+% high frequences are on the edges, zero ones in the middle
 ```
-![](media/spect2_corr_iron.png)
-#
+![](media/spect3_corr_iron.png)
+# Fourier transform on a photo, low-pass filter, high-pass filter
+## Image preparation
 ``` matlab
-%% fft na fotce - kvetina - DP a HP
-
 A = (imread('kytka256.jpg'));
+im_gr= rgb2gray(A); % creating grayscale image
+``` 
+## Grayscale image spectrum calculation
+``` 
+spektrum_img = fft2(im_gr);
+spektrum_img_adj = log(fftshift(abs(spektrum_img)));
 
-im_gr= rgb2gray(A);
+``` 
+## Filtration, mask creation
+``` 
+im_size = size(im_gr); % image size
+d = 20; % interval width for binary mask square
+maska_dp = zeros(im_size(1), im_size(2)); % mask creation
+% mask creation from the middle
+mask_lp((im_size(1)/2)-d:(im_size(1)/2)+d, (im_size(2)/2)-d:(im_size(2)/2)+d) = 1; 
+``` 
+## Low-pass filtration
+``` matlab
+% spectrum multiplied by mask
+spektrum_filt_lp = fftshift(spektrum_img) .* mask_lp; 
+img_lp = ifft2(spektrum_filt_lp); % inverse fourier transform
 
-% vypocet spektra sedotonoveho obrazku
 
-spektrum_obr = fft2(im_gr);
-
-spektrum_obr_uprava = log(fftshift(abs(spektrum_obr)));
-
+``` 
+## Inverse mask using, high-pass filter
+``` matlab
+% pouziti inverzni masky, horni propust
+spektrum_filt_hp = fftshift(spektrum_obr) .* (~maska_dp);
+img_hp = ifft2(spektrum_filt_hp); %zpetna fourierova transformace
+```
+## Plotting results
+``` matlab
 subplot(3,3,1)
-
 imshow(im_gr)
-
 title('Original grayscale img')
-
 subplot(3,3,2)
-
 imshow(spektrum_obr_uprava, [])
-
 title('spectrum')
-
-% filtrace
-
-im_size = size(im_gr); %rozmery obrazu
-
-d = 20; % sirka intervalu pro ctverec binarni masky
-
-maska_dp = zeros(im_size(1), im_size(2)); % tvorba masky
-
-maska_dp((im_size(1)/2)-d:(im_size(1)/2)+d, (im_size(2)/2)-d:(im_size(2)/2)+d) = 1; % vytvoreni masky ze stredu
-
-% filtrace dolni propusti
-
-spektrum_filt_dp = fftshift(spektrum_obr) .* maska_dp; % predpis pro filtraci ve frekvenci oblasti, spektrum je vynasobeno maskou
-
-img_dp = ifft2(spektrum_filt_dp); %zpetna fourierova transformace
 
 % vykresleni vysledku filtrace DP
-
 subplot(3, 3, 4)
-
 imshow((abs(img_dp)), []),title('after low-pass filter')
-
 title('after low-pass filter')
-
 subplot(3,3,5)
-
 imshow(log(abs(spektrum_filt_dp)), [])
-
 title('spectrum')
-
 subplot(3, 3, 6)
-
 imshow(maska_dp)
-
 title('mask')
 
-% pouziti inverzni masky, horni propust
-
-spektrum_filt_hp = fftshift(spektrum_obr) .* (~maska_dp);
-
-img_hp = ifft2(spektrum_filt_hp); %zpetna fourierova transformace
-
 % vykresleni vysledku filtrace HP
-
 subplot(3, 3, 7)
-
 imshow((abs(img_hp)), []),title('after high-pass filter')
-
 title('after high-pass filter')
-
 subplot(3,3,8)
-
 imshow(log(abs(spektrum_filt_hp)), [])
-
 title('spectrum')
-
 subplot(3, 3, 9)
-
 imshow(~maska_dp)
-
 title('mask') 
 ```
 ![](media/spect2.png)
