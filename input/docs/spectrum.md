@@ -1,7 +1,7 @@
 title: Image spectra, fourier transformation, low-pass and high-pass filter
 Description: Plotting basic functions and their spectrums, calculating and showing spectrums of grayscale images using 2D fourier transformation, creating low-pass filter and high-pass filter and plotting results 
 ---
->This whole document works with [image](/zodoc/assets/img/kytka256.jpg) in `A` variable.
+>This whole document works with [image](/media/kytka256.jpg) in `A` variable.
 # One-dimensional signal spectrum - sine function, dirac delta function, constant function
 ## Calculating functions and their spectra
 ```matlab
