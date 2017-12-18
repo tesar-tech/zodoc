@@ -1,22 +1,20 @@
-﻿<!DOCTYPE html>
-<html>
-    <head>
+﻿<!DOCTYPE html><html><head>
         <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-        <meta name="description" />
-        <meta name="keywords" content="static content generator,static site generator,static site,HTML,web development,.NET,C#,Razor,Markdown,YAML" />
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+        <meta name="description">
+        <meta name="keywords" content="static content generator,static site generator,static site,HTML,web development,.NET,C#,Razor,Markdown,YAML">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="shortcut icon" href="/zodoc/assets/img/favicon.ico" type="image/x-icon">
         <link rel="icon" href="/zodoc/assets/img/favicon.ico" type="image/x-icon">
-        <title>ZODOC - Docs</title>
+        <title>ZODOC - Histogram-based operations on images</title>
         <link href="/zodoc/assets/css/mermaid.css" rel="stylesheet">
         <link href="/zodoc/assets/css/highlight.css" rel="stylesheet">
-        <link href="/zodoc/assets/css/bootstrap/bootstrap.css" rel="stylesheet" />
-        <link href="/zodoc/assets/css/adminlte/AdminLTE.css" rel="stylesheet" />
-        <link href="/zodoc/assets/css/theme/theme.css" rel="stylesheet" />
+        <link href="/zodoc/assets/css/bootstrap/bootstrap.css" rel="stylesheet">
+        <link href="/zodoc/assets/css/adminlte/AdminLTE.css" rel="stylesheet">
+        <link href="/zodoc/assets/css/theme/theme.css" rel="stylesheet">
         <link href="//fonts.googleapis.com/css?family=Roboto+Mono:400,700|Roboto:400,400i,700,700i" rel="stylesheet">
         <link href="/zodoc/assets/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-        <link href="/zodoc/assets/css/override.css" rel="stylesheet" />
+        <link href="/zodoc/assets/css/override.css" rel="stylesheet">
         <script src="/zodoc/assets/js/jquery-2.2.3.min.js"></script>
         <script src="/zodoc/assets/js/bootstrap.min.js"></script>        
         <script src="/zodoc/assets/js/app.min.js"></script>         
@@ -73,7 +71,12 @@
             <aside class="main-sidebar ">
                 <section class="infobar" data-spy="affix" data-offset-top="60" data-offset-bottom="200"> 
                     	
-    <div id="infobar-headings"></div>
+    <div id="infobar-headings"><h6>On This Page</h6><p><a href="#histogram-plotting">Histogram plotting</a></p>
+<p><a href="#histogram-and-equalized-histogram">Histogram and equalized histogram</a></p>
+<p><a href="#image-deequalization-contrast-lowering">Image "deequalization" - contrast lowering</a></p>
+<p><a href="#local-contrast-increase-on-teeth-x-ray-image">Local contrast increase on teeth x-ray image</a></p>
+<hr class="infobar-hidden">
+</div>
 
                 </section>
                 <section class="sidebar">                    
@@ -83,7 +86,7 @@
                         
                 <li><a href="/zodoc/docs/matlab_start">Basic Operations on Images 1</a></li>
                 <li><a href="/zodoc/docs/matlab_start2">Basic Operations on Images 2</a></li>
-                <li><a href="/zodoc/docs/histogram">Histogram-based operations on images</a></li>
+                <li class="selected"><a href="/zodoc/docs/histogram">Histogram-based operations on images</a></li>
                 <li><a href="/zodoc/docs/autofocus">Image sharpness detection and autofocus</a></li>
                 <li><a href="/zodoc/docs/spectrum">Image spectra, fourier transformation, low-pass and high-pass filter</a></li>
 
@@ -98,43 +101,82 @@
 
 
 	<section class="content-header">
-		<h1>Docs</h1>
+		<h1>Histogram-based operations on images</h1>
 	</section>
 	<section class="content">
-					<div class="box">
-				<div class="box-body no-padding">
-					<table class="table table-striped table-hover two-cols-alt table-responsive">
-						
-						<tbody>
-								<tr>
-									<td><strong><a href="/zodoc/docs/matlab_start">Basic Operations on Images 1</a></strong></td>
-									<td>
-First part of basic operation on images									</td>
-								</tr>
-								<tr>
-									<td><strong><a href="/zodoc/docs/matlab_start2">Basic Operations on Images 2</a></strong></td>
-									<td>
-Second part of basic operation on images									</td>
-								</tr>
-								<tr>
-									<td><strong><a href="/zodoc/docs/histogram">Histogram-based operations on images</a></strong></td>
-									<td>
-Histogram plotting, histogram based equalization, deequalization. Creating tool for interactive partial highlighting of teeth x-ray									</td>
-								</tr>
-								<tr>
-									<td><strong><a href="/zodoc/docs/autofocus">Image sharpness detection and autofocus</a></strong></td>
-									<td>
-Comparing sharpness of images and findinf sharpest image in a video sequence									</td>
-								</tr>
-								<tr>
-									<td><strong><a href="/zodoc/docs/spectrum">Image spectra, fourier transformation, low-pass and high-pass filter</a></strong></td>
-									<td>
-Plotting basic functions and their spectrums, calculating and showing spectrums of grayscale images using 2D fourier transformation, creating low-pass filter and high-pass filter and plotting results									</td>
-								</tr>
-						</tbody>				
-					</table>
-				</div>
-			</div> 
+		<blockquote class="blockquote">
+<p>This document works with three images:</p>
+</blockquote>
+<ul>
+<li><a href="/zodoc/assets/img/rip_histogramy.jpg">image</a> in <code>A</code> variable</li>
+<li>matlab default image pout.tif in <code>B</code> variable</li>
+<li><a href="/zodoc/assets/img/zubRtg.png">teeth x-ray image</a> in <code>C</code> variable.</li>
+</ul>
+<h1 id="histogram-plotting">Histogram plotting</h1>
+<pre><code class="language-matlab">A=imread('rip_histogramy.jpg'); % loading an image
+As=rgb2gray(A); % conversion to grayscale
+H = imhist(As); % histogram
+subplot(2,1,1)
+imshow(A) % original picture
+subplot(2,1,2)
+imhist(As) % histogram display
+</code></pre>
+<p><img src="media/hist1_rip.png" class="img-fluid" alt=""></p>
+<h1 id="histogram-and-equalized-histogram">Histogram and equalized histogram</h1>
+<pre><code class="language-matlab">B=imread('pout.tif');
+
+subplot(2,2,1)
+imshow(B)
+subplot(2,2,2)
+imhist(B)
+
+% image equalization
+subplot(2,2,3)
+imshow(histeq(B))
+subplot(2,2,4)
+imhist(histeq(B)) % equalized histogram display 
+</code></pre>
+<p><img src="media/hist2_pout.png" class="img-fluid" alt=""></p>
+<h1 id="image-deequalization-contrast-lowering">Image "deequalization" - contrast lowering</h1>
+<pre><code class="language-matlab">figure
+
+subplot(2,2,1
+imshow(As)
+subplot(2,2,2)
+imhist(As)
+
+dq=(As*0.2)+100; % image equalisation via multiplication and 
+subplot(2,2,3)
+imshow(dq)
+subplot(2,2,4)
+imhist(dq) 
+</code></pre>
+<p><img src="media/hist3_rip_deeq.png" class="img-fluid" alt=""></p>
+<h1 id="local-contrast-increase-on-teeth-x-ray-image">Local contrast increase on teeth x-ray image</h1>
+<h2 id="making-button-that-enables-user-to-pick-a-square-and-replacing-it-with-equalized-one">Making button, that enables user to pick a square and replacing it with equalized one</h2>
+<pre><code class="language-matlab">C=imread('zubRtg.png')
+button=1; % button 
+x=300;y=300; % square size - smaller, better depiction
+figure;
+ax = axes; % picking up axes
+
+while button==1 % left-click on button
+if x&gt;100 &amp;&amp; y &gt;100 % excludinh picture margins
+z_ekv=C;
+z_ekv(x-100:x+100,y-100:y+100)=histeq(z_ekv(x-100:x+100,y-100:y+100));
+imshow(z_ekv,'Parent',ax)
+end
+
+[y,x, button]=ginput(1); %waiting for button press
+end 
+</code></pre>
+<p><img src="media/hist4_zubr.png" class="img-fluid" alt=""></p>
+<h2 id="adaptive-equalization">Adaptive equalization</h2>
+<pre><code class="language-matlab">subplot(2,1,1), imshow(C)
+z_ekvadaptive=adapthisteq(C,'NumTiles',[100 100]); %adaptivni ekvalizace
+subplot(2,1,2), imshow(z_ekvadaptive) 
+</code></pre>
+<p><img src="media/hist5_zubr_adeq.png" class="img-fluid" alt=""></p>
 
 	</section>
                 
@@ -190,5 +232,5 @@ Plotting basic functions and their spectrums, calculating and showing spectrums 
                 }, 500);
             });
         </script>
-    </body>
-</html>
+    
+</body></html>
