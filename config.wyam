@@ -4,5 +4,6 @@
 Settings[Keys.Host] = "tesar-tech.github.io/zodoc";
 Settings[DocsKeys.Title] = "ZODOC";
 Settings[Keys.LinkRoot] = "/zodoc";
+Settings[DocsKeys.BaseEditUrl] = "https://github.com/tesar-tech/zodoc/tree/master/input/";
 //Settings[DocsKeys.Logo] = "/assets/img/logo.png";
 
