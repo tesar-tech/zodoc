@@ -71,6 +71,7 @@
             <aside class="main-sidebar ">
                 <section class="infobar" data-spy="affix" data-offset-top="60" data-offset-bottom="200"> 
                     	
+        <div><p><a href="https://github.com/tesar-tech/zodoc/tree/master/input/docs/histogram.md"><i class="fa fa-pencil-square" aria-hidden="true"></i> Edit Content</a></p></div>
     <div id="infobar-headings"><h6>On This Page</h6><p><a href="#histogram-plotting">Histogram plotting</a></p>
 <p><a href="#histogram-and-equalized-histogram">Histogram and equalized histogram</a></p>
 <p><a href="#image-deequalization-contrast-lowering">Image "deequalization" - contrast lowering</a></p>
@@ -108,72 +109,59 @@
 <p>This document works with three images:</p>
 </blockquote>
 <ul>
-<li><a href="/zodoc/assets/img/rip_histogramy.jpg">image</a> in <code>A</code> variable</li>
-<li>matlab default image pout.tif in <code>B</code> variable</li>
-<li><a href="/zodoc/assets/img/zubRtg.png">teeth x-ray image</a> in <code>C</code> variable.</li>
+<li><a href="media/kytka256.jpg">Image of flower</a> in <code>A</code></li>
+<li>Build-in <em>pout.tif</em> image in <code>B</code></li>
+<li><a href="media/zubRtg.png">Teeth x-ray image</a> in <code>C</code></li>
 </ul>
 <h1 id="histogram-plotting">Histogram plotting</h1>
-<pre><code class="language-matlab">A=imread('rip_histogramy.jpg'); % loading an image
-As=rgb2gray(A); % conversion to grayscale
-H = imhist(As); % histogram
-subplot(2,1,1)
-imshow(A) % original picture
-subplot(2,1,2)
-imhist(As) % histogram display
+<pre><code class="language-matlab">A=imread('kytka256.jpg'); % loading an image 
+Ag = rgb2gray(A);
+subplot(1,2,1);imshow(Ag) % original picture
+subplot(1,2,2);imhist(Ag) % histogram display
 </code></pre>
-<p><img src="media/hist1_rip.png" class="img-fluid" alt=""></p>
+<p><img src="media/2017-12-18-14-54-00.png" class="img-fluid" alt=""></p>
 <h1 id="histogram-and-equalized-histogram">Histogram and equalized histogram</h1>
-<pre><code class="language-matlab">B=imread('pout.tif');
+<pre><code class="language-matlab">B=imread('pout.tif');%pout.tif is matlab built-in image 
 
-subplot(2,2,1)
-imshow(B)
-subplot(2,2,2)
-imhist(B)
+subplot(2,2,1);imshow(B)
+subplot(2,2,2);imhist(B)
 
 % image equalization
-subplot(2,2,3)
-imshow(histeq(B))
-subplot(2,2,4)
-imhist(histeq(B)) % equalized histogram display 
+subplot(2,2,3);imshow(histeq(B))
+subplot(2,2,4);imhist(histeq(B)) % equalized histogram display 
 </code></pre>
 <p><img src="media/hist2_pout.png" class="img-fluid" alt=""></p>
 <h1 id="image-deequalization-contrast-lowering">Image "deequalization" - contrast lowering</h1>
-<pre><code class="language-matlab">figure
+<pre><code class="language-matlab">subplot(2,2,1);imshow(Ag)
+subplot(2,2,2);imhist(Ag)
 
-subplot(2,2,1
-imshow(As)
-subplot(2,2,2)
-imhist(As)
-
-dq=(As*0.2)+100; % image equalisation via multiplication and 
-subplot(2,2,3)
-imshow(dq)
-subplot(2,2,4)
-imhist(dq) 
+Dq=(Ag*0.2)+100; % image equalisation via multiplication and addition
+subplot(2,2,3);imshow(Dq)
+subplot(2,2,4);imhist(Dq) 
 </code></pre>
-<p><img src="media/hist3_rip_deeq.png" class="img-fluid" alt=""></p>
+<p><img src="media/2017-12-18-14-57-53.png" class="img-fluid" alt=""></p>
 <h1 id="local-contrast-increase-on-teeth-x-ray-image">Local contrast increase on teeth x-ray image</h1>
-<h2 id="making-button-that-enables-user-to-pick-a-square-and-replacing-it-with-equalized-one">Making button, that enables user to pick a square and replacing it with equalized one</h2>
-<pre><code class="language-matlab">C=imread('zubRtg.png')
-button=1; % button 
+<p>Enable user to pick a square and replacing it with equalized one</p>
+<pre><code class="language-matlab">C=imread('zubRtg.png');
+button=1; % button
 x=300;y=300; % square size - smaller, better depiction
 figure;
 ax = axes; % picking up axes
 
 while button==1 % left-click on button
-if x&gt;100 &amp;&amp; y &gt;100 % excludinh picture margins
-z_ekv=C;
-z_ekv(x-100:x+100,y-100:y+100)=histeq(z_ekv(x-100:x+100,y-100:y+100));
-imshow(z_ekv,'Parent',ax)
+    if x&gt;100 &amp;&amp; y &gt;100 % excludinh picture margins
+        z_ekv=C;
+        z_ekv(x-100:x+100,y-100:y+100)=histeq(z_ekv(x-100:x+100,y-100:y+100));
+        imshow(z_ekv,'Parent',ax)
+    end
+    
+    [y,x, button]=ginput(1); %waiting for button press
 end
-
-[y,x, button]=ginput(1); %waiting for button press
-end 
 </code></pre>
-<p><img src="media/hist4_zubr.png" class="img-fluid" alt=""></p>
+<p><img src="media/zubr_anim.gif" class="img-fluid" alt=""></p>
 <h2 id="adaptive-equalization">Adaptive equalization</h2>
 <pre><code class="language-matlab">subplot(2,1,1), imshow(C)
-z_ekvadaptive=adapthisteq(C,'NumTiles',[100 100]); %adaptivni ekvalizace
+z_ekvadaptive=adapthisteq(C,'NumTiles',[100 100]); 
 subplot(2,1,2), imshow(z_ekvadaptive) 
 </code></pre>
 <p><img src="media/hist5_zubr_adeq.png" class="img-fluid" alt=""></p>
