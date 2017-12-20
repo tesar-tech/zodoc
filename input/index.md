@@ -18,10 +18,21 @@ Existuje spoustu způsobů a editorů, které Markdown zvládají. Já mohu dopo
 Obrázky je dobré vkládat vždy do složky `media` ve stejné složce jako je článek (opět zřete [repozitář](https://github.com/tesar-tech/zodoc/tree/master/input/docs)).
 ### Jak mají soubory vypadat
 Nejde jenom o to, abyste překopírovali text z wordu do .md. Jde také o to, abyste kód spustili, opravili (třeba názvy proměnných), zadokumentovali (obrázky). Inspirujte se v již vytvořených souborech.
-  
+
+## Konvence
+
+Pár tipů, jak tvořit dokumentaci. Pokud vám jsou některé následující pojmy tajné, nevěšte hlavy, stačí spolupracovat s již vytvořenými soubory, které tyto konvence respektují. 
+- Soubory nazývejte výstižnými názvy
+- Pro obrázky je nejlepší použít časovou značku (zmíněný doplněk pro vscode toto umí automaticky)
+- Obrázky ukládejte do složky /media
+- Obsahuje-li výstup více obrázků vytvořených pomocí funkce `subplot`, následný `imshow` dejte na stejný řádek.
+- Uvádějte titulek i popis souboru (přes metadata)
+- Podnadpisy jsou první úrovně (#). Hlavní nadpis je v metadatech jako `title` 
+- Ukázky kódu patřičně zarovnejte (v Matlabu označit vše a potom Ctrl+I)
+
 ## Jak publikovat
-- Nejlépe Forkem repositáře a pull requestou. Je k tomu nutný účet na githubu a lehká znalost jak to celé funguje. Návodů je všude fůra a samotný github vás směle navede. Tuto cestu vřele doporučuji (ve skutečnosti je to jeden z důvodů proč dokumentaci přesouvám tímto směrem) - jestli se chcete programování do budoucna věnovat, bude se vám tento základ hodit. 
-- Můžete mi poslat e-mail s patřičnými soubory (nejlépe zip obsahující .md soubor a složku `media` s obrázky)
+Forkem repositáře a pull requestou. Je k tomu nutný účet na githubu a lehká znalost, jak to celé funguje. Návodů je všude fůra a samotný github vás směle navede. Tuto cestu vřele doporučuji (ve skutečnosti je to jeden z důvodů proč dokumentaci přesouvám tímto směrem) - jestli se chcete programování do budoucna věnovat, bude se vám tento základ hodit. Pro jednu novou část dokumentace (jeden .md soubor) vytvořte jednu pullrequestu. Já to okomentuji, vy opravíte, commitnete a pushnete do svého forlklého repozitáře. Až to bude v pořádku, pull requestu bude sloučena (merge) s mateřským adresářem.
+
 ## Co z toho? 
 - Především dobrý pocit, že jste přispěli k zvyšování kvality výuky a naučili jste se něco nového. 
 - 7 bodů do vašeho celoročního skóre za každý precizně vytvořený soubor (čím méně práce s tím budu mít já při editaci, tím více se přiblížíte těm 7 bodům)
@@ -30,6 +41,7 @@ Nejde jenom o to, abyste překopírovali text z wordu do .md. Jde také o to, ab
 - https://wyam.io pro generování statických stánek
 - https://github.io pro hostování a sdílení
 - https://appveyor.com pro buildění a nasazení
+
 
 
 
