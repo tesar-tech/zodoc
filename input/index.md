@@ -41,6 +41,7 @@ Forkem repositáře a pull requestou. Je k tomu nutný účet na githubu a lehk�
 - https://wyam.io pro generování statických stánek
 - https://github.io pro hostování a sdílení
 - https://appveyor.com pro buildění a nasazení
+- https://github.com/MinhasKamal/DownGit pro stahování složek z githubu.
 
 
 

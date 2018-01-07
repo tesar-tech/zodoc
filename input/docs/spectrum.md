@@ -1,7 +1,7 @@
 title: Image spectra, fourier transformation, low-pass and high-pass filter
 Description: Plotting basic functions and their spectrums, calculating and showing spectrums of grayscale images using 2D fourier transformation, creating low-pass filter and high-pass filter and plotting results 
 ---
->This whole document works with [image](/media/kytka256.jpg) in `A` variable.
+>This whole document works with [image](media/kytka256.jpg) in `A` variable.
 # One-dimensional signal spectrum - sine function, dirac delta function, constant function
 ## Calculating functions and their spectra
 ```matlab
@@ -27,30 +27,16 @@ faxis_konst = linspace(0, 1, length(sp_konst));
 ```
 ## Ploting results
 ``` matlab
-subplot(3,2,1) 
-plot(x_sin,y_sin)
-title('sine function')
-subplot(3,2,2)
-stem(faxis_sin, abs(sp_sin), '.')
-title('sine function spectrum')
-subplot(3,2,3)
-stem(x_dirac,y_dirac)
-title('dirac delta function')
-subplot(3,2,4)
-stem(faxis_dirac, abs(sp_dirac), '.')
-title('dirac delta function spectrum ')
-subplot(3,2,5)
-plot(x_konst,y_konst)
-title('constant function')
-subplot(3,2,6)
-stem(faxis_konst, abs(sp_konst), '.')
-title('constant function spectre')
+subplot(3,2,1);plot(x_sin,y_sin);title('sine function');
+subplot(3,2,2);stem(faxis_sin, abs(sp_sin), '.');title('sine function spectrum')
+subplot(3,2,3);stem(x_dirac,y_dirac);title('dirac delta function')
+subplot(3,2,4);stem(faxis_dirac, abs(sp_dirac), '.');title('dirac delta function spectrum ')
+subplot(3,2,5);plot(x_konst,y_konst);title('constant function')
+subplot(3,2,6);stem(faxis_konst, abs(sp_konst), '.');title('constant function spectre')
 ```
 ![](media/spect1.png)
 # 2D fast fourier transform to create spectrum of corrugated iron image
 ``` matlab
-close all
-
 % sin creates sine signal, linspace creates a vector with 1 and 50 limits
 num_points = 256;
 sine_corr_iron = sin(linspace(1,50,num_points)); 
@@ -69,8 +55,9 @@ subplot(1, 2, 2)
 imshow(fftshift(abs(spektrum_img)), []) % shifts zero frequences to the middle
 title('spektrum')
 
-% high frequences are on the edges, zero ones in the middle
+
 ```
+High frequencies are on the edges, low frequencies in the middle.
 ![](media/spect3_corr_iron.png)
 # Fourier transform on a photo, low-pass filter, high-pass filter
 ## Image preparation

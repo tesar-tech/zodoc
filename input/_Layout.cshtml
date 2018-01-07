@@ -37,6 +37,83 @@ else
 		<h1>@ViewData[Keys.Title]</h1>
 	</section>
 	<section class="content">
+
+		@if(Model.String("type")==(string)Model.String("assignmentType"))
+		{
+		<blockquote class="blockquote">
+		@{
+			var langs = Model.Metadata.Get<List<string>>("assignmentsLangsList");
+		}
+		@if (langs.Count ==0)
+		{
+			
+			 <p>This is orphaned solution. There are no assignments (yet)</p>
+
+		}else
+		{
+			
+		 <p>This is the solution. Assignments are available in these languages:
+		@{
+		
+		int i = 0;  
+		foreach (var lan in langs )
+		 {
+			 string separator = "";
+			 @if (langs.Count()-i > 1)
+			  {
+				  separator = ",";
+			  }else 
+			  {
+				  separator = ".";
+			  }
+			  i++;
+			 @Html.Partial("_LanguageLinks",new string[] {"localization_assignmentsLangsList",lan,Model.String("RelativeFilePath"),separator});
+	 	 	
+		  }
+		 
+		} </p>
+		}
+		</blockquote>	
+		
+		}
+
+	@{
+	 var langsList = Model.Metadata.Get<List<string>>("otherLanguagesList");
+	@if (langsList!=null)
+	 {
+		<blockquote class="blockquote">
+		 @foreach (var lan in langsList )
+		{
+			 @Html.Partial("_LanguageLinks",new string[] {"localization_languagePacks",lan,Model.String("RelativeFilePath"),Model.String("lang")}) ;
+	 	}	  
+		</blockquote>
+	}   
+	}   
+
+	
+
+ @if (!String.IsNullOrEmpty( Model.String("folderWithSourcesRelativePath")))
+	 {
+		<blockquote class="blockquote">
+		@{
+		string githubFolder = Context.String(DocsKeys.BaseEditUrl)+Model.String("folderWithSourcesRelativePath");
+		string downGitDownloadLink = "https://minhaskamal.github.io/DownGit/#/home?url="+githubFolder;
+		@Html.Partial("_LanguageLinks",new string[] {"localization_githubFolderLink" , Model.String("lang") , githubFolder,downGitDownloadLink}) 
+		
+		}
+		</blockquote>
+	}  
+
+
 		@RenderBody()
+
+		@if(Model.String("solutionRelativeFilePath")!="")
+		{
+		<blockquote class="blockquote">
+		@Html.Partial("_LanguageLinks",new string[] {"localization_solutionLink" , Model.String("lang") , Model.String("solutionRelativeFilePath"),}) 
+        </blockquote>		
+		}
+
+
 	</section>
 }
