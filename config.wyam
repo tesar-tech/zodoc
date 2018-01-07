@@ -14,19 +14,21 @@ Settings[Keys.LinkRoot] = "/zodoc";
 Settings[DocsKeys.BaseEditUrl] = "https://github.com/tesar-tech/zodoc/tree/master/input/";
 //Settings[DocsKeys.Logo] = "/assets/img/logo.png";
 Settings["Langs"] = new string[] { "en","cs","de"};
-Settings["exerciseType"] = "exercise"; //this is probably useless
-Settings["assignmentType"] = "assignment";//also useless
+Settings["assignmentType"] = "assignment"; //this is probably useless
+Settings["solutionType"] = "solution";//also useless
 
 //method for gathering type (assignment or solution)
 public string GetType(string filePath)
 {
     var splits = filePath.Split('/');
     string type = "";
+    if(splits.Last().Split('.').First()=="index")//do not assign type to index pages
+         return "";
     if (splits.First() == "exercises")//looking for folder exercises
     {
-        type = (string)Settings["exerciseType"];
+        type = (string)Settings["assignmentType"];
         if (splits.Count() > 1 && splits[1] == "solutions")//also in folder solution?
-            type = (string)Settings["assignmentType"];
+            type = (string)Settings["solutionType"];
     }
     return type;
 }
@@ -37,8 +39,12 @@ Pipelines["RenderPages"].InsertAfter("GetDocuments",
      return doc.Get<String>("RelativeFilePath").Split('/').Last();}
     ),
    Meta ("lang",  (doc,ctx) => { 
-      var langSplit =  doc.Get<String>("RelativeFilePath").Split('/') //search for folder in file path
-                        .FirstOrDefault(x=>((string[])Settings["Langs"]).Contains(x)); //look for folder with lang string i.e. "en"
+       var splits = doc.Get<String>("RelativeFilePath").Split('/');
+       if(splits.Last().Split('.').First()=="index")//do not assign type to index pages
+         return "";
+      var langSplit =  splits.FirstOrDefault(x=>((string[])Settings["Langs"]).Contains(x)); //look for folder with lang string i.e. "en"
+        
+                      
         return langSplit??"" ;} 
     ),
    Meta ("type", GetType ( @doc.Get<String>("RelativeFilePath"))) //use custom method GetType
@@ -57,28 +63,28 @@ Pipelines["RenderPages"].InsertBefore("Render",
         return otherLangs.Count() ==0 ? null:otherLangs.ToList();//no other lang -> return null;
     } ),
 
-    If( @doc.String("type")==(string)Settings["exerciseType"] ,//looking for exercises 
+    If( @doc.String("type")==(string)Settings["assignmentType"], //looking for exercises 
+      
         Meta("solutionRelativeFilePath", (doc, ctx) => { 
-                
             var solutionDoc =  ctx.Documents.FromPipeline("RenderPages") //from all documents
-                    .SingleOrDefault(x=> x.Get<String>("type")==(string)Settings["assignmentType"] //look for solutions
-                         && x.Get<String>("fileName") == doc.Get<String>("fileName")); //with same name as current doc
-            
+                    .SingleOrDefault(x=> x.Get<String>("type")==(string)Settings["solutionType"] //look for solutions
+                         && x.Get<String>("fileName") == doc.Get<String>("fileName") //with same name as current doc
+                         && x.Get<String>("fileName").Split('.').First() !="index" );//not on index pages 
             return solutionDoc==null ? "":solutionDoc.Get<String>("RelativeFilePath");//no solution -> return empty string
         } )
     ),
 
-    If( @doc.String("type")==(string)Settings["assignmentType"] , //only for solution documents
+    If( @doc.String("type")==(string)Settings["solutionType"] , //only for solution documents
         Meta("assignmentsLangsList", (doc, ctx) => { 
             var assignemntLangs = ctx.Documents.FromPipeline("RenderPages")//search in all document
-                .Where(x=> x.Get<String>("type")==Settings["exerciseType"] && //for exercises documents
+                .Where(x=> x.Get<String>("type")==Settings["assignmentType"] && //for exercises documents
                         x.Get<String>("fileName") == doc.Get<String>("fileName")) //with same name (that is the way how assignment-solution pairs are created)
                 .Select(c=>c.String("lang")).ToList();
         return assignemntLangs; 
     } )
     ),
 
-    If( @doc.String("type")==(string)Settings["exerciseType"] ,//
+    If( @doc.String("type")==(string)Settings["assignmentType"] ,//
         Meta("folderWithSourcesRelativePath", (doc, ctx) => { 
             var absPathToFileWithoutExt = doc.Get<String>("SourceFilePathBase");
             var relPathToFileWithoutExt = doc.Get<String>("RelativeFilePathBase");

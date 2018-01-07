@@ -38,7 +38,7 @@ else
 	</section>
 	<section class="content">
 
-		@if(Model.String("type")==(string)Model.String("assignmentType"))
+		@if(Model.String("type")==(string)Model.String("solutionType"))
 		{
 		<blockquote class="blockquote">
 		@{
@@ -107,7 +107,7 @@ else
 
 		@RenderBody()
 
-		@if(Model.String("solutionRelativeFilePath")!="")
+		@if(!String.IsNullOrEmpty(Model.String("solutionRelativeFilePath")))
 		{
 		<blockquote class="blockquote">
 		@Html.Partial("_LanguageLinks",new string[] {"localization_solutionLink" , Model.String("lang") , Model.String("solutionRelativeFilePath"),}) 
