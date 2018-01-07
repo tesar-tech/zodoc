@@ -1,22 +1,20 @@
-﻿<!DOCTYPE html>
-<html>
-    <head>
+﻿<!DOCTYPE html><html><head>
         <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-        <meta name="description" />
-        <meta name="keywords" content="static content generator,static site generator,static site,HTML,web development,.NET,C#,Razor,Markdown,YAML" />
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+        <meta name="description">
+        <meta name="keywords" content="static content generator,static site generator,static site,HTML,web development,.NET,C#,Razor,Markdown,YAML">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="shortcut icon" href="/zodoc/assets/img/favicon.ico" type="image/x-icon">
         <link rel="icon" href="/zodoc/assets/img/favicon.ico" type="image/x-icon">
-        <title>ZODOC - First Deploy</title>
+        <title>ZODOC - Hello World exercise and description</title>
         <link href="/zodoc/assets/css/mermaid.css" rel="stylesheet">
         <link href="/zodoc/assets/css/highlight.css" rel="stylesheet">
-        <link href="/zodoc/assets/css/bootstrap/bootstrap.css" rel="stylesheet" />
-        <link href="/zodoc/assets/css/adminlte/AdminLTE.css" rel="stylesheet" />
-        <link href="/zodoc/assets/css/theme/theme.css" rel="stylesheet" />
+        <link href="/zodoc/assets/css/bootstrap/bootstrap.css" rel="stylesheet">
+        <link href="/zodoc/assets/css/adminlte/AdminLTE.css" rel="stylesheet">
+        <link href="/zodoc/assets/css/theme/theme.css" rel="stylesheet">
         <link href="//fonts.googleapis.com/css?family=Roboto+Mono:400,700|Roboto:400,400i,700,700i" rel="stylesheet">
         <link href="/zodoc/assets/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-        <link href="/zodoc/assets/css/override.css" rel="stylesheet" />
+        <link href="/zodoc/assets/css/override.css" rel="stylesheet">
         <script src="/zodoc/assets/js/jquery-2.2.3.min.js"></script>
         <script src="/zodoc/assets/js/bootstrap.min.js"></script>        
         <script src="/zodoc/assets/js/app.min.js"></script>         
@@ -60,8 +58,8 @@
                     <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
                         <ul class="nav navbar-nav">                            
                                     <li><a href="/zodoc/docs">Docs</a></li>
-        <li><a href="/zodoc/exercises">Exercises</a></li>
-        <li class="active"><a href="/zodoc/blog">Blog</a></li>
+        <li class="active"><a href="/zodoc/exercises">Exercises</a></li>
+        <li><a href="/zodoc/blog">Blog</a></li>
  
                         </ul>       
                     </div>
@@ -75,8 +73,13 @@
             <aside class="main-sidebar ">
                 <section class="infobar" data-spy="affix" data-offset-top="60" data-offset-bottom="200"> 
                     	
-        <div><p><a href="https://github.com/tesar-tech/zodoc/tree/master/input/blog/first.md"><i class="fa fa-pencil-square" aria-hidden="true"></i> Edit Content</a></p></div>
-    <div id="infobar-headings"></div>
+        <div><p><a href="https://github.com/tesar-tech/zodoc/tree/master/input/exercises/en/hello_world_exercise.md"><i class="fa fa-pencil-square" aria-hidden="true"></i> Edit Content</a></p></div>
+    <div id="infobar-headings"><h6>On This Page</h6><p><a href="#introduction">Introduction</a></p>
+<p><a href="#structure">Structure</a></p>
+<p><a href="#how-does-it-work">How does it work</a></p>
+<p><a href="#how-to-add-an-exercise">How to add an exercise</a></p>
+<hr class="infobar-hidden">
+</div>
 
                 </section>
                 <section class="sidebar">                    
@@ -84,15 +87,27 @@
 
                     <ul class="sidebar-menu">
                         
+                <li class="treeview active">
+                    <a href="/zodoc/exercises/en">Assignments (English)</a> <a href="#" class="expand"></a>
+                    <ul class="treeview-menu">
+                                        <li class="selected"><a href="/zodoc/exercises/en/hello_world_exercise">Hello World exercise and description</a></li>
 
-    <li class="header"><i class="fa fa-bookmark"></i> Categories</li>    
-        <li><a href="/zodoc/blog/History">History</a></li>
-    
-    <li class="header"><i class="fa fa-calendar"></i> Archive</li>    
-        <li><a href="/zodoc/blog/archive/2017/12">December, 2017</a></li>
-    
-    <li class="header"><i class="fa fa-user"></i> Authors</li>    
-        <li><a href="/zodoc/blog/author/tesar-tech">tesar-tech</a></li>
+                    </ul>
+                </li>
+                <li class="treeview">
+                    <a href="/zodoc/exercises/cs">Zadání (Česky)</a> <a href="#" class="expand"></a>
+                    <ul class="treeview-menu">
+                                        <li><a href="/zodoc/exercises/cs/hello_world_exercise">Zkušební cvičení a popis</a></li>
+
+                    </ul>
+                </li>
+                <li class="treeview">
+                    <a href="/zodoc/exercises/solutions">Solutions</a> <a href="#" class="expand"></a>
+                    <ul class="treeview-menu">
+                                        <li><a href="/zodoc/exercises/solutions/hello_world_exercise">Hello World solution</a></li>
+
+                    </ul>
+                </li>
 
                     </ul>
                 </section>                
@@ -105,34 +120,72 @@
 
 
 	<section class="content-header">
-		<h1>First Deploy</h1>
+		<h1>Hello World exercise and description</h1>
 	</section>
 	<section class="content">
 
 
+		<blockquote class="blockquote">
+<!--[0]type of translation  -->
+            <p> Tento dokument je dostupný též v <a href="/zodoc/exercises/cs/hello_world_exercise">Češtině</a> </p>
+		</blockquote>
 
 	
 
+		<blockquote class="blockquote">
+<!--[0]type of translation  -->
+            <p><a href="https://github.com/tesar-tech/zodoc/tree/master/input/exercises/sources/hello_world_exercise">Sources</a> for this assignment are available.
+             Direct <a href="https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/tesar-tech/zodoc/tree/master/input/exercises/sources/hello_world_exercise"> download</a>.
+             </p>
+		</blockquote>
 
 
-		
-
-
-<dl class="dl-horizontal">
-    <dt><i class="fa fa-calendar"></i> Published</dt>
-    <dd>Monday, December 11, 2017</dd>
-        <dt><i class="fa fa-bookmark"></i> Category</dt>
-        <dd><a href="/zodoc/blog/History">History</a></dd>
-            <dt><i class="fa fa-user"></i> Author</dt>
-        <dd><a href="/zodoc/blog/author/tesar-tech">tesar-tech</a></dd>
-</dl>
-
-<p>ZODOC was fist launched on December 11th.</p>
-
+		<h1 id="introduction">Introduction</h1>
+<p>Entire exercise section is used to archive all assignments and solutions.</p>
+<h1 id="structure">Structure</h1>
+<pre><code class="language-sql">exercises
+├───cs
+│       hello_world_exercise.md (Current file)                   
+│       index.cshtml
+│
+├───en
+│       hello_world_exercise.md
+│       index.cshtml
+│
+├───media
+│       hello_world_exercise_1.png (Image used in this file)
+│
+├───solutions
+│       (test_case)solution_without_assignment.md
+│       hello_world_exercise.md (solution of this assignment)
+│
+└───sources
+    └───hello_world_exercise (Resources for this exercise)
+        │   someMatlabFunction.m
+        │   someMatlabScript.m
+        │
+        └───folderWithImages 
+                image01.png
+                image02.png
+</code></pre>
+<p>Several links are automatically generated:</p>
+<ul>
+<li>Link to a document if it is available in another language.</li>
+<li>Link to the solution, if available (without language mutations).</li>
+<li>Link to folder with additional files (only if available).</li>
+</ul>
+<h1 id="how-does-it-work">How does it work</h1>
+<p>All language mutation files are paired by the same name. For example, this file has a name in all mutations <code>hello_world_exercise.md</code>. The same name has a solution file in the folder <code>solutions</code> and the folder with the files related to the assignment in folder <code>sources</code>. Sources are not available on web site only link redirecting to GitHub or <a href="https://minhaskamal.github.io/DownGit/#/Home">DownGit</a> tool, that is used to download folders from GitHub.</p>
+<p>Images are shared for all language mutations, placed in <code>media</code> folder (to avoid duplications). It is a good practice to name image file according to “base filename”. Therefore, the following image is named <code>hello_world_exercise_1.png</code>.</p>
+<p><img src="../media/hello_world_exercise_1.png" class="img-fluid" alt=""></p>
+<h1 id="how-to-add-an-exercise">How to add an exercise</h1>
+<p>The simplest way for single language mutation is one file with a meaningful name in the folder of given language mutation. There is no need to add any metadata.</p>
+<p>For more complex scenarios (adding language mutations, resources, solutions) follow this sample file.</p>
 
 
 		<blockquote class="blockquote">
 		<!--[0]type of translation  -->
+            <p> Soulution is <a href="/zodoc/exercises/solutions/hello_world_exercise">here</a> </p> 
  
         </blockquote>		
 
@@ -196,5 +249,5 @@
     anchors.options.placement = 'left';
     anchors.add();
 </script>
-    </body>
-</html>
+    
+</body></html>

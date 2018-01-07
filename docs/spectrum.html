@@ -58,6 +58,7 @@
                     <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
                         <ul class="nav navbar-nav">                            
                                     <li class="active"><a href="/zodoc/docs">Docs</a></li>
+        <li><a href="/zodoc/exercises">Exercises</a></li>
         <li><a href="/zodoc/blog">Blog</a></li>
  
                         </ul>       
@@ -105,8 +106,15 @@
 		<h1>Image spectra, fourier transformation, low-pass and high-pass filter</h1>
 	</section>
 	<section class="content">
+
+
+
+	
+
+
+
 		<blockquote class="blockquote">
-<p>This whole document works with <a href="/media/kytka256.jpg">image</a> in <code>A</code> variable.</p>
+<p>This whole document works with <a href="media/kytka256.jpg">image</a> in <code>A</code> variable.</p>
 </blockquote>
 <h1 id="one-dimensional-signal-spectrum-sine-function-dirac-delta-function-constant-function">One-dimensional signal spectrum - sine function, dirac delta function, constant function</h1>
 <h2 id="calculating-functions-and-their-spectra">Calculating functions and their spectra</h2>
@@ -131,30 +139,16 @@ faxis_dirac = linspace(0, 1, length(sp_dirac));
 faxis_konst = linspace(0, 1, length(sp_konst)); 
 </code></pre>
 <h2 id="ploting-results">Ploting results</h2>
-<pre><code class="language-matlab">subplot(3,2,1) 
-plot(x_sin,y_sin)
-title('sine function')
-subplot(3,2,2)
-stem(faxis_sin, abs(sp_sin), '.')
-title('sine function spectrum')
-subplot(3,2,3)
-stem(x_dirac,y_dirac)
-title('dirac delta function')
-subplot(3,2,4)
-stem(faxis_dirac, abs(sp_dirac), '.')
-title('dirac delta function spectrum ')
-subplot(3,2,5)
-plot(x_konst,y_konst)
-title('constant function')
-subplot(3,2,6)
-stem(faxis_konst, abs(sp_konst), '.')
-title('constant function spectre')
+<pre><code class="language-matlab">subplot(3,2,1);plot(x_sin,y_sin);title('sine function');
+subplot(3,2,2);stem(faxis_sin, abs(sp_sin), '.');title('sine function spectrum')
+subplot(3,2,3);stem(x_dirac,y_dirac);title('dirac delta function')
+subplot(3,2,4);stem(faxis_dirac, abs(sp_dirac), '.');title('dirac delta function spectrum ')
+subplot(3,2,5);plot(x_konst,y_konst);title('constant function')
+subplot(3,2,6);stem(faxis_konst, abs(sp_konst), '.');title('constant function spectre')
 </code></pre>
 <p><img src="media/spect1.png" class="img-fluid" alt=""></p>
 <h1 id="d-fast-fourier-transform-to-create-spectrum-of-corrugated-iron-image">2D fast fourier transform to create spectrum of corrugated iron image</h1>
-<pre><code class="language-matlab">close all
-
-% sin creates sine signal, linspace creates a vector with 1 and 50 limits
+<pre><code class="language-matlab">% sin creates sine signal, linspace creates a vector with 1 and 50 limits
 num_points = 256;
 sine_corr_iron = sin(linspace(1,50,num_points)); 
 % creates a matrix combining sine_corr_iron num_points - times
@@ -172,9 +166,10 @@ subplot(1, 2, 2)
 imshow(fftshift(abs(spektrum_img)), []) % shifts zero frequences to the middle
 title('spektrum')
 
-% high frequences are on the edges, zero ones in the middle
+
 </code></pre>
-<p><img src="media/spect3_corr_iron.png" class="img-fluid" alt=""></p>
+<p>High frequencies are on the edges, low frequencies in the middle.
+<img src="media/spect3_corr_iron.png" class="img-fluid" alt=""></p>
 <h1 id="fourier-transform-on-a-photo-low-pass-filter-high-pass-filter">Fourier transform on a photo, low-pass filter, high-pass filter</h1>
 <h2 id="image-preparation">Image preparation</h2>
 <pre><code class="language-matlab">A = (imread('kytka256.jpg'));
@@ -232,6 +227,13 @@ imshow(~mask_lp)
 title('mask') 
 </code></pre>
 <p><img src="media/spect2.png" class="img-fluid" alt=""></p>
+
+
+		<blockquote class="blockquote">
+		<!--[0]type of translation  -->
+ 
+        </blockquote>		
+
 
 	</section>
                 

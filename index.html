@@ -54,6 +54,7 @@
                     <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
                         <ul class="nav navbar-nav">                            
                                     <li><a href="/zodoc/docs">Docs</a></li>
+        <li><a href="/zodoc/exercises">Exercises</a></li>
         <li><a href="/zodoc/blog">Blog</a></li>
  
                         </ul>       
@@ -96,6 +97,13 @@
 		<h1>ZODOC</h1>
 	</section>
 	<section class="content">
+
+
+
+	
+
+
+
 		<blockquote class="blockquote">
 <p>Vznikající dokumentace k předmětu <a href="https://predmety.fbmi.cvut.cz/cs/17pbizod">BIZOD</a></p>
 </blockquote>
@@ -116,11 +124,19 @@ Nyní jsou poznámky udržované v <a href="https://campuscvut-my.sharepoint.com
 Obrázky je dobré vkládat vždy do složky <code>media</code> ve stejné složce jako je článek (opět zřete <a href="https://github.com/tesar-tech/zodoc/tree/master/input/docs">repozitář</a>).</p>
 <h3 id="jak-maji-soubory-vypadat">Jak mají soubory vypadat</h3>
 <p>Nejde jenom o to, abyste překopírovali text z wordu do .md. Jde také o to, abyste kód spustili, opravili (třeba názvy proměnných), zadokumentovali (obrázky). Inspirujte se v již vytvořených souborech.</p>
-<h2 id="jak-publikovat">Jak publikovat</h2>
+<h2 id="konvence">Konvence</h2>
+<p>Pár tipů, jak tvořit dokumentaci. Pokud vám jsou některé následující pojmy tajné, nevěšte hlavy, stačí spolupracovat s již vytvořenými soubory, které tyto konvence respektují.</p>
 <ul>
-<li>Nejlépe Forkem repositáře a pull requestou. Je k tomu nutný účet na githubu a lehká znalost jak to celé funguje. Návodů je všude fůra a samotný github vás směle navede. Tuto cestu vřele doporučuji (ve skutečnosti je to jeden z důvodů proč dokumentaci přesouvám tímto směrem) - jestli se chcete programování do budoucna věnovat, bude se vám tento základ hodit.</li>
-<li>Můžete mi poslat e-mail s patřičnými soubory (nejlépe zip obsahující .md soubor a složku <code>media</code> s obrázky)</li>
+<li>Soubory nazývejte výstižnými názvy</li>
+<li>Pro obrázky je nejlepší použít časovou značku (zmíněný doplněk pro vscode toto umí automaticky)</li>
+<li>Obrázky ukládejte do složky /media</li>
+<li>Obsahuje-li výstup více obrázků vytvořených pomocí funkce <code>subplot</code>, následný <code>imshow</code> dejte na stejný řádek.</li>
+<li>Uvádějte titulek i popis souboru (přes metadata)</li>
+<li>Podnadpisy jsou první úrovně (#). Hlavní nadpis je v metadatech jako <code>title</code></li>
+<li>Ukázky kódu patřičně zarovnejte (v Matlabu označit vše a potom Ctrl+I)</li>
 </ul>
+<h2 id="jak-publikovat">Jak publikovat</h2>
+<p>Forkem repositáře a pull requestou. Je k tomu nutný účet na githubu a lehká znalost, jak to celé funguje. Návodů je všude fůra a samotný github vás směle navede. Tuto cestu vřele doporučuji (ve skutečnosti je to jeden z důvodů proč dokumentaci přesouvám tímto směrem) - jestli se chcete programování do budoucna věnovat, bude se vám tento základ hodit. Pro jednu novou část dokumentace (jeden .md soubor) vytvořte jednu pullrequestu. Já to okomentuji, vy opravíte, commitnete a pushnete do svého forlklého repozitáře. Až to bude v pořádku, pull requestu bude sloučena (merge) s mateřským adresářem.</p>
 <h2 id="co-z-toho">Co z toho?</h2>
 <ul>
 <li>Především dobrý pocit, že jste přispěli k zvyšování kvality výuky a naučili jste se něco nového.</li>
@@ -132,7 +148,15 @@ Obrázky je dobré vkládat vždy do složky <code>media</code> ve stejné slož
 <li><a href="https://wyam.io">https://wyam.io</a> pro generování statických stánek</li>
 <li><a href="https://github.io">https://github.io</a> pro hostování a sdílení</li>
 <li><a href="https://appveyor.com">https://appveyor.com</a> pro buildění a nasazení</li>
+<li><a href="https://github.com/MinhasKamal/DownGit">https://github.com/MinhasKamal/DownGit</a> pro stahování složek z githubu.</li>
 </ul>
+
+
+		<blockquote class="blockquote">
+		<!--[0]type of translation  -->
+ 
+        </blockquote>		
+
 
 	</section>
                 
