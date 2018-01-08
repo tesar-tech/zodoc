@@ -8,7 +8,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="shortcut icon" href="/zodoc/assets/img/favicon.ico" type="image/x-icon">
         <link rel="icon" href="/zodoc/assets/img/favicon.ico" type="image/x-icon">
-        <title>ZODOC - Assignments (English)</title>
+        <title>ZODOC - Rectangles in Rectangles</title>
         <link href="/zodoc/assets/css/mermaid.css" rel="stylesheet">
         <link href="/zodoc/assets/css/highlight.css" rel="stylesheet">
         <link href="/zodoc/assets/css/bootstrap/bootstrap.css" rel="stylesheet" />
@@ -75,7 +75,7 @@
             <aside class="main-sidebar ">
                 <section class="infobar" data-spy="affix" data-offset-top="60" data-offset-bottom="200"> 
                     	
-        <div><p><a href="https://github.com/tesar-tech/zodoc/tree/master/input/exercises/en/index.cshtml"><i class="fa fa-pencil-square" aria-hidden="true"></i> Edit Content</a></p></div>
+        <div><p><a href="https://github.com/tesar-tech/zodoc/tree/master/input/exercises/solutions/rectangles_in_rectangles.md"><i class="fa fa-pencil-square" aria-hidden="true"></i> Edit Content</a></p></div>
     <div id="infobar-headings"></div>
 
                 </section>
@@ -84,7 +84,7 @@
 
                     <ul class="sidebar-menu">
                         
-                <li class="treeview active selected">
+                <li class="treeview">
                     <a href="/zodoc/exercises/en">Assignments (English)</a> <a href="#" class="expand"></a>
                     <ul class="treeview-menu">
                                         <li><a href="/zodoc/exercises/en/hello_world_exercise">Hello World exercise and description</a></li>
@@ -102,12 +102,12 @@
 
                     </ul>
                 </li>
-                <li class="treeview">
+                <li class="treeview active">
                     <a href="/zodoc/exercises/solutions">Solutions</a> <a href="#" class="expand"></a>
                     <ul class="treeview-menu">
                                         <li><a href="/zodoc/exercises/solutions/hello_world_exercise">Hello World solution</a></li>
                 <li><a href="/zodoc/exercises/solutions/connected_shapes">Connected shapes</a></li>
-                <li><a href="/zodoc/exercises/solutions/rectangles_in_rectangles">Rectangles in Rectangles</a></li>
+                <li class="selected"><a href="/zodoc/exercises/solutions/rectangles_in_rectangles">Rectangles in Rectangles</a></li>
 
                     </ul>
                 </li>
@@ -123,43 +123,66 @@
 
 
 	<section class="content-header">
-		<h1>Assignments (English)</h1>
+		<h1>Rectangles in Rectangles</h1>
 	</section>
 	<section class="content">
 
+		<blockquote class="blockquote">
+				 <p>This is the solution. Assignments are available in these languages:
+<!--[0]type of translation  -->
+            <a href="/zodoc/exercises/cs/rectangles_in_rectangles">Čeština</a>,<!--[0]type of translation  -->
+           <a href="/zodoc/exercises/en/rectangles_in_rectangles">English</a>. </p>
+		</blockquote>	
 
 
 	
 
 
 
-		
-			<div class="box">
-				<div class="box-body no-padding">
-					<table class="table table-striped table-hover two-cols-alt table-responsive">
-						
-						<tbody>
-								<tr>
-									<td><strong><a href="/zodoc/exercises/en/hello_world_exercise">Hello World exercise and description</a></strong></td>
-									<td>
-									</td>
-								</tr>
-								<tr>
-									<td><strong><a href="/zodoc/exercises/en/connected_shapes">Connected Shapes</a></strong></td>
-									<td>
-									</td>
-								</tr>
-								<tr>
-									<td><strong><a href="/zodoc/exercises/en/rectangles_in_rectangles">Rectangles in rectangles</a></strong></td>
-									<td>
-									</td>
-								</tr>
-						</tbody>				
-					</table>
-				</div>
-			</div> 
+		<pre><code class="language-sql">'img_009.png'
+'img_018.png'
+'img_002.png'
+'img_008.png'
+'img_004.png'
+'img_006.png'
+'img_012.png'
+'img_010.png'
+'img_019.png'
+'img_015.png'
+'img_016.png'
+'img_013.png'
+'img_001.png'
+'img_011.png'
+'img_014.png'
+'img_020.png'
+'img_005.png'
+'img_007.png'
+'img_017.png'
+'img_003.png'
+</code></pre>
+<pre><code class="language-matlab">imgs = dir('./imgs_test1/*.png');
+imnum =length(imgs);
+inner_rect_size = zeros(imnum,1);
 
+for ii = 1:imnum
+    
+    curr_img_struct = imgs(ii);
+    curr_img = imread(fullfile(curr_img_struct.folder,curr_img_struct.name));
+    curr_img_double = mat2gray(curr_img);% to double in 0-1 range
+    gr = rgb2gray(curr_img_double); 
+    %%bw =  im2bw(gr,graythresh(gr));%for older matlabs
+    bw = imbinarize(gr,graythresh(gr));
+    if(bw(1,1))%if small rect is black
+        bw = ~bw;%invert colors
+    end
+    
+    inner_rect_size(ii) = sum(bw(:));%count number of ones
+end
 
+[~,indxs]= sort(inner_rect_size);%sort by size of inner rect and get indexes
+
+sorted_images = {imgs(indxs).name}';% get sorted images by file name in cell array
+</code></pre>
 
 
 

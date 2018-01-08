@@ -1,20 +1,22 @@
-﻿<!DOCTYPE html><html><head>
+﻿<!DOCTYPE html>
+<html>
+    <head>
         <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=Edge">
-        <meta name="description">
-        <meta name="keywords" content="static content generator,static site generator,static site,HTML,web development,.NET,C#,Razor,Markdown,YAML">
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+        <meta name="description" />
+        <meta name="keywords" content="static content generator,static site generator,static site,HTML,web development,.NET,C#,Razor,Markdown,YAML" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="shortcut icon" href="/zodoc/assets/img/favicon.ico" type="image/x-icon">
         <link rel="icon" href="/zodoc/assets/img/favicon.ico" type="image/x-icon">
-        <title>ZODOC - Basic Operations on Images 2</title>
+        <title>ZODOC - Testovac&#xED; dokumentace</title>
         <link href="/zodoc/assets/css/mermaid.css" rel="stylesheet">
         <link href="/zodoc/assets/css/highlight.css" rel="stylesheet">
-        <link href="/zodoc/assets/css/bootstrap/bootstrap.css" rel="stylesheet">
-        <link href="/zodoc/assets/css/adminlte/AdminLTE.css" rel="stylesheet">
-        <link href="/zodoc/assets/css/theme/theme.css" rel="stylesheet">
+        <link href="/zodoc/assets/css/bootstrap/bootstrap.css" rel="stylesheet" />
+        <link href="/zodoc/assets/css/adminlte/AdminLTE.css" rel="stylesheet" />
+        <link href="/zodoc/assets/css/theme/theme.css" rel="stylesheet" />
         <link href="//fonts.googleapis.com/css?family=Roboto+Mono:400,700|Roboto:400,400i,700,700i" rel="stylesheet">
         <link href="/zodoc/assets/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-        <link href="/zodoc/assets/css/override.css" rel="stylesheet">
+        <link href="/zodoc/assets/css/override.css" rel="stylesheet" />
         <script src="/zodoc/assets/js/jquery-2.2.3.min.js"></script>
         <script src="/zodoc/assets/js/bootstrap.min.js"></script>        
         <script src="/zodoc/assets/js/app.min.js"></script>         
@@ -73,17 +75,8 @@
             <aside class="main-sidebar ">
                 <section class="infobar" data-spy="affix" data-offset-top="60" data-offset-bottom="200"> 
                     	
-        <div><p><a href="https://github.com/tesar-tech/zodoc/tree/master/input/docs/matlab_start2.md"><i class="fa fa-pencil-square" aria-hidden="true"></i> Edit Content</a></p></div>
-    <div id="infobar-headings"><h6>On This Page</h6><p><a href="#image-values-to-range-from-0-to-1-in-double">Image values to range from 0 to 1 in double</a></p>
-<p><a href="#moving-colorful-stripe">Moving colorful stripe</a></p>
-<p><a href="#repetitive-image-canvas">Repetitive image canvas</a></p>
-<p><a href="#scaling-image">Scaling Image</a></p>
-<p><a href="#croping-image">Croping Image</a></p>
-<p><a href="#replacing-part-of-image-with-black-color">Replacing part of image with black color</a></p>
-<p><a href="#brightness-changes">Brightness changes</a></p>
-<p><a href="#display-image-histogram">Display image histogram</a></p>
-<hr class="infobar-hidden">
-</div>
+        <div><p><a href="https://github.com/tesar-tech/zodoc/tree/master/input/docs/cs/test_documentation_file.md"><i class="fa fa-pencil-square" aria-hidden="true"></i> Edit Content</a></p></div>
+    <div id="infobar-headings"></div>
 
                 </section>
                 <section class="sidebar">                    
@@ -91,11 +84,24 @@
 
                     <ul class="sidebar-menu">
                         
-                <li><a href="/zodoc/docs/matlab_start">Basic Operations on Images 1</a></li>
-                <li class="selected"><a href="/zodoc/docs/matlab_start2">Basic Operations on Images 2</a></li>
-                <li><a href="/zodoc/docs/histogram">Histogram-based operations on images</a></li>
-                <li><a href="/zodoc/docs/autofocus">Image sharpness detection and autofocus</a></li>
-                <li><a href="/zodoc/docs/spectrum">Image spectra, fourier transformation, low-pass and high-pass filter</a></li>
+                <li class="treeview">
+                    <a href="/zodoc/docs/en">Documentation (English)</a> <a href="#" class="expand"></a>
+                    <ul class="treeview-menu">
+                                        <li><a href="/zodoc/docs/en/matlab_start">Basic Operations on Images 1</a></li>
+                <li><a href="/zodoc/docs/en/matlab_start2">Basic Operations on Images 2</a></li>
+                <li><a href="/zodoc/docs/en/histogram">Histogram-based operations on images</a></li>
+                <li><a href="/zodoc/docs/en/autofocus">Image sharpness detection and autofocus</a></li>
+                <li><a href="/zodoc/docs/en/spectrum">Image spectra, fourier transformation, low-pass and high-pass filter</a></li>
+
+                    </ul>
+                </li>
+                <li class="treeview active">
+                    <a href="/zodoc/docs/cs">Dokumentace (&#x10C;esky)</a> <a href="#" class="expand"></a>
+                    <ul class="treeview-menu">
+                                        <li class="selected"><a href="/zodoc/docs/cs/test_documentation_file.md">Testovac&#xED; dokumentace</a></li>
+
+                    </ul>
+                </li>
 
                     </ul>
                 </section>                
@@ -108,7 +114,7 @@
 
 
 	<section class="content-header">
-		<h1>Basic Operations on Images 2</h1>
+		<h1>Testovac&#xED; dokumentace</h1>
 	</section>
 	<section class="content">
 
@@ -118,91 +124,7 @@
 
 
 
-		<blockquote class="blockquote">
-<p>This whole document works with <a href="/zodoc/assets/img/kytka256.jpg">image</a> in <code>A</code> variable. <code>A=imread('kytka256.jpg');</code></p>
-</blockquote>
-<h1 id="image-values-to-range-from-0-to-1-in-double">Image values to range from 0 to 1 in double</h1>
-<pre><code>A = mat2gray(A);
-imshow(A)
-</code></pre>
-<h1 id="moving-colorful-stripe">Moving colorful stripe</h1>
-<p><img src="media/moving_stripe.gif" class="img-fluid" alt=""></p>
-<p>Commented parts are use to save animation to gif</p>
-<pre><code class="language-matlab">Ag = rgb2gray(A);
-figure; ax = axes;
-stripe_height = 20;
-runs = 10;% let animation run 10 times
-
-% gifName = 'moving_stripe.gif';
-% firstTime = 1;
-% runs = 1;
-
-for ii=1:runs 
-    for i=1:stripe_height:size(Ag, 1)
-        
-        currentImage = A;
-        currentImage(1:i, :, :) = repmat(Ag(1:i, :),[1 1 3]);
-        currentImage(i+stripe_height:end, :, :) = repmat(Ag(i+stripe_height:end, :),[1 1 3]);
-        
-        imshow(currentImage,'Parent',ax);
-        pause(0.1) % pause for 0.1 sec
-        
-%         [A_to_save,map] = rgb2ind(currentImage,256);
-%         if firstTime ==1%first frame is saved differently
-%             imwrite(A_to_save,map,gifName,'gif','LoopCount',Inf,'DelayTime',0.001);
-%             firstTime = 0;
-%         else
-%             imwrite(A_to_save,map,gifName,'gif','WriteMode','append','DelayTime',0.001);
-%         end
-        
-    end
-end
-
-</code></pre>
-<h1 id="repetitive-image-canvas">Repetitive image canvas</h1>
-<p><img src="media/img_repetitive_canvas.png" class="img-fluid" alt=""></p>
-<pre><code class="language-matlab">raster = ones (5);
-raster([7:9,12,17:19,14]) = 0;
-canvas = repmat(raster,20,20);
-imshow(canvas)
-</code></pre>
-<h1 id="scaling-image">Scaling Image</h1>
-<p>You can use both methods (by percentage and size in pixels) for scaling images up and down.</p>
-<h2 id="scaling-down">Scaling down</h2>
-<p><img src="media/scaledDown.png" class="img-fluid" alt=""></p>
-<pre><code class="language-matlab">A_scaledDown = imresize(A,0.3);% 30 % of original size
-imshow(A_scaledDown)
-</code></pre>
-<h2 id="scaling-up">Scaling up</h2>
-<p><img src="media/scaledUp.png" class="img-fluid" alt=""></p>
-<pre><code class="language-matlab">A_scaledUp = imresize(A,[300 400]);% in pixels. Does not keep proportions
-imshow(A_scaledUp)
-</code></pre>
-<h1 id="croping-image">Croping Image</h1>
-<p><img src="media/croped.png" class="img-fluid" alt=""></p>
-<pre><code class="language-matlab">A_cropped = A(50:100,170:250,:);% colon means "in all channels"
-imshow(A_cropped)
-</code></pre>
-<h1 id="replacing-part-of-image-with-black-color">Replacing part of image with black color</h1>
-<p><img src="media/replaced.png" class="img-fluid" alt=""></p>
-<pre><code class="language-matlab">A_replaced = A; %copy A, not overwrite
-A_replaced(50:100,170:250,:) = 0;
-imshow(A_replaced)
-</code></pre>
-<h1 id="brightness-changes">Brightness changes</h1>
-<p><img src="media/brightness.png" class="img-fluid" alt=""></p>
-<pre><code class="language-matlab">A_brighter = A+0.3;
-A_darker = A-0.3;
-figure;
-subplot 131;imshow(A_darker);
-subplot 132;imshow(A);
-subplot 133;imshow(A_brighter);
-</code></pre>
-<h1 id="display-image-histogram">Display image histogram</h1>
-<p><img src="media/hist.png" class="img-fluid" alt=""></p>
-<pre><code class="language-matlab">imhist(A)
-</code></pre>
-
+		
 
 
 
@@ -265,5 +187,5 @@ subplot 133;imshow(A_brighter);
     anchors.options.placement = 'left';
     anchors.add();
 </script>
-    
-</body></html>
+    </body>
+</html>

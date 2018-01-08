@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="shortcut icon" href="/zodoc/assets/img/favicon.ico" type="image/x-icon">
         <link rel="icon" href="/zodoc/assets/img/favicon.ico" type="image/x-icon">
-        <title>ZODOC - Image spectra, fourier transformation, low-pass and high-pass filter</title>
+        <title>ZODOC - Rectangles in rectangles</title>
         <link href="/zodoc/assets/css/mermaid.css" rel="stylesheet">
         <link href="/zodoc/assets/css/highlight.css" rel="stylesheet">
         <link href="/zodoc/assets/css/bootstrap/bootstrap.css" rel="stylesheet">
@@ -57,8 +57,8 @@
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
                         <ul class="nav navbar-nav">                            
-                                    <li class="active"><a href="/zodoc/docs">Docs</a></li>
-        <li><a href="/zodoc/exercises">Exercises</a></li>
+                                    <li><a href="/zodoc/docs">Docs</a></li>
+        <li class="active"><a href="/zodoc/exercises">Exercises</a></li>
         <li><a href="/zodoc/blog">Blog</a></li>
  
                         </ul>       
@@ -73,10 +73,9 @@
             <aside class="main-sidebar ">
                 <section class="infobar" data-spy="affix" data-offset-top="60" data-offset-bottom="200"> 
                     	
-        <div><p><a href="https://github.com/tesar-tech/zodoc/tree/master/input/docs/spectrum.md"><i class="fa fa-pencil-square" aria-hidden="true"></i> Edit Content</a></p></div>
-    <div id="infobar-headings"><h6>On This Page</h6><p><a href="#one-dimensional-signal-spectrum-sine-function-dirac-delta-function-constant-function">One-dimensional signal spectrum - sine function, dirac delta function, constant function</a></p>
-<p><a href="#d-fast-fourier-transform-to-create-spectrum-of-corrugated-iron-image">2D fast fourier transform to create spectrum of corrugated iron image</a></p>
-<p><a href="#fourier-transform-on-a-photo-low-pass-filter-high-pass-filter">Fourier transform on a photo, low-pass filter, high-pass filter</a></p>
+        <div><p><a href="https://github.com/tesar-tech/zodoc/tree/master/input/exercises/en/rectangles_in_rectangles.md"><i class="fa fa-pencil-square" aria-hidden="true"></i> Edit Content</a></p></div>
+    <div id="infobar-headings"><h6>On This Page</h6><p><a href="#introduction">Introduction</a></p>
+<p><a href="#task">Task</a></p>
 <hr class="infobar-hidden">
 </div>
 
@@ -86,11 +85,33 @@
 
                     <ul class="sidebar-menu">
                         
-                <li><a href="/zodoc/docs/matlab_start">Basic Operations on Images 1</a></li>
-                <li><a href="/zodoc/docs/matlab_start2">Basic Operations on Images 2</a></li>
-                <li><a href="/zodoc/docs/histogram">Histogram-based operations on images</a></li>
-                <li><a href="/zodoc/docs/autofocus">Image sharpness detection and autofocus</a></li>
-                <li class="selected"><a href="/zodoc/docs/spectrum">Image spectra, fourier transformation, low-pass and high-pass filter</a></li>
+                <li class="treeview active">
+                    <a href="/zodoc/exercises/en">Assignments (English)</a> <a href="#" class="expand"></a>
+                    <ul class="treeview-menu">
+                                        <li><a href="/zodoc/exercises/en/hello_world_exercise">Hello World exercise and description</a></li>
+                <li><a href="/zodoc/exercises/en/connected_shapes">Connected Shapes</a></li>
+                <li class="selected"><a href="/zodoc/exercises/en/rectangles_in_rectangles">Rectangles in rectangles</a></li>
+
+                    </ul>
+                </li>
+                <li class="treeview">
+                    <a href="/zodoc/exercises/cs">Zadání (Česky)</a> <a href="#" class="expand"></a>
+                    <ul class="treeview-menu">
+                                        <li><a href="/zodoc/exercises/cs/hello_world_exercise">Zkušební cvičení a popis</a></li>
+                <li><a href="/zodoc/exercises/cs/rectangles_in_rectangles">Obdélníky v obdélnících</a></li>
+                <li><a href="/zodoc/exercises/cs/connected_shapes">Spojené tvary</a></li>
+
+                    </ul>
+                </li>
+                <li class="treeview">
+                    <a href="/zodoc/exercises/solutions">Solutions</a> <a href="#" class="expand"></a>
+                    <ul class="treeview-menu">
+                                        <li><a href="/zodoc/exercises/solutions/hello_world_exercise">Hello World solution</a></li>
+                <li><a href="/zodoc/exercises/solutions/connected_shapes">Connected shapes</a></li>
+                <li><a href="/zodoc/exercises/solutions/rectangles_in_rectangles">Rectangles in Rectangles</a></li>
+
+                    </ul>
+                </li>
 
                     </ul>
                 </section>                
@@ -103,132 +124,43 @@
 
 
 	<section class="content-header">
-		<h1>Image spectra, fourier transformation, low-pass and high-pass filter</h1>
+		<h1>Rectangles in rectangles</h1>
 	</section>
 	<section class="content">
 
 
+		<blockquote class="blockquote">
+<!--[0]type of translation  -->
+            <p> Tento dokument je dostupný též v <a href="/zodoc/exercises/cs/rectangles_in_rectangles">Češtině</a> </p>
+		</blockquote>
 
 	
 
+		<blockquote class="blockquote">
+<!--[0]type of translation  -->
+            <p><a href="https://github.com/tesar-tech/zodoc/tree/master/input/exercises/sources/rectangles_in_rectangles">Sources</a> for this assignment are available.
+             Direct <a href="https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/tesar-tech/zodoc/tree/master/input/exercises/sources/rectangles_in_rectangles"> download</a>.
+             </p>
+		</blockquote>
+
+
+		<h1 id="introduction">Introduction</h1>
+<p>Folder <code>imgs_test1</code>contains images of rectangles within rectangles.</p>
+<p><img src="../media/rectangles_in_rectangles_1.png" class="img-fluid" alt=""></p>
+<p>Script that was used to create images (<code>generate_rects_in_rects.m</code>) is also
+available. Script helps you to identify the rules that was used to generate
+images. It is possible to run the script and generate additional images (new
+images will be saved in the <code>imgs</code> folder).</p>
+<h1 id="task">Task</h1>
+<p>Sort pictures in a folder <code>imgs_test1</code> depending on size of the inner
+rectangle. Of course, automated using  MATLAB.</p>
 
 
 		<blockquote class="blockquote">
-<p>This whole document works with <a href="media/kytka256.jpg">image</a> in <code>A</code> variable.</p>
-</blockquote>
-<h1 id="one-dimensional-signal-spectrum-sine-function-dirac-delta-function-constant-function">One-dimensional signal spectrum - sine function, dirac delta function, constant function</h1>
-<h2 id="calculating-functions-and-their-spectra">Calculating functions and their spectra</h2>
-<pre><code class="language-matlab">x_sin=0:pi/64:2*pi; % creating the signal - sine function
-y_sin=sin(x_sin);
-
-x_dirac=1:10; % creating the signal - dirac delta function
-y_dirac=zeros((length(x_dirac)),1);
-y_dirac(length(x_dirac)/2)=1;
-
-x_konst=x_dirac;  % creating the signal - const function
-y_konst=ones(length(x_dirac),1);
-
-% spectrum calculation using Fast fourier tranform
-sp_sin= fft(y_sin); 
-sp_dirac=fft(y_dirac); 
-sp_konst=fft(y_konst); 
-
-%standardized frequency axis
-faxis_sin = linspace(0, 1, length(sp_sin)); 
-faxis_dirac = linspace(0, 1, length(sp_dirac)); 
-faxis_konst = linspace(0, 1, length(sp_konst)); 
-</code></pre>
-<h2 id="ploting-results">Ploting results</h2>
-<pre><code class="language-matlab">subplot(3,2,1);plot(x_sin,y_sin);title('sine function');
-subplot(3,2,2);stem(faxis_sin, abs(sp_sin), '.');title('sine function spectrum')
-subplot(3,2,3);stem(x_dirac,y_dirac);title('dirac delta function')
-subplot(3,2,4);stem(faxis_dirac, abs(sp_dirac), '.');title('dirac delta function spectrum ')
-subplot(3,2,5);plot(x_konst,y_konst);title('constant function')
-subplot(3,2,6);stem(faxis_konst, abs(sp_konst), '.');title('constant function spectre')
-</code></pre>
-<p><img src="media/spect1.png" class="img-fluid" alt=""></p>
-<h1 id="d-fast-fourier-transform-to-create-spectrum-of-corrugated-iron-image">2D fast fourier transform to create spectrum of corrugated iron image</h1>
-<pre><code class="language-matlab">% sin creates sine signal, linspace creates a vector with 1 and 50 limits
-num_points = 256;
-sine_corr_iron = sin(linspace(1,50,num_points)); 
-% creates a matrix combining sine_corr_iron num_points - times
-corr_iron = repmat(sine_corr_iron, num_points, 1); 
-
-figure
-subplot(1, 2, 1)
-imshow(corr_iron, [])
-title('corrugated iron ')
-
-% spectrum calculation
-
-spektrum_img = fft2(corr_iron); % spectrum calculation using Fast 2D fourier transform
-subplot(1, 2, 2)
-imshow(fftshift(abs(spektrum_img)), []) % shifts zero frequences to the middle
-title('spektrum')
-
-
-</code></pre>
-<p>High frequencies are on the edges, low frequencies in the middle.
-<img src="media/spect3_corr_iron.png" class="img-fluid" alt=""></p>
-<h1 id="fourier-transform-on-a-photo-low-pass-filter-high-pass-filter">Fourier transform on a photo, low-pass filter, high-pass filter</h1>
-<h2 id="image-preparation">Image preparation</h2>
-<pre><code class="language-matlab">A = (imread('kytka256.jpg'));
-im_gr= rgb2gray(A); % creating grayscale image
-</code></pre>
-<h2 id="grayscale-image-spectrum-calculation">Grayscale image spectrum calculation</h2>
-<pre><code>spektrum_img = fft2(im_gr);
-spektrum_img_adj = log(fftshift(abs(spektrum_img)));
-</code></pre>
-<h2 id="filtration-mask-creation">Filtration, mask creation</h2>
-<pre><code>im_size = size(im_gr); % image size
-d = 20; % interval width for binary mask square
-mask_lp = zeros(im_size(1), im_size(2)); % mask creation
-% mask creation from the middle
-mask_lp((im_size(1)/2)-d:(im_size(1)/2)+d, (im_size(2)/2)-d:(im_size(2)/2)+d) = 1; 
-</code></pre>
-<h2 id="low-pass-filtration">Low-pass filtration</h2>
-<pre><code class="language-matlab">% spectrum multiplied by mask
-spektrum_filt_lp = fftshift(spektrum_img) .* mask_lp; 
-img_lp = ifft2(spektrum_filt_lp); % inverse fourier transform
-</code></pre>
-<h2 id="inverse-mask-using-high-pass-filter">Inverse mask using, high-pass filter</h2>
-<pre><code class="language-matlab">% using inverse mask
-spektrum_filt_hp = fftshift(spektrum_img) .* (~mask_lp);
-img_hp = ifft2(spektrum_filt_hp); % inverse  fourier transform
-</code></pre>
-<h2 id="plotting-results">Plotting results</h2>
-<pre><code class="language-matlab">subplot(3,3,1)
-imshow(im_gr)
-title('Original grayscale img')
-subplot(3,3,2)
-imshow(spektrum_img_adj, [])
-title('spectrum')
-
-% display of low-pass filtration result
-subplot(3, 3, 4)
-imshow((abs(img_lp)), []),title('after low-pass filter')
-title('after low-pass filter')
-subplot(3,3,5)
-imshow(log(abs(spektrum_filt_lp)), [])
-title('spectrum')
-subplot(3, 3, 6)
-imshow(mask_lp)
-title('mask')
-
-% display of high-pass filtration result
-subplot(3, 3, 7)
-imshow((abs(img_hp)), []),title('after high-pass filter')
-title('after high-pass filter')
-subplot(3,3,8)
-imshow(log(abs(spektrum_filt_hp)), [])
-title('spectrum')
-subplot(3, 3, 9)
-imshow(~mask_lp)
-title('mask') 
-</code></pre>
-<p><img src="media/spect2.png" class="img-fluid" alt=""></p>
-
-
+		<!--[0]type of translation  -->
+            <p> Soulution is <a href="/zodoc/exercises/solutions/rectangles_in_rectangles">here</a> </p> 
+ 
+        </blockquote>		
 
 
 	</section>

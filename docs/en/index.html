@@ -1,20 +1,22 @@
-﻿<!DOCTYPE html><html><head>
+﻿<!DOCTYPE html>
+<html>
+    <head>
         <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=Edge">
-        <meta name="description">
-        <meta name="keywords" content="static content generator,static site generator,static site,HTML,web development,.NET,C#,Razor,Markdown,YAML">
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+        <meta name="description" />
+        <meta name="keywords" content="static content generator,static site generator,static site,HTML,web development,.NET,C#,Razor,Markdown,YAML" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="shortcut icon" href="/zodoc/assets/img/favicon.ico" type="image/x-icon">
         <link rel="icon" href="/zodoc/assets/img/favicon.ico" type="image/x-icon">
-        <title>ZODOC - Basic Operations on Images 1</title>
+        <title>ZODOC - Documentation (English)</title>
         <link href="/zodoc/assets/css/mermaid.css" rel="stylesheet">
         <link href="/zodoc/assets/css/highlight.css" rel="stylesheet">
-        <link href="/zodoc/assets/css/bootstrap/bootstrap.css" rel="stylesheet">
-        <link href="/zodoc/assets/css/adminlte/AdminLTE.css" rel="stylesheet">
-        <link href="/zodoc/assets/css/theme/theme.css" rel="stylesheet">
+        <link href="/zodoc/assets/css/bootstrap/bootstrap.css" rel="stylesheet" />
+        <link href="/zodoc/assets/css/adminlte/AdminLTE.css" rel="stylesheet" />
+        <link href="/zodoc/assets/css/theme/theme.css" rel="stylesheet" />
         <link href="//fonts.googleapis.com/css?family=Roboto+Mono:400,700|Roboto:400,400i,700,700i" rel="stylesheet">
         <link href="/zodoc/assets/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-        <link href="/zodoc/assets/css/override.css" rel="stylesheet">
+        <link href="/zodoc/assets/css/override.css" rel="stylesheet" />
         <script src="/zodoc/assets/js/jquery-2.2.3.min.js"></script>
         <script src="/zodoc/assets/js/bootstrap.min.js"></script>        
         <script src="/zodoc/assets/js/app.min.js"></script>         
@@ -73,15 +75,8 @@
             <aside class="main-sidebar ">
                 <section class="infobar" data-spy="affix" data-offset-top="60" data-offset-bottom="200"> 
                     	
-        <div><p><a href="https://github.com/tesar-tech/zodoc/tree/master/input/docs/matlab_start.md"><i class="fa fa-pencil-square" aria-hidden="true"></i> Edit Content</a></p></div>
-    <div id="infobar-headings"><h6>On This Page</h6><p><a href="#load-and-show-image">Load and show image</a></p>
-<p><a href="#conver-rgb-image-to-gray-scale">Conver RGB image to gray scale</a></p>
-<p><a href="#decompose-rgb-channels">Decompose RGB channels</a></p>
-<p><a href="#negative-image">Negative image</a></p>
-<p><a href="#black-white">Black &amp; White</a></p>
-<p><a href="#bw-animation">B&amp;W animation</a></p>
-<hr class="infobar-hidden">
-</div>
+        <div><p><a href="https://github.com/tesar-tech/zodoc/tree/master/input/docs/en/index.cshtml"><i class="fa fa-pencil-square" aria-hidden="true"></i> Edit Content</a></p></div>
+    <div id="infobar-headings"></div>
 
                 </section>
                 <section class="sidebar">                    
@@ -89,11 +84,24 @@
 
                     <ul class="sidebar-menu">
                         
-                <li class="selected"><a href="/zodoc/docs/matlab_start">Basic Operations on Images 1</a></li>
-                <li><a href="/zodoc/docs/matlab_start2">Basic Operations on Images 2</a></li>
-                <li><a href="/zodoc/docs/histogram">Histogram-based operations on images</a></li>
-                <li><a href="/zodoc/docs/autofocus">Image sharpness detection and autofocus</a></li>
-                <li><a href="/zodoc/docs/spectrum">Image spectra, fourier transformation, low-pass and high-pass filter</a></li>
+                <li class="treeview active selected">
+                    <a href="/zodoc/docs/en">Documentation (English)</a> <a href="#" class="expand"></a>
+                    <ul class="treeview-menu">
+                                        <li><a href="/zodoc/docs/en/matlab_start">Basic Operations on Images 1</a></li>
+                <li><a href="/zodoc/docs/en/matlab_start2">Basic Operations on Images 2</a></li>
+                <li><a href="/zodoc/docs/en/histogram">Histogram-based operations on images</a></li>
+                <li><a href="/zodoc/docs/en/autofocus">Image sharpness detection and autofocus</a></li>
+                <li><a href="/zodoc/docs/en/spectrum">Image spectra, fourier transformation, low-pass and high-pass filter</a></li>
+
+                    </ul>
+                </li>
+                <li class="treeview">
+                    <a href="/zodoc/docs/cs">Dokumentace (&#x10C;esky)</a> <a href="#" class="expand"></a>
+                    <ul class="treeview-menu">
+                                        <li><a href="/zodoc/docs/cs/test_documentation_file.md">Testovac&#xED; dokumentace</a></li>
+
+                    </ul>
+                </li>
 
                     </ul>
                 </section>                
@@ -106,7 +114,7 @@
 
 
 	<section class="content-header">
-		<h1>Basic Operations on Images 1</h1>
+		<h1>Documentation (English)</h1>
 	</section>
 	<section class="content">
 
@@ -116,96 +124,43 @@
 
 
 
-		<blockquote class="blockquote">
-<p>This whole document works with <a href="/zodoc/assets/img/kytka256.jpg">image</a> in <code>A</code> variable.</p>
-</blockquote>
-<h1 id="load-and-show-image">Load and show image</h1>
-<pre><code class="language-matlab">A=imread('kytka256.jpg');
-imshow(A))
-</code></pre>
-<p><img src="/zodoc/assets/img/kytka256.jpg" class="img-fluid" alt=""></p>
-<p>Image has to be in current folder !</p>
-<h1 id="conver-rgb-image-to-gray-scale">Conver RGB image to gray scale</h1>
-<pre><code class="language-matlab">Ag = rgb2gray(A);
-imshow(Ag)
-</code></pre>
-<p><img src="media/2017-12-04-17-47-57.png" class="img-fluid" alt=""></p>
-<h1 id="decompose-rgb-channels">Decompose RGB channels</h1>
-<pre><code class="language-matlab">R=A(:,:,1);
-G=A(:,:,2);
-B=A(:,:,3);
+		
+			<div class="box">
+				<div class="box-body no-padding">
+					<table class="table table-striped table-hover two-cols-alt table-responsive">
+						
+						<tbody>
+								<tr>
+									<td><strong><a href="/zodoc/docs/en/matlab_start">Basic Operations on Images 1</a></strong></td>
+									<td>
+First part of basic operation on images									</td>
+								</tr>
+								<tr>
+									<td><strong><a href="/zodoc/docs/en/matlab_start2">Basic Operations on Images 2</a></strong></td>
+									<td>
+Second part of basic operation on images									</td>
+								</tr>
+								<tr>
+									<td><strong><a href="/zodoc/docs/en/histogram">Histogram-based operations on images</a></strong></td>
+									<td>
+Histogram plotting, histogram based equalization, deequalization. Creating tool for interactive partial highlighting of teeth x-ray									</td>
+								</tr>
+								<tr>
+									<td><strong><a href="/zodoc/docs/en/autofocus">Image sharpness detection and autofocus</a></strong></td>
+									<td>
+Comparing sharpness of images and findinf sharpest image in a video sequence									</td>
+								</tr>
+								<tr>
+									<td><strong><a href="/zodoc/docs/en/spectrum">Image spectra, fourier transformation, low-pass and high-pass filter</a></strong></td>
+									<td>
+Plotting basic functions and their spectrums, calculating and showing spectrums of grayscale images using 2D fourier transformation, creating low-pass filter and high-pass filter and plotting results									</td>
+								</tr>
+						</tbody>				
+					</table>
+				</div>
+			</div> 
 
-subplot 221;imshow(A);title('original image');
-subplot 222;imshow(R);title('red channel');
-subplot 223;imshow(G);title('green channel');
-subplot 224;imshow(B);title('blue channel');
-</code></pre>
-<p>Notice dark color in blue channel, which is not part of yellow color unlike red and green channels.</p>
-<p><img src="media/2017-12-04-17-59-08.png" class="img-fluid" alt=""></p>
-<h2 id="colorize-channels">Colorize channels</h2>
-<p>Set non-color channels to zero</p>
-<pre><code class="language-matlab">zeroMatrix=zeros(size(A,1),size(A,2));
-R1=cat(3,R,zeroMatrix,zeroMatrix); 
-G1=cat(3,zeroMatrix,G,zeroMatrix);
-B1=cat(3,zeroMatrix,zeroMatrix,B);
 
-subplot 221;imshow(A);title('original image');
-subplot 222;imshow(R1);title('red channel');
-subplot 223;imshow(G1);title('green channel');
-subplot 224;imshow(B1);title('blue channel');
-</code></pre>
-<p><img src="media/colorizedChannels.png" class="img-fluid" alt=""></p>
-<h1 id="negative-image">Negative image</h1>
-<pre><code class="language-matlab">An=imcomplement(A);
-%or
-An= 255-A;%if image is uint8 type
-imshow(An)
-</code></pre>
-<p><img src="media/negative.png" class="img-fluid" alt=""></p>
-<h1 id="black-white">Black &amp; White</h1>
-<pre><code class="language-matlab">Abw = imbinarize(Ag);%from gray image
-%BW = im2bw(A);% in older versions of matlab
-imshow(Abw)
-
-</code></pre>
-<p><img src="media/binarized.png" class="img-fluid" alt=""></p>
-<h2 id="custom-way">Custom way</h2>
-<p>Result of <code>Ag&lt;128</code> is binary matrix - i.e. b&amp;w image</p>
-<pre><code class="language-matlab">imshow(Ag&lt;128);
-</code></pre>
-<h1 id="bw-animation">B&amp;W animation</h1>
-<pre><code class="language-matlab">figure
-ax = axes;% because of rewriting parent figure
-THR=0;
-for i=1:100
-    while (THR&lt;=255)
-        imshow(Ag&gt;THR,'Parent',ax)
-        THR=THR+10;
-        pause(0.05)
-    end
-    while (THR&gt;=0)
-        imshow(Ag&gt;THR,'Parent',ax)
-        THR=THR-10;
-        pause(0.05)
-    end
-end
-</code></pre>
-<h2 id="save-animation-as-gif">Save animation as GIF</h2>
-<pre><code class="language-matlab">firstTime = 1;gifName = 'bw_anim.gif';
-for ii = 1:5:256
-    
-   curr_img = (Ag&lt;ii)*255;%0 and 255 values
-   [A,map] = gray2ind(curr_img,2); 
-   
-    if firstTime ==1%first frame is saved differently
-        imwrite(A,map,gifName,'gif','LoopCount',Inf,'DelayTime',0.001);
-    firstTime = 0;
-    else
-        imwrite(A,map,gifName,'gif','WriteMode','append','DelayTime',0.001);
-    end 
- end
-</code></pre>
-<p><img src="media/bw_anim.gif" class="img-fluid" alt=""></p>
 
 
 
@@ -269,5 +224,5 @@ for ii = 1:5:256
     anchors.options.placement = 'left';
     anchors.add();
 </script>
-    
-</body></html>
+    </body>
+</html>

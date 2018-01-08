@@ -1,22 +1,20 @@
-﻿<!DOCTYPE html>
-<html>
-    <head>
+﻿<!DOCTYPE html><html><head>
         <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-        <meta name="description" />
-        <meta name="keywords" content="static content generator,static site generator,static site,HTML,web development,.NET,C#,Razor,Markdown,YAML" />
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+        <meta name="description">
+        <meta name="keywords" content="static content generator,static site generator,static site,HTML,web development,.NET,C#,Razor,Markdown,YAML">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="shortcut icon" href="/zodoc/assets/img/favicon.ico" type="image/x-icon">
         <link rel="icon" href="/zodoc/assets/img/favicon.ico" type="image/x-icon">
-        <title>ZODOC - Assignments (English)</title>
+        <title>ZODOC - Image sharpness detection and autofocus</title>
         <link href="/zodoc/assets/css/mermaid.css" rel="stylesheet">
         <link href="/zodoc/assets/css/highlight.css" rel="stylesheet">
-        <link href="/zodoc/assets/css/bootstrap/bootstrap.css" rel="stylesheet" />
-        <link href="/zodoc/assets/css/adminlte/AdminLTE.css" rel="stylesheet" />
-        <link href="/zodoc/assets/css/theme/theme.css" rel="stylesheet" />
+        <link href="/zodoc/assets/css/bootstrap/bootstrap.css" rel="stylesheet">
+        <link href="/zodoc/assets/css/adminlte/AdminLTE.css" rel="stylesheet">
+        <link href="/zodoc/assets/css/theme/theme.css" rel="stylesheet">
         <link href="//fonts.googleapis.com/css?family=Roboto+Mono:400,700|Roboto:400,400i,700,700i" rel="stylesheet">
         <link href="/zodoc/assets/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-        <link href="/zodoc/assets/css/override.css" rel="stylesheet" />
+        <link href="/zodoc/assets/css/override.css" rel="stylesheet">
         <script src="/zodoc/assets/js/jquery-2.2.3.min.js"></script>
         <script src="/zodoc/assets/js/bootstrap.min.js"></script>        
         <script src="/zodoc/assets/js/app.min.js"></script>         
@@ -59,8 +57,8 @@
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
                         <ul class="nav navbar-nav">                            
-                                    <li><a href="/zodoc/docs">Docs</a></li>
-        <li class="active"><a href="/zodoc/exercises">Exercises</a></li>
+                                    <li class="active"><a href="/zodoc/docs">Docs</a></li>
+        <li><a href="/zodoc/exercises">Exercises</a></li>
         <li><a href="/zodoc/blog">Blog</a></li>
  
                         </ul>       
@@ -75,8 +73,12 @@
             <aside class="main-sidebar ">
                 <section class="infobar" data-spy="affix" data-offset-top="60" data-offset-bottom="200"> 
                     	
-        <div><p><a href="https://github.com/tesar-tech/zodoc/tree/master/input/exercises/en/index.cshtml"><i class="fa fa-pencil-square" aria-hidden="true"></i> Edit Content</a></p></div>
-    <div id="infobar-headings"></div>
+        <div><p><a href="https://github.com/tesar-tech/zodoc/tree/master/input/docs/en/autofocus.md"><i class="fa fa-pencil-square" aria-hidden="true"></i> Edit Content</a></p></div>
+    <div id="infobar-headings"><h6>On This Page</h6><p><a href="#detect-image-sharpness-use-edges-to-compare-sharpness-of-2-images">Detect image sharpness -&gt; use edges to compare sharpness of 2 images</a></p>
+<p><a href="#plotting-the-results">Plotting the results</a></p>
+<p><a href="#autofocus-finding-sharpest-frames-of-a-video">Autofocus – finding sharpest frames of a video</a></p>
+<hr class="infobar-hidden">
+</div>
 
                 </section>
                 <section class="sidebar">                    
@@ -84,30 +86,21 @@
 
                     <ul class="sidebar-menu">
                         
-                <li class="treeview active selected">
-                    <a href="/zodoc/exercises/en">Assignments (English)</a> <a href="#" class="expand"></a>
+                <li class="treeview active">
+                    <a href="/zodoc/docs/en">Documentation (English)</a> <a href="#" class="expand"></a>
                     <ul class="treeview-menu">
-                                        <li><a href="/zodoc/exercises/en/hello_world_exercise">Hello World exercise and description</a></li>
-                <li><a href="/zodoc/exercises/en/connected_shapes">Connected Shapes</a></li>
-                <li><a href="/zodoc/exercises/en/rectangles_in_rectangles">Rectangles in rectangles</a></li>
+                                        <li><a href="/zodoc/docs/en/matlab_start">Basic Operations on Images 1</a></li>
+                <li><a href="/zodoc/docs/en/matlab_start2">Basic Operations on Images 2</a></li>
+                <li><a href="/zodoc/docs/en/histogram">Histogram-based operations on images</a></li>
+                <li class="selected"><a href="/zodoc/docs/en/autofocus">Image sharpness detection and autofocus</a></li>
+                <li><a href="/zodoc/docs/en/spectrum">Image spectra, fourier transformation, low-pass and high-pass filter</a></li>
 
                     </ul>
                 </li>
                 <li class="treeview">
-                    <a href="/zodoc/exercises/cs">Zad&#xE1;n&#xED; (&#x10C;esky)</a> <a href="#" class="expand"></a>
+                    <a href="/zodoc/docs/cs">Dokumentace (Česky)</a> <a href="#" class="expand"></a>
                     <ul class="treeview-menu">
-                                        <li><a href="/zodoc/exercises/cs/hello_world_exercise">Zku&#x161;ebn&#xED; cvi&#x10D;en&#xED; a popis</a></li>
-                <li><a href="/zodoc/exercises/cs/rectangles_in_rectangles">Obd&#xE9;ln&#xED;ky v obd&#xE9;ln&#xED;c&#xED;ch</a></li>
-                <li><a href="/zodoc/exercises/cs/connected_shapes">Spojen&#xE9; tvary</a></li>
-
-                    </ul>
-                </li>
-                <li class="treeview">
-                    <a href="/zodoc/exercises/solutions">Solutions</a> <a href="#" class="expand"></a>
-                    <ul class="treeview-menu">
-                                        <li><a href="/zodoc/exercises/solutions/hello_world_exercise">Hello World solution</a></li>
-                <li><a href="/zodoc/exercises/solutions/connected_shapes">Connected shapes</a></li>
-                <li><a href="/zodoc/exercises/solutions/rectangles_in_rectangles">Rectangles in Rectangles</a></li>
+                                        <li><a href="/zodoc/docs/cs/test_documentation_file.md">Testovací dokumentace</a></li>
 
                     </ul>
                 </li>
@@ -123,7 +116,7 @@
 
 
 	<section class="content-header">
-		<h1>Assignments (English)</h1>
+		<h1>Image sharpness detection and autofocus</h1>
 	</section>
 	<section class="content">
 
@@ -133,33 +126,85 @@
 
 
 
-		
-			<div class="box">
-				<div class="box-body no-padding">
-					<table class="table table-striped table-hover two-cols-alt table-responsive">
-						
-						<tbody>
-								<tr>
-									<td><strong><a href="/zodoc/exercises/en/hello_world_exercise">Hello World exercise and description</a></strong></td>
-									<td>
-									</td>
-								</tr>
-								<tr>
-									<td><strong><a href="/zodoc/exercises/en/connected_shapes">Connected Shapes</a></strong></td>
-									<td>
-									</td>
-								</tr>
-								<tr>
-									<td><strong><a href="/zodoc/exercises/en/rectangles_in_rectangles">Rectangles in rectangles</a></strong></td>
-									<td>
-									</td>
-								</tr>
-						</tbody>				
-					</table>
-				</div>
-			</div> 
+		<blockquote class="blockquote">
+<p>This document works with an <a href="media/kytka256.jpg">image</a> in <code>A</code> variable and a <a href="media/podzimni_kvetena_focus_test.mp4">video</a> in <code>v</code> variable.</p>
+</blockquote>
+<h1 id="detect-image-sharpness-use-edges-to-compare-sharpness-of-2-images">Detect image sharpness -&gt; use edges to compare sharpness of 2 images</h1>
+<pre><code class="language-matlab">A = imread('kytka256.jpg');
+A = rgb2gray(A);
 
+% create blurred image
+% If you have MATLAB2015a or newer, use imgaussfilt(A, sigma) instead of fspecial() and imfilter().
+hsize = 50; 
+sigma = 5;
+f = fspecial('gaussian',hsize,sigma);
+Af = imfilter(A,f);
+Ae =edge(A);
+Aef =edge(Af);
+s = 1;
+cols = 3;
+rows = 2;
+</code></pre>
+<h1 id="plotting-the-results">Plotting the results</h1>
+<pre><code class="language-matlab">subplot(rows,cols,s);s=s+1;imshow(A);title('original');
+subplot(rows,cols,s);s=s+1;imshow(Af);title('filtered');
+subplot(rows,cols,s);s=s+1;mesh(f);title(['filtr. hsize: ' num2str(hsize),', sigma: ' num2str(sigma)]);
+colormap('hot')
+subplot(rows,cols,s);s=s+1;imshow(Ae);title(['edges: ', num2str(sum(Ae(:))), ' px' ]);
+subplot(rows,cols,s);s=s+1;imshow(Aef);title(['edges: ', num2str(sum(Aef(:))), ' px' ]);
+</code></pre>
+<p><img src="media/kytka1_gauss_autofocus.png" class="img-fluid" alt=""></p>
+<h1 id="autofocus-finding-sharpest-frames-of-a-video">Autofocus – finding sharpest frames of a video</h1>
+<pre><code class="language-matlab">v = VideoReader('podzimni_kvetena_focus_test.mp4');
+vHeight = v.Height;
+vWidth = v.Width;
+</code></pre>
+<h2 id="determining-the-standard-deviation-of-the-middle-quarter">Determining the standard deviation of the middle quarter</h2>
+<pre><code>centerX = [vHeight/4:vHeight*3/4];
+centerY = [vWidth/4:vWidth*3/4];
+</code></pre>
+<h2 id="struct-to-load-each-frame">Struct to load each frame</h2>
+<pre><code class="language-matlab">s = struct('frame',zeros(vHeight,vWidth,3,'uint8'));
+k = 1;
+A = [];
 
+while hasFrame(v)
+f = readFrame(v);
+% saving frame
+s(k).frame = f;
+% sum of standard deviations in a frame cutout
+A = [A sum(sum(std(double(f(centerX,centerY)))))];
+k = k+1;
+end
+
+[m,i] = max(A);
+D = ['Sharpest one probably: ',num2str(i),'. snimek.'];
+disp(D)
+</code></pre>
+<h2 id="sharpest-frame-display">Sharpest frame display</h2>
+<pre><code class="language-matlab">imshow(s(i).frame);
+</code></pre>
+<h2 id="write-results">Write results</h2>
+<pre><code class="language-matlab">w = VideoWriter('autofocus');
+open(w);
+
+% the video goes a little bit past sharpest frame
+for k = 1:i+10
+writeVideo(w, s(k).frame)
+end
+
+% then returns
+for k = 1:9
+writeVideo(w, s(i+10-k).frame);
+end
+
+% and stays a while
+for k = 1:9
+writeVideo(w, s(i).frame);
+end
+
+close(w); 
+</code></pre>
 
 
 
@@ -223,5 +268,5 @@
     anchors.options.placement = 'left';
     anchors.add();
 </script>
-    </body>
-</html>
+    
+</body></html>
