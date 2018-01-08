@@ -1,5 +1,5 @@
 title: Zkušební cvičení a popis
-
+order: 0
 ---
 # Úvod
 Cvičení je v tomto kontextu myšleno jako procvičování. Celá sekce cvičení (Exercise) slouží k archivaci proběhnuvších testů a úloh k procvičení. 

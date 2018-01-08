@@ -16,6 +16,7 @@ Settings[DocsKeys.BaseEditUrl] = "https://github.com/tesar-tech/zodoc/tree/maste
 Settings["Langs"] = new string[] { "en","cs","de"};
 Settings["assignmentType"] = "assignment"; //this is probably useless
 Settings["solutionType"] = "solution";//also useless
+Settings["documentationType"] = "documentation";//also useless
 
 //method for gathering type (assignment or solution)
 public string GetType(string filePath)
@@ -29,6 +30,9 @@ public string GetType(string filePath)
         type = (string)Settings["assignmentType"];
         if (splits.Count() > 1 && splits[1] == "solutions")//also in folder solution?
             type = (string)Settings["solutionType"];
+    } else if(splits.First() == "docs")
+    {
+        return (string)Settings["documentationType"];
     }
     return type;
 }
@@ -58,7 +62,8 @@ Pipelines["RenderPages"].InsertBefore("Render",
         var otherLangs =  ctx.Documents.FromPipeline("RenderPages") //search in other documents
                         .Where(c => c.String("lang") != "" //where the language is set
                             && c.String("lang") != doc.String("lang") //for different languages
-                            && c.String("filename")==doc.String("filename")) //of files with same name 
+                            && c.String("filename")==doc.String("filename") //same file name 
+                            && c.String("type")==doc.String("type")) //and same type
                         .Select(x => x.String("lang")).Distinct();
         return otherLangs.Count() ==0 ? null:otherLangs.ToList();//no other lang -> return null;
     } ),
