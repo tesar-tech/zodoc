@@ -21,53 +21,30 @@ for i=1:100
 	imwrite(pic_res,[route, 'pic_' num2str(i/100) '.png'],'PNG'); %saving current img in .jpg
 end
 ```
-# Loading of .jpg images
+# Counting pixels and bytes of each image
 ``` matlab
-B = dir([route,'*.jpg']); % load all .jpg images into B 
-B_count= length(B); % number of .jpg images
-index = 1;
-```
-# Counting pixels and bytes of each .jpg image
-``` matlab
-for img_Index = 1: B_count
-	act_img = B(img_Index);
-	
-	if(~act_img.isdir)
-		act_img_name = act_img.name;
-		A = imread([route,act_img_name]);
-		[a,b] = size(A);	
-		byte_count(index)= act_img.bytes;
-		px_count(index) = a*b;
-		index = index +1;
-	end
+% to aviod repetitions in code, this will create a cell array with both format names
+formats = {'jpg' , 'png'};
+
+% this code will count pixels and bytes of each .jpg image in first iteration, and does the same with .png images in second iteration
+for i=1: 2  
+    B = dir([route, strcat('*.',formats{i})]); % load all .jpg/.png images into B 
+    B_count= length(B); % number of .jpg/.png images
+    index = 1;
+
+    for img_Index = 1: B_count
+        act_img = B(img_Index);          
+        act_img_name = act_img.name;
+        A = imread([route,act_img_name]);
+        [a,b] = size(A);	
+        byte_count(index)= act_img.bytes;
+        px_count(index) = a*b;
+        index = index +1;
+    end
+
+    px_countF{i} = px_count;  % saves counts in cell array 
+    byte_countF{i} = byte_count;
 end
-
-px_count_jpg = px_count;
-byte_count_jpg = byte_count;
-```
-# Loading of .png images
-``` matlab
-B = dir([route,'*.png']); % load all .png images into B 
-B_count= length(B); % number of .png images
-index = 1;
-```
-# Counting pixels and bytes of each .png image
-``` matlab
-for img_Index = 1: B_count
-act_img = B(img_Index);
-
-	if(~act_img.isdir)
-	act_img_name = act_img.name; 
- 	A = imread([route,act_img_name]);
-	[a,b] = size(A);
-	byte_count(index)= act_img.bytes;
-	px_count(index) = a*b;
-	index = index +1;
-	end
-end
-
-px_count_png = px_count;
-byte_count_png = byte_count;
 ```
 # Plotting the relationship between pixels count and file size of .jpg and .png images
 ``` matlab
