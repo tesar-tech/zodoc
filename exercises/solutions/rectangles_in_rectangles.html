@@ -77,7 +77,7 @@
                              -->
                             <!-- Control Sidebar Toggle Button -->
                             <li>
-                                <a href="https://github.com/tesar-tech/zodoc" data-toggle="control-sidebar">GitHub <i class="fa fa-github"></i></a>
+                                <a href="https://github.com/tesar-tech/zodoc" >GitHub <i class="fa fa-github"></i></a>
                             </li>
                         </ul>
                     </div>
