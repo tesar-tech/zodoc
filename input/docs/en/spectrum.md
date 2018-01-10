@@ -1,7 +1,7 @@
 title: Image spectra, fourier transformation, low-pass and high-pass filter
 Description: Plotting basic functions and their spectrums, calculating and showing spectrums of grayscale images using 2D fourier transformation, creating low-pass filter and high-pass filter and plotting results 
 ---
->This whole document works with [image](media/kytka256.jpg) in `A` variable.
+>This whole document works with [image](../media/kytka256.jpg) in `A` variable.
 # One-dimensional signal spectrum - sine function, dirac delta function, constant function
 ## Calculating functions and their spectra
 ```matlab
@@ -34,7 +34,7 @@ subplot(3,2,4);stem(faxis_dirac, abs(sp_dirac), '.');title('dirac delta function
 subplot(3,2,5);plot(x_konst,y_konst);title('constant function')
 subplot(3,2,6);stem(faxis_konst, abs(sp_konst), '.');title('constant function spectre')
 ```
-![](media/spect1.png)
+![](../media/spect1.png)
 # 2D fast fourier transform to create spectrum of corrugated iron image
 ``` matlab
 % sin creates sine signal, linspace creates a vector with 1 and 50 limits
@@ -58,7 +58,7 @@ title('spektrum')
 
 ```
 High frequencies are on the edges, low frequencies in the middle.
-![](media/spect3_corr_iron.png)
+![](../media/spect3_corr_iron.png)
 # Fourier transform on a photo, low-pass filter, high-pass filter
 ## Image preparation
 ``` matlab
@@ -121,5 +121,5 @@ subplot(3, 3, 9)
 imshow(~mask_lp)
 title('mask') 
 ```
-![](media/spect2.png)
+![](../media/spect2.png)
 

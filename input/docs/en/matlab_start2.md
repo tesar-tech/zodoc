@@ -13,7 +13,7 @@ imshow(A)
 ```
 
 # Moving colorful stripe
-![](media/moving_stripe.gif)
+![](../media/moving_stripe.gif)
 
 Commented parts are use to save animation to gif
 
@@ -52,7 +52,7 @@ end
 
 
 # Repetitive image canvas
-![](media/img_repetitive_canvas.png)
+![](../media/img_repetitive_canvas.png)
 
 ``` matlab
 raster = ones (5);
@@ -63,27 +63,27 @@ imshow(canvas)
 # Scaling Image
 You can use both methods (by percentage and size in pixels) for scaling images up and down.
 ## Scaling down 
-![](media/scaledDown.png)
+![](../media/scaledDown.png)
 
 ``` matlab
 A_scaledDown = imresize(A,0.3);% 30 % of original size
 imshow(A_scaledDown)
 ```
 ## Scaling up
-![](media/scaledUp.png)
+![](../media/scaledUp.png)
 ```matlab
 A_scaledUp = imresize(A,[300 400]);% in pixels. Does not keep proportions
 imshow(A_scaledUp)
 ```
 
 # Croping Image
-![](media/croped.png)
+![](../media/croped.png)
 ``` matlab
 A_cropped = A(50:100,170:250,:);% colon means "in all channels"
 imshow(A_cropped)
 ```
 # Replacing part of image with black color
-![](media/replaced.png)
+![](../media/replaced.png)
 ``` matlab
 A_replaced = A; %copy A, not overwrite
 A_replaced(50:100,170:250,:) = 0;
@@ -91,7 +91,7 @@ imshow(A_replaced)
 ```
 
 # Brightness changes
-![](media/brightness.png)
+![](../media/brightness.png)
 ``` matlab
 A_brighter = A+0.3;
 A_darker = A-0.3;
@@ -101,7 +101,7 @@ subplot 132;imshow(A);
 subplot 133;imshow(A_brighter);
 ```
 # Display image histogram
-![](media/hist.png)
+![](../media/hist.png)
 ``` matlab
 imhist(A)
 ```

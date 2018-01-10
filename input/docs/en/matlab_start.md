@@ -15,7 +15,7 @@ Image has to be in current folder !
 Ag = rgb2gray(A);
 imshow(Ag)
 ```
-![](media/2017-12-04-17-47-57.png)
+![](../media/2017-12-04-17-47-57.png)
 
 # Decompose RGB channels 
 ``` matlab
@@ -30,7 +30,7 @@ subplot 224;imshow(B);title('blue channel');
 ```
 Notice dark color in blue channel, which is not part of yellow color unlike red and green channels.
 
-![](media/2017-12-04-17-59-08.png)
+![](../media/2017-12-04-17-59-08.png)
 ## Colorize channels
 
 Set non-color channels to zero 
@@ -47,7 +47,7 @@ subplot 223;imshow(G1);title('green channel');
 subplot 224;imshow(B1);title('blue channel');
 ```
 
-![](media/colorizedChannels.png)
+![](../media/colorizedChannels.png)
 
 # Negative image
 
@@ -58,7 +58,7 @@ An= 255-A;%if image is uint8 type
 imshow(An)
 ```
 
-![](media/negative.png)
+![](../media/negative.png)
 
 # Black & White
 
@@ -68,7 +68,7 @@ Abw = imbinarize(Ag);%from gray image
 imshow(Abw)
 
 ```
-![](media/binarized.png)
+![](../media/binarized.png)
 
 ## Custom way
 Result of `Ag<128` is binary matrix - i.e. b&w image
@@ -109,6 +109,6 @@ for ii = 1:5:256
     end 
  end
 ```
-![](media/bw_anim.gif)
+![](../media/bw_anim.gif)
 
 
