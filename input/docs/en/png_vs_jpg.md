@@ -53,4 +53,4 @@ hold on
 scatter( px_count_png,byte_count_png/1024,'r');xlabel('pixels'), ylabel('kilobytes')
 legend('jpg','png') 
 ```
-![](media/pvj1.png)
+![](../media/pvj1.png)

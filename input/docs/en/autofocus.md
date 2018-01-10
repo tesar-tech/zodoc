@@ -1,7 +1,7 @@
 title: Image sharpness detection and autofocus 
 Description: Comparing sharpness of images and findinf sharpest image in a video sequence
 ---
->This document works with an [image](media/kytka256.jpg) in `A` variable and a [video](media/podzimni_kvetena_focus_test.mp4) in `v` variable.
+>This document works with an [image](../media/kytka256.jpg) in `A` variable and a [video](../media/podzimni_kvetena_focus_test.mp4) in `v` variable.
 # Detect image sharpness -> use edges to compare sharpness of 2 images
 ``` matlab
 A = imread('kytka256.jpg');
@@ -28,7 +28,7 @@ colormap('hot')
 subplot(rows,cols,s);s=s+1;imshow(Ae);title(['edges: ', num2str(sum(Ae(:))), ' px' ]);
 subplot(rows,cols,s);s=s+1;imshow(Aef);title(['edges: ', num2str(sum(Aef(:))), ' px' ]);
 ```
-![](media/kytka1_gauss_autofocus.png)
+![](../media/kytka1_gauss_autofocus.png)
 
 # Autofocus – finding sharpest frames of a video
 ``` matlab

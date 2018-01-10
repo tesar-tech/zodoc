@@ -3,9 +3,9 @@ Description: Histogram plotting, histogram based equalization, deequalization. C
 ---
 >This document works with three images: 
 
-* [Image of flower](media/kytka256.jpg) in `A` 
+* [Image of flower](../media/kytka256.jpg) in `A` 
 * Build-in *pout.tif* image in `B`
-* [Teeth x-ray image](media/zubRtg.png) in `C` 
+* [Teeth x-ray image](../media/zubRtg.png) in `C` 
 # Histogram plotting
 
 ```matlab
@@ -14,7 +14,7 @@ Ag = rgb2gray(A);
 subplot(1,2,1);imshow(Ag) % original picture
 subplot(1,2,2);imhist(Ag) % histogram display
 ```
-![](media/2017-12-18-14-54-00.png)
+![](../media/2017-12-18-14-54-00.png)
 # Histogram and equalized histogram
 ``` matlab
 B=imread('pout.tif');%pout.tif is matlab built-in image 
@@ -26,7 +26,7 @@ subplot(2,2,2);imhist(B)
 subplot(2,2,3);imshow(histeq(B))
 subplot(2,2,4);imhist(histeq(B)) % equalized histogram display 
 ```
-![](media/hist2_pout.png)
+![](../media/hist2_pout.png)
 # Image "deequalization" - contrast lowering
 ``` matlab
 subplot(2,2,1);imshow(Ag)
@@ -36,7 +36,7 @@ Dq=(Ag*0.2)+100; % image equalisation via multiplication and addition
 subplot(2,2,3);imshow(Dq)
 subplot(2,2,4);imhist(Dq) 
 ```
-![](media/2017-12-18-14-57-53.png)
+![](../media/2017-12-18-14-57-53.png)
 # Local contrast increase on teeth x-ray image
 Enable user to pick a square and replacing it with equalized one
 
@@ -57,11 +57,11 @@ while button==1 % left-click on button
     [y,x, button]=ginput(1); %waiting for button press
 end
 ```
-![](media/zubr_anim.gif)
+![](../media/zubr_anim.gif)
 ## Adaptive equalization
 ``` matlab
 subplot(2,1,1), imshow(C)
 z_ekvadaptive=adapthisteq(C,'NumTiles',[100 100]); 
 subplot(2,1,2), imshow(z_ekvadaptive) 
 ```
-![](media/hist5_zubr_adeq.png)
+![](../media/hist5_zubr_adeq.png)
