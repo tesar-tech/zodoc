@@ -67,7 +67,21 @@
                     </div>
                     <!-- /.navbar-collapse -->
                 
+                
                     <!-- Navbar Right Menu -->
+                    
+                    <div class="navbar-custom-menu">
+                        <ul class="nav navbar-nav">
+                            <!-- <li><a href="#">A Menu Item</a></li>
+                            <li><a href="#">Another Item</a></li>
+                             -->
+                            <!-- Control Sidebar Toggle Button -->
+                            <li>
+                                <a href="https://github.com/tesar-tech/zodoc" data-toggle="control-sidebar">GitHub <i class="fa fa-github"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                    
                 </nav>
             </header>
             
@@ -92,6 +106,7 @@
                 <li><a href="/zodoc/docs/en/histogram">Histogram-based operations on images</a></li>
                 <li><a href="/zodoc/docs/en/autofocus">Image sharpness detection and autofocus</a></li>
                 <li><a href="/zodoc/docs/en/spectrum">Image spectra, fourier transformation, low-pass and high-pass filter</a></li>
+                <li><a href="/zodoc/docs/en/png_vs_jpg">PNG vs JPG</a></li>
 
                     </ul>
                 </li>

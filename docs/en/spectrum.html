@@ -65,7 +65,21 @@
                     </div>
                     <!-- /.navbar-collapse -->
                 
+                
                     <!-- Navbar Right Menu -->
+                    
+                    <div class="navbar-custom-menu">
+                        <ul class="nav navbar-nav">
+                            <!-- <li><a href="#">A Menu Item</a></li>
+                            <li><a href="#">Another Item</a></li>
+                             -->
+                            <!-- Control Sidebar Toggle Button -->
+                            <li>
+                                <a href="https://github.com/tesar-tech/zodoc" data-toggle="control-sidebar">GitHub <i class="fa fa-github"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                    
                 </nav>
             </header>
             
@@ -94,6 +108,7 @@
                 <li><a href="/zodoc/docs/en/histogram">Histogram-based operations on images</a></li>
                 <li><a href="/zodoc/docs/en/autofocus">Image sharpness detection and autofocus</a></li>
                 <li class="selected"><a href="/zodoc/docs/en/spectrum">Image spectra, fourier transformation, low-pass and high-pass filter</a></li>
+                <li><a href="/zodoc/docs/en/png_vs_jpg">PNG vs JPG</a></li>
 
                     </ul>
                 </li>
@@ -127,7 +142,7 @@
 
 
 		<blockquote class="blockquote">
-<p>This whole document works with <a href="media/kytka256.jpg">image</a> in <code>A</code> variable.</p>
+<p>This whole document works with <a href="../media/kytka256.jpg">image</a> in <code>A</code> variable.</p>
 </blockquote>
 <h1 id="one-dimensional-signal-spectrum-sine-function-dirac-delta-function-constant-function">One-dimensional signal spectrum - sine function, dirac delta function, constant function</h1>
 <h2 id="calculating-functions-and-their-spectra">Calculating functions and their spectra</h2>
@@ -159,7 +174,7 @@ subplot(3,2,4);stem(faxis_dirac, abs(sp_dirac), '.');title('dirac delta function
 subplot(3,2,5);plot(x_konst,y_konst);title('constant function')
 subplot(3,2,6);stem(faxis_konst, abs(sp_konst), '.');title('constant function spectre')
 </code></pre>
-<p><img src="media/spect1.png" class="img-fluid" alt=""></p>
+<p><img src="../media/spect1.png" class="img-fluid" alt=""></p>
 <h1 id="d-fast-fourier-transform-to-create-spectrum-of-corrugated-iron-image">2D fast fourier transform to create spectrum of corrugated iron image</h1>
 <pre><code class="language-matlab">% sin creates sine signal, linspace creates a vector with 1 and 50 limits
 num_points = 256;
@@ -182,7 +197,7 @@ title('spektrum')
 
 </code></pre>
 <p>High frequencies are on the edges, low frequencies in the middle.
-<img src="media/spect3_corr_iron.png" class="img-fluid" alt=""></p>
+<img src="../media/spect3_corr_iron.png" class="img-fluid" alt=""></p>
 <h1 id="fourier-transform-on-a-photo-low-pass-filter-high-pass-filter">Fourier transform on a photo, low-pass filter, high-pass filter</h1>
 <h2 id="image-preparation">Image preparation</h2>
 <pre><code class="language-matlab">A = (imread('kytka256.jpg'));
@@ -239,7 +254,7 @@ subplot(3, 3, 9)
 imshow(~mask_lp)
 title('mask') 
 </code></pre>
-<p><img src="media/spect2.png" class="img-fluid" alt=""></p>
+<p><img src="../media/spect2.png" class="img-fluid" alt=""></p>
 
 
 

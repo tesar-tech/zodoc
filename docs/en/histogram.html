@@ -65,7 +65,21 @@
                     </div>
                     <!-- /.navbar-collapse -->
                 
+                
                     <!-- Navbar Right Menu -->
+                    
+                    <div class="navbar-custom-menu">
+                        <ul class="nav navbar-nav">
+                            <!-- <li><a href="#">A Menu Item</a></li>
+                            <li><a href="#">Another Item</a></li>
+                             -->
+                            <!-- Control Sidebar Toggle Button -->
+                            <li>
+                                <a href="https://github.com/tesar-tech/zodoc" data-toggle="control-sidebar">GitHub <i class="fa fa-github"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                    
                 </nav>
             </header>
             
@@ -95,6 +109,7 @@
                 <li class="selected"><a href="/zodoc/docs/en/histogram">Histogram-based operations on images</a></li>
                 <li><a href="/zodoc/docs/en/autofocus">Image sharpness detection and autofocus</a></li>
                 <li><a href="/zodoc/docs/en/spectrum">Image spectra, fourier transformation, low-pass and high-pass filter</a></li>
+                <li><a href="/zodoc/docs/en/png_vs_jpg">PNG vs JPG</a></li>
 
                     </ul>
                 </li>
@@ -131,9 +146,9 @@
 <p>This document works with three images:</p>
 </blockquote>
 <ul>
-<li><a href="media/kytka256.jpg">Image of flower</a> in <code>A</code></li>
+<li><a href="../media/kytka256.jpg">Image of flower</a> in <code>A</code></li>
 <li>Build-in <em>pout.tif</em> image in <code>B</code></li>
-<li><a href="media/zubRtg.png">Teeth x-ray image</a> in <code>C</code></li>
+<li><a href="../media/zubRtg.png">Teeth x-ray image</a> in <code>C</code></li>
 </ul>
 <h1 id="histogram-plotting">Histogram plotting</h1>
 <pre><code class="language-matlab">A=imread('kytka256.jpg'); % loading an image 
@@ -141,7 +156,7 @@ Ag = rgb2gray(A);
 subplot(1,2,1);imshow(Ag) % original picture
 subplot(1,2,2);imhist(Ag) % histogram display
 </code></pre>
-<p><img src="media/2017-12-18-14-54-00.png" class="img-fluid" alt=""></p>
+<p><img src="../media/2017-12-18-14-54-00.png" class="img-fluid" alt=""></p>
 <h1 id="histogram-and-equalized-histogram">Histogram and equalized histogram</h1>
 <pre><code class="language-matlab">B=imread('pout.tif');%pout.tif is matlab built-in image 
 
@@ -152,7 +167,7 @@ subplot(2,2,2);imhist(B)
 subplot(2,2,3);imshow(histeq(B))
 subplot(2,2,4);imhist(histeq(B)) % equalized histogram display 
 </code></pre>
-<p><img src="media/hist2_pout.png" class="img-fluid" alt=""></p>
+<p><img src="../media/hist2_pout.png" class="img-fluid" alt=""></p>
 <h1 id="image-deequalization-contrast-lowering">Image "deequalization" - contrast lowering</h1>
 <pre><code class="language-matlab">subplot(2,2,1);imshow(Ag)
 subplot(2,2,2);imhist(Ag)
@@ -161,7 +176,7 @@ Dq=(Ag*0.2)+100; % image equalisation via multiplication and addition
 subplot(2,2,3);imshow(Dq)
 subplot(2,2,4);imhist(Dq) 
 </code></pre>
-<p><img src="media/2017-12-18-14-57-53.png" class="img-fluid" alt=""></p>
+<p><img src="../media/2017-12-18-14-57-53.png" class="img-fluid" alt=""></p>
 <h1 id="local-contrast-increase-on-teeth-x-ray-image">Local contrast increase on teeth x-ray image</h1>
 <p>Enable user to pick a square and replacing it with equalized one</p>
 <pre><code class="language-matlab">C=imread('zubRtg.png');
@@ -180,13 +195,13 @@ while button==1 % left-click on button
     [y,x, button]=ginput(1); %waiting for button press
 end
 </code></pre>
-<p><img src="media/zubr_anim.gif" class="img-fluid" alt=""></p>
+<p><img src="../media/zubr_anim.gif" class="img-fluid" alt=""></p>
 <h2 id="adaptive-equalization">Adaptive equalization</h2>
 <pre><code class="language-matlab">subplot(2,1,1), imshow(C)
 z_ekvadaptive=adapthisteq(C,'NumTiles',[100 100]); 
 subplot(2,1,2), imshow(z_ekvadaptive) 
 </code></pre>
-<p><img src="media/hist5_zubr_adeq.png" class="img-fluid" alt=""></p>
+<p><img src="../media/hist5_zubr_adeq.png" class="img-fluid" alt=""></p>
 
 
 

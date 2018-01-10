@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="shortcut icon" href="/zodoc/assets/img/favicon.ico" type="image/x-icon">
         <link rel="icon" href="/zodoc/assets/img/favicon.ico" type="image/x-icon">
-        <title>ZODOC - ZODOC</title>
+        <title>ZODOC - PNG vs JPG</title>
         <link href="/zodoc/assets/css/mermaid.css" rel="stylesheet">
         <link href="/zodoc/assets/css/highlight.css" rel="stylesheet">
         <link href="/zodoc/assets/css/bootstrap/bootstrap.css" rel="stylesheet">
@@ -30,7 +30,7 @@
 
         
     </head>
-    <body class="hold-transition wyam layout-boxed layout-top-nav ">    
+    <body class="hold-transition wyam layout-boxed  ">    
         <div class="top-banner"></div>
         <div class="wrapper with-container">
             <!-- Header -->
@@ -42,6 +42,10 @@
                          
                 <nav class="navbar navbar-static-top" role="navigation">
                     <!-- Sidebar toggle button-->
+                        <a href="#" class="sidebar-toggle visible-xs-block" data-toggle="offcanvas" role="button">
+                            <span class="sr-only">Toggle side menu</span>
+                            <i class="fa fa-chevron-circle-right"></i>
+                        </a>
                                         
                     <div class="navbar-header">
                         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
@@ -53,7 +57,7 @@
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
                         <ul class="nav navbar-nav">                            
-                                    <li><a href="/zodoc/docs">Docs</a></li>
+                                    <li class="active"><a href="/zodoc/docs">Docs</a></li>
         <li><a href="/zodoc/exercises">Exercises</a></li>
         <li><a href="/zodoc/blog">Blog</a></li>
  
@@ -80,13 +84,13 @@
             </header>
             
             <!-- Left side column. contains the logo and sidebar -->
-            <aside class="main-sidebar hidden">
+            <aside class="main-sidebar ">
                 <section class="infobar" data-spy="affix" data-offset-top="60" data-offset-bottom="200"> 
                     	
-        <div><p><a href="https://github.com/tesar-tech/zodoc/tree/master/input/index.md"><i class="fa fa-pencil-square" aria-hidden="true"></i> Edit Content</a></p></div>
-    <div id="infobar-headings"><h6>On This Page</h6><p><a href="#ucel">Účel</a></p>
-<p><a href="#prispivani">Přispívání</a></p>
-<p><a href="#technologie-jak-to-funguje">Technologie - jak to funguje</a></p>
+        <div><p><a href="https://github.com/tesar-tech/zodoc/tree/master/input/docs/en/png_vs_jpg.md"><i class="fa fa-pencil-square" aria-hidden="true"></i> Edit Content</a></p></div>
+    <div id="infobar-headings"><h6>On This Page</h6><p><a href="#creating-an-image-database">Creating an image database</a></p>
+<p><a href="#counting-pixels-and-bytes-of-each-image">Counting pixels and bytes of each image</a></p>
+<p><a href="#plotting-the-relationship-between-pixels-count-and-file-size-of.jpg-and.png-images">Plotting the relationship between pixels count and file size of .jpg and .png images</a></p>
 <hr class="infobar-hidden">
 </div>
 
@@ -96,6 +100,25 @@
 
                     <ul class="sidebar-menu">
                         
+                <li class="treeview active">
+                    <a href="/zodoc/docs/en">Documentation (English)</a> <a href="#" class="expand"></a>
+                    <ul class="treeview-menu">
+                                        <li><a href="/zodoc/docs/en/matlab_start">Basic Operations on Images 1</a></li>
+                <li><a href="/zodoc/docs/en/matlab_start2">Basic Operations on Images 2</a></li>
+                <li><a href="/zodoc/docs/en/histogram">Histogram-based operations on images</a></li>
+                <li><a href="/zodoc/docs/en/autofocus">Image sharpness detection and autofocus</a></li>
+                <li><a href="/zodoc/docs/en/spectrum">Image spectra, fourier transformation, low-pass and high-pass filter</a></li>
+                <li class="selected"><a href="/zodoc/docs/en/png_vs_jpg">PNG vs JPG</a></li>
+
+                    </ul>
+                </li>
+                <li class="treeview">
+                    <a href="/zodoc/docs/cs">Dokumentace (Česky)</a> <a href="#" class="expand"></a>
+                    <ul class="treeview-menu">
+                                        <li><a href="/zodoc/docs/cs/test_documentation_file.md">Testovací dokumentace</a></li>
+
+                    </ul>
+                </li>
 
                     </ul>
                 </section>                
@@ -108,7 +131,7 @@
 
 
 	<section class="content-header">
-		<h1>ZODOC</h1>
+		<h1>PNG vs JPG</h1>
 	</section>
 	<section class="content">
 
@@ -119,60 +142,59 @@
 
 
 		<blockquote class="blockquote">
-<p>Vznikající dokumentace k předmětu <a href="https://predmety.fbmi.cvut.cz/cs/17pbizod">BIZOD</a></p>
+<p>This document works with MATLAB built-in image <em>coloredChips.png</em> in <code>A</code> variable. The code uses <code>A</code> to create images in an <strong>imgs/</strong> folder.</p>
 </blockquote>
-<blockquote class="blockquote">
-<p>Pro otevření dokumentace přejděte na záložku <a href="zodoc/docs">Docs</a></p>
-</blockquote>
-<h1 id="ucel">Účel</h1>
-<p>Během výuky Zpracování obrazových dat (ZOD) především pro obor Biomedicínská informatika na <a href="https://fbmi.cvut.cz">fbmi.cvut.cz</a> vzniká spoustu kódu, který je dobré archivovat a udržovat a to včetně vysvětlujících poznámek a výstupu většinou ve formě obrazu.
-Nyní jsou poznámky udržované v <a href="https://campuscvut-my.sharepoint.com/personal/tesarj13_cvut_cz/_layouts/15/guestaccess.aspx?docid=0bfb2bdf298624cfd958ecec0995ad1e1&amp;authkey=ARqZgO9VFIV1R9b1jJJu8Yc&amp;e=4073622bdf1a474caf92164e278c5744">jednom .docx souboru</a> "hostovaném" na OneDrivu, což s sebou přináší značné výhody (snadná editace, automatické zvýraznění syntaxe, obrázky rovnou v souboru, minimální požadavky na nasazení), tak též nevýhody (webově špatně prezentovatelný a nesnadno dohledatelný formát, složité přispívání více lidí, linearita - chybějící struktura).</p>
-<h1 id="prispivani">Přispívání</h1>
-<p>Máte - li zájem získat body navíc stačí přispět předěláním nějaké kapitoly z mateřského souboru do markdownu.</p>
-<h2 id="co-je-to-markdown.md">Co je to Markdown (.md)?</h2>
-<p>Markdown je jednoduchý značkovací jazyk využívající několik "značek" pro snadnější naformátování dokumentu. Zvládá vytvořit odkazy, zvýraznit syntaxi, přidat obrázky a mnohem víc. <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet#links">Markdown tahák</a>.</p>
-<h2 id="kde-zacit">Kde začít</h2>
-<p>Pro inspiraci jak vytvořit článek odpovídající zdejším (velice čerstvým a kujným) pravidlům se podívejte <a href="https://raw.githubusercontent.com/tesar-tech/zodoc/master/input/docs/matlab_start.md">zde</a>. K uvedenému souboru se dostanete přes repositář na mém <a href="https://github.com/tesar-tech/zodoc/tree/master/input/docs">githubu</a>, vybráním souboru a kliknutí na <code>Raw</code></p>
-<h2 id="jak-tvorit">Jak tvořit</h2>
-<p>Existuje spoustu způsobů a editorů, které Markdown zvládají. Já mohu doporučit <a href="https://code.visualstudio.com/">Visual Studio Code</a> (multiplatformní záležitost) a doplňky pro usnadnění práce s .md soubory. <a href="https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one">Markdown All in One</a> a <a href="https://marketplace.visualstudio.com/items?itemName=telesoho.vscode-markdown-paste-image">Markdown Paste</a> pro snadnější vkládání obrázků.
-Obrázky je dobré vkládat vždy do složky <code>media</code> ve stejné složce jako je článek (opět zřete <a href="https://github.com/tesar-tech/zodoc/tree/master/input/docs">repozitář</a>).</p>
-<h3 id="jak-maji-soubory-vypadat">Jak mají soubory vypadat</h3>
-<p>Nejde jenom o to, abyste překopírovali text z wordu do .md. Jde také o to, abyste kód spustili, opravili (třeba názvy proměnných), zadokumentovali (obrázky). Inspirujte se v již vytvořených souborech.</p>
-<h2 id="konvence">Konvence</h2>
-<p>Pár tipů, jak tvořit dokumentaci. Pokud vám jsou některé následující pojmy tajné, nevěšte hlavy, stačí spolupracovat s již vytvořenými soubory, které tyto konvence respektují.</p>
+<h1 id="creating-an-image-database">Creating an image database</h1>
 <ul>
-<li><p>Soubory nazývejte výstižnými názvy</p>
-</li>
-<li><p>Pro obrázky je nejlepší použít časovou značku (zmíněný doplněk pro vscode toto umí automaticky)</p>
-</li>
-<li><p>Obrázky ukládejte do složky /media</p>
-</li>
-<li><p>Obsahuje-li výstup více obrázků vytvořených pomocí funkce <code>subplot</code>, následný <code>imshow</code> dejte na stejný řádek.</p>
-</li>
-<li><p>Uvádějte titulek i popis souboru (přes metadata)</p>
-</li>
-<li><p>Podnadpisy jsou první úrovně (#). Hlavní nadpis je v metadatech jako <code>title</code></p>
-</li>
-<li><p>Ukázky kódu patřičně zarovnejte (v Matlabu označit vše a potom Ctrl+I)</p>
-</li>
-<li><p>v případě tvorby dokumentů do sekce <code>Exercises</code> jsou konvence lehce jiné. Vysvětlené jsou v ukázkovém cvičení.</p>
-</li>
+<li>To compare atributes of both formats, following code will create database of 100 <strong>.jpg</strong> and 100 <strong>.png</strong> images of <em>coloredChips.png</em>, varying in size</li>
+<li>It would be more educative to use a database of diverse pictures, but for simplicity, we use this solution. Results of this chapter would be no different: The plot shows, that using <strong>.jpg</strong> for this kind of image is more space-saving than using <strong>.png</strong></li>
+<li>First create <strong>imgs/</strong> folder in your actual working directory</li>
 </ul>
-<h2 id="jak-publikovat">Jak publikovat</h2>
-<p>Forkem repositáře a pull requestou. Je k tomu nutný účet na githubu a lehká znalost, jak to celé funguje. Návodů je všude fůra a samotný github vás směle navede. Tuto cestu vřele doporučuji (ve skutečnosti je to jeden z důvodů proč dokumentaci přesouvám tímto směrem) - jestli se chcete programování do budoucna věnovat, bude se vám tento základ hodit. Pro jednu novou část dokumentace (jeden .md soubor) vytvořte jednu pullrequestu. Já to okomentuji, vy opravíte, commitnete a pushnete do svého forlklého repozitáře. Až to bude v pořádku, pull requestu bude sloučena (merge) s mateřským adresářem.</p>
-<h2 id="co-z-toho">Co z toho?</h2>
-<ul>
-<li>Především dobrý pocit, že jste přispěli k zvyšování kvality výuky a naučili jste se něco nového.</li>
-<li>7 bodů do vašeho celoročního skóre za každý precizně vytvořený soubor (čím méně práce s tím budu mít já při editaci, tím více se přiblížíte těm 7 bodům)</li>
-<li>Připomínám, že během 14. výukového týdne bude zápočtové klání uzavřené. Stíhejte to včas.</li>
-</ul>
-<h1 id="technologie-jak-to-funguje">Technologie - jak to funguje</h1>
-<ul>
-<li><a href="https://wyam.io">https://wyam.io</a> pro generování statických stánek</li>
-<li><a href="https://github.io">https://github.io</a> pro hostování a sdílení</li>
-<li><a href="https://appveyor.com">https://appveyor.com</a> pro buildění a nasazení</li>
-<li><a href="https://github.com/MinhasKamal/DownGit">https://github.com/MinhasKamal/DownGit</a> pro stahování složek z githubu.</li>
-</ul>
+<pre><code class="language-matlab">clear all 
+
+route= 'imgs/'; %sets route to saving directory
+A=imread('coloredChips.png'); %reads an image
+
+for i=1:100
+	pic_res=imresize(A,i/100); %img resize
+	[r, c]=size(pic_res);
+	pic_size(i,1)=r*c; %size of current img in pixels
+
+	imwrite(pic_res,[route ,'pic_' num2str(i/100) '.jpg'],'JPEG'); %saving current img in .png
+	imwrite(pic_res,[route, 'pic_' num2str(i/100) '.png'],'PNG'); %saving current img in .jpg
+end
+</code></pre>
+<h1 id="counting-pixels-and-bytes-of-each-image">Counting pixels and bytes of each image</h1>
+<pre><code class="language-matlab">% to aviod repetitions in code, this will create a cell array with both format names
+formats = {'jpg' , 'png'};
+
+% this code will count pixels and bytes of each .jpg image in first iteration, and does the same with .png images in second iteration
+for i=1: 2  
+    B = dir([route, strcat('*.',formats{i})]); % load all .jpg/.png images into B 
+    B_count= length(B); % number of .jpg/.png images
+    index = 1;
+
+    for img_Index = 1: B_count
+        act_img = B(img_Index);          
+        act_img_name = act_img.name;
+        A = imread([route,act_img_name]);
+        [a,b] = size(A);	
+        byte_count(index)= act_img.bytes;
+        px_count(index) = a*b;
+        index = index +1;
+    end
+
+    px_countF{i} = px_count;  % saves counts in cell array 
+    byte_countF{i} = byte_count;
+end
+</code></pre>
+<h1 id="plotting-the-relationship-between-pixels-count-and-file-size-of.jpg-and.png-images">Plotting the relationship between pixels count and file size of .jpg and .png images</h1>
+<pre><code class="language-matlab">scatter( px_count_jpg,byte_count_jpg/1024,'b');xlabel('pixels'), ylabel('kilobytes')
+hold on
+scatter( px_count_png,byte_count_png/1024,'r');xlabel('pixels'), ylabel('kilobytes')
+legend('jpg','png') 
+</code></pre>
+<p><img src="../media/pvj1.png" class="img-fluid" alt=""></p>
 
 
 

@@ -65,7 +65,21 @@
                     </div>
                     <!-- /.navbar-collapse -->
                 
+                
                     <!-- Navbar Right Menu -->
+                    
+                    <div class="navbar-custom-menu">
+                        <ul class="nav navbar-nav">
+                            <!-- <li><a href="#">A Menu Item</a></li>
+                            <li><a href="#">Another Item</a></li>
+                             -->
+                            <!-- Control Sidebar Toggle Button -->
+                            <li>
+                                <a href="https://github.com/tesar-tech/zodoc" data-toggle="control-sidebar">GitHub <i class="fa fa-github"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                    
                 </nav>
             </header>
             
@@ -94,6 +108,7 @@
                 <li><a href="/zodoc/docs/en/histogram">Histogram-based operations on images</a></li>
                 <li class="selected"><a href="/zodoc/docs/en/autofocus">Image sharpness detection and autofocus</a></li>
                 <li><a href="/zodoc/docs/en/spectrum">Image spectra, fourier transformation, low-pass and high-pass filter</a></li>
+                <li><a href="/zodoc/docs/en/png_vs_jpg">PNG vs JPG</a></li>
 
                     </ul>
                 </li>
@@ -127,7 +142,7 @@
 
 
 		<blockquote class="blockquote">
-<p>This document works with an <a href="media/kytka256.jpg">image</a> in <code>A</code> variable and a <a href="media/podzimni_kvetena_focus_test.mp4">video</a> in <code>v</code> variable.</p>
+<p>This document works with an <a href="../media/kytka256.jpg">image</a> in <code>A</code> variable and a <a href="../media/podzimni_kvetena_focus_test.mp4">video</a> in <code>v</code> variable.</p>
 </blockquote>
 <h1 id="detect-image-sharpness-use-edges-to-compare-sharpness-of-2-images">Detect image sharpness -&gt; use edges to compare sharpness of 2 images</h1>
 <pre><code class="language-matlab">A = imread('kytka256.jpg');
@@ -153,7 +168,7 @@ colormap('hot')
 subplot(rows,cols,s);s=s+1;imshow(Ae);title(['edges: ', num2str(sum(Ae(:))), ' px' ]);
 subplot(rows,cols,s);s=s+1;imshow(Aef);title(['edges: ', num2str(sum(Aef(:))), ' px' ]);
 </code></pre>
-<p><img src="media/kytka1_gauss_autofocus.png" class="img-fluid" alt=""></p>
+<p><img src="../media/kytka1_gauss_autofocus.png" class="img-fluid" alt=""></p>
 <h1 id="autofocus-finding-sharpest-frames-of-a-video">Autofocus – finding sharpest frames of a video</h1>
 <pre><code class="language-matlab">v = VideoReader('podzimni_kvetena_focus_test.mp4');
 vHeight = v.Height;

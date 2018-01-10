@@ -65,7 +65,21 @@
                     </div>
                     <!-- /.navbar-collapse -->
                 
+                
                     <!-- Navbar Right Menu -->
+                    
+                    <div class="navbar-custom-menu">
+                        <ul class="nav navbar-nav">
+                            <!-- <li><a href="#">A Menu Item</a></li>
+                            <li><a href="#">Another Item</a></li>
+                             -->
+                            <!-- Control Sidebar Toggle Button -->
+                            <li>
+                                <a href="https://github.com/tesar-tech/zodoc" data-toggle="control-sidebar">GitHub <i class="fa fa-github"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                    
                 </nav>
             </header>
             
@@ -97,6 +111,7 @@
                 <li><a href="/zodoc/docs/en/histogram">Histogram-based operations on images</a></li>
                 <li><a href="/zodoc/docs/en/autofocus">Image sharpness detection and autofocus</a></li>
                 <li><a href="/zodoc/docs/en/spectrum">Image spectra, fourier transformation, low-pass and high-pass filter</a></li>
+                <li><a href="/zodoc/docs/en/png_vs_jpg">PNG vs JPG</a></li>
 
                     </ul>
                 </li>
@@ -142,7 +157,7 @@ imshow(A))
 <pre><code class="language-matlab">Ag = rgb2gray(A);
 imshow(Ag)
 </code></pre>
-<p><img src="media/2017-12-04-17-47-57.png" class="img-fluid" alt=""></p>
+<p><img src="../media/2017-12-04-17-47-57.png" class="img-fluid" alt=""></p>
 <h1 id="decompose-rgb-channels">Decompose RGB channels</h1>
 <pre><code class="language-matlab">R=A(:,:,1);
 G=A(:,:,2);
@@ -154,7 +169,7 @@ subplot 223;imshow(G);title('green channel');
 subplot 224;imshow(B);title('blue channel');
 </code></pre>
 <p>Notice dark color in blue channel, which is not part of yellow color unlike red and green channels.</p>
-<p><img src="media/2017-12-04-17-59-08.png" class="img-fluid" alt=""></p>
+<p><img src="../media/2017-12-04-17-59-08.png" class="img-fluid" alt=""></p>
 <h2 id="colorize-channels">Colorize channels</h2>
 <p>Set non-color channels to zero</p>
 <pre><code class="language-matlab">zeroMatrix=zeros(size(A,1),size(A,2));
@@ -167,21 +182,21 @@ subplot 222;imshow(R1);title('red channel');
 subplot 223;imshow(G1);title('green channel');
 subplot 224;imshow(B1);title('blue channel');
 </code></pre>
-<p><img src="media/colorizedChannels.png" class="img-fluid" alt=""></p>
+<p><img src="../media/colorizedChannels.png" class="img-fluid" alt=""></p>
 <h1 id="negative-image">Negative image</h1>
 <pre><code class="language-matlab">An=imcomplement(A);
 %or
 An= 255-A;%if image is uint8 type
 imshow(An)
 </code></pre>
-<p><img src="media/negative.png" class="img-fluid" alt=""></p>
+<p><img src="../media/negative.png" class="img-fluid" alt=""></p>
 <h1 id="black-white">Black &amp; White</h1>
 <pre><code class="language-matlab">Abw = imbinarize(Ag);%from gray image
 %BW = im2bw(A);% in older versions of matlab
 imshow(Abw)
 
 </code></pre>
-<p><img src="media/binarized.png" class="img-fluid" alt=""></p>
+<p><img src="../media/binarized.png" class="img-fluid" alt=""></p>
 <h2 id="custom-way">Custom way</h2>
 <p>Result of <code>Ag&lt;128</code> is binary matrix - i.e. b&amp;w image</p>
 <pre><code class="language-matlab">imshow(Ag&lt;128);
@@ -218,7 +233,7 @@ for ii = 1:5:256
     end 
  end
 </code></pre>
-<p><img src="media/bw_anim.gif" class="img-fluid" alt=""></p>
+<p><img src="../media/bw_anim.gif" class="img-fluid" alt=""></p>
 
 
 

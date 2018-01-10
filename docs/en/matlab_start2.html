@@ -65,7 +65,21 @@
                     </div>
                     <!-- /.navbar-collapse -->
                 
+                
                     <!-- Navbar Right Menu -->
+                    
+                    <div class="navbar-custom-menu">
+                        <ul class="nav navbar-nav">
+                            <!-- <li><a href="#">A Menu Item</a></li>
+                            <li><a href="#">Another Item</a></li>
+                             -->
+                            <!-- Control Sidebar Toggle Button -->
+                            <li>
+                                <a href="https://github.com/tesar-tech/zodoc" data-toggle="control-sidebar">GitHub <i class="fa fa-github"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                    
                 </nav>
             </header>
             
@@ -99,6 +113,7 @@
                 <li><a href="/zodoc/docs/en/histogram">Histogram-based operations on images</a></li>
                 <li><a href="/zodoc/docs/en/autofocus">Image sharpness detection and autofocus</a></li>
                 <li><a href="/zodoc/docs/en/spectrum">Image spectra, fourier transformation, low-pass and high-pass filter</a></li>
+                <li><a href="/zodoc/docs/en/png_vs_jpg">PNG vs JPG</a></li>
 
                     </ul>
                 </li>
@@ -139,7 +154,7 @@
 imshow(A)
 </code></pre>
 <h1 id="moving-colorful-stripe">Moving colorful stripe</h1>
-<p><img src="media/moving_stripe.gif" class="img-fluid" alt=""></p>
+<p><img src="../media/moving_stripe.gif" class="img-fluid" alt=""></p>
 <p>Commented parts are use to save animation to gif</p>
 <pre><code class="language-matlab">Ag = rgb2gray(A);
 figure; ax = axes;
@@ -173,7 +188,7 @@ end
 
 </code></pre>
 <h1 id="repetitive-image-canvas">Repetitive image canvas</h1>
-<p><img src="media/img_repetitive_canvas.png" class="img-fluid" alt=""></p>
+<p><img src="../media/img_repetitive_canvas.png" class="img-fluid" alt=""></p>
 <pre><code class="language-matlab">raster = ones (5);
 raster([7:9,12,17:19,14]) = 0;
 canvas = repmat(raster,20,20);
@@ -182,28 +197,28 @@ imshow(canvas)
 <h1 id="scaling-image">Scaling Image</h1>
 <p>You can use both methods (by percentage and size in pixels) for scaling images up and down.</p>
 <h2 id="scaling-down">Scaling down</h2>
-<p><img src="media/scaledDown.png" class="img-fluid" alt=""></p>
+<p><img src="../media/scaledDown.png" class="img-fluid" alt=""></p>
 <pre><code class="language-matlab">A_scaledDown = imresize(A,0.3);% 30 % of original size
 imshow(A_scaledDown)
 </code></pre>
 <h2 id="scaling-up">Scaling up</h2>
-<p><img src="media/scaledUp.png" class="img-fluid" alt=""></p>
+<p><img src="../media/scaledUp.png" class="img-fluid" alt=""></p>
 <pre><code class="language-matlab">A_scaledUp = imresize(A,[300 400]);% in pixels. Does not keep proportions
 imshow(A_scaledUp)
 </code></pre>
 <h1 id="croping-image">Croping Image</h1>
-<p><img src="media/croped.png" class="img-fluid" alt=""></p>
+<p><img src="../media/croped.png" class="img-fluid" alt=""></p>
 <pre><code class="language-matlab">A_cropped = A(50:100,170:250,:);% colon means "in all channels"
 imshow(A_cropped)
 </code></pre>
 <h1 id="replacing-part-of-image-with-black-color">Replacing part of image with black color</h1>
-<p><img src="media/replaced.png" class="img-fluid" alt=""></p>
+<p><img src="../media/replaced.png" class="img-fluid" alt=""></p>
 <pre><code class="language-matlab">A_replaced = A; %copy A, not overwrite
 A_replaced(50:100,170:250,:) = 0;
 imshow(A_replaced)
 </code></pre>
 <h1 id="brightness-changes">Brightness changes</h1>
-<p><img src="media/brightness.png" class="img-fluid" alt=""></p>
+<p><img src="../media/brightness.png" class="img-fluid" alt=""></p>
 <pre><code class="language-matlab">A_brighter = A+0.3;
 A_darker = A-0.3;
 figure;
@@ -212,7 +227,7 @@ subplot 132;imshow(A);
 subplot 133;imshow(A_brighter);
 </code></pre>
 <h1 id="display-image-histogram">Display image histogram</h1>
-<p><img src="media/hist.png" class="img-fluid" alt=""></p>
+<p><img src="../media/hist.png" class="img-fluid" alt=""></p>
 <pre><code class="language-matlab">imhist(A)
 </code></pre>
 
