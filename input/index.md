@@ -30,6 +30,8 @@ Pár tipů, jak tvořit dokumentaci. Pokud vám jsou některé následující po
 - Podnadpisy jsou první úrovně (#). Hlavní nadpis je v metadatech jako `title` 
 - Ukázky kódu patřičně zarovnejte (v Matlabu označit vše a potom Ctrl+I)
 
+- v případě tvorby dokumentů do sekce `Exercises` jsou konvence lehce jiné. Vysvětlené jsou v ukázkovém cvičení. 
+
 ## Jak publikovat
 Forkem repositáře a pull requestou. Je k tomu nutný účet na githubu a lehká znalost, jak to celé funguje. Návodů je všude fůra a samotný github vás směle navede. Tuto cestu vřele doporučuji (ve skutečnosti je to jeden z důvodů proč dokumentaci přesouvám tímto směrem) - jestli se chcete programování do budoucna věnovat, bude se vám tento základ hodit. Pro jednu novou část dokumentace (jeden .md soubor) vytvořte jednu pullrequestu. Já to okomentuji, vy opravíte, commitnete a pushnete do svého forlklého repozitáře. Až to bude v pořádku, pull requestu bude sloučena (merge) s mateřským adresářem.
 
@@ -41,6 +43,7 @@ Forkem repositáře a pull requestou. Je k tomu nutný účet na githubu a lehk�
 - https://wyam.io pro generování statických stánek
 - https://github.io pro hostování a sdílení
 - https://appveyor.com pro buildění a nasazení
+- https://github.com/MinhasKamal/DownGit pro stahování složek z githubu.
 
 
 
