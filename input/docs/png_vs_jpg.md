@@ -4,7 +4,7 @@ description: Comparing .png and .jpg formats
 >This document works with MATLAB built-in image *coloredChips.png* in `A` variable. The code uses `A` to create images in an **imgs/** folder.
 # Creating an image database
 * To compare atributes of both formats, following code will create database of 100 **.jpg** and 100 **.png** images of *coloredChips.png*, varying in size
-* It would be more educative to use a database of diverse pictures, but for simplicity, we use this solution. Results of this chapter would be no different: The plot shows, that using **.jpg** is more space-saving than using **.png**
+* It would be more educative to use a database of diverse pictures, but for simplicity, we use this solution. Results of this chapter would be no different: The plot shows, that using **.jpg** for this kind of image is more space-saving than using **.png**
 * First create **imgs/** folder in your actual working directory
 ``` matlab
 clear all 
