@@ -1,8 +1,113 @@
+using System.IO;
+#n Wyam.Html
+
 #recipe Docs
 
-// Customize your settings and add new ones here
 Settings[Keys.Host] = "tesar-tech.github.io/zodoc";
 Settings[DocsKeys.Title] = "ZODOC";
-Settings[Keys.LinkRoot] = "/zodoc";
 
-// Add any pipeline customizations here
+//Settings[DocsKeys.ValidateRelativeLinks] =true;
+//Settings[DocsKeys.ValidateAbsoluteLinks] =false;
+//Settings[DocsKeys.ValidateLinksAsError] =false;
+
+Settings[Keys.LinkRoot] = "/zodoc";
+Settings[DocsKeys.BaseEditUrl] = "https://github.com/tesar-tech/zodoc/tree/master/input/";
+//Settings[DocsKeys.Logo] = "/assets/img/logo.png";
+Settings["Langs"] = new string[] { "en","cs","de"};
+Settings["assignmentType"] = "assignment"; //this is probably useless
+Settings["solutionType"] = "solution";//also useless
+Settings["documentationType"] = "documentation";//also useless
+
+//method for gathering type (assignment or solution)
+public string GetType(string filePath)
+{
+    var splits = filePath.Split('/');
+    string type = "";
+    if(splits.Last().Split('.').First()=="index")//do not assign type to index pages
+         return "";
+    if (splits.First() == "exercises")//looking for folder exercises
+    {
+        type = (string)Settings["assignmentType"];
+        if (splits.Count() > 1 && splits[1] == "solutions")//also in folder solution?
+            type = (string)Settings["solutionType"];
+    } else if(splits.First() == "docs")
+    {
+        return (string)Settings["documentationType"];
+    }
+    return type;
+}
+
+//add some basic metadata
+Pipelines["RenderPages"].InsertAfter("GetDocuments",
+   Meta ("fileName", (doc,ctx) => { 
+     return doc.Get<String>("RelativeFilePath").Split('/').Last();}
+    ),
+   Meta ("lang",  (doc,ctx) => { 
+       var splits = doc.Get<String>("RelativeFilePath").Split('/');
+       if(splits.Last().Split('.').First()=="index")//do not assign type to index pages
+         return "";
+      var langSplit =  splits.FirstOrDefault(x=>((string[])Settings["Langs"]).Contains(x)); //look for folder with lang string i.e. "en"
+        
+                      
+        return langSplit??"" ;} 
+    ),
+   Meta ("type", GetType ( @doc.Get<String>("RelativeFilePath"))) //use custom method GetType
+);
+
+//create metadata for connecting assignments, solutions, sources and languages mutations
+Pipelines["RenderPages"].InsertBefore("Render",
+    Meta("otherLanguagesList", (doc, ctx) => { 
+        if(doc.String("lang")=="")
+         return null;
+        var otherLangs =  ctx.Documents.FromPipeline("RenderPages") //search in other documents
+                        .Where(c => c.String("lang") != "" //where the language is set
+                            && c.String("lang") != doc.String("lang") //for different languages
+                            && c.String("filename")==doc.String("filename") //same file name 
+                            && c.String("type")==doc.String("type")) //and same type
+                        .Select(x => x.String("lang")).Distinct();
+        return otherLangs.Count() ==0 ? null:otherLangs.ToList();//no other lang -> return null;
+    } ),
+
+    If( @doc.String("type")==(string)Settings["assignmentType"], //looking for exercises 
+      
+        Meta("solutionRelativeFilePath", (doc, ctx) => { 
+            var solutionDoc =  ctx.Documents.FromPipeline("RenderPages") //from all documents
+                    .SingleOrDefault(x=> x.Get<String>("type")==(string)Settings["solutionType"] //look for solutions
+                         && x.Get<String>("fileName") == doc.Get<String>("fileName") //with same name as current doc
+                         && x.Get<String>("fileName").Split('.').First() !="index" );//not on index pages 
+            return solutionDoc==null ? "":solutionDoc.Get<String>("RelativeFilePath");//no solution -> return empty string
+        } )
+    ),
+
+    If( @doc.String("type")==(string)Settings["solutionType"] , //only for solution documents
+        Meta("assignmentsLangsList", (doc, ctx) => { 
+            var assignemntLangs = ctx.Documents.FromPipeline("RenderPages")//search in all document
+                .Where(x=> x.Get<String>("type")==Settings["assignmentType"] && //for exercises documents
+                        x.Get<String>("fileName") == doc.Get<String>("fileName")) //with same name (that is the way how assignment-solution pairs are created)
+                .Select(c=>c.String("lang")).ToList();
+        return assignemntLangs; 
+    } )
+    ),
+
+    If( @doc.String("type")==(string)Settings["assignmentType"] ,//
+        Meta("folderWithSourcesRelativePath", (doc, ctx) => { 
+            var absPathToFileWithoutExt = doc.Get<String>("SourceFilePathBase");
+            var relPathToFileWithoutExt = doc.Get<String>("RelativeFilePathBase");
+            if (String.IsNullOrEmpty(absPathToFileWithoutExt) || String.IsNullOrEmpty(relPathToFileWithoutExt))
+                return "";
+            //need abs path to test if dir exists
+            //path to folderWithSources is almost same as path to assignment (exercise) file. 
+            // i.e.: exercise/sources/souresIlookFor  and exercise/cs/souresIlookFor.md where cs is language...
+            var relativePathToFolderWithSources = relPathToFileWithoutExt.Replace(doc.String("lang"), "sources");
+            
+            //there is slightly chance that server has same path like this one. In that case, path will be replaced twice.
+            //solution is replace only last matching string..
+            var dir = absPathToFileWithoutExt.Replace(relPathToFileWithoutExt, relativePathToFolderWithSources);
+
+            if (Directory.Exists(dir.Replace("file:///", "")))
+                return relativePathToFolderWithSources;
+            else return "";
+        } )
+    )
+);
+

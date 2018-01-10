@@ -1,0 +1,59 @@
+@model string[]
+<!--[0]type of translation  -->
+@{
+    if(Model[0]=="localization_languagePacks")
+    {
+    // [1] language to make link; [2]current link; [3]current lang 
+        var link = Context.GetLink(Model[2]).Replace(Model[3],Model[1]);
+        if(Model[1]=="cs")
+        {
+            <p> Tento dokument je dostupný též v <a href="@link">Češtině</a> </p>
+        }else if(Model[1]=="en")
+        {
+            <p> This document is also available in <a href="@link">English</a> </p> 
+        }
+    }else if (Model[0]=="localization_solutionLink")
+    {
+     // [1] current lang; [2]solution link;
+        var link = Context.GetLink(Model[2]);
+        if(Model[1]=="cs")
+        {
+            <p> Řešení naleznete <a href="@link">zde</a> </p>
+        }else if(Model[1]=="en")
+        {
+            <p> Soulution is <a href="@link">here</a> </p> 
+        }
+
+    }
+    else if (Model[0]=="localization_assignmentsLangsList")
+    {
+     // [1] lang to display [2]solution link(that need to be processed to assignemnts links); [3] separator
+        var link = Context.GetLink(Model[2]).Replace("solutions",Model[1]);//todo: hardcoded foldername
+        if(Model[1]=="cs")
+        {
+            <a href="@link">Čeština</a>@Model[3];
+        }else if(Model[1]=="en")
+        {
+           <a href="@link">English</a>@Model[3];
+        //    solution with , and . is not the best practise. But I had the issue with spaces from unknown source..
+        }
+
+    }
+    else if (Model[0]=="localization_githubFolderLink")
+    {
+     // [1] lang to display [2]githubfolder link [3]direct link to download 
+
+        if(Model[1]=="cs")
+        {
+            <p>K této úloze jsou dostupné <a href="@Model[2]">materiály</a>.
+            Přímý <a href="@Model[3]">odkaz</a> ke stažení.
+            </p>
+        }else if(Model[1]=="en")
+        {
+            <p><a href="@Model[2]">Sources</a> for this assignment are available.
+             Direct <a href="@Model[3]"> download</a>.
+             </p>
+        }
+
+    }
+}
