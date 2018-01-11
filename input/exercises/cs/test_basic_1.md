@@ -1,7 +1,7 @@
-Úvod: Test základních znalostí 1
-Popis: Test obsahuje 6 otázek. Maximalně můžete získat 21 bod.
+title: Test základních znalostí 1
 ---
-
+# Úvod
+Test obsahuje 6 otázek. Maximalně můžete získat 21 bod.
 # Kytka
 (2 body) Zobrazte obrázek kytky a jeho šedotónovou alternativu tak jak je na ukázce níže.
 
