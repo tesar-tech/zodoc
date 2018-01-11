@@ -1,5 +1,5 @@
 Úvod: Test základních znalostí 1
-Popis: Test obsahuje 6 otázek. Maximalně můžete dostat 21 bod.
+Popis: Test obsahuje 6 otázek. Maximalně můžete získat 21 bod.
 ---
 # Zadání
 ## Kytka
