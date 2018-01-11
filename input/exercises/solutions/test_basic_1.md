@@ -1,5 +1,4 @@
-Úvod: Test základních znalosti 1
-Popis: Řešení testu.
+title: Test základních znalostí 1
 ---
 >This document works with two images: 
 
