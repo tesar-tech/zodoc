@@ -6,14 +6,14 @@ title: Test základních znalostí 1
 * [Image of Norway](media/tes_basic_1_8.jpg) in `B`
 # Kytka
  ``` matlab
-A = imread('kytka256.jpg');
+A = imread('test_basic_1_7.jpg');
 A_gray = rgb2gray(A);
 subplot (2,2,1); imshow(A)
 subplot (2,2,4) ;imshow(A_gray)
  ```
 # Kytkonor
  ``` matlab
-B = imread('nor256.jpg');
+B = imread('test_basic_1_8.jpg');
 Flower = A;
 Two_images = cat (3,Flower(:,:,2),B(:,:,1),B(:,:,3));
 imshow(Two_images)
