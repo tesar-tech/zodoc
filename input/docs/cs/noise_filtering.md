@@ -34,7 +34,7 @@ bar(err)
 set(gca,'XTickLabel',labels_X) % nastaví text na osu x 
 text(1:length(err),err',num2str(err','%0.2f'),'HorizontalAlignment','center','VerticalAlignment','bottom') % zobrazení čísel na bary
 ```
-![](../media/noisemedfil.png)
+![](../media/noisemedfil.PNG)
 # Histogram gaussovského šumu
 ``` matlab
 A_noise = imnoise(B, 'gaussian'); % gausuv šum na obrázek
@@ -42,7 +42,7 @@ A_orig = double(A_noise)- double(B); % odčítání matic
 hist(A_orig(:),22); % histogram, vykreslení vektoru
 xlabel('Velikost šuma'), ylabel('Četnost')
 ```
-![](../media/histnoise.png)
+![](../media/histnoise.PNG)
 # Testování filtrů
 ``` matlab
 A_noise = imnoise(B,'gaussian'); % gausuv šum na obrázek
@@ -69,4 +69,4 @@ bar(err)
 set (gca, 'XTickLabel', labels_X) % nastaví text na osu x 
 text(1:length(err),err',num2str(err','%0.2f'), 'HorizontalAlignment','center','VerticalAlignment','bottom') % zobrazení čísel na bary
 ```
-![](../media/testfilter.png)
+![](../media/testfilter.PNG)
