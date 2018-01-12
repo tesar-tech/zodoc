@@ -2,7 +2,7 @@ title: Hledání kružnic.
 ---
 >This document works with image: 
 
-* [Image of eye](../media/oko.jpg) in `img` 
+* [Image of eye](../media/oko.jpg) in `A` 
 # Načtení obrázku a zobrazení hran
 ``` matlab
 A = rgb2gray(imread('oko.jpg'));
@@ -13,7 +13,7 @@ subplot 131;imshow(A);title('původní obrázek');
 subplot 132;imshow(A_filter);title('obrázek po filtrace');
 subplot 133;imshow(hrany);title('hrany');
 ```
-![](../media/plotedges.png)
+![](../media/plotedges.PNG)
 # Samotný algoritmus 
 ``` matlab
 minR = 40;
@@ -52,4 +52,4 @@ vzdalenosti_od_bodu = bwdist(matice_s_bodem);
 kruznice = round(vzdalenosti_od_bodu)==nalezenyPolomer;
 imshow(double(A)+kruznice*255,[]);
 ``` 
-![](../media/drawcir.png)
+![](../media/drawcir.PNG)
