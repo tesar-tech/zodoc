@@ -1,4 +1,4 @@
-Název: Test základních znalostí 1
+title: Test základních znalostí 1
 ---
 # Úvod
 Test obsahuje 6 otázek. Maximalně můžete získat 21 bod.
