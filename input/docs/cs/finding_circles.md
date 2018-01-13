@@ -5,16 +5,16 @@ title: Hledání kružnic - Houghova transformace
 * [Obrázek oka](../media/oko.jpg) v proměnné `A` 
 # Načtení obrázku jeho předzpracování a hledání hran
 ``` matlab
-A = rgb2gray(imread('oko.jpg')); % převod obrázu do šedotónové stupnice
-h = fspecial('gaussian',[8 8],1); % funkce vytvoří masku pro filtrování 
+A = rgb2gray(imread('oko.jpg')); % převod obrázu do stupnice šedi
+h = fspecial('gaussian',[8 8],1); % tvorba masky pro filtrování 
 A_filter = imfilter(A,h); % provádí filtraci šumu
-hrany = edge(A_filter); % funkce nalezné hrany v obrazu
+hrany = edge(A_filter); % funkce nalezne hrany v obrazu
 subplot 131;imshow(A);title('původní obrázek');
-subplot 132;imshow(A_filter);title('obrázek po filtrace');
+subplot 132;imshow(A_filter);title('obrázek po filtraci');
 subplot 133;imshow(hrany);title('hrany');
 ```
 ![](../media/plotedges.png)
-# Algoritmus pro výpočet Houghové transformaci
+# Algoritmus pro výpočet Houghovy transformaci
 ``` matlab
 minR = 40; 
 maxR = 46; 
@@ -40,7 +40,7 @@ end
 ```
 # Hledání maxima
 ``` matlab
-[~, ind] = max(vsechny_platna(:)); % kde v tom kvádru je nejvyšší hodnota
+[~, ind] = max(vsechny_platna(:)); % kde v kvádru všech pláten je nejvyšší hodnota
 [a, b, c] = ind2sub(size(vsechny_platna),ind); % indexy třech rozměru
 nalezenyPolomer = c+minR-1; % v případě 1 by to byl ten nejmenší poloměr
 ``` 
