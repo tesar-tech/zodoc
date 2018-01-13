@@ -1,9 +1,5 @@
 title: Test základních znalostí 1
 ---
->Tento dokument pracuje se dvěma obrázky: 
-
-* [Obrázek kytky](media/test_basic_1_7.jpg) in `A` 
-* [Obrázek Norska](media/tes_basic_1_8.jpg) in `B`
 # Kytka
  ``` matlab
 A = imread('test_basic_1_7.jpg');

@@ -1,9 +1,5 @@
 title: Test základních znalostí 2
 --- 
->this document works with image: 
-
-* [Obrázek kytky](media/test_basic_2_7) in `A` 
-
 # Kytka v prostředku
  ``` matlab
  A = imread('test_basic_2_7.jpg');
