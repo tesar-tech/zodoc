@@ -1,8 +1,8 @@
-title: Hledání kružnic - Houghova transformace.
+title: Hledání kružnic - Houghova transformace
 ---
 >Tento dokument pracuje s obrázkem: 
 
-* [Obrázek oka](../media/oko.jpg) in `A` 
+* [Obrázek oka](../media/oko.jpg) v proměnné `A` 
 # Načtení obrázku jeho předzpracování a hledání hran
 ``` matlab
 A = rgb2gray(imread('oko.jpg')); % převod obrázu do šedotónové stupnice
