@@ -3,7 +3,7 @@ title: Hledání kružnic - Houghova transformace
 >Tento dokument pracuje s obrázkem: 
 
 * [Obrázek oka](../media/oko.jpg) v proměnné `A` 
-# Načtení obrázku jeho předzpracování a hledání hran
+# Načtení obrázku, předzpracování a hledání hran
 ``` matlab
 A = rgb2gray(imread('oko.jpg')); % převod obrázu do stupnice šedi
 h = fspecial('gaussian',[8 8],1); % tvorba masky pro filtrování 
@@ -14,7 +14,7 @@ subplot 132;imshow(A_filter);title('obrázek po filtraci');
 subplot 133;imshow(hrany);title('hrany');
 ```
 ![](../media/plotedges.png)
-# Algoritmus pro výpočet Houghovy transformaci
+# Houghova transformace
 ``` matlab
 minR = 40; 
 maxR = 46; 
@@ -33,7 +33,7 @@ for r = minR:maxR % interval poloměru od 40 do 46
         kruznice = round(vzdalenosti_od_bodu)==r; % vzdálenosti v délce poloměru
         platno = platno+kruznice; % přimaluje kružnici na plátno
     end
-    toc % výpočetní čas - konec
+    toc % výpočetní čas - konec (vypíše čas do konzole)
     r
     vsechny_platna(:,:,ii)= platno; 
 end
@@ -44,7 +44,7 @@ end
 [a, b, c] = ind2sub(size(vsechny_platna),ind); % indexy třech rozměru
 nalezenyPolomer = c+minR-1; % v případě 1 by to byl ten nejmenší poloměr
 ``` 
-# Vykreslení kružnice
+# Vykreslení výsledku
 ``` matlab
 matice_s_bodem = zeros(m,n);
 matice_s_bodem(a,b)=1; 
