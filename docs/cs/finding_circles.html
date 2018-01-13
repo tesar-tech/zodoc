@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="shortcut icon" href="/zodoc/assets/img/favicon.ico" type="image/x-icon">
         <link rel="icon" href="/zodoc/assets/img/favicon.ico" type="image/x-icon">
-        <title>ZODOC - Histogram-based operations on images</title>
+        <title>ZODOC - Hledání kružnic - Houghova transformace</title>
         <link href="/zodoc/assets/css/mermaid.css" rel="stylesheet">
         <link href="/zodoc/assets/css/highlight.css" rel="stylesheet">
         <link href="/zodoc/assets/css/bootstrap/bootstrap.css" rel="stylesheet">
@@ -87,11 +87,11 @@
             <aside class="main-sidebar ">
                 <section class="infobar" data-spy="affix" data-offset-top="60" data-offset-bottom="200"> 
                     	
-        <div><p><a href="https://github.com/tesar-tech/zodoc/tree/master/input/docs/en/histogram.md"><i class="fa fa-pencil-square" aria-hidden="true"></i> Edit Content</a></p></div>
-    <div id="infobar-headings"><h6>On This Page</h6><p><a href="#histogram-plotting">Histogram plotting</a></p>
-<p><a href="#histogram-and-equalized-histogram">Histogram and equalized histogram</a></p>
-<p><a href="#image-deequalization-contrast-lowering">Image "deequalization" - contrast lowering</a></p>
-<p><a href="#local-contrast-increase-on-teeth-x-ray-image">Local contrast increase on teeth x-ray image</a></p>
+        <div><p><a href="https://github.com/tesar-tech/zodoc/tree/master/input/docs/cs/finding_circles.md"><i class="fa fa-pencil-square" aria-hidden="true"></i> Edit Content</a></p></div>
+    <div id="infobar-headings"><h6>On This Page</h6><p><a href="#nacteni-obrazku-predzpracovani-a-hledani-hran">Načtení obrázku, předzpracování a hledání hran</a></p>
+<p><a href="#houghova-transformace">Houghova transformace</a></p>
+<p><a href="#hledani-maxima">Hledání maxima</a></p>
+<p><a href="#vykresleni-vysledku">Vykreslení výsledku</a></p>
 <hr class="infobar-hidden">
 </div>
 
@@ -101,22 +101,22 @@
 
                     <ul class="sidebar-menu">
                         
-                <li class="treeview active">
+                <li class="treeview">
                     <a href="/zodoc/docs/en">Documentation (English)</a> <a href="#" class="expand"></a>
                     <ul class="treeview-menu">
                                         <li><a href="/zodoc/docs/en/matlab_start">Basic Operations on Images 1</a></li>
                 <li><a href="/zodoc/docs/en/matlab_start2">Basic Operations on Images 2</a></li>
-                <li class="selected"><a href="/zodoc/docs/en/histogram">Histogram-based operations on images</a></li>
+                <li><a href="/zodoc/docs/en/histogram">Histogram-based operations on images</a></li>
                 <li><a href="/zodoc/docs/en/autofocus">Image sharpness detection and autofocus</a></li>
                 <li><a href="/zodoc/docs/en/spectrum">Image spectra, fourier transformation, low-pass and high-pass filter</a></li>
                 <li><a href="/zodoc/docs/en/png_vs_jpg">PNG vs JPG</a></li>
 
                     </ul>
                 </li>
-                <li class="treeview">
+                <li class="treeview active">
                     <a href="/zodoc/docs/cs">Dokumentace (Česky)</a> <a href="#" class="expand"></a>
                     <ul class="treeview-menu">
-                                        <li><a href="/zodoc/docs/cs/finding_circles">Hledání kružnic - Houghova transformace</a></li>
+                                        <li class="selected"><a href="/zodoc/docs/cs/finding_circles">Hledání kružnic - Houghova transformace</a></li>
                 <li><a href="/zodoc/docs/cs/test_documentation_file.md">Testovací dokumentace</a></li>
 
                     </ul>
@@ -133,7 +133,7 @@
 
 
 	<section class="content-header">
-		<h1>Histogram-based operations on images</h1>
+		<h1>Hledání kružnic - Houghova transformace</h1>
 	</section>
 	<section class="content">
 
@@ -144,65 +144,57 @@
 
 
 		<blockquote class="blockquote">
-<p>This document works with three images:</p>
+<p>Tento dokument pracuje s obrázkem:</p>
 </blockquote>
 <ul>
-<li><a href="../media/kytka256.jpg">Image of flower</a> in <code>A</code></li>
-<li>Build-in <em>pout.tif</em> image in <code>B</code></li>
-<li><a href="../media/zubRtg.png">Teeth x-ray image</a> in <code>C</code></li>
+<li><a href="../media/oko.jpg">Obrázek oka</a> v proměnné <code>A</code></li>
 </ul>
-<h1 id="histogram-plotting">Histogram plotting</h1>
-<pre><code class="language-matlab">A=imread('kytka256.jpg'); % loading an image 
-Ag = rgb2gray(A);
-subplot(1,2,1);imshow(Ag) % original picture
-subplot(1,2,2);imhist(Ag) % histogram display
+<h1 id="nacteni-obrazku-predzpracovani-a-hledani-hran">Načtení obrázku, předzpracování a hledání hran</h1>
+<pre><code class="language-matlab">A = rgb2gray(imread('oko.jpg')); % převod obrázu do stupnice šedi
+h = fspecial('gaussian',[8 8],1); % tvorba masky pro filtrování 
+A_filter = imfilter(A,h); % provádí filtraci šumu
+hrany = edge(A_filter); % funkce nalezne hrany v obrazu
+subplot 131;imshow(A);title('původní obrázek');
+subplot 132;imshow(A_filter);title('obrázek po filtraci');
+subplot 133;imshow(hrany);title('hrany');
 </code></pre>
-<p><img src="../media/2017-12-18-14-54-00.png" class="img-fluid" alt=""></p>
-<h1 id="histogram-and-equalized-histogram">Histogram and equalized histogram</h1>
-<pre><code class="language-matlab">B=imread('pout.tif');%pout.tif is matlab built-in image 
-
-subplot(2,2,1);imshow(B)
-subplot(2,2,2);imhist(B)
-
-% image equalization
-subplot(2,2,3);imshow(histeq(B))
-subplot(2,2,4);imhist(histeq(B)) % equalized histogram display 
-</code></pre>
-<p><img src="../media/hist2_pout.png" class="img-fluid" alt=""></p>
-<h1 id="image-deequalization-contrast-lowering">Image "deequalization" - contrast lowering</h1>
-<pre><code class="language-matlab">subplot(2,2,1);imshow(Ag)
-subplot(2,2,2);imhist(Ag)
-
-Dq=(Ag*0.2)+100; % image equalisation via multiplication and addition
-subplot(2,2,3);imshow(Dq)
-subplot(2,2,4);imhist(Dq) 
-</code></pre>
-<p><img src="../media/2017-12-18-14-57-53.png" class="img-fluid" alt=""></p>
-<h1 id="local-contrast-increase-on-teeth-x-ray-image">Local contrast increase on teeth x-ray image</h1>
-<p>Enable user to pick a square and replacing it with equalized one</p>
-<pre><code class="language-matlab">C=imread('zubRtg.png');
-button=1; % button
-x=300;y=300; % square size - smaller, better depiction
-figure;
-ax = axes; % picking up axes
-
-while button==1 % left-click on button
-    if x&gt;100 &amp;&amp; y &gt;100 % excludinh picture margins
-        z_ekv=C;
-        z_ekv(x-100:x+100,y-100:y+100)=histeq(z_ekv(x-100:x+100,y-100:y+100));
-        imshow(z_ekv,'Parent',ax)
+<p><img src="../media/plotedges.png" class="img-fluid" alt=""></p>
+<h1 id="houghova-transformace">Houghova transformace</h1>
+<pre><code class="language-matlab">minR = 40; 
+maxR = 46; 
+ii = 0;
+indexy_hran = find(hrany); 
+[m, n] = size(A);
+for r = minR:maxR % interval poloměru od 40 do 46
+    ii= ii+1;
+    platno = zeros(m,n); % pro každý poloměr jedno plátno
+    tic % výpočetní čas - start
+    for h = 1:length(indexy_hran)
+        % generování kružnice
+        matice_s_bodem = zeros(m,n); % pomocná matice na tvorbu kružnice
+        matice_s_bodem(indexy_hran(h))=1; % na místě aktuálního hranového bodu udělá jedničku
+        vzdalenosti_od_bodu = bwdist(matice_s_bodem); % propočítá vzdálenosti od nejbližší jedničky
+        kruznice = round(vzdalenosti_od_bodu)==r; % vzdálenosti v délce poloměru
+        platno = platno+kruznice; % přimaluje kružnici na plátno
     end
-    
-    [y,x, button]=ginput(1); %waiting for button press
+    toc % výpočetní čas - konec (vypíše čas do konzole)
+    r
+    vsechny_platna(:,:,ii)= platno; 
 end
 </code></pre>
-<p><img src="../media/zubr_anim.gif" class="img-fluid" alt=""></p>
-<h2 id="adaptive-equalization">Adaptive equalization</h2>
-<pre><code class="language-matlab">subplot(2,1,1), imshow(C)
-z_ekvadaptive=adapthisteq(C,'NumTiles',[100 100]); 
-subplot(2,1,2), imshow(z_ekvadaptive) 
+<h1 id="hledani-maxima">Hledání maxima</h1>
+<pre><code class="language-matlab">[~, ind] = max(vsechny_platna(:)); % kde v kvádru všech pláten je nejvyšší hodnota
+[a, b, c] = ind2sub(size(vsechny_platna),ind); % indexy třech rozměru
+nalezenyPolomer = c+minR-1; % v případě 1 by to byl ten nejmenší poloměr
 </code></pre>
-<p><img src="../media/hist5_zubr_adeq.png" class="img-fluid" alt=""></p>
+<h1 id="vykresleni-vysledku">Vykreslení výsledku</h1>
+<pre><code class="language-matlab">matice_s_bodem = zeros(m,n);
+matice_s_bodem(a,b)=1; 
+vzdalenosti_od_bodu = bwdist(matice_s_bodem); 
+kruznice = round(vzdalenosti_od_bodu)==nalezenyPolomer;
+imshow(double(A)+kruznice*255,[]);
+</code></pre>
+<p><img src="../media/drawcir.png" class="img-fluid" alt=""></p>
 
 
 

@@ -113,7 +113,8 @@
                 <li class="treeview active">
                     <a href="/zodoc/docs/cs">Dokumentace (&#x10C;esky)</a> <a href="#" class="expand"></a>
                     <ul class="treeview-menu">
-                                        <li class="selected"><a href="/zodoc/docs/cs/test_documentation_file.md">Testovac&#xED; dokumentace</a></li>
+                                        <li><a href="/zodoc/docs/cs/finding_circles">Hled&#xE1;n&#xED; kru&#x17E;nic - Houghova transformace</a></li>
+                <li class="selected"><a href="/zodoc/docs/cs/test_documentation_file.md">Testovac&#xED; dokumentace</a></li>
 
                     </ul>
                 </li>
