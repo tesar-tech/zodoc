@@ -1,8 +1,8 @@
-Název: Test základních znalostí 2
+title: Test základních znalostí 2
 --- 
->This document works with image: 
+>this document works with image: 
 
-* [Image of flower](media/test_basic_2_7) in `A` 
+* [Obrázek kytky](media/test_basic_2_7) in `A` 
 
 # Kytka v prostředku
  ``` matlab
@@ -41,6 +41,3 @@ imshow(Gradient,[])
 Astin = double(A) + repmat(Gradient,[1 1 3]);
 imshow(mat2gray(Astin))
  ```
-
-
-
