@@ -10,19 +10,13 @@ A = imread('kytka256.jpg');
 Gray = rgb2gray(A);
 prah = graythresh(Gray); % vypočítá globální prahovou hodnotu, metodou Otsu
 prah2 = multithresh(Gray,2); % vypočítá 2 prahové úrovně
+BW = im2bw(Gray,prah);
+imshowpair(Gray,BW,'montage');
 ```
-# K-means
-``` matlab
-[vektor, C] = kmeans(double(Gray(:)),3);
-mean(C)
-Gr_vektor= (reshape(vektor,size(Gray))); % změna na původní velikost
-Gr_vektor_BW = Gr_vektor - 1;
-imshow(Gr_vektor_BW) % zobrazení obrázku
-colormap jet % změna barevné mapy
-```
-![](../media/kmeans.PNG)
+![](../media/grayprah.PNG)
 
 # Aplikace pro zobrazení prahu.
+Z histogramu je snadno vidět, že existují dvě jasně oddělující třídy. Podstatou Otsuovy metody je vystavení prahu mezi třídami takovým způsobem, aby každá z nich byla nejvíc "hustá".
 ``` matlab
 colorThresholder
 ```
@@ -40,6 +34,17 @@ A2 = hsv2rgb(A_hsv2); % převod HSV hodnot zpět do RGB
 imshow(A2,[])
 ```
 ![](../media/HSVmodel.PNG)
+
+# Použivání k-means k segmentace
+``` matlab
+[vektor, C] = kmeans(double(Gray(:)),3);
+mean(C)
+Gr_vektor= (reshape(vektor,size(Gray))); % změna na původní velikost
+Gr_vektor_BW = Gr_vektor - 1;
+imshow(Gr_vektor_BW) % zobrazení obrázku
+colormap jet % změna barevné mapy
+```
+![](../media/kmeans.PNG)
 
 # K-means segmentace s 1 parametrem
 ``` matlab
