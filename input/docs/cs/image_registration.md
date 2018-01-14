@@ -35,7 +35,7 @@ cpselect(B,C); % vybere body
 ``` 
 ![](../media/spselect.PNG)
 
-## Kopirování vybranných bodů  do proměnných "pA a pB"
+## Kopirování vybranných bodů  do proměnných "point_B a point_C"
 ``` matlab
 point_B = fixedPoints;
 point_C = movingPoints;
