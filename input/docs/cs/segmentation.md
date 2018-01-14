@@ -2,7 +2,7 @@ title: Segmentace
 ---
 >Tento dokument pracuje s obrázkem: 
 
-* [Obrázek oka](../media/kytka256.jpg) v proměnné `A` 
+* [Obrázek kytky](../media/kytka256.jpg) v proměnné `A` 
 
 # Vypočet prahové hodnoty
 ``` matlab
