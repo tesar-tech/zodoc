@@ -2,7 +2,7 @@ title: Registrace obrazu
 ---
 >Tento dokument pracuje se třema obrázky: 
 
-* [Obrázek oka](../media/oko.jpg) v proměnné `A` 
+* [Obrázek kytky](../media/kytka256.jpg) v proměnné `A` 
 * [Obrázek Einsteina](../media/einstein.jpeg) iv proměnné `B` 
 * [Obrázek Morpheusa](../media/morpheus.jpg) iv proměnné `C` 
 # Posunutí o 20 a 30 pixelů
