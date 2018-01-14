@@ -3,8 +3,8 @@ title: Registrace obrazu
 >Tento dokument pracuje se třema obrázky: 
 
 * [Obrázek kytky](../media/kytka256.jpg) v proměnné `A` 
-* [Obrázek Einsteina](../media/einstein.jpeg) iv proměnné `B` 
-* [Obrázek Morpheusa](../media/morpheus.jpg) iv proměnné `C` 
+* [Obrázek Einsteina](../media/einstein.jpeg) v proměnné `B` 
+* [Obrázek Morpheusa](../media/morpheus.jpg) v proměnné `C` 
 # Posunutí o 20 a 30 pixelů
 ``` matlab
 T = [1 0 0;
