@@ -36,6 +36,7 @@ imshow(A2,[])
 ![](../media/HSVmodel.PNG)
 
 # Použivání k-means k segmentace
+Jedná se nehierarchický algoritmus, který třídí data do k shluků na základě jejich vlastností. Tento algoritmus pracuje tak, že přiřadí každý bod do shluku, jemuž středu je nejblíže. Středy shluků se při každém běhu algoritmu znovu spočítají jako aritmetické průměry všech bodů shluku. Cílem je dosáhnout co nejmenších rozdílů uvnitř shluků.
 ``` matlab
 [vektor, C] = kmeans(double(Gray(:)),3);
 mean(C)
