@@ -13,7 +13,7 @@ subplot 122;imshow(A_noise);title 'Obrázek s šumem'
 ```
 ![](../media/nacteni.PNG)
 
-# Pomocí for-cyklu
+# Filtrován pomocí for-cyklu
 ``` matlab
 Amargin = padarray(A_noise,[1 1]); 
 Afiltered_cycle = zeros(size(A_noise));
@@ -25,16 +25,19 @@ for a = 2:size(Amargin,1)-1
     end
 end
 ```
-# Pomocí nlfiltru
+# Filtrování pomocí nlfiltru
+Nlfiltr(nelineární filtr) - vytváří nový obraz Afiltered_nfilter, jehož pixely jsou výsledkem zpracování funkcí fun pixelů původního obrazu, odpovídající poloze masky filtru [3 3]. Operace je provaděná nerekurzivně pro všechny pozice masky.
 ``` matlab
 fun = @(x) median(x(:));
 Afiltered_nlfilter = nlfilter(A_noise,[3 3],fun);
 ```
-# Pomocí ordfiltru
+# Filtrování pomocí ordfiltru
+Ordfiltr(pořadový filtr) - vytváří  obraz Afiltered_ordfilt2, jehož každý pixel je tvořen následujícím způsobem. Pixely původního obrazu, odpovídající nenulovým prvkům masky filtru, jsou seřazeny ve vzestupném pořadí. Pixelu obrazu Afiltered_ordfilt2 odpovídající střednímu prvku masky přiřazená hodnota s číslem 5 ve uspořádanem množství.
 ``` matlab
 Afiltered_ordfilt2 = ordfilt2(A_noise,5,true(3));
 ```
-# Pomocí medfiltru
+# Filtrování pomocí medfiltru
+Medfiltr(medianový filtr) - vytváří obraz Afiltered_medfilt2, jehož každý pixel je tvořen následujícím způsobem. Pixely původního obrazu, odpovídající všem prvkům masky filtra 3x3, tvoří uspořádanou posloupnost A. Pixelu Afiltered(r,c), kde "r" a "c" - souřadnice aktuální polohy centralního prvku masky, přiřazená hodnota mediany.
 ``` matlab
 Afiltered_medfilt2 = medfilt2(A_noise,[3 3]);
 ```
