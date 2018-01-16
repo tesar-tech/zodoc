@@ -3,7 +3,7 @@ order: 0
 
 ---
 # Introduction
-Solution is mainly source code writen in english.
+Solution is mainly source code.
 ``` matlab
 clc;
 clear all; 

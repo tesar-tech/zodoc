@@ -56,7 +56,7 @@ Pipelines["RenderPages"].InsertAfter("GetDocuments",
 
 //create metadata for connecting assignments, solutions, sources and languages mutations
 Pipelines["RenderPages"].InsertBefore("Render",
-    Meta("otherLanguagesList", (doc, ctx) => { 
+    Meta("otherLanguagesList", (doc, ctx) => {//get other languages of document
         if(doc.String("lang")=="")
          return null;
         var otherLangs =  ctx.Documents.FromPipeline("RenderPages") //search in other documents
@@ -69,24 +69,23 @@ Pipelines["RenderPages"].InsertBefore("Render",
     } ),
 
     If( @doc.String("type")==(string)Settings["assignmentType"], //looking for exercises 
-      
-        Meta("solutionRelativeFilePath", (doc, ctx) => { 
-            var solutionDoc =  ctx.Documents.FromPipeline("RenderPages") //from all documents
-                    .SingleOrDefault(x=> x.Get<String>("type")==(string)Settings["solutionType"] //look for solutions
-                         && x.Get<String>("fileName") == doc.Get<String>("fileName") //with same name as current doc
-                         && x.Get<String>("fileName").Split('.').First() !="index" );//not on index pages 
-            return solutionDoc==null ? "":solutionDoc.Get<String>("RelativeFilePath");//no solution -> return empty string
+        Meta("solutionsLangsList", (doc, ctx) => { 
+            var solutionsLangs = ctx.Documents.FromPipeline("RenderPages")//search in all document
+                .Where(x=> x.Get<String>("type")==Settings["solutionType"] && //for solution documents
+                        x.Get<String>("fileName") == doc.Get<String>("fileName")) //with same name (that is the way how assignment-solution pairs are created)
+                .Select(c=>c.String("lang")).ToList();
+        return solutionsLangs; 
         } )
-    ),
+    ),   
 
     If( @doc.String("type")==(string)Settings["solutionType"] , //only for solution documents
         Meta("assignmentsLangsList", (doc, ctx) => { 
             var assignemntLangs = ctx.Documents.FromPipeline("RenderPages")//search in all document
-                .Where(x=> x.Get<String>("type")==Settings["assignmentType"] && //for exercises documents
+                .Where(x=> x.Get<String>("type")==Settings["assignmentType"] && //for assignment documents
                         x.Get<String>("fileName") == doc.Get<String>("fileName")) //with same name (that is the way how assignment-solution pairs are created)
                 .Select(c=>c.String("lang")).ToList();
         return assignemntLangs; 
-    } )
+        } )
     ),
 
     If( @doc.String("type")==(string)Settings["assignmentType"] ,//

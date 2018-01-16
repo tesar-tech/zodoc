@@ -8,19 +8,22 @@ Entire exercise section is used to archive all assignments and solutions.
 ``` sql
 exercises
 ├───cs
-│       hello_world_exercise.md (Current file)                   
+│       hello_world_exercise.md (Current file in Czech language)                
 │       index.cshtml
 │
 ├───en
-│       hello_world_exercise.md
+│       hello_world_exercise.md (Current file)   
 │       index.cshtml
 │
 ├───media
 │       hello_world_exercise_1.png (Image used in this file)
 │
 ├───solutions
-│       (test_case)solution_without_assignment.md
-│       hello_world_exercise.md (solution of this assignment)
+│   ├───cs
+│   │       hello_world_exercise.md (Solution in Czech)
+│   │
+│   └───en
+│           hello_world_exercise.md (Solution for this assignment)
 │
 └───sources
     └───hello_world_exercise (Resources for this exercise)
@@ -35,7 +38,7 @@ exercises
 
 Several links are automatically generated: 
 - Link to a document if it is available in another language.
-- Link to the solution, if available (without language mutations).
+- Link to the solution, if available. Primary in assignment language.
 - Link to folder with additional files (only if available).
 
 # How does it work 

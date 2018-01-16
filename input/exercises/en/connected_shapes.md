@@ -7,14 +7,14 @@ Introduction
 
 Folder *imgs_test2* contains binary images with different shapes. These shapes are circle and square in different sizes and location. Shapes may overlap
 
-! [](.. /media/connected_shapes_1.png)
+![](../media/connected_shapes_1.png)
 
 Task
 ======
 
 Your task is remove overlapping shapes.
 
-! [](.. /media/connected_shapes_2.png)
+![](../media/connected_shapes_2.png)
 
 (Automated using matlab)
 

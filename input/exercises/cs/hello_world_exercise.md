@@ -2,7 +2,7 @@ title: Zkušební cvičení a popis
 order: 0
 ---
 # Úvod
-Cvičení je v tomto kontextu myšleno jako procvičování. Celá sekce cvičení (Exercise) slouží k archivaci proběhnuvších testů a úloh k procvičení. 
+Cvičení je v tomto kontextu myšleno jako procvičování. Celá sekce cvičení (Exercises) slouží k archivaci proběhnuvších testů a úloh k procvičení. 
 
 # Struktura 
 ``` sql
@@ -12,15 +12,18 @@ exercises
 │       index.cshtml
 │
 ├───en
-│       hello_world_exercise.md
+│       hello_world_exercise.md (anglická verze tohoto souboru)
 │       index.cshtml
 │
 ├───media
 │       hello_world_exercise_1.png (obrázek využitý v tomuto souboru)
 │
 ├───solutions
-│       (test_case)solution_without_assignment.md
-│       hello_world_exercise.md (řešení k tomuto cvičení)
+│   ├───cs
+│   │       hello_world_exercise.md (řešení k tomuto cvičení)
+│   │
+│   └───en
+│           hello_world_exercise.md (anglická verze řešení)
 │
 └───sources
     └───hello_world_exercise (zdroje k tomuto cvičení)
@@ -33,7 +36,7 @@ exercises
 ```
 Automaticky se generuje několik věci: 
 - Odkaz na dokument v případě, že je dostupný v jiném jazyce.
-- Odkaz na řešení, v případě že je dostupné (bez jazykových mutací, počítá se s kódem v angličtině).
+- Odkaz na řešení, v případě že je dostupné. Primárně v jazyce zadání, pokud chybí tak v jiném jazyce. 
 - Odkaz na složku s dodatečnými soubory (pouze v případě, že je dostupná).
 
 # Jak to funguje 

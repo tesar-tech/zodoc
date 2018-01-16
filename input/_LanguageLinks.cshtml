@@ -14,8 +14,8 @@
         }
     }else if (Model[0]=="localization_solutionLink")
     {
-     // [1] current lang; [2]solution link;
-        var link = Context.GetLink(Model[2]);
+     // [1] current lang; [2]relative link to file without language;
+        var link = Context.GetLink("/exercises/solutions/" + Model[1] + "/" + Model[2]);
         if(Model[1]=="cs")
         {
             <p> Řešení naleznete <a href="@link">zde</a> </p>
@@ -25,20 +25,7 @@
         }
 
     }
-    else if (Model[0]=="localization_assignmentsLangsList")
-    {
-     // [1] lang to display [2]solution link(that need to be processed to assignemnts links); [3] separator
-        var link = Context.GetLink(Model[2]).Replace("solutions",Model[1]);//todo: hardcoded foldername
-        if(Model[1]=="cs")
-        {
-            <a href="@link">Čeština</a>@Model[3];
-        }else if(Model[1]=="en")
-        {
-           <a href="@link">English</a>@Model[3];
-        //    solution with , and . is not the best practise. But I had the issue with spaces from unknown source..
-        }
-
-    }
+    
     else if (Model[0]=="localization_githubFolderLink")
     {
      // [1] lang to display [2]githubfolder link [3]direct link to download 
@@ -53,6 +40,73 @@
             <p><a href="@Model[2]">Sources</a> for this assignment are available.
              Direct <a href="@Model[3]"> download</a>.
              </p>
+        }
+
+    }else if(Model[0]=="localization_solutionLanguages")
+    {
+    // [1] language to make link;  [2]relative link to file without language; [3]separator
+        var link = Context.GetLink("/exercises/solutions/" + Model[1] +"/" +Model[2]);
+        if(Model[1]=="cs")
+        {
+             <a href="@link">Čeština</a>@Model[3];
+        }else if(Model[1]=="en")
+        {
+            <a href="@link">English</a>@Model[3];
+        }
+    }else if (Model[0]=="localization_solutionAvailableText")
+    {
+        //[1] language to write text
+        if(Model[1]=="cs")
+        {
+            <span>Řešení je dostupné v jiných jazycích:</span>
+        }else if (Model[1]=="en")
+        {
+            <span>Solution is available in other languages:</span>
+        }
+    }else if (Model[0]=="localization_orphanedSolution")
+    {
+        //[1] language to write text
+        if(Model[1]=="cs")
+        {
+            <p>Toto je řešení, zadání však (zatím) neexistuje</p>
+        }else if (Model[1]=="en")
+        {
+            <p>This is orphaned solution. There are no assignments (yet)</p>
+        }
+    }else if (Model[0]=="localization_assignmentLink")
+    {
+     // [1] current lang; [2]relative link to file without language;
+        var link = Context.GetLink("/exercises/" + Model[1] + "/" + Model[2]);
+        if(Model[1]=="cs")
+        {
+            <p> Zadání naleznete <a href="@link">zde</a> </p>
+        }else if(Model[1]=="en")
+        {
+            <p> Assignment is <a href="@link">here</a> </p> 
+        }
+       
+
+    }else if (Model[0]=="localization_assignmentAvailableText")
+    {
+        //[1] language to write text
+        if(Model[1]=="cs")
+        {
+            <span>Zadání je dostupné v jiných jazycích:</span>
+        }else if (Model[1]=="en")
+        {
+            <span>Assignment is available in other languages:</span>
+        }
+    }else if (Model[0]=="localization_assignmentsLangsList")
+    {
+     // [1] lang to display [2]relative link to file without language; [3] separator
+        var link = Context.GetLink("/exercises/" + Model[1] + "/" + Model[2]);//todo: hardcoded foldername
+        if(Model[1]=="cs")
+        {
+            <a href="@link">Čeština</a>@Model[3];
+        }else if(Model[1]=="en")
+        {
+           <a href="@link">English</a>@Model[3];
+        //    solution with , and . is not the best practise. But I had the issue with spaces from unknown source..
         }
 
     }
