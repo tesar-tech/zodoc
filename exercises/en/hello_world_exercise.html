@@ -124,11 +124,24 @@
                 <li class="treeview">
                     <a href="/zodoc/exercises/solutions">Solutions</a> <a href="#" class="expand"></a>
                     <ul class="treeview-menu">
-                                        <li><a href="/zodoc/exercises/solutions/hello_world_exercise">Hello World solution</a></li>
-                <li><a href="/zodoc/exercises/solutions/connected_shapes">Connected shapes</a></li>
-                <li><a href="/zodoc/exercises/solutions/rectangles_in_rectangles">Rectangles in Rectangles</a></li>
-                <li><a href="/zodoc/exercises/solutions/test_basic_1">Test základních znalostí 1</a></li>
-                <li><a href="/zodoc/exercises/solutions/test_basic_2">Test základních znalostí 2</a></li>
+                                        <li class="treeview">
+                    <a href="/zodoc/exercises/solutions/en">Solutions (English)</a> <a href="#" class="expand"></a>
+                    <ul class="treeview-menu">
+                                        <li><a href="/zodoc/exercises/solutions/en/hello_world_exercise">Hello World solution</a></li>
+                <li><a href="/zodoc/exercises/solutions/en/connected_shapes">Connected shapes</a></li>
+                <li><a href="/zodoc/exercises/solutions/en/rectangles_in_rectangles">Rectangles in Rectangles</a></li>
+
+                    </ul>
+                </li>
+                <li class="treeview">
+                    <a href="/zodoc/exercises/solutions/cs">Řešení (Česky)</a> <a href="#" class="expand"></a>
+                    <ul class="treeview-menu">
+                                        <li><a href="/zodoc/exercises/solutions/cs/hello_world_exercise">Zkušební cvičení</a></li>
+                <li><a href="/zodoc/exercises/solutions/cs/test_basic_1">Test základních znalostí 1</a></li>
+                <li><a href="/zodoc/exercises/solutions/cs/test_basic_2">Test základních znalostí 2</a></li>
+
+                    </ul>
+                </li>
 
                     </ul>
                 </li>
@@ -169,19 +182,22 @@
 <h1 id="structure">Structure</h1>
 <pre><code class="language-sql">exercises
 ├───cs
-│       hello_world_exercise.md (Current file)                   
+│       hello_world_exercise.md (Current file in Czech language)                
 │       index.cshtml
 │
 ├───en
-│       hello_world_exercise.md
+│       hello_world_exercise.md (Current file)   
 │       index.cshtml
 │
 ├───media
 │       hello_world_exercise_1.png (Image used in this file)
 │
 ├───solutions
-│       (test_case)solution_without_assignment.md
-│       hello_world_exercise.md (solution of this assignment)
+│   ├───cs
+│   │       hello_world_exercise.md (Solution in Czech)
+│   │
+│   └───en
+│           hello_world_exercise.md (Solution for this assignment)
 │
 └───sources
     └───hello_world_exercise (Resources for this exercise)
@@ -195,7 +211,7 @@
 <p>Several links are automatically generated:</p>
 <ul>
 <li>Link to a document if it is available in another language.</li>
-<li>Link to the solution, if available (without language mutations).</li>
+<li>Link to the solution, if available. Primary in assignment language.</li>
 <li>Link to folder with additional files (only if available).</li>
 </ul>
 <h1 id="how-does-it-work">How does it work</h1>
@@ -207,12 +223,12 @@
 <p>For more complex scenarios (adding language mutations, resources, solutions) follow this sample file.</p>
 
 
-		<blockquote class="blockquote">
-		<!--[0]type of translation  -->
-            <p> Soulution is <a href="/zodoc/exercises/solutions/hello_world_exercise">here</a> </p> 
- 
-        </blockquote>		
 
+			<blockquote class="blockquote">
+<!--[0]type of translation  -->
+            <p> Soulution is <a href="/zodoc/exercises/solutions/en/hello_world_exercise">here</a> </p> 
+		</blockquote>
+	 
 
 	</section>
                 

@@ -8,7 +8,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="shortcut icon" href="/zodoc/assets/img/favicon.ico" type="image/x-icon">
         <link rel="icon" href="/zodoc/assets/img/favicon.ico" type="image/x-icon">
-        <title>ZODOC - Connected shapes</title>
+        <title>ZODOC - Rectangles in Rectangles</title>
         <link href="/zodoc/assets/css/mermaid.css" rel="stylesheet">
         <link href="/zodoc/assets/css/highlight.css" rel="stylesheet">
         <link href="/zodoc/assets/css/bootstrap/bootstrap.css" rel="stylesheet" />
@@ -89,7 +89,7 @@
             <aside class="main-sidebar ">
                 <section class="infobar" data-spy="affix" data-offset-top="60" data-offset-bottom="200"> 
                     	
-        <div><p><a href="https://github.com/tesar-tech/zodoc/tree/master/input/exercises/solutions/connected_shapes.md"><i class="fa fa-pencil-square" aria-hidden="true"></i> Edit Content</a></p></div>
+        <div><p><a href="https://github.com/tesar-tech/zodoc/tree/master/input/exercises/solutions/en/rectangles_in_rectangles.md"><i class="fa fa-pencil-square" aria-hidden="true"></i> Edit Content</a></p></div>
     <div id="infobar-headings"></div>
 
                 </section>
@@ -121,11 +121,24 @@
                 <li class="treeview active">
                     <a href="/zodoc/exercises/solutions">Solutions</a> <a href="#" class="expand"></a>
                     <ul class="treeview-menu">
-                                        <li><a href="/zodoc/exercises/solutions/hello_world_exercise">Hello World solution</a></li>
-                <li class="selected"><a href="/zodoc/exercises/solutions/connected_shapes">Connected shapes</a></li>
-                <li><a href="/zodoc/exercises/solutions/rectangles_in_rectangles">Rectangles in Rectangles</a></li>
-                <li><a href="/zodoc/exercises/solutions/test_basic_1">Test z&#xE1;kladn&#xED;ch znalost&#xED; 1</a></li>
-                <li><a href="/zodoc/exercises/solutions/test_basic_2">Test z&#xE1;kladn&#xED;ch znalost&#xED; 2</a></li>
+                                        <li class="treeview active">
+                    <a href="/zodoc/exercises/solutions/en">Solutions (English)</a> <a href="#" class="expand"></a>
+                    <ul class="treeview-menu">
+                                        <li><a href="/zodoc/exercises/solutions/en/hello_world_exercise">Hello World solution</a></li>
+                <li><a href="/zodoc/exercises/solutions/en/connected_shapes">Connected shapes</a></li>
+                <li class="selected"><a href="/zodoc/exercises/solutions/en/rectangles_in_rectangles">Rectangles in Rectangles</a></li>
+
+                    </ul>
+                </li>
+                <li class="treeview">
+                    <a href="/zodoc/exercises/solutions/cs">&#x158;e&#x161;en&#xED; (&#x10C;esky)</a> <a href="#" class="expand"></a>
+                    <ul class="treeview-menu">
+                                        <li><a href="/zodoc/exercises/solutions/cs/hello_world_exercise">Zku&#x161;ebn&#xED; cvi&#x10D;en&#xED;</a></li>
+                <li><a href="/zodoc/exercises/solutions/cs/test_basic_1">Test z&#xE1;kladn&#xED;ch znalost&#xED; 1</a></li>
+                <li><a href="/zodoc/exercises/solutions/cs/test_basic_2">Test z&#xE1;kladn&#xED;ch znalost&#xED; 2</a></li>
+
+                    </ul>
+                </li>
 
                     </ul>
                 </li>
@@ -141,15 +154,15 @@
 
 
 	<section class="content-header">
-		<h1>Connected shapes</h1>
+		<h1>Rectangles in Rectangles</h1>
 	</section>
 	<section class="content">
 
 		<blockquote class="blockquote">
-				 <p>This is the solution. Assignments are available in these languages:
+		
 <!--[0]type of translation  -->
-            <a href="/zodoc/exercises/cs/connected_shapes">Čeština</a>,<!--[0]type of translation  -->
-           <a href="/zodoc/exercises/en/connected_shapes">English</a>. </p>
+            <p> Assignment is <a href="/zodoc/exercises/en/rectangles_in_rectangles">here</a> </p> 
+		
 		</blockquote>	
 
 
@@ -157,48 +170,54 @@
 
 
 
-		<pre><code class="language-matlab">imgs = dir('./imgs/*.png');
+		<pre><code class="language-sql">'img_009.png'
+'img_018.png'
+'img_002.png'
+'img_008.png'
+'img_004.png'
+'img_006.png'
+'img_012.png'
+'img_010.png'
+'img_019.png'
+'img_015.png'
+'img_016.png'
+'img_013.png'
+'img_001.png'
+'img_011.png'
+'img_014.png'
+'img_020.png'
+'img_005.png'
+'img_007.png'
+'img_017.png'
+'img_003.png'
+</code></pre>
+<pre><code class="language-matlab">imgs = dir('./imgs_test1/*.png');
 imnum =length(imgs);
+inner_rect_size = zeros(imnum,1);
 
 for ii = 1:imnum
     
     curr_img_struct = imgs(ii);
     curr_img = imread(fullfile(curr_img_struct.folder,curr_img_struct.name));
-    %curr_img_bw = im2bw(curr_img);% for older matlabs
-    curr_img_bw = imbinarize(curr_img);
-     
+    curr_img_double = mat2gray(curr_img);% to double in 0-1 range
+    gr = rgb2gray(curr_img_double); 
+    %%bw =  im2bw(gr,graythresh(gr));%for older matlabs
+    bw = imbinarize(gr,graythresh(gr));
+    if(bw(1,1))%if small rect is black
+        bw = ~bw;%invert colors
+    end
     
-    % keep just objects with eccentricity equal 0
-    
-    %---solution using bwpropfilt
-    curr_img_bw_new = bwpropfilt(curr_img_bw,'Eccentricity',[0 0]);
-    
-    %---solution using for loop
-    %props = regionprops(curr_img_bw,'Eccentricity','PixelIdxList');
-    %curr_img_bw_new = curr_img_bw;
-    %     for region_ii = 1:length(props)
-    %         if( props(region_ii).Eccentricity&gt;0)
-    %             curr_img_bw_new(props(region_ii).PixelIdxList) = 0;%set pixels of shape to black
-    %         end
-    %     end
-    
-    %%%     square and cyrcle have ecc==0
-    %%%     eccentricity does not solve the issue when square is inside of
-    %%%     cyrcle (or reversely)... Solution could be area/perimeter
-    %%%         ratio... But eccentricity is &quot;the easiest almost perfectly
-    %%%         working solution&quot;  ¯\_(ツ)_/¯
-    
-    %save images
-    imwrite(curr_img_bw_new,fullfile('.', 'imgs_result', curr_img_struct.name))
-    disp(['image ' curr_img_struct.name ' saved']);
-    
+    inner_rect_size(ii) = sum(bw(:));%count number of ones
 end
 
+[~,indxs]= sort(inner_rect_size);%sort by size of inner rect and get indexes
 
+sorted_images = {imgs(indxs).name}';% get sorted images by file name in cell array
 </code></pre>
 
 
 
+		 
 
 	</section>
                 
