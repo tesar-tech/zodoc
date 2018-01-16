@@ -5,7 +5,7 @@ title: Spojené tvary
 Úvod
 ====
 
-Složka *imgs_test2* obsahuje obrázky binární obrázky s různými tvary. Tvary jsou
+Složka *imgs_test2* obsahuje binární obrázky s různými tvary. Tvary jsou
 ve skutečnosti dva. Čtverec a kruh. Tvary nabývají různých velikostí a mohou se
 překrývat.
 
