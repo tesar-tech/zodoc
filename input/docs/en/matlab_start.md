@@ -41,9 +41,9 @@ G(:,:,[1,3])=0;
 B(:,:,[1,2])=0;
 
 subplot 221;imshow(A);title('original image');
-subplot 222;imshow(R1);title('red channel');
-subplot 223;imshow(G1);title('green channel');
-subplot 224;imshow(B1);title('blue channel');
+subplot 222;imshow(R);title('red channel');
+subplot 223;imshow(G);title('green channel');
+subplot 224;imshow(B);title('blue channel');
 ```
 
 ![](../media/colorizedChannels.png)
