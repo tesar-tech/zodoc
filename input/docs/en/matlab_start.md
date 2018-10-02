@@ -36,14 +36,16 @@ Notice dark color in blue channel, which is not part of yellow color unlike red 
 Set non-color channels to zero 
 
 ``` matlab
-R(:,:,[2,3])=0; 
-G(:,:,[1,3])=0;
-B(:,:,[1,2])=0;
+R1=A;G1=A;B1=A; %create new copies of original image
+
+R1(:,:,[2,3])=0;
+G1(:,:,[1,3])=0;
+B1(:,:,[1,2])=0;
 
 subplot 221;imshow(A);title('original image');
-subplot 222;imshow(R);title('red channel');
-subplot 223;imshow(G);title('green channel');
-subplot 224;imshow(B);title('blue channel');
+subplot 222;imshow(R1);title('red channel');
+subplot 223;imshow(G1);title('green channel');
+subplot 224;imshow(B1);title('blue channel');
 ```
 
 ![](../media/colorizedChannels.png)
