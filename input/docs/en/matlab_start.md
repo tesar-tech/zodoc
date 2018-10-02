@@ -10,7 +10,7 @@ imshow(A))
 ![](/zodoc/assets/img/kytka256.jpg)
 
 Image has to be in current folder !
-# Conver RGB image to gray scale 
+# Convert RGB image to grayscale 
 ```matlab
 Ag = rgb2gray(A);
 imshow(Ag)
@@ -36,10 +36,9 @@ Notice dark color in blue channel, which is not part of yellow color unlike red 
 Set non-color channels to zero 
 
 ``` matlab
-zeroMatrix=zeros(size(A,1),size(A,2));
-R1=cat(3,R,zeroMatrix,zeroMatrix); 
-G1=cat(3,zeroMatrix,G,zeroMatrix);
-B1=cat(3,zeroMatrix,zeroMatrix,B);
+R(:,:,[2,3])=0; 
+G(:,:,[1,3])=0;
+B(:,:,[1,2])=0;
 
 subplot 221;imshow(A);title('original image');
 subplot 222;imshow(R1);title('red channel');
