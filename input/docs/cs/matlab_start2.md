@@ -4,7 +4,7 @@ Description: Druhá část základních operací s obrázky
 >Celá tato sekce operuje s výchozím [obrázkem](/zodoc/assets/img/kytka256.jpg) v proměnné `A`. `A=imread('kytka256.jpg');`
 
 # Mapa intenzity s rozsahem od 0 do 1
-![](../media/mat2gray.png)
+![](../media/2018-10-02-20-49-00.png)
 ```
 % parametry [amin amax] určují práh minima a maxima
 % A(typ uint8) => B(typ double)
