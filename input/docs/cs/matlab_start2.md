@@ -7,8 +7,8 @@ Description: Druhá část základních operací s obrázky
 ![](../media/2018-10-02-20-49-00.png)
 ```
 % parametry [amin amax] určují práh minima a maxima
-% A(typ uint8) => B(typ double)
-B = mat2gray(A,[18 69]);
+% A(typ uint8) => B(typ double) v rozsahu 0-1
+B = mat2gray(A,[18 69]);%pixely menší než 18 budou 0. Pixely větší než 69 budou 1
 
 subplot 121;imshow(A);title('Původní obrázek');
 subplot 122;imshow(B);title('Mapa intenzity');
