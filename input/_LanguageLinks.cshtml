@@ -4,7 +4,7 @@
     if(Model[0]=="localization_languagePacks")
     {
     // [1] language to make link; [2]current link; [3]current lang 
-        var link = Context.GetLink(Model[2]).Replace(Model[3],Model[1]);
+        var link = Context.GetLink(Model[2]).Replace( "/"+Model[3]+"/","/"+Model[1]+"/");
         if(Model[1]=="cs")
         {
             <p> Tento dokument je dostupný též v <a href="@link">Češtině</a> </p>
