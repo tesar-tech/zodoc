@@ -1,8 +1,8 @@
 title: Test základních znalostí 2
 ---
->Tento dokument pracuje se obrázkem
+>Tento dokument pracuje s
 
-* [Obrázek kytky](../media/test_basic_2_7) v proměnné `A`
+* [Obrázek kytky](../media/kytka256.jpg) v proměnné `A`
 
 # Úvod
 Test obsahuje 6 otázek. Maximalně můžete získat 21 bodů.
