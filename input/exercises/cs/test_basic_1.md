@@ -2,7 +2,7 @@ title: Test základních znalostí 1
 ---
 >Tento dokument pracuje se dvěma obrázky: 
 
-* [Obrázek kytky](../media/test_basic_1_7.jpg) v proměnné `A` 
+* [Obrázek kytky](../media/kytka256.jpg) v proměnné `A` 
 * [Obrázek Norska](../media/test_basic_1_8.jpg) v proměnné `B`
 
 # Úvod
