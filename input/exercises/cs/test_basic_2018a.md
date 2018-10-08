@@ -8,7 +8,7 @@ title: Test základních znalostí 2018a
 # Úvod
 Test obsahuje 3 otázky. Maximalně můžete získat 8 bodů (7+1 bonusový).
 # Zatmění čtvercového měsíce
-(2 body) Zobrazte obrázek, který je vytvořen níže. Nápověda: budete potřebovat tvořit vektor a zřejmě i funkci `repmat`.
+(3 body) Zobrazte obrázek, který je vytvořen níže. Nápověda: budete potřebovat tvořit vektor a zřejmě i funkci `repmat`.
  
 ![](../media/2018-10-03-15-45-49.png)
  
