@@ -10,14 +10,14 @@ imshow(A)
 ![](/zodoc/assets/img/kytka256.jpg)
 
 Obrázek musí být ve složce, ve které současně pracujete s matlabem. 
-# Převeďte RGB obrázek do šedotónu
+# Převést RGB obrázek do šedotónu
 ```matlab
 Ag = rgb2gray(A);
 imshow(Ag)
 ```
 ![](../media/2017-12-04-17-47-57.png)
 
-# Zobrazte jednotlivé barevné kanály
+# Zobrazit jednotlivé barevné kanály
 ``` matlab
 R=A(:,:,1);
 G=A(:,:,2);
@@ -36,9 +36,9 @@ Všimněte si tmavé barvy v modrém kanálu, která není součástí žluté b
 Nastavte nebarevné kanály na nulu.
 
 ``` matlab
-R1=A;G1=A;B1=A; %nakopírujeme originální obrázek do nových proměnných
+R1=A;G1=A;B1=A; %nakopírujte originální obrázek do nových proměnných
 
-%nastavíme nulové hodnoty ostatních barev, pro zobrazení vždy jen jednoho kanálu
+%nastavte nulové hodnoty ostatních barev, pro zobrazení vždy jen jednoho kanálu
 R1(:,:,[2,3])=0; 
 G1(:,:,[1,3])=0;
 B1(:,:,[1,2])=0;
@@ -95,7 +95,7 @@ for i=1:100
     end
 end
 ```
-## Uložení animace jako gifu
+## Uložit animaci jako gif
 ``` matlab
 firstTime = 1;gifName = 'bw_anim.gif';
 for ii = 1:5:256
