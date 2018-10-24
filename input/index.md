@@ -34,6 +34,7 @@ Pár tipů, jak tvořit dokumentaci. Pokud vám jsou některé následující po
 - Uvádějte titulek i popis souboru (přes metadata)
 - Podnadpisy jsou první úrovně (#). Hlavní nadpis je v metadatech jako `title`
 - Ukázky kódu patřičně zarovnejte (v Matlabu označit vše a potom Ctrl+I)
+- Používejte infinitiv namísto imperativu ("Načíst a zobrazit obrázek" vs "Načtěte a zobrazte obrázek")
 
 - V případě tvorby dokumentů do sekce `Exercises` jsou konvence lehce jiné. Vysvětlené jsou v ukázkovém cvičení.
 
