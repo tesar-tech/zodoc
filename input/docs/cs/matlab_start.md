@@ -2,10 +2,10 @@ title: Základní operace s obrázky
 Description: První kapitola základních operací s obrázky
 ---
 >Tento dokument pracuje s [obrázkem](/zodoc/assets/img/kytka256.jpg) uloženém v proměnné`A`.
-# Načtěte a zobrazte obrázek
+# Načíst a zobrazit obrázek
 ```matlab
 A=imread('kytka256.jpg');
-imshow(A))
+imshow(A)
 ```
 ![](/zodoc/assets/img/kytka256.jpg)
 
@@ -38,7 +38,8 @@ Nastavte nebarevné kanály na nulu.
 ``` matlab
 R1=A;G1=A;B1=A; %nakopírujeme originální obrázek do nových proměnných
 
-R1(:,:,[2,3])=0;
+%nastavíme nulové hodnoty ostatních barev, pro zobrazení vždy jen jednoho kanálu
+R1(:,:,[2,3])=0; 
 G1(:,:,[1,3])=0;
 B1(:,:,[1,2])=0;
 
@@ -55,7 +56,7 @@ subplot 224;imshow(B1);title('Modry kanal');
 ```matlab
 An=imcomplement(A);
 %nebo
-An= 255-A;%pokud obrázek splňuje třidu uint8
+An= 255-A;%pokud je obrázek typu uint8
 imshow(An)
 ```
 
@@ -114,13 +115,14 @@ for ii = 1:5:256
 ![](../media/bw_anim.gif)
 
 ## Indexové zobrazení
+Indexové zobrazení se používá kvůli snížení velikosti (té, která zabíra místo na disku, nikoliv samotného rozlišení) obrázku a zbytečnému použití výpočetní paměti.
+
 ``` matlab
-AInd=rgb2ind(A,7);
-imshow(AInd); %jeden způsob
-
 [AInd,map]=rgb2ind(A,7);
-imshow(AInd, map); %druhý způsob
-
+imshow(AInd, map); %přes mapování, každý řádek v "map" představuje jednu
+%barvu (RGB)
+%Pixel v indexovém obraze je indexem do mapy barev.
+%Hodnota 7 je variabilní a představuje, kolika barevný bude výsledný obraz.
 
 ```
 ![](../media/kytka_index.jpg)
