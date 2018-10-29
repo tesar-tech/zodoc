@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="shortcut icon" href="/zodoc/assets/img/favicon.ico" type="image/x-icon">
         <link rel="icon" href="/zodoc/assets/img/favicon.ico" type="image/x-icon">
-        <title>ZODOC - Image sharpness detection and autofocus</title>
+        <title>ZODOC - Histogramové operace s obrázky</title>
         <link href="/zodoc/assets/css/mermaid.css" rel="stylesheet">
         <link href="/zodoc/assets/css/highlight.css" rel="stylesheet">
         <link href="/zodoc/assets/css/bootstrap/bootstrap.css" rel="stylesheet">
@@ -87,10 +87,11 @@
             <aside class="main-sidebar ">
                 <section class="infobar" data-spy="affix" data-offset-top="60" data-offset-bottom="200"> 
                     	
-        <div><p><a href="https://github.com/tesar-tech/zodoc/tree/master/input/docs/en/autofocus.md"><i class="fa fa-pencil-square" aria-hidden="true"></i> Edit Content</a></p></div>
-    <div id="infobar-headings"><h6>On This Page</h6><p><a href="#detect-image-sharpness-use-edges-to-compare-sharpness-of-2-images">Detect image sharpness -&gt; use edges to compare sharpness of 2 images</a></p>
-<p><a href="#plotting-the-results">Plotting the results</a></p>
-<p><a href="#autofocus-finding-sharpest-frames-of-a-video">Autofocus – finding sharpest frames of a video</a></p>
+        <div><p><a href="https://github.com/tesar-tech/zodoc/tree/master/input/docs/cs/histogram.md"><i class="fa fa-pencil-square" aria-hidden="true"></i> Edit Content</a></p></div>
+    <div id="infobar-headings"><h6>On This Page</h6><p><a href="#vykresleni-histogramu">Vykreslení histogramu</a></p>
+<p><a href="#histogram-a-ekvalizovany-histogram">Histogram a ekvalizovaný histogram</a></p>
+<p><a href="#deekvalizace-obrazku-snizeni-kontrastu">"Deekvalizace" obrázku - snížení kontrastu</a></p>
+<p><a href="#interaktivni-zvyrazneni-casti-rtg-snimku-zubu">Interaktivní zvýraznění části RTG snímku zubů</a></p>
 <hr class="infobar-hidden">
 </div>
 
@@ -101,24 +102,24 @@
                     <ul class="sidebar-menu">
                         
 
-                <li class="treeview active">
+                <li class="treeview">
                     <a href="/zodoc/docs/en">Documentation (English)</a> <a href="#" class="expand"></a>
                     <ul class="treeview-menu">
                         
                 <li><a href="/zodoc/docs/en/matlab_start">Basic Operations on Images 1</a></li>
                 <li><a href="/zodoc/docs/en/matlab_start2">Basic Operations on Images 2</a></li>
                 <li><a href="/zodoc/docs/en/histogram">Histogram-based operations on images</a></li>
-                <li class="selected"><a href="/zodoc/docs/en/autofocus">Image sharpness detection and autofocus</a></li>
+                <li><a href="/zodoc/docs/en/autofocus">Image sharpness detection and autofocus</a></li>
                 <li><a href="/zodoc/docs/en/spectrum">Image spectra, fourier transformation, low-pass and high-pass filter</a></li>
                 <li><a href="/zodoc/docs/en/png_vs_jpg">PNG vs JPG</a></li>
 
                     </ul>
                 </li>
-                <li class="treeview">
+                <li class="treeview active">
                     <a href="/zodoc/docs/cs">Dokumentace (Česky)</a> <a href="#" class="expand"></a>
                     <ul class="treeview-menu">
                         
-                <li><a href="/zodoc/docs/cs/histogram">Histogramové operace s obrázky</a></li>
+                <li class="selected"><a href="/zodoc/docs/cs/histogram">Histogramové operace s obrázky</a></li>
                 <li><a href="/zodoc/docs/cs/finding_circles">Hledání kružnic - Houghova transformace</a></li>
                 <li><a href="/zodoc/docs/cs/matlab_start">Základní operace s obrázky</a></li>
                 <li><a href="/zodoc/docs/cs/matlab_start2">Základní operace s obrázky 2</a></li>
@@ -137,95 +138,79 @@
 
 
 	<section class="content-header">
-		<h1>Image sharpness detection and autofocus</h1>
+		<h1>Histogramové operace s obrázky</h1>
 	</section>
 	<section class="content">
 
 
+		<blockquote class="blockquote">
+<!--[0]type of translation  -->
+            <p> This document is also available in <a href="/zodoc/docs/en/histogram">English</a> </p> 
+		</blockquote>
 
 	
 
 
 
 		<blockquote class="blockquote">
-<p>This document works with an <a href="../media/kytka256.jpg">image</a> in <code>A</code> variable and a <a href="../media/podzimni_kvetena_focus_test.mp4">video</a> in <code>v</code> variable.</p>
+<p>Tento dokument pracuje se třemi obrázky:</p>
 </blockquote>
-<h1 id="detect-image-sharpness-use-edges-to-compare-sharpness-of-2-images">Detect image sharpness -&gt; use edges to compare sharpness of 2 images</h1>
-<pre><code class="language-matlab">A = imread('kytka256.jpg');
-A = rgb2gray(A);
+<ul>
+<li><a href="../media/kytka256.jpg">Obrázek kytky</a> v proměnné <code>A</code></li>
+<li>Vestavěný obrázek <em>pout.tif</em> v proměnné <code>B</code></li>
+<li><a href="../media/zubRtg.png">RTG snímek zubů</a> v proměnné <code>C</code></li>
+</ul>
+<h1 id="vykresleni-histogramu">Vykreslení histogramu</h1>
+<pre><code class="language-matlab">A=imread('kytka256.jpg'); % načtení obrázku 
+Ag = rgb2gray(A);
+subplot(1,2,1);imshow(Ag) % původní obrázek
+subplot(1,2,2);imhist(Ag) % vykreslení histogramu
+</code></pre>
+<p><img src="../media/2017-12-18-14-54-00.png" class="img-fluid" alt=""></p>
+<h1 id="histogram-a-ekvalizovany-histogram">Histogram a ekvalizovaný histogram</h1>
+<pre><code class="language-matlab">B=imread('pout.tif'); %pout.tif je vestavěný obr. v Matlabu
 
-% create blurred image
-% If you have MATLAB2015a or newer, use imgaussfilt(A, sigma) instead of fspecial() and imfilter().
-hsize = 50; 
-sigma = 5;
-f = fspecial('gaussian',hsize,sigma);
-Af = imfilter(A,f);
-Ae =edge(A);
-Aef =edge(Af);
-s = 1;
-cols = 3;
-rows = 2;
-</code></pre>
-<h1 id="plotting-the-results">Plotting the results</h1>
-<pre><code class="language-matlab">subplot(rows,cols,s);s=s+1;imshow(A);title('original');
-subplot(rows,cols,s);s=s+1;imshow(Af);title('filtered');
-subplot(rows,cols,s);s=s+1;mesh(f);title(['filtr. hsize: ' num2str(hsize),', sigma: ' num2str(sigma)]);
-colormap('hot')
-subplot(rows,cols,s);s=s+1;imshow(Ae);title(['edges: ', num2str(sum(Ae(:))), ' px' ]);
-subplot(rows,cols,s);s=s+1;imshow(Aef);title(['edges: ', num2str(sum(Aef(:))), ' px' ]);
-</code></pre>
-<p><img src="../media/kytka1_gauss_autofocus.png" class="img-fluid" alt=""></p>
-<h1 id="autofocus-finding-sharpest-frames-of-a-video">Autofocus – finding sharpest frames of a video</h1>
-<pre><code class="language-matlab">v = VideoReader('podzimni_kvetena_focus_test.mp4');
-vHeight = v.Height;
-vWidth = v.Width;
-</code></pre>
-<h2 id="determining-the-standard-deviation-of-the-middle-quarter">Determining the standard deviation of the middle quarter</h2>
-<pre><code>centerX = [vHeight/4:vHeight*3/4];
-centerY = [vWidth/4:vWidth*3/4];
-</code></pre>
-<h2 id="struct-to-load-each-frame">Struct to load each frame</h2>
-<pre><code class="language-matlab">s = struct('frame',zeros(vHeight,vWidth,3,'uint8'));
-k = 1;
-A = [];
+subplot(2,2,1);imshow(B)
+subplot(2,2,2);imhist(B)
 
-while hasFrame(v)
-f = readFrame(v);
-% saving frame
-s(k).frame = f;
-% sum of standard deviations in a frame cutout
-A = [A sum(sum(std(double(f(centerX,centerY)))))];
-k = k+1;
+subplot(2,2,3);imshow(histeq(B)) % ekvalizace obrázku
+subplot(2,2,4);imhist(histeq(B)) % vykreslení ekvalizovaného histogramu 
+</code></pre>
+<h1 id="deekvalizace-obrazku-snizeni-kontrastu">"Deekvalizace" obrázku - snížení kontrastu</h1>
+<pre><code class="language-matlab">subplot(2,2,1);imshow(Ag)
+subplot(2,2,2);imhist(Ag)
+
+Dq=(Ag*0.2)+100; % deekvalizace obrázku pomocí násobení a sčítání
+subplot(2,2,3);imshow(Dq)
+subplot(2,2,4);imhist(Dq) 
+</code></pre>
+<p><img src="../media/2017-12-18-14-57-53.png" class="img-fluid" alt=""></p>
+<h1 id="interaktivni-zvyrazneni-casti-rtg-snimku-zubu">Interaktivní zvýraznění části RTG snímku zubů</h1>
+<p>Uživatel bude moci kliknutím vybrat oblast snímku k ekvalizaci</p>
+<pre><code class="language-matlab">C=imread('zubRtg.png');
+button=1; % tlačítko
+x=300;y=300; % velikost oblasti v pixelech - menší = lepší vykreslení
+figure;
+ax = axes; % uložení os do proměnné
+
+while button==1 % kliknutí levým tlačítkem na tlačítko
+    if x&gt;100 &amp;&amp; y &gt;100 % vynechání okrajů snímku
+        z_ekv=C;
+        z_ekv(x-100:x+100,y-100:y+100)=histeq(z_ekv(x-100:x+100,y-100:y+100));
+        imshow(z_ekv,'Parent',ax)
+    end
+    [y,x, button]=ginput(1); % čekání na zmáčknutí tlačítka
 end
-
-[m,i] = max(A);
-D = ['Sharpest one probably: ',num2str(i),'. snimek.'];
-disp(D)
 </code></pre>
-<h2 id="sharpest-frame-display">Sharpest frame display</h2>
-<pre><code class="language-matlab">imshow(s(i).frame);
+<p><img src="../media/zubr_anim.gif" class="img-fluid" alt=""></p>
+<h2 id="adaptivni-ekvalizace">Adaptivní ekvalizace</h2>
+<p>Adaptivní ekvalizace se liší od obyčejné tím, že počítá histogramy jednotlivých částí obrázku. Tím je dosaženo vyššího lokálního kontrastu v celém obrázku.</p>
+<pre><code class="language-matlab">subplot(2,1,1), imshow(C)
+% parametr [m n] udává počet 'dlaždic', do kterých je obrázek rozdělen při zpracování
+z_ekvadaptive=adapthisteq(C,'NumTiles',[100 100]); 
+subplot(2,1,2), imshow(z_ekvadaptive) 
 </code></pre>
-<h2 id="write-results">Write results</h2>
-<pre><code class="language-matlab">w = VideoWriter('autofocus');
-open(w);
-
-% the video goes a little bit past sharpest frame
-for k = 1:i+10
-writeVideo(w, s(k).frame)
-end
-
-% then returns
-for k = 1:9
-writeVideo(w, s(i+10-k).frame);
-end
-
-% and stays a while
-for k = 1:9
-writeVideo(w, s(i).frame);
-end
-
-close(w); 
-</code></pre>
+<p><img src="../media/hist5_zubr_adeq.png" class="img-fluid" alt=""></p>
 
 
 
