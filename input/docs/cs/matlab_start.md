@@ -1,7 +1,8 @@
 title: Základní operace s obrázky
 Description: První kapitola základních operací s obrázky
 ---
->Tento dokument pracuje s [obrázkem](/zodoc/assets/img/kytka256.jpg) uloženém v proměnné`A`.
+>Tento dokument pracuje s obrázkem:
+* [Obrázek kytky](/zodoc/assets/img/kytka256.jpg) v proměnné `A`.
 # Načíst a zobrazit obrázek
 ```matlab
 A=imread('kytka256.jpg');

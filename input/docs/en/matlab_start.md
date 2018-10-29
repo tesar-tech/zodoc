@@ -1,7 +1,8 @@
 title: Basic Operations on Images 1
 Description: First part of basic operation on images
 ---
->This whole document works with [image](/zodoc/assets/img/kytka256.jpg) in `A` variable.
+>This whole document works with one image:
+* [Image of flower](/zodoc/assets/img/kytka256.jpg) in `A`.
 # Load and show image 
 ```matlab
 A=imread('kytka256.jpg');
