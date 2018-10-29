@@ -4,7 +4,7 @@ Description: Histogram plotting, histogram based equalization, deequalization. C
 >This document works with three images: 
 
 * [Image of flower](../media/kytka256.jpg) in `A` 
-* Build-in *pout.tif* image in `B`
+* Built-in *pout.tif* image in `B`
 * [Teeth x-ray image](../media/zubRtg.png) in `C` 
 # Histogram plotting
 
@@ -12,12 +12,12 @@ Description: Histogram plotting, histogram based equalization, deequalization. C
 A=imread('kytka256.jpg'); % loading an image 
 Ag = rgb2gray(A);
 subplot(1,2,1);imshow(Ag) % original picture
-subplot(1,2,2);imhist(Ag) % histogram display
+subplot(1,2,2);imhist(Ag) % display histogram
 ```
 ![](../media/2017-12-18-14-54-00.png)
 # Histogram and equalized histogram
 ``` matlab
-B=imread('pout.tif');%pout.tif is matlab built-in image 
+B=imread('pout.tif'); % pout.tif is Matlab built-in image 
 
 subplot(2,2,1);imshow(B)
 subplot(2,2,2);imhist(B)
@@ -43,25 +43,27 @@ Enable user to pick a square and replacing it with equalized one
 ``` matlab
 C=imread('zubRtg.png');
 button=1; % button
-x=300;y=300; % square size - smaller, better depiction
+x=300;y=300; % square size in pixels - smaller = better depiction
 figure;
 ax = axes; % picking up axes
 
 while button==1 % left-click on button
-    if x>100 && y >100 % excludinh picture margins
+    if x>100 && y >100 % excluding picture margins
         z_ekv=C;
         z_ekv(x-100:x+100,y-100:y+100)=histeq(z_ekv(x-100:x+100,y-100:y+100));
         imshow(z_ekv,'Parent',ax)
     end
     
-    [y,x, button]=ginput(1); %waiting for button press
+    [y,x, button]=ginput(1); % waiting for button press
 end
 ```
 ![](../media/zubr_anim.gif)
 ## Adaptive equalization
+Adaptive equalization computes separate histograms for parts of an image, which results in higher local contrast in the whole image.
 ``` matlab
 subplot(2,1,1), imshow(C)
-z_ekvadaptive=adapthisteq(C,'NumTiles',[100 100]); 
+% parameter [m n] specifies number of tiles image is divided into for processing
+z_ekvadaptive=adapthisteq(C,'NumTiles',[100 100]);
 subplot(2,1,2), imshow(z_ekvadaptive) 
 ```
 ![](../media/hist5_zubr_adeq.png)
