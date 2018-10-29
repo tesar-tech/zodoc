@@ -51,10 +51,10 @@ while button==1 % kliknutí levým tlačítkem na tlačítko
         z_ekv(x-100:x+100,y-100:y+100)=histeq(z_ekv(x-100:x+100,y-100:y+100));
         imshow(z_ekv,'Parent',ax)
     end
-    
     [y,x, button]=ginput(1); % čekání na zmáčknutí tlačítka
 end
 ```
+![](../media/zubr_anim.gif)
 ## Adaptivní ekvalizace
 Adaptivní ekvalizace se liší od obyčejné tím, že počítá histogramy jednotlivých částí obrázku. Tím je dosaženo vyššího lokálního kontrastu v celém obrázku.
 ``` matlab

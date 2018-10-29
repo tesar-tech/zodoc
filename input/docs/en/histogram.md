@@ -53,7 +53,6 @@ while button==1 % left-click on button
         z_ekv(x-100:x+100,y-100:y+100)=histeq(z_ekv(x-100:x+100,y-100:y+100));
         imshow(z_ekv,'Parent',ax)
     end
-    
     [y,x, button]=ginput(1); % waiting for button press
 end
 ```
