@@ -36,7 +36,7 @@ subplot(2,2,4);imshow(A_ctvrt4)
 # Čtvrtinky - libovolná velikost obrazu
  ``` matlab
 velikost=size(A); %tato fce vrátí vektor, který obsahuje velikost matice A
-polovina_delka=round(velikost(1)/2); % zaokrouhlení kvůli obrázkům s lichou délou nebo šířkou
+polovina_delka=round(velikost(1)/2); % zaokrouhlení kvůli obrázkům s lichou délkou nebo šířkou
 polovina_sirka=round(velikost(2)/2);
 A_ctvrt1=A(1:polovina_delka,1:polovina_sirka,:);
 A_ctvrt2=A(polovina_delka:end,1:polovina_sirka,:);
