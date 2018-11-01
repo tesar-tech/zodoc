@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="shortcut icon" href="/zodoc/assets/img/favicon.ico" type="image/x-icon">
         <link rel="icon" href="/zodoc/assets/img/favicon.ico" type="image/x-icon">
-        <title>ZODOC - Hello World solution</title>
+        <title>ZODOC - Basic knowledge test 2018a</title>
         <link href="/zodoc/assets/css/mermaid.css" rel="stylesheet">
         <link href="/zodoc/assets/css/highlight.css" rel="stylesheet">
         <link href="/zodoc/assets/css/bootstrap/bootstrap.css" rel="stylesheet">
@@ -87,8 +87,11 @@
             <aside class="main-sidebar ">
                 <section class="infobar" data-spy="affix" data-offset-top="60" data-offset-bottom="200"> 
                     	
-        <div><p><a href="https://github.com/tesar-tech/zodoc/tree/master/input/exercises/solutions/en/hello_world_exercise.md"><i class="fa fa-pencil-square" aria-hidden="true"></i> Edit Content</a></p></div>
+        <div><p><a href="https://github.com/tesar-tech/zodoc/tree/master/input/exercises/en/test_basic_2018a.md"><i class="fa fa-pencil-square" aria-hidden="true"></i> Edit Content</a></p></div>
     <div id="infobar-headings"><h6>On This Page</h6><p><a href="#introduction">Introduction</a></p>
+<p><a href="#eclipse-of-a-square-moon">Eclipse of a square moon</a></p>
+<p><a href="#two-binary-images">Two binary images</a></p>
+<p><a href="#the-quartering">The quartering</a></p>
 <hr class="infobar-hidden">
 </div>
 
@@ -99,14 +102,14 @@
                     <ul class="sidebar-menu">
                         
 
-                <li class="treeview">
+                <li class="treeview active">
                     <a href="/zodoc/exercises/en">Assignments (English)</a> <a href="#" class="expand"></a>
                     <ul class="treeview-menu">
                         
                 <li><a href="/zodoc/exercises/en/hello_world_exercise">Hello World exercise and description</a></li>
                 <li><a href="/zodoc/exercises/en/test_basic_1">Basic knowledge test 1</a></li>
                 <li><a href="/zodoc/exercises/en/test_basic_2">Basic knowledge test 2</a></li>
-                <li><a href="/zodoc/exercises/en/test_basic_2018a">Basic knowledge test 2018a</a></li>
+                <li class="selected"><a href="/zodoc/exercises/en/test_basic_2018a">Basic knowledge test 2018a</a></li>
                 <li><a href="/zodoc/exercises/en/connected_shapes">Connected Shapes</a></li>
                 <li><a href="/zodoc/exercises/en/rectangles_in_rectangles">Rectangles in rectangles</a></li>
 
@@ -125,15 +128,15 @@
 
                     </ul>
                 </li>
-                <li class="treeview active">
+                <li class="treeview">
                     <a href="/zodoc/exercises/solutions">Solutions</a> <a href="#" class="expand"></a>
                     <ul class="treeview-menu">
                         
-                <li class="treeview active">
+                <li class="treeview">
                     <a href="/zodoc/exercises/solutions/en">Solutions (English)</a> <a href="#" class="expand"></a>
                     <ul class="treeview-menu">
                         
-                <li class="selected"><a href="/zodoc/exercises/solutions/en/hello_world_exercise">Hello World solution</a></li>
+                <li><a href="/zodoc/exercises/solutions/en/hello_world_exercise">Hello World solution</a></li>
                 <li><a href="/zodoc/exercises/solutions/en/test_basic_1">Basic knowledge test 1</a></li>
                 <li><a href="/zodoc/exercises/solutions/en/test_basic_2018a">Basic knowledge test 2018a</a></li>
                 <li><a href="/zodoc/exercises/solutions/en/connected_shapes">Connected shapes</a></li>
@@ -167,40 +170,45 @@
 
 
 	<section class="content-header">
-		<h1>Hello World solution</h1>
+		<h1>Basic knowledge test 2018a</h1>
 	</section>
 	<section class="content">
 
-		<blockquote class="blockquote">
-		
-<!--[0]type of translation  -->
-            <p> Assignment is <a href="/zodoc/exercises/en/hello_world_exercise">here</a> </p> 
-		
-		</blockquote>	
 
 		<blockquote class="blockquote">
 <!--[0]type of translation  -->
-            <p> Tento dokument je dostupný též v <a href="/zodoc/exercises/solutions/cs/hello_world_exercise">Češtině</a> </p>
+            <p> Tento dokument je dostupný též v <a href="/zodoc/exercises/cs/test_basic_2018a">Češtině</a> </p>
 		</blockquote>
 
 	
 
 
 
-		<h1 id="introduction">Introduction</h1>
-<p>Solution is mainly source code.</p>
-<pre><code class="language-matlab">clc;
-clear all; 
-%% this is matlab comment
-A = zeros(100);% create square matrix (binary image)
-A(50:70, 70:90) = 1; % place white square
-A = imrotate(A,42)% rotate image by 42 °
-imshow(A); % show image
-</code></pre>
+		<blockquote class="blockquote">
+<p>This document utilizes an image:</p>
+</blockquote>
+<ul>
+<li><a href="../media/kytka256.jpg">Image of flower</a> in variable <code>A</code></li>
+</ul>
+<h1 id="introduction">Introduction</h1>
+<p>This test contains 3 exercises. Maximum number of points that you can get is 8 (7+1 bonus).</p>
+<h1 id="eclipse-of-a-square-moon">Eclipse of a square moon</h1>
+<p>(3 points) Display an image, which is created below. The hint: you will need to create a vector and probably a function <code>repmat</code>.</p>
+<p><img src="../media/2018-10-03-15-45-49.png" class="img-fluid" alt=""></p>
+<h1 id="two-binary-images">Two binary images</h1>
+<p>(2 points) Convert the flower to a binary representation. Always in a different way. Display in one figure below.</p>
+<p><img src="../media/2018-10-03-15-49-44.png" class="img-fluid" alt=""></p>
+<h1 id="the-quartering">The quartering</h1>
+<p>(2 points) Divide the flower into quarters and show it in one figure. +1 point for creating a script, which will be able to do it with whichever RGB image of any size.</p>
+<p><img src="../media/2018-10-03-15-52-05.png" class="img-fluid" alt=""></p>
 
 
 
-		 
+			<blockquote class="blockquote">
+<!--[0]type of translation  -->
+            <p> Soulution is <a href="/zodoc/exercises/solutions/en/test_basic_2018a">here</a> </p> 
+		</blockquote>
+	 
 
 	</section>
                 
