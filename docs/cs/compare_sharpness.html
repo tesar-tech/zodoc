@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="shortcut icon" href="/zodoc/assets/img/favicon.ico" type="image/x-icon">
         <link rel="icon" href="/zodoc/assets/img/favicon.ico" type="image/x-icon">
-        <title>ZODOC - Image sharpness detection and autofocus</title>
+        <title>ZODOC - Porovnání ostrosti dvou obrazů</title>
         <link href="/zodoc/assets/css/mermaid.css" rel="stylesheet">
         <link href="/zodoc/assets/css/highlight.css" rel="stylesheet">
         <link href="/zodoc/assets/css/bootstrap/bootstrap.css" rel="stylesheet">
@@ -87,10 +87,10 @@
             <aside class="main-sidebar ">
                 <section class="infobar" data-spy="affix" data-offset-top="60" data-offset-bottom="200"> 
                     	
-        <div><p><a href="https://github.com/tesar-tech/zodoc/tree/master/input/docs/en/autofocus.md"><i class="fa fa-pencil-square" aria-hidden="true"></i> Edit Content</a></p></div>
-    <div id="infobar-headings"><h6>On This Page</h6><p><a href="#detect-image-sharpness-use-edges-to-compare-sharpness-of-2-images">Detect image sharpness -&gt; use edges to compare sharpness of 2 images</a></p>
-<p><a href="#plotting-the-results">Plotting the results</a></p>
-<p><a href="#autofocus-finding-sharpest-frames-of-a-video">Autofocus – finding sharpest frames of a video</a></p>
+        <div><p><a href="https://github.com/tesar-tech/zodoc/tree/master/input/docs/cs/compare_sharpness.md"><i class="fa fa-pencil-square" aria-hidden="true"></i> Edit Content</a></p></div>
+    <div id="infobar-headings"><h6>On This Page</h6><p><a href="#rozmazani-obrazku-hledani-hran">Rozmazání obrázku, hledání hran</a></p>
+<p><a href="#porovnani-ostrosti-podle-hran">Porovnání ostrosti podle hran</a></p>
+<p><a href="#vykresleni-vysledku">Vykreslení výsledku</a></p>
 <hr class="infobar-hidden">
 </div>
 
@@ -101,26 +101,26 @@
                     <ul class="sidebar-menu">
                         
 
-                <li class="treeview active">
+                <li class="treeview">
                     <a href="/zodoc/docs/en">Documentation (English)</a> <a href="#" class="expand"></a>
                     <ul class="treeview-menu">
                         
                 <li><a href="/zodoc/docs/en/matlab_start">Basic Operations on Images 1</a></li>
                 <li><a href="/zodoc/docs/en/matlab_start2">Basic Operations on Images 2</a></li>
                 <li><a href="/zodoc/docs/en/histogram">Histogram-based operations on images</a></li>
-                <li class="selected"><a href="/zodoc/docs/en/autofocus">Image sharpness detection and autofocus</a></li>
+                <li><a href="/zodoc/docs/en/autofocus">Image sharpness detection and autofocus</a></li>
                 <li><a href="/zodoc/docs/en/spectrum">Image spectra, fourier transformation, low-pass and high-pass filter</a></li>
                 <li><a href="/zodoc/docs/en/png_vs_jpg">PNG vs JPG</a></li>
 
                     </ul>
                 </li>
-                <li class="treeview">
+                <li class="treeview active">
                     <a href="/zodoc/docs/cs">Dokumentace (Česky)</a> <a href="#" class="expand"></a>
                     <ul class="treeview-menu">
                         
                 <li><a href="/zodoc/docs/cs/histogram">Histogramové operace s obrázky</a></li>
                 <li><a href="/zodoc/docs/cs/finding_circles">Hledání kružnic - Houghova transformace</a></li>
-                <li><a href="/zodoc/docs/cs/compare_sharpness">Porovnání ostrosti dvou obrazů</a></li>
+                <li class="selected"><a href="/zodoc/docs/cs/compare_sharpness">Porovnání ostrosti dvou obrazů</a></li>
                 <li><a href="/zodoc/docs/cs/matlab_start">Základní operace s obrázky</a></li>
                 <li><a href="/zodoc/docs/cs/matlab_start2">Základní operace s obrázky 2</a></li>
 
@@ -138,7 +138,7 @@
 
 
 	<section class="content-header">
-		<h1>Image sharpness detection and autofocus</h1>
+		<h1>Porovnání ostrosti dvou obrazů</h1>
 	</section>
 	<section class="content">
 
@@ -148,85 +148,40 @@
 
 
 
-		<blockquote class="blockquote">
-<p>This document works with an <a href="../media/kytka256.jpg">image</a> in <code>A</code> variable and a <a href="../media/podzimni_kvetena_focus_test.mp4">video</a> in <code>v</code> variable.</p>
-</blockquote>
-<h1 id="detect-image-sharpness-use-edges-to-compare-sharpness-of-2-images">Detect image sharpness -&gt; use edges to compare sharpness of 2 images</h1>
-<pre><code class="language-matlab">A = imread('kytka256.jpg');
-A = rgb2gray(A);
+		<h1 id="rozmazani-obrazku-hledani-hran">Rozmazání obrázku, hledání hran</h1>
+<pre><code class="language-matlab">A=imread('kytka256.jpg');
+% vytvoření gausovského filtru, 12 je velikost filtru, 10 je sigma neboli směrodatná odchylka
+f=fspecial('gaussian',12,10);
+A_rozmazana=imfilter(A,f); % aplikace vytvořeného filtru na obrázek
 
-% create blurred image
-% If you have MATLAB2015a or newer, use imgaussfilt(A, sigma) instead of fspecial() and imfilter().
-hsize = 50; 
-sigma = 5;
-f = fspecial('gaussian',hsize,sigma);
-Af = imfilter(A,f);
-Ae =edge(A);
-Aef =edge(Af);
-s = 1;
-cols = 3;
-rows = 2;
-</code></pre>
-<h1 id="plotting-the-results">Plotting the results</h1>
-<pre><code class="language-matlab">subplot(rows,cols,s);s=s+1;imshow(A);title('original');
-subplot(rows,cols,s);s=s+1;imshow(Af);title('filtered');
-subplot(rows,cols,s);s=s+1;mesh(f);title(['filtr. hsize: ' num2str(hsize),', sigma: ' num2str(sigma)]);
-colormap('hot')
-subplot(rows,cols,s);s=s+1;imshow(Ae);title(['edges: ', num2str(sum(Ae(:))), ' px' ]);
-subplot(rows,cols,s);s=s+1;imshow(Aef);title(['edges: ', num2str(sum(Aef(:))), ' px' ]);
-</code></pre>
-<p><img src="../media/kytka1_gauss_autofocus.png" class="img-fluid" alt=""></p>
-<h1 id="autofocus-finding-sharpest-frames-of-a-video">Autofocus – finding sharpest frames of a video</h1>
-<pre><code class="language-matlab">v = VideoReader('podzimni_kvetena_focus_test.mp4');
-vHeight = v.Height;
-vWidth = v.Width;
-</code></pre>
-<h2 id="determining-the-standard-deviation-of-the-middle-quarter">Determining the standard deviation of the middle quarter</h2>
-<pre><code>centerX = [vHeight/4:vHeight*3/4];
-centerY = [vWidth/4:vWidth*3/4];
-</code></pre>
-<h2 id="struct-to-load-each-frame">Struct to load each frame</h2>
-<pre><code class="language-matlab">s = struct('frame',zeros(vHeight,vWidth,3,'uint8'));
-k = 1;
-A = [];
+A_rozm_seda=rgb2gray(A_rozmazana);
+A_seda=rgb2gray(A);
+% funkce edge hledá hrany na obrázku, vrací binární obraz
+A_rozm_E=edge(A_rozm_seda);
+A_seda_E=edge(A_seda);
 
-while hasFrame(v)
-f = readFrame(v);
-% saving frame
-s(k).frame = f;
-% sum of standard deviations in a frame cutout
-A = [A sum(sum(std(double(f(centerX,centerY)))))];
-k = k+1;
-end
-
-[m,i] = max(A);
-D = ['Sharpest one probably: ',num2str(i),'. snimek.'];
-disp(D)
 </code></pre>
-<h2 id="sharpest-frame-display">Sharpest frame display</h2>
-<pre><code class="language-matlab">imshow(s(i).frame);
+<h1 id="porovnani-ostrosti-podle-hran">Porovnání ostrosti podle hran</h1>
+<p>Základní předpoklad je, že u ostřejšího obrazu najde funkce edge více hran</p>
+<pre><code class="language-matlab">% matice vrácená funkcí edge je binární (obsahuje jen 0 a 1). 1 reprezentuje hranu. 
+% stačí porovnat, ve které matici je více jedniček.
+C=find(A_seda_E==1); 
+B=find(A_rozm_E==1);
+if (length(C)&gt;length(B))
+   disp('Ostřejší je původní obrázek');
+elseif (length(C)&lt;length(B))
+   disp('Ostřejší je filrovaný obrázek');
+else
+  disp('není možné určit, který obrázek je ostřejší'); %např.obrázky mají stejný počet hran  
+end 
 </code></pre>
-<h2 id="write-results">Write results</h2>
-<pre><code class="language-matlab">w = VideoWriter('autofocus');
-open(w);
-
-% the video goes a little bit past sharpest frame
-for k = 1:i+10
-writeVideo(w, s(k).frame)
-end
-
-% then returns
-for k = 1:9
-writeVideo(w, s(i+10-k).frame);
-end
-
-% and stays a while
-for k = 1:9
-writeVideo(w, s(i).frame);
-end
-
-close(w); 
+<h1 id="vykresleni-vysledku">Vykreslení výsledku</h1>
+<pre><code class="language-matlab">subplot (2,2,1); imshow(A); title('původní');
+subplot (2,2,2); imshow(A_rozmazana);  title('filtrovaný');
+subplot (2,2,3); imshow(A_seda_E);
+subplot (2,2,4); imshow(A_rozm_E);  
 </code></pre>
+<p><img src="../media/compare_sharpness_result.jpg" class="img-fluid" alt=""></p>
 
 
 
