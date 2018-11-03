@@ -1,0 +1,10 @@
+.en-flag {
+  content: url('../img/en-flag.png');
+  height: 25px;
+  width: 25px;
+}
+.cs-flag {
+  content: url('../img/cs-flag.png');
+  height: 25px;
+  width: 25px;
+}
