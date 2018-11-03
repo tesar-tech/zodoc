@@ -89,12 +89,16 @@ else
 	 var langsList = Model.Metadata.Get<List<string>>("otherLanguagesList");
 	@if (langsList!=null)
 	 {
-		<blockquote class="blockquote">
+		
+			<table><tr>
 		 @foreach (var lan in langsList )
 		{
-			 @Html.Partial("_LanguageLinks",new string[] {"localization_languagePacks",lan,Model.String("RelativeFilePath"),Model.String("lang")}) ;
-	 	}	  
-		</blockquote>
+			<td>
+			 @Html.Partial("_LanguageLinks",new string[] {"localization_languagePacks",lan,Model.String("RelativeFilePath"),Model.String("lang")}) 
+	 		</td>
+		 }	 
+		 </tr></table> 
+		
 	}   
 	}   
 
