@@ -31,8 +31,8 @@ end
  ```
 # Vykreslení výsledku
  ``` matlab
-subplot (2,2,1); imshow(A); title('původní');
-subplot (2,2,2); imshow(A_rozmazana);  title('filtrovaný');
+subplot (2,2,1); imshow(A);
+subplot (2,2,2); imshow(A_rozmazana);
 subplot (2,2,3); imshow(A_seda_E);
 subplot (2,2,4); imshow(A_rozm_E);  
  ```
