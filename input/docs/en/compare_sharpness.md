@@ -37,4 +37,4 @@ subplot (2,2,3); imshow(A_gray_E);
 subplot (2,2,4); imshow(A_blurred_E);  
  ```
  
- ![](../media/compare_sharpness_result.jpg)
+ ![](../media/2018-11-04-10-20-30.jpg)
