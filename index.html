@@ -138,34 +138,6 @@
 <h2 id="jak-tvorit">Jak tvořit</h2>
 <p>Existuje spoustu způsobů a editorů, které Markdown zvládají. Já mohu doporučit <a href="https://code.visualstudio.com/">Visual Studio Code</a> (multiplatformní záležitost) a doplňky pro usnadnění práce s .md soubory. <a href="https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one">Markdown All in One</a> a <a href="https://marketplace.visualstudio.com/items?itemName=telesoho.vscode-markdown-paste-image">Markdown Paste</a> pro snadnější vkládání obrázků.
 Obrázky je dobré vkládat vždy do složky <code>media</code> ve stejné složce jako je článek (opět zřete <a href="https://github.com/tesar-tech/zodoc/tree/master/input/docs">repozitář</a>).</p>
-<h3 id="jak-maji-soubory-vypadat">Jak mají soubory vypadat</h3>
-<p>Soubor by měl obsahovat všechny důležité informace ve ze cvičení ve formě zdrojového kódu, patřičných komentářů a vysvětlujících obrázků. Inspirujte se v již vytvořených souborech.</p>
-<h2 id="konvence">Konvence</h2>
-<p>Pár tipů, jak tvořit dokumentaci. Pokud vám jsou některé následující pojmy tajné, nevěšte hlavy, stačí spolupracovat s již vytvořenými soubory, které tyto konvence respektují.</p>
-<ul>
-<li><p>Soubory nazývejte výstižnými názvy</p>
-</li>
-<li><p>Pro obrázky je nejlepší použít časovou značku (zmíněný doplněk pro vscode toto umí automaticky). Formát je následující: yyyy-MM-dd-HH-mm-ss, tedy například pro 4. 11. 2018 v 10 hodin 20 minut a 30 sekund:  <code>2018-11-04-10-20-30.jpg</code>. Je to z důvodu minimalizace rizik duplicit a přehlednějšího třídění ve složce.</p>
-</li>
-<li><p>Snažte se ořezávat obrázky tak, aby neměly zbytečně velký okraj.</p>
-</li>
-<li><p>Zvolte vhodné rozlišení obrázků. Spíše menší. I obrázek kytky o velikosti 256 x 256 pixlů splňuje účel zobrazení potřebné informace.</p>
-</li>
-<li><p>Obrázky ukládejte do složky /media</p>
-</li>
-<li><p>Obsahuje-li výstup více obrázků vytvořených pomocí funkce <code>subplot</code>, následný <code>imshow</code> dejte na stejný řádek.</p>
-</li>
-<li><p>Uvádějte titulek i popis souboru (přes metadata)</p>
-</li>
-<li><p>Podnadpisy jsou první úrovně (#). Hlavní nadpis je v metadatech jako <code>title</code></p>
-</li>
-<li><p>Ukázky kódu patřičně zarovnejte (v Matlabu označit vše a potom Ctrl+I)</p>
-</li>
-<li><p>Používejte infinitiv namísto imperativu ("Načíst a zobrazit obrázek" vs "Načtěte a zobrazte obrázek")</p>
-</li>
-<li><p>V případě tvorby dokumentů do sekce <code>Exercises</code> jsou konvence lehce jiné. Vysvětlené jsou v ukázkovém cvičení.</p>
-</li>
-</ul>
 <h2 id="jak-publikovat">Jak publikovat</h2>
 <p>Forkem repositáře a pull requestou. Je k tomu nutný účet na githubu a lehká znalost, jak to celé funguje. Návodů je všude fůra a samotný github vás směle navede. Tuto cestu vřele doporučuji (ve skutečnosti je to jeden z důvodů proč dokumentaci přesouvám tímto směrem) - jestli se chcete programování do budoucna věnovat, bude se vám tento základ hodit. Pro jednu novou část dokumentace (jeden .md soubor) vytvořte jednu pullrequestu. Já to okomentuji, vy opravíte, commitnete a pushnete do svého forlklého repozitáře. Až to bude v pořádku, pull requestu bude sloučena (merge) s mateřským adresářem.</p>
 <h2 id="co-z-toho">Co z toho?</h2>
