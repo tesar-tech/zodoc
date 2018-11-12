@@ -8,7 +8,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="shortcut icon" href="/zodoc/assets/img/favicon.ico" type="image/x-icon">
         <link rel="icon" href="/zodoc/assets/img/favicon.ico" type="image/x-icon">
-        <title>ZODOC - Documentation (English)</title>
+        <title>ZODOC - Randomly two-color image</title>
         <link href="/zodoc/assets/css/mermaid.css" rel="stylesheet">
         <link href="/zodoc/assets/css/highlight.css" rel="stylesheet">
         <link href="/zodoc/assets/css/bootstrap/bootstrap.css" rel="stylesheet" />
@@ -89,7 +89,7 @@
             <aside class="main-sidebar ">
                 <section class="infobar" data-spy="affix" data-offset-top="60" data-offset-bottom="200"> 
                     	
-        <div><p><a href="https://github.com/tesar-tech/zodoc/tree/master/input/docs/en/index.cshtml"><i class="fa fa-pencil-square" aria-hidden="true"></i> Edit Content</a></p></div>
+        <div><p><a href="https://github.com/tesar-tech/zodoc/tree/master/input/docs/en/randomly_two-color_image.md"><i class="fa fa-pencil-square" aria-hidden="true"></i> Edit Content</a></p></div>
     <div id="infobar-headings"></div>
 
                 </section>
@@ -99,7 +99,7 @@
                     <ul class="sidebar-menu">
                         
 
-                <li class="treeview active selected">
+                <li class="treeview active">
                     <a href="/zodoc/docs/en">Documentation (English)</a> <a href="#" class="expand"></a>
                     <ul class="treeview-menu">
                         
@@ -110,7 +110,7 @@
                 <li><a href="/zodoc/docs/en/autofocus">Image sharpness detection and autofocus</a></li>
                 <li><a href="/zodoc/docs/en/spectrum">Image spectra, fourier transformation, low-pass and high-pass filter</a></li>
                 <li><a href="/zodoc/docs/en/png_vs_jpg">PNG vs JPG</a></li>
-                <li><a href="/zodoc/docs/en/randomly_two-color_image">Randomly two-color image</a></li>
+                <li class="selected"><a href="/zodoc/docs/en/randomly_two-color_image">Randomly two-color image</a></li>
                 <li><a href="/zodoc/docs/en/selective_blur">Selective blur</a></li>
 
                     </ul>
@@ -141,73 +141,40 @@
 
 
 	<section class="content-header">
-		<h1>Documentation (English)</h1>
+		<h1>Randomly two-color image</h1>
 	</section>
 	<section class="content">
 
 
+			<table><tr>
+			<td>
+			 <!--[0]type of translation  -->
+         <a href="/zodoc/docs/cs/randomly_two-color_image"><img class="cs-flag"/></a>
+ 
+	 		</td>
+		 </tr></table> 
 
 	
 
 
 
-		
-			<div class="box">
-				<div class="box-body no-padding">
-					<table class="table table-striped table-hover two-cols-alt table-responsive">
-						
-						<tbody>
-								<tr>
-									<td><strong><a href="/zodoc/docs/en/matlab_start">Basic Operations on Images 1</a></strong></td>
-									<td>
-First part of basic operation on images									</td>
-								</tr>
-								<tr>
-									<td><strong><a href="/zodoc/docs/en/matlab_start2">Basic Operations on Images 2</a></strong></td>
-									<td>
-Second part of basic operation on images									</td>
-								</tr>
-								<tr>
-									<td><strong><a href="/zodoc/docs/en/compare_sharpness">Compare the sharpness of two images</a></strong></td>
-									<td>
-									</td>
-								</tr>
-								<tr>
-									<td><strong><a href="/zodoc/docs/en/histogram">Histogram-based operations on images</a></strong></td>
-									<td>
-Histogram plotting, histogram based equalization, deequalization. Creating tool for interactive partial highlighting of teeth x-ray									</td>
-								</tr>
-								<tr>
-									<td><strong><a href="/zodoc/docs/en/autofocus">Image sharpness detection and autofocus</a></strong></td>
-									<td>
-Comparing sharpness of images and findinf sharpest image in a video sequence									</td>
-								</tr>
-								<tr>
-									<td><strong><a href="/zodoc/docs/en/spectrum">Image spectra, fourier transformation, low-pass and high-pass filter</a></strong></td>
-									<td>
-Plotting basic functions and their spectrums, calculating and showing spectrums of grayscale images using 2D fourier transformation, creating low-pass filter and high-pass filter and plotting results									</td>
-								</tr>
-								<tr>
-									<td><strong><a href="/zodoc/docs/en/png_vs_jpg">PNG vs JPG</a></strong></td>
-									<td>
-Comparing .png and .jpg formats									</td>
-								</tr>
-								<tr>
-									<td><strong><a href="/zodoc/docs/en/randomly_two-color_image">Randomly two-color image</a></strong></td>
-									<td>
-From RGB to randomly two-color image									</td>
-								</tr>
-								<tr>
-									<td><strong><a href="/zodoc/docs/en/selective_blur">Selective blur</a></strong></td>
-									<td>
-How to blur background only									</td>
-								</tr>
-						</tbody>				
-					</table>
-				</div>
-			</div> 
+		<blockquote class="blockquote">
+<p>Utilizing image of the <a href="/zodoc/assets/img/kytka256.jpg">flower</a></p>
+</blockquote>
+<p>Converts image to binary representation and dyes it with two random colors. The code ensures that the colors and channel values will never be the same.</p>
+<p><img src="../media/2018-11-12-10-51-46.png" class="img-fluid" alt="" /></p>
+<pre><code class="language-matlab">A=imread('kytka256.jpg');
+Ag = rgb2gray(A);% covert to grayscale
+colors = randperm(256,6) -1;% get 6 random numbers from 0 to 255
+Ab = imbinarize(Ag);%convert to binary image
+Ab_3D = repmat(Ab,[1 1 3]);%replicate binary image to 3 dimensions
+R = Ab*colors(1) + ~Ab*colors(2);% 1 * color = color
+G = Ab*colors(3) + ~Ab*colors(4);
+B = Ab*colors(5) + ~Ab*colors(6);
+Ab_RGB = cat(3,R,G,B);%merging in 3th dimension
 
-
+imshow(uint8(Ab_RGB));
+</code></pre>
 
 
 
