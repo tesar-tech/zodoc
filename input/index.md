@@ -20,22 +20,7 @@ Pro inspiraci jak vytvořit článek odpovídající zdejším (velice čerstvý
 ## Jak tvořit
 Existuje spoustu způsobů a editorů, které Markdown zvládají. Já mohu doporučit [Visual Studio Code](https://code.visualstudio.com/) (multiplatformní záležitost) a doplňky pro usnadnění práce s .md soubory. [Markdown All in One](https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one) a [Markdown Paste](https://marketplace.visualstudio.com/items?itemName=telesoho.vscode-markdown-paste-image) pro snadnější vkládání obrázků.
 Obrázky je dobré vkládat vždy do složky `media` ve stejné složce jako je článek (opět zřete [repozitář](https://github.com/tesar-tech/zodoc/tree/master/input/docs)).
-### Jak mají soubory vypadat
-Soubor by měl obsahovat všechny důležité informace ve ze cvičení ve formě zdrojového kódu, patřičných komentářů a vysvětlujících obrázků. Inspirujte se v již vytvořených souborech.
 
-## Konvence
-
-Pár tipů, jak tvořit dokumentaci. Pokud vám jsou některé následující pojmy tajné, nevěšte hlavy, stačí spolupracovat s již vytvořenými soubory, které tyto konvence respektují.
-
-- Soubory nazývejte výstižnými názvy
-- Pro obrázky je nejlepší použít časovou značku (zmíněný doplněk pro vscode toto umí automaticky)
-- Obrázky ukládejte do složky /media
-- Obsahuje-li výstup více obrázků vytvořených pomocí funkce `subplot`, následný `imshow` dejte na stejný řádek.
-- Uvádějte titulek i popis souboru (přes metadata)
-- Podnadpisy jsou první úrovně (#). Hlavní nadpis je v metadatech jako `title`
-- Ukázky kódu patřičně zarovnejte (v Matlabu označit vše a potom Ctrl+I)
-
-- V případě tvorby dokumentů do sekce `Exercises` jsou konvence lehce jiné. Vysvětlené jsou v ukázkovém cvičení.
 
 ## Jak publikovat
 Forkem repositáře a pull requestou. Je k tomu nutný účet na githubu a lehká znalost, jak to celé funguje. Návodů je všude fůra a samotný github vás směle navede. Tuto cestu vřele doporučuji (ve skutečnosti je to jeden z důvodů proč dokumentaci přesouvám tímto směrem) - jestli se chcete programování do budoucna věnovat, bude se vám tento základ hodit. Pro jednu novou část dokumentace (jeden .md soubor) vytvořte jednu pullrequestu. Já to okomentuji, vy opravíte, commitnete a pushnete do svého forlklého repozitáře. Až to bude v pořádku, pull requestu bude sloučena (merge) s mateřským adresářem.
@@ -49,10 +34,3 @@ Forkem repositáře a pull requestou. Je k tomu nutný účet na githubu a lehk�
 - https://github.io pro hostování a sdílení
 - https://appveyor.com pro buildění a nasazení
 - https://github.com/MinhasKamal/DownGit pro stahování složek z githubu.
-
-
-
-
-
-
-

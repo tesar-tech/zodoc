@@ -5,13 +5,8 @@
     {
     // [1] language to make link; [2]current link; [3]current lang 
         var link = Context.GetLink(Model[2]).Replace( "/"+Model[3]+"/","/"+Model[1]+"/");
-        if(Model[1]=="cs")
-        {
-            <p> Tento dokument je dostupný též v <a href="@link">Češtině</a> </p>
-        }else if(Model[1]=="en")
-        {
-            <p> This document is also available in <a href="@link">English</a> </p> 
-        }
+        var flag_class = Model[1] + "-flag";
+         <a href="@link"><img class="@flag_class"/></a>
     }else if (Model[0]=="localization_solutionLink")
     {
      // [1] current lang; [2]relative link to file without language;

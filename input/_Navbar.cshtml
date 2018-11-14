@@ -9,15 +9,15 @@
         .ToList();
     if(Documents[Docs.BlogPosts].Any())
     {
-        pages.Add(Tuple.Create("Blog", Context.GetLink(Context.String(DocsKeys.BlogPath))));
+        pages.Add(Tuple.Create(Context.String(DocsKeys.BlogTitle), Context.GetLink(Context.String(DocsKeys.BlogPath))));
     }
     if(Documents[Docs.Api].Any())
     {
-        pages.Add(Tuple.Create("API", Context.GetLink("api")));
+        pages.Add(Tuple.Create("API", Context.GetLink(Context.DirectoryPath(DocsKeys.ApiPath))));
     }
     foreach(Tuple<string, string> page in pages)
     {
         string active = Context.GetLink(Document).StartsWith(page.Item2) ? "active" : null;
-        <li class="@active"><a href="@page.Item2">@page.Item1</a></li>
+        <li class="@active"><a href="@(page.Item2)">@(page.Item1)</a></li>
     }
 }

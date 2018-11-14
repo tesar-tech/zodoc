@@ -1,6 +1,6 @@
 title: Basic knowledge test 1
 ---
-> this document utilizes 2 images
+> This document utilizes 2 images
 
 
 * [Image of a flower](../media/kytka256.jpg) in variable `A` 
