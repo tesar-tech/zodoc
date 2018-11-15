@@ -106,7 +106,6 @@
                 <li><a href="/zodoc/docs/en/matlab_start">Basic Operations on Images 1</a></li>
                 <li><a href="/zodoc/docs/en/matlab_start2">Basic Operations on Images 2</a></li>
                 <li><a href="/zodoc/docs/en/classification_of_handwritten_digits">Classification of handwritten digits</a></li>
-                <li><a href="/zodoc/docs/en/classify_hand_written_digits">Classification of handwritten digits</a></li>
                 <li><a href="/zodoc/docs/en/compare_sharpness">Compare the sharpness of two images</a></li>
                 <li><a href="/zodoc/docs/en/handwritten_to_digital">Handwritten numbers to binary image</a></li>
                 <li><a href="/zodoc/docs/en/histogram">Histogram-based operations on images</a></li>
@@ -164,15 +163,15 @@
 
 
 		<blockquote class="blockquote">
-<p>Tento dokument pracuje s <a href="/zodoc/input/media/cisla_ver.jpg">obrázkem čísel na papíře</a> uložený v proměnné <code>A</code>.</p>
+<p>Tento dokument pracuje s <a href="/zodoc/media/cisla_ver.jpg">obrázkem čísel na papíře</a> uložený v proměnné <code>A</code>.</p>
 </blockquote>
 <p>Zkonvertovat obrázek do binární reprezentace, kde jednotlivá čísla budou reprezentována bílou barvou a pozadí černou. Pro zvýraznění čísel k budoucí klasifikaci natrénovanou neuronovou sítí bude využita operace z matematické morfologie nazvaná dilatace, která je v MATLABu implementována pomocí funkce <code>imdilate</code>.</p>
-<p><img src="../media/2018-11-14-23-41-30" class="img-fluid" alt="" /></p>
+<p><img src="../media/2018-11-14-23-41-30.png" class="img-fluid" alt="" /></p>
 <pre><code class="language-matlab">A = imread('cisla_ver.jpg'); % načtení obrazu
 AGray = rgb2gray(A); % konverze do šedotónu
 ABinary = imbinarize(AGray, 'adaptive', 'ForegroundPolarity', 'dark', 'Sensitivity', 0.3); % binarizace obrazu. ForegroundPolarity parametr značí ,že popředí je tmavší, než pozadí.
 ABinaryComplement = ~ABinary; % bitová inverze matice
-StructuringElement = strel('disk', 7); % vytvoření strukturního elementu ve tvaru kruhu
+StructuringElement = strel('disk', 7); % vytvoření strukturního elementu ve tvaru kruhu, který slouží k prozkoumání původního obrazu
 DilatedABinaryComplement = imdilate(ABinaryComplement, StructuringElement); % dilatace obrazu
 subplot(1, 3, 1), imshow(A)
 subplot(1, 3, 2), imshow(ABinaryComplement)
