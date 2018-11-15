@@ -12,7 +12,7 @@ A = imread('cisla_ver.jpg'); % načtení obrazu
 AGray = rgb2gray(A); % konverze do šedotónu
 ABinary = imbinarize(AGray, 'adaptive', 'ForegroundPolarity', 'dark', 'Sensitivity', 0.3); % binarizace obrazu. ForegroundPolarity parametr značí ,že popředí je tmavší, než pozadí.
 ABinaryComplement = ~ABinary; % bitová inverze matice
-StructuringElement = strel('disk', 7); % vytvoření strukturního elementu ve tvaru kruhu
+StructuringElement = strel('disk', 7); % vytvoření strukturního elementu ve tvaru kruhu, který slouží k prozkoumání původního obrazu
 DilatedABinaryComplement = imdilate(ABinaryComplement, StructuringElement); % dilatace obrazu
 subplot(1, 3, 1), imshow(A)
 subplot(1, 3, 2), imshow(ABinaryComplement)
