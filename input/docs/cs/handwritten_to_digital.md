@@ -5,7 +5,7 @@ Description: Konverze ručně psaných čísel do binárního obrazu
 
 Zkonvertovat obrázek do binární reprezentace, kde jednotlivá čísla budou reprezentována bílou barvou a pozadí černou. Pro zvýraznění čísel k budoucí klasifikaci natrénovanou neuronovou sítí bude využita operace z matematické morfologie nazvaná dilatace, která je v MATLABu implementována pomocí funkce `imdilate`.
 
-![](../media/2018-11-14-23-41-30)
+![](../media/2018-11-14-23-41-30.png)
 
 ```matlab
 A = imread('cisla_ver.jpg'); % načtení obrazu
