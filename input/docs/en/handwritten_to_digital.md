@@ -1,7 +1,7 @@
 title: Handwritten numbers to binary image
 Description: Conversion of handwritten numbers on a paper to binary image
 ---
->This document utilizes [image](/zodoc/input/media/cisla_ver.jpg) stored in variable `A`.
+>This document utilizes [image](/zodoc/media/cisla_ver.jpg) stored in variable `A`.
 
 Convert the image to binary representation where numbers are going to be represented in white color, while the background is going to be black. However, the numbers won't be very clearly visible for possible future classification by neural networks, so a mathematical morphology operation called dilation will be used, implemented in MATLAB with function `imdilate`.
 

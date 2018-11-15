@@ -1,7 +1,7 @@
 title: Fotka s ručně psanými čísly na binární obraz
 Description: Konverze ručně psaných čísel do binárního obrazu
 ---
->Tento dokument pracuje s [obrázkem čísel na papíře](/zodoc/input/media/cisla_ver.jpg) uložený v proměnné `A`.
+>Tento dokument pracuje s [obrázkem čísel na papíře](/zodoc/media/cisla_ver.jpg) uložený v proměnné `A`.
 
 Zkonvertovat obrázek do binární reprezentace, kde jednotlivá čísla budou reprezentována bílou barvou a pozadí černou. Pro zvýraznění čísel k budoucí klasifikaci natrénovanou neuronovou sítí bude využita operace z matematické morfologie nazvaná dilatace, která je v MATLABu implementována pomocí funkce `imdilate`.
 
