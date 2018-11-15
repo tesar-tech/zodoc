@@ -8,7 +8,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="shortcut icon" href="/zodoc/assets/img/favicon.ico" type="image/x-icon">
         <link rel="icon" href="/zodoc/assets/img/favicon.ico" type="image/x-icon">
-        <title>ZODOC - Classification of handwritten digits</title>
+        <title>ZODOC - Handwritten numbers to binary image</title>
         <link href="/zodoc/assets/css/mermaid.css" rel="stylesheet">
         <link href="/zodoc/assets/css/highlight.css" rel="stylesheet">
         <link href="/zodoc/assets/css/bootstrap/bootstrap.css" rel="stylesheet" />
@@ -89,7 +89,7 @@
             <aside class="main-sidebar ">
                 <section class="infobar" data-spy="affix" data-offset-top="60" data-offset-bottom="200"> 
                     	
-        <div><p><a href="https://github.com/tesar-tech/zodoc/tree/master/input/docs/en/classification_of_handwritten_digits.md"><i class="fa fa-pencil-square" aria-hidden="true"></i> Edit Content</a></p></div>
+        <div><p><a href="https://github.com/tesar-tech/zodoc/tree/master/input/docs/en/handwritten_to_digital.md"><i class="fa fa-pencil-square" aria-hidden="true"></i> Edit Content</a></p></div>
     <div id="infobar-headings"></div>
 
                 </section>
@@ -105,10 +105,10 @@
                         
                 <li><a href="/zodoc/docs/en/matlab_start">Basic Operations on Images 1</a></li>
                 <li><a href="/zodoc/docs/en/matlab_start2">Basic Operations on Images 2</a></li>
-                <li class="selected"><a href="/zodoc/docs/en/classification_of_handwritten_digits">Classification of handwritten digits</a></li>
+                <li><a href="/zodoc/docs/en/classification_of_handwritten_digits">Classification of handwritten digits</a></li>
                 <li><a href="/zodoc/docs/en/classify_hand_written_digits">Classification of handwritten digits</a></li>
                 <li><a href="/zodoc/docs/en/compare_sharpness">Compare the sharpness of two images</a></li>
-                <li><a href="/zodoc/docs/en/handwritten_to_digital">Handwritten numbers to binary image</a></li>
+                <li class="selected"><a href="/zodoc/docs/en/handwritten_to_digital">Handwritten numbers to binary image</a></li>
                 <li><a href="/zodoc/docs/en/histogram">Histogram-based operations on images</a></li>
                 <li><a href="/zodoc/docs/en/autofocus">Image sharpness detection and autofocus</a></li>
                 <li><a href="/zodoc/docs/en/spectrum">Image spectra, fourier transformation, low-pass and high-pass filter</a></li>
@@ -146,39 +146,37 @@
 
 
 	<section class="content-header">
-		<h1>Classification of handwritten digits</h1>
+		<h1>Handwritten numbers to binary image</h1>
 	</section>
 	<section class="content">
 
 
+			<table><tr>
+			<td>
+			 <!--[0]type of translation  -->
+         <a href="/zodoc/docs/cs/handwritten_to_digital"><img class="cs-flag"/></a>
+ 
+	 		</td>
+		 </tr></table> 
 
 	
 
 
 
 		<blockquote class="blockquote">
-<p>Utilizing the <a href="/zodoc/media/cisla_ver.jpg">image</a> with handwritten digits (you can use any image with digits). Pretrained CNN on <a href="http://yann.lecun.com/exdb/mnist/">MNIST</a> dataset is necessary. You can download one with 99.29 % accuracy <a href="https://github.com/tesar-tech/zodoc/blob/master/datazoo/MNIST_99.29.onnx">here</a>.</p>
+<p>This document utilizes <a href="/zodoc/input/media/cisla_ver.jpg">image</a> stored in variable <code>A</code>.</p>
 </blockquote>
-<p>The code runs in a loop. Firstly, select region with a single digit. This region is adjusted, resized and convolutional neural network is used to classify it.</p>
-<p><img src="../media/2018-11-13-10-20-40.gif" class="img-fluid" alt="" /></p>
-<pre><code class="language-matlab">%% import MNIST cnn
-net = importONNXNetwork('MNIST_99.29.onnx','OutputLayerType', 'classification','classnames',{'0', '1', '2', '3', '4', '5' ,'6', '7', '8', '9'});
-%% load images 
-A_orig =imread('cisla_ver.jpg');
-A_gray = rgb2gray(A_orig);%convert to gray
-%%
-imshow(A_orig);
-while 1
-    rect = drawrectangle();
-    A_gray_selection = imcrop(A_gray,rect.Position);% crop selected rectangle
-    A_gray_selection_resized = imadjust( 255 -(imresize(A_gray_selection,[28 28])));%
-    cl = classify(net,(A_gray_selection_resized));% classify by cnn
-    if(exist('te'))
-        te.delete% delete existing text
-    end
-    te = text(10,160,['Classified as ' cellstr(cl)],'FontSize',14,'color','blue');
-    rect.delete;
-end
+<p>Convert the image to binary representation where numbers are going to be represented in white color, while the background is going to be black. However, the numbers won't be very clearly visible for possible future classification by neural networks, so a mathematical morphology operation called dilation will be used, implemented in MATLAB with function <code>imdilate</code>.</p>
+<p><img src="../media/2018-11-14-23-41-30" class="img-fluid" alt="" /></p>
+<pre><code class="language-matlab">A = imread('cisla_ver.jpg'); % load an image
+AGray = rgb2gray(A); % conversion to grayscale
+ABinary = imbinarize(AGray, 'adaptive', 'ForegroundPolarity', 'dark', 'Sensitivity', 0.3); % binarization of image. ForegroundPolarity parameter indicates that the foreground is darker than the background.
+ABinaryComplement = ~ABinary; % turning numbers to white color
+StructuringElement = strel('disk', 7); % creating a disk-shaped structuring element to probe the binary image
+DilatedABinaryComplement = imdilate(ABinaryComplement, StructuringElement); % dilation of image
+subplot(1, 3, 1), imshow(A)
+subplot(1, 3, 2), imshow(ABinaryComplement)
+subplot(1, 3, 3), imshow(DilatedABinaryComplement)
 </code></pre>
 
 
