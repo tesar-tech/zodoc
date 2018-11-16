@@ -4,7 +4,7 @@ Description: Using convolutional neural network Alexnet for image classification
 >This whole document works with [image](/zodoc/assets/img/kytka256.jpg) in `A` variable.
 
 # Alexnet convolutional neural network definition
-Convolutional neural network alexnet works with more than one milion images from the ImageNet database. The network is 8 layers deep and can classify images into 1000 object categories, such as keyboard, mouse, pencil, and many animals.
+Convolutional neural network alexnet works with more than one milion images from the ImageNet database. The network is 8 layers deep and can classify images into 1000 object categories, such as keyboard, mouse, pencil, and many animals. 
 Result of classification of a image is a name (what is on that image) and percentage value of success by classify in to category.
 
 
