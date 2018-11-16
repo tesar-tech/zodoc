@@ -1,7 +1,7 @@
 title: Aplikace konvoluční sítě alexnet pro klasifikaci obrázků
 Description: Použití konvoluční neuronové sítě Alexnet pro klasifikaci obrázků a procentuální vyhodnocení přesnosti klasifikace algoritmu.
 ---
->Tento dokument pracuje s [obrázkem](/zodoc/assets/img/kytka256.jpg) uloženém v proměnné`A`. 
+>Tento dokument pracuje s [obrázkem](/zodoc/assets/img/kytka256.jpg) uloženém v proměnné`A`.
 
 # Jak definovat konvoluční neuronovou síť Alexnet?
 Konvoluční neuronová síť alexnet má naučeno více než milion různých obrázků z databáze ImageNet. Tato síť je tvořena osmi vrstvami a dokáže obrázky či vybrané výřezy obrázků klasifikovat do tisíce kategorií, pro příklad: klávesnice, různá zvířata a mnohé další. 
