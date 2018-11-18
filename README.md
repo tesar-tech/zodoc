@@ -8,21 +8,24 @@ Source code of [zodoc](https://tesar-tech.github.io/zodoc/docs/)
 
 ## Konvence pro přispívání
 
+[Ukázkový příspěvek](https://tesar-tech.github.io/zodoc/docs/cs/selective_blur)
+
 ### 1. Obecné
 
-1. Soubory nazývejte výstižnými názvy
+1. Soubory nazývejte výstižnými názvy v AJ (podle stejného názvu souboru se párují jazykové mutace). Názvy souborů malými písmeny, jako oddělovač využijte podtržítko. Např.: `image_segmentation.md`
 2. Používejte infinitiv namísto imperativu ("Načíst a zobrazit obrázek" vs "Načtěte a zobrazte obrázek")
 3. V případě tvorby dokumentů do sekce `Exercises` jsou konvence lehce jiné. Vysvětlené jsou v ukázkovém cvičení.
 4. Využívejte metadata `description`
-5. Podnadpisy jsou první úrovně (#). Hlavní nadpis je v metadatech jako `title`
+5. (Podnadpisy jsou první úrovně (#). Hlavní nadpis je v metadatech jako `title`).(Není příliš důvod využívat podnadpisy, viz Struktura).
 
 ### 2. Struktura
 
 Struktura by měla vypadat následovně:
 
 - Krátký úvod k "úloze"
-- Obrázek výsledku
+- Obrázek výsledku (popřípadě postupu)
 - Okomentovaný zdrojový kód jak bylo výsledku dosaženo
+  - Zdrojový kód by měl být v jednom (kopírovatelném) bloku.
 
 ### 3. Obrázky
 
@@ -35,3 +38,4 @@ Struktura by měla vypadat následovně:
 
 1. Obsahuje-li výstup více obrázků vytvořených pomocí funkce `subplot`, následný `imshow` dejte na stejný řádek.
 2. Ukázky kódu patřičně zarovnejte (v Matlabu označit vše a potom Ctrl+I)
+3. Pro oddělení logických částí využívejte oddělovač buňěk z MATLABu (%%) a prázdný řádek.
