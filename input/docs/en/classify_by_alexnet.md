@@ -3,7 +3,7 @@ Description: Convolutional neural network alexnet is used to classify image.
 ---
 >This document works with the [image](/zodoc/assets/img/kytka256.jpg) in `A` variable. It is also necessary to install alexnet add-on. 
 
-Tested image is classified as "daisy", which is not correct because that yellow bloom is Jerusalem artichoke. However "Jerusalem artichoke" is not one of the alexnet classes (there is 1000 of them) and the daisy is fairly similar, so the classification is not completely wrong. Five classifications with topmost score are displayed in the table.
+Tested image is classified as "daisy", which is not correct because that yellow bloom is Jerusalem artichoke. However "Jerusalem artichoke" is not one of the alexnet classes (there are 1000 of them) and the daisy is fairly similar, so the classification is not completely wrong. Five classifications with topmost score are displayed in the table.
 
 ![](../media/2018-11-15-0-0-0.jpg)
 
