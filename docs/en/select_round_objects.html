@@ -1,20 +1,22 @@
-﻿<!DOCTYPE html><html><head>
+﻿<!DOCTYPE html>
+<html>
+    <head>
         <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=Edge">
-        <meta name="description">
-        <meta name="keywords" content="static content generator,static site generator,static site,HTML,web development,.NET,C#,Razor,Markdown,YAML">
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+        <meta name="description" />
+        <meta name="keywords" content="static content generator,static site generator,static site,HTML,web development,.NET,C#,Razor,Markdown,YAML" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="shortcut icon" href="/zodoc/assets/img/favicon.ico" type="image/x-icon">
         <link rel="icon" href="/zodoc/assets/img/favicon.ico" type="image/x-icon">
-        <title>ZODOC - Hledání kružnic - Houghova transformace</title>
+        <title>ZODOC - Distinguish between round and other binary objects</title>
         <link href="/zodoc/assets/css/mermaid.css" rel="stylesheet">
         <link href="/zodoc/assets/css/highlight.css" rel="stylesheet">
-        <link href="/zodoc/assets/css/bootstrap/bootstrap.css" rel="stylesheet">
-        <link href="/zodoc/assets/css/adminlte/AdminLTE.css" rel="stylesheet">
-        <link href="/zodoc/assets/css/theme/theme.css" rel="stylesheet">
+        <link href="/zodoc/assets/css/bootstrap/bootstrap.css" rel="stylesheet" />
+        <link href="/zodoc/assets/css/adminlte/AdminLTE.css" rel="stylesheet" />
+        <link href="/zodoc/assets/css/theme/theme.css" rel="stylesheet" />
         <link href="//fonts.googleapis.com/css?family=Roboto+Mono:400,700|Roboto:400,400i,700,700i" rel="stylesheet">
         <link href="/zodoc/assets/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-        <link href="/zodoc/assets/css/override.css" rel="stylesheet">
+        <link href="/zodoc/assets/css/override.css" rel="stylesheet" />
         <script src="/zodoc/assets/js/jquery-2.2.3.min.js"></script>
         <script src="/zodoc/assets/js/bootstrap.min.js"></script>        
         <script src="/zodoc/assets/js/app.min.js"></script>         
@@ -75,7 +77,7 @@
                              -->
                             <!-- Control Sidebar Toggle Button -->
                             <li>
-                                <a href="https://github.com/tesar-tech/zodoc">GitHub <i class="fa fa-github"></i></a>
+                                <a href="https://github.com/tesar-tech/zodoc" >GitHub <i class="fa fa-github"></i></a>
                             </li>
                         </ul>
                     </div>
@@ -87,13 +89,8 @@
             <aside class="main-sidebar ">
                 <section class="infobar" data-spy="affix" data-offset-top="60" data-offset-bottom="200"> 
                     	
-        <div><p><a href="https://github.com/tesar-tech/zodoc/tree/master/input/docs/cs/finding_circles.md"><i class="fa fa-pencil-square" aria-hidden="true"></i> Edit Content</a></p></div>
-    <div id="infobar-headings"><h6>On This Page</h6><p><a href="#nacteni-obrazku-predzpracovani-a-hledani-hran">Načtení obrázku, předzpracování a hledání hran</a></p>
-<p><a href="#houghova-transformace">Houghova transformace</a></p>
-<p><a href="#hledani-maxima">Hledání maxima</a></p>
-<p><a href="#vykresleni-vysledku">Vykreslení výsledku</a></p>
-<hr class="infobar-hidden">
-</div>
+        <div><p><a href="https://github.com/tesar-tech/zodoc/tree/master/input/docs/en/select_round_objects.md"><i class="fa fa-pencil-square" aria-hidden="true"></i> Edit Content</a></p></div>
+    <div id="infobar-headings"></div>
 
                 </section>
                 <section class="sidebar">                    
@@ -102,7 +99,7 @@
                     <ul class="sidebar-menu">
                         
 
-                <li class="treeview">
+                <li class="treeview active">
                     <a href="/zodoc/docs/en">Documentation (English)</a> <a href="#" class="expand"></a>
                     <ul class="treeview-menu">
                         
@@ -110,7 +107,7 @@
                 <li><a href="/zodoc/docs/en/matlab_start2">Basic Operations on Images 2</a></li>
                 <li><a href="/zodoc/docs/en/classification_of_handwritten_digits">Classification of handwritten digits</a></li>
                 <li><a href="/zodoc/docs/en/compare_sharpness">Compare the sharpness of two images</a></li>
-                <li><a href="/zodoc/docs/en/select_round_objects">Distinguish between round and other binary objects</a></li>
+                <li class="selected"><a href="/zodoc/docs/en/select_round_objects">Distinguish between round and other binary objects</a></li>
                 <li><a href="/zodoc/docs/en/filtering_binary_objects_with_kmeans">Filtering binary objects with kmeans</a></li>
                 <li><a href="/zodoc/docs/en/handwritten_to_digital">Handwritten numbers to binary image</a></li>
                 <li><a href="/zodoc/docs/en/histogram">Histogram-based operations on images</a></li>
@@ -124,22 +121,22 @@
 
                     </ul>
                 </li>
-                <li class="treeview active">
-                    <a href="/zodoc/docs/cs">Dokumentace (Česky)</a> <a href="#" class="expand"></a>
+                <li class="treeview">
+                    <a href="/zodoc/docs/cs">Dokumentace (&#x10C;esky)</a> <a href="#" class="expand"></a>
                     <ul class="treeview-menu">
                         
-                <li><a href="/zodoc/docs/cs/lower_case">Aplikace konvoluční sítě alexnet pro klasifikaci obrázků</a></li>
-                <li><a href="/zodoc/docs/cs/filtering_binary_objects_with_kmeans">Filtrování binárních objektů za použití k-means</a></li>
-                <li><a href="/zodoc/docs/cs/handwritten_to_digital">Fotka s ručně psanými čísly na binární obraz</a></li>
-                <li><a href="/zodoc/docs/cs/histogram">Histogramové operace s obrázky</a></li>
-                <li class="selected"><a href="/zodoc/docs/cs/finding_circles">Hledání kružnic - Houghova transformace</a></li>
-                <li><a href="/zodoc/docs/cs/classify_by_alexnet">Klasifikace obrázků s pomocí alexnet</a></li>
-                <li><a href="/zodoc/docs/cs/randomly_two-color_image">Náhodně dvoubarevný obrázek</a></li>
-                <li><a href="/zodoc/docs/cs/select_round_objects">Oddělení kulatých objektů od objektů ostatních</a></li>
-                <li><a href="/zodoc/docs/cs/compare_sharpness">Porovnání ostrosti dvou obrazů</a></li>
-                <li><a href="/zodoc/docs/cs/selective_blur">Selektivní rozmazání</a></li>
-                <li><a href="/zodoc/docs/cs/matlab_start">Základní operace s obrázky</a></li>
-                <li><a href="/zodoc/docs/cs/matlab_start2">Základní operace s obrázky 2</a></li>
+                <li><a href="/zodoc/docs/cs/lower_case">Aplikace konvolu&#x10D;n&#xED; s&#xED;t&#x11B; alexnet pro klasifikaci obr&#xE1;zk&#x16F;</a></li>
+                <li><a href="/zodoc/docs/cs/filtering_binary_objects_with_kmeans">Filtrov&#xE1;n&#xED; bin&#xE1;rn&#xED;ch objekt&#x16F; za pou&#x17E;it&#xED; k-means</a></li>
+                <li><a href="/zodoc/docs/cs/handwritten_to_digital">Fotka s ru&#x10D;n&#x11B; psan&#xFD;mi &#x10D;&#xED;sly na bin&#xE1;rn&#xED; obraz</a></li>
+                <li><a href="/zodoc/docs/cs/histogram">Histogramov&#xE9; operace s obr&#xE1;zky</a></li>
+                <li><a href="/zodoc/docs/cs/finding_circles">Hled&#xE1;n&#xED; kru&#x17E;nic - Houghova transformace</a></li>
+                <li><a href="/zodoc/docs/cs/classify_by_alexnet">Klasifikace obr&#xE1;zk&#x16F; s pomoc&#xED; alexnet</a></li>
+                <li><a href="/zodoc/docs/cs/randomly_two-color_image">N&#xE1;hodn&#x11B; dvoubarevn&#xFD; obr&#xE1;zek</a></li>
+                <li><a href="/zodoc/docs/cs/select_round_objects">Odd&#x11B;len&#xED; kulat&#xFD;ch objekt&#x16F; od objekt&#x16F; ostatn&#xED;ch</a></li>
+                <li><a href="/zodoc/docs/cs/compare_sharpness">Porovn&#xE1;n&#xED; ostrosti dvou obraz&#x16F;</a></li>
+                <li><a href="/zodoc/docs/cs/selective_blur">Selektivn&#xED; rozmaz&#xE1;n&#xED;</a></li>
+                <li><a href="/zodoc/docs/cs/matlab_start">Z&#xE1;kladn&#xED; operace s obr&#xE1;zky</a></li>
+                <li><a href="/zodoc/docs/cs/matlab_start2">Z&#xE1;kladn&#xED; operace s obr&#xE1;zky 2</a></li>
 
                     </ul>
                 </li>
@@ -155,68 +152,42 @@
 
 
 	<section class="content-header">
-		<h1>Hledání kružnic - Houghova transformace</h1>
+		<h1>Distinguish between round and other binary objects</h1>
 	</section>
 	<section class="content">
 
 
+			<table><tr>
+			<td>
+			 <!--[0]type of translation  -->
+         <a href="/zodoc/docs/cs/select_round_objects"><img class="cs-flag"/></a>
+ 
+	 		</td>
+		 </tr></table> 
 
 	
 
 
 
 		<blockquote class="blockquote">
-<p>Tento dokument pracuje s obrázkem:</p>
+<p>This is a continuation from <a href="filtering_binary_objects_with_kmeans">previous post</a> that is about processing of image with shapes.</p>
 </blockquote>
-<ul>
-<li><a href="../media/oko.jpg">Obrázek oka</a> v proměnné <code>A</code></li>
-</ul>
-<h1 id="nacteni-obrazku-predzpracovani-a-hledani-hran">Načtení obrázku, předzpracování a hledání hran</h1>
-<pre><code class="language-matlab">A = rgb2gray(imread('oko.jpg')); % převod obrázu do stupnice šedi
-h = fspecial('gaussian',[8 8],1); % tvorba masky pro filtrování 
-A_filter = imfilter(A,h); % provádí filtraci šumu
-hrany = edge(A_filter); % funkce nalezne hrany v obrazu
-subplot 131;imshow(A);title('původní obrázek');
-subplot 132;imshow(A_filter);title('obrázek po filtraci');
-subplot 133;imshow(hrany);title('hrany');
+<p><img src="../media/2018-11-18-10-20-30.png" class="img-fluid" alt="" /></p>
+<pre><code class="language-matlab">reg_props2 = regionprops(Aa{6},'perimeter','EquivDiameter','area');
+
+[~,L] = bwboundaries(Aa{6},'noholes');% marking regions by numbers from 1:num_of_regions
+
+%circle objects on the image are not perfectly round. Looking for &quot;almost&quot; round objects
+%EquivDiameter is diameter for circle with same Area as object.
+%Area/Perimeter + smallConstant &gt; EquivDiameter/4   for round objects
+%round objects (circles) have topmost Area/perimeter ration from all objects.
+% Area/Perimeter = Diameter/4 for circles 
+where_is_true =([reg_props2.Area] ./ [reg_props2.Perimeter]+1) &gt; [reg_props2.EquivDiameter]/4;
+ 
+Aa{7} =  ismember(L, find(where_is_true));
+
+montage({Aa{6},Aa{7}},'bordersize',[1 1],'backgroundcolor','green')
 </code></pre>
-<p><img src="../media/plotedges.png" class="img-fluid" alt=""></p>
-<h1 id="houghova-transformace">Houghova transformace</h1>
-<pre><code class="language-matlab">minR = 40; 
-maxR = 46; 
-ii = 0;
-indexy_hran = find(hrany); 
-[m, n] = size(A);
-for r = minR:maxR % interval poloměru od 40 do 46
-    ii= ii+1;
-    platno = zeros(m,n); % pro každý poloměr jedno plátno
-    tic % výpočetní čas - start
-    for h = 1:length(indexy_hran)
-        % generování kružnice
-        matice_s_bodem = zeros(m,n); % pomocná matice na tvorbu kružnice
-        matice_s_bodem(indexy_hran(h))=1; % na místě aktuálního hranového bodu udělá jedničku
-        vzdalenosti_od_bodu = bwdist(matice_s_bodem); % propočítá vzdálenosti od nejbližší jedničky
-        kruznice = round(vzdalenosti_od_bodu)==r; % vzdálenosti v délce poloměru
-        platno = platno+kruznice; % přimaluje kružnici na plátno
-    end
-    toc % výpočetní čas - konec (vypíše čas do konzole)
-    r
-    vsechny_platna(:,:,ii)= platno; 
-end
-</code></pre>
-<h1 id="hledani-maxima">Hledání maxima</h1>
-<pre><code class="language-matlab">[~, ind] = max(vsechny_platna(:)); % kde v kvádru všech pláten je nejvyšší hodnota
-[a, b, c] = ind2sub(size(vsechny_platna),ind); % indexy třech rozměru
-nalezenyPolomer = c+minR-1; % v případě 1 by to byl ten nejmenší poloměr
-</code></pre>
-<h1 id="vykresleni-vysledku">Vykreslení výsledku</h1>
-<pre><code class="language-matlab">matice_s_bodem = zeros(m,n);
-matice_s_bodem(a,b)=1; 
-vzdalenosti_od_bodu = bwdist(matice_s_bodem); 
-kruznice = round(vzdalenosti_od_bodu)==nalezenyPolomer;
-imshow(double(A)+kruznice*255,[]);
-</code></pre>
-<p><img src="../media/drawcir.png" class="img-fluid" alt=""></p>
 
 
 
@@ -281,5 +252,5 @@ imshow(double(A)+kruznice*255,[]);
     anchors.options.placement = 'left';
     anchors.add();
 </script>
-    
-</body></html>
+    </body>
+</html>
