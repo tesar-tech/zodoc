@@ -8,7 +8,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="shortcut icon" href="/zodoc/assets/img/favicon.ico" type="image/x-icon">
         <link rel="icon" href="/zodoc/assets/img/favicon.ico" type="image/x-icon">
-        <title>ZODOC - Docs</title>
+        <title>ZODOC - Image classification using alexnet</title>
         <link href="/zodoc/assets/css/mermaid.css" rel="stylesheet">
         <link href="/zodoc/assets/css/highlight.css" rel="stylesheet">
         <link href="/zodoc/assets/css/bootstrap/bootstrap.css" rel="stylesheet" />
@@ -89,6 +89,7 @@
             <aside class="main-sidebar ">
                 <section class="infobar" data-spy="affix" data-offset-top="60" data-offset-bottom="200"> 
                     	
+        <div><p><a href="https://github.com/tesar-tech/zodoc/tree/master/input/docs/en/classify_by_alexnet.md"><i class="fa fa-pencil-square" aria-hidden="true"></i> Edit Content</a></p></div>
     <div id="infobar-headings"></div>
 
                 </section>
@@ -98,7 +99,7 @@
                     <ul class="sidebar-menu">
                         
 
-                <li class="treeview">
+                <li class="treeview active">
                     <a href="/zodoc/docs/en">Documentation (English)</a> <a href="#" class="expand"></a>
                     <ul class="treeview-menu">
                         
@@ -109,7 +110,7 @@
                 <li><a href="/zodoc/docs/en/filtering_binary_objects_with_kmeans">Filtering binary objects with kmeans</a></li>
                 <li><a href="/zodoc/docs/en/handwritten_to_digital">Handwritten numbers to binary image</a></li>
                 <li><a href="/zodoc/docs/en/histogram">Histogram-based operations on images</a></li>
-                <li><a href="/zodoc/docs/en/classify_by_alexnet">Image classification using alexnet</a></li>
+                <li class="selected"><a href="/zodoc/docs/en/classify_by_alexnet">Image classification using alexnet</a></li>
                 <li><a href="/zodoc/docs/en/autofocus">Image sharpness detection and autofocus</a></li>
                 <li><a href="/zodoc/docs/en/spectrum">Image spectra, fourier transformation, low-pass and high-pass filter</a></li>
                 <li><a href="/zodoc/docs/en/increase_image_resolution_with_cnn">Increase Image Resolution with CNN</a></li>
@@ -149,35 +150,41 @@
 
 
 	<section class="content-header">
-		<h1>Docs</h1>
+		<h1>Image classification using alexnet</h1>
 	</section>
 	<section class="content">
 
 
+			<table><tr>
+			<td>
+			 <!--[0]type of translation  -->
+         <a href="/zodoc/docs/cs/classify_by_alexnet"><img class="cs-flag"/></a>
+ 
+	 		</td>
+		 </tr></table> 
 
 	
 
 
 
-					<div class="box">
-				<div class="box-body no-padding">
-					<table class="table table-striped table-hover two-cols-alt table-responsive">
-						
-						<tbody>
-								<tr>
-									<td><strong><a href="/zodoc/docs/en">Documentation (English)</a></strong></td>
-									<td>
-									</td>
-								</tr>
-								<tr>
-									<td><strong><a href="/zodoc/docs/cs">Dokumentace (&#x10C;esky)</a></strong></td>
-									<td>
-									</td>
-								</tr>
-						</tbody>				
-					</table>
-				</div>
-			</div> 
+		<blockquote class="blockquote">
+<p>This document works with the <a href="/zodoc/assets/img/kytka256.jpg">image</a> in <code>A</code> variable. It is also necessary to install alexnet add-on.</p>
+</blockquote>
+<p>Tested image is classified as &quot;daisy&quot;, which is not correct because that yellow bloom is Jerusalem artichoke. However &quot;Jerusalem artichoke&quot; is not one of the alexnet classes (there is 1000 of them) and the daisy is fairly similar, so the classification is not completely wrong. Five classifications with topmost score are displayed in the table.</p>
+<p><img src="../media/2018-11-15-0-0-0.jpg" class="img-fluid" alt="" /></p>
+<pre><code class="language-matlab">net = alexnet;
+A = imread('kytka256.jpg');
+A_resized = imresize(A,[227 227]); %resize image to 227px 227px for cnn input
+[label,score] = classify(net,A_resized); % classify the image
+
+[maxvalues, ind] = maxk(score(:), 5); %get five most succesfull classifications
+
+subplot 121; imshow(A_resized); %display original image
+title(string(label) + &quot;, &quot; + num2str(max(score)*100,3) + &quot; %&quot;); % display name and percentage
+
+names=(net.Layers(end).ClassNames(ind)); %get label names 
+uitable('Data',[names,num2cell(maxvalues*100)],'Position',[290 150 150 130],'ColumnName',{'Class name','Score %'});% create table
+</code></pre>
 
 
 
