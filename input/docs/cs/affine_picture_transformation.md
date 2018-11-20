@@ -1,39 +1,30 @@
-﻿title: Afinní zobrazení obrazku
+﻿title: Afinní transformace obrázku pomoci rotace
 --- 
-# Afinní rotace obrazku
-Pro provedeni afinní rotace potřebujeme otáčet obrázek vzhledem k původním souřadnicím osy a použit pro nastavení otáčení úhel (φ).
+Transformační matice T je matice o velikosti 3x3, která se používá k provedení operace posunu, rotaci a odražení objektů v afinní transformaci 2D obrázků vůči původním souřadnicím osy.
 
- ![](../media/image_rotation.jpg)
+ ![](../media/2018-11-20-14-33-14.jpg)
 
-Počítáme se s tím, že směr otáčení je  pozitivní proti směru hodinových ručiček. Je výhodné předpokládat, že úhel φ je v intervalu [-pi; pi].
-Abychom získali transformaci souřadnic během rotace, vezmeme si libovolný vektor r, který definuje určitý bod. Jeho souřadnice jsou:
+Rotace obrázků se provádí proti směru hodinových ručiček. Matice T popisuje otáčení bodu ve původních souřadnicích.
 
-		x = |r|cos(α)
-		y = |r|sin(α)
-Při otačení obrazku o úhel φ, souřadnice X a Y procházejí transformací:
-
-		x'=|r|cos(α+φ) = |r|(cos(α)cos(φ)) - sin(α)sin(φ) = x cos(φ) - y sin(φ)
-		y'=|r|sin(α+φ) = |r|(sin(α)cos(φ)) + cos(α)sin(φ) = x sin(φ) + y cos(φ)
+		T = ( cos(φ) -sin(φ)  
+		      sin(φ)  cos(φ) )
+Pro rotaci po směru hodinových ručiček je nutné se počítat se zápornou hodnotou uhlu φ.
 		
-Z uvedených rovnic odvodíme matice, díky které snadno spočítáme výslednou matice afinní rotaci obrázku. Násobení matic se provádí podle principu násobeni řádku na sloupec, proto počet sloupců v matici vlevo musí odpovídat počtu řádků v matici vpravo.
+		T = ( cos(φ) sin(φ)  
+		     -sin(φ) cos(φ) )
+Funkce affine2d(T) přirázuje matici vlastnosti platnou afinní transformací matice T. Výsledná afinní transformace obrázku se provádí pomoci funkci imwarp(), kde se obrázek mění podle definovaného formátu rotaci.
 
-		(x' y') = (cos(φ) -sin(φ)    * (x y)
-				   sin(φ)  cos(φ) )
-
-
-Tímhle tím způsobem dokázali jsme posunout obrázek určeným před tim kladným směrem (proti časové ručičce). Ale pokud bychom potřebovali udělat rotace po směru hodinové ručičce, přiradíme uhlu *φ* zápornou hodnotu (protože pohybujeme proti určeného směru) a přepočítáme vztah  pro stejný uhel se záporným znaménkem.
-
-	
-		(x' y') = (cos(-φ) -sin(-φ)  * (x y) = (cos(φ) sin(φ)  * (x y)
-				   sin(-φ)  cos(-φ) )          -sin(φ) cos(φ) )
-		 
+		(X' Y') = (X Y) * (cos(φ) -sin(φ)   
+						   sin(φ)  cos(φ) )
+						   		 
+---				
 ```
  ``` matlab
 A = rgb2gray(imread('kytka256.jpg')); %načitani obrazku a prevedení do šedotonu
 uh = pi/4; %uhel pi je urcen pro zadavani centrální symetrii vzhledek k puvodnim souradnicim osy
 
-T = [ cos(uh)  sin(uh) 0; %matice T o velikosti 3x3, zadava uhly otačeni obrazku kolem sve osy(Rotace/Rotation)
-      -sin(uh) cos(uh) 0  %posledni sloupec {0 0 1} nastavuje afinní transformaci roviny
+T = [ cos(uh)  sin(uh) 0; %matice T o velikosti 3x3 nastavuje afinní transformaci roviny
+      -sin(uh) cos(uh) 0  %cos(uh) ,sin(uh), -sin(uh), cos(uh) zadavaji uhly otačeni obrazku kolem sve osy pro provedeni Rotaci
         0       0      1 ];%posledni řadek {0 0 1} určuje posun obrazku podél os X a Y(pro Translation)
                                                  
 tform = affine2d(T); %nastavuje vlastnosti matice T s platnou afinní transformací pro maticí tform
