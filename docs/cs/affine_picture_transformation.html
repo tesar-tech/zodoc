@@ -8,7 +8,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="shortcut icon" href="/zodoc/assets/img/favicon.ico" type="image/x-icon">
         <link rel="icon" href="/zodoc/assets/img/favicon.ico" type="image/x-icon">
-        <title>ZODOC - Odd&#x11B;len&#xED; kulat&#xFD;ch objekt&#x16F; od objekt&#x16F; ostatn&#xED;ch</title>
+        <title>ZODOC - Rotace obr&#xE1;zku pomoc&#xED; transforma&#x10D;n&#xED; matice</title>
         <link href="/zodoc/assets/css/mermaid.css" rel="stylesheet">
         <link href="/zodoc/assets/css/highlight.css" rel="stylesheet">
         <link href="/zodoc/assets/css/bootstrap/bootstrap.css" rel="stylesheet" />
@@ -89,7 +89,7 @@
             <aside class="main-sidebar ">
                 <section class="infobar" data-spy="affix" data-offset-top="60" data-offset-bottom="200"> 
                     	
-        <div><p><a href="https://github.com/tesar-tech/zodoc/tree/master/input/docs/cs/select_round_objects.md"><i class="fa fa-pencil-square" aria-hidden="true"></i> Edit Content</a></p></div>
+        <div><p><a href="https://github.com/tesar-tech/zodoc/tree/master/input/docs/cs/affine_picture_transformation.md"><i class="fa fa-pencil-square" aria-hidden="true"></i> Edit Content</a></p></div>
     <div id="infobar-headings"></div>
 
                 </section>
@@ -132,9 +132,9 @@
                 <li><a href="/zodoc/docs/cs/finding_circles">Hled&#xE1;n&#xED; kru&#x17E;nic - Houghova transformace</a></li>
                 <li><a href="/zodoc/docs/cs/classify_by_alexnet">Klasifikace obr&#xE1;zk&#x16F; s pomoc&#xED; alexnet</a></li>
                 <li><a href="/zodoc/docs/cs/randomly_two-color_image">N&#xE1;hodn&#x11B; dvoubarevn&#xFD; obr&#xE1;zek</a></li>
-                <li class="selected"><a href="/zodoc/docs/cs/select_round_objects">Odd&#x11B;len&#xED; kulat&#xFD;ch objekt&#x16F; od objekt&#x16F; ostatn&#xED;ch</a></li>
+                <li><a href="/zodoc/docs/cs/select_round_objects">Odd&#x11B;len&#xED; kulat&#xFD;ch objekt&#x16F; od objekt&#x16F; ostatn&#xED;ch</a></li>
                 <li><a href="/zodoc/docs/cs/compare_sharpness">Porovn&#xE1;n&#xED; ostrosti dvou obraz&#x16F;</a></li>
-                <li><a href="/zodoc/docs/cs/affine_picture_transformation">Rotace obr&#xE1;zku pomoc&#xED; transforma&#x10D;n&#xED; matice</a></li>
+                <li class="selected"><a href="/zodoc/docs/cs/affine_picture_transformation">Rotace obr&#xE1;zku pomoc&#xED; transforma&#x10D;n&#xED; matice</a></li>
                 <li><a href="/zodoc/docs/cs/selective_blur">Selektivn&#xED; rozmaz&#xE1;n&#xED;</a></li>
                 <li><a href="/zodoc/docs/cs/matlab_start">Z&#xE1;kladn&#xED; operace s obr&#xE1;zky</a></li>
                 <li><a href="/zodoc/docs/cs/matlab_start2">Z&#xE1;kladn&#xED; operace s obr&#xE1;zky 2</a></li>
@@ -153,42 +153,39 @@
 
 
 	<section class="content-header">
-		<h1>Odd&#x11B;len&#xED; kulat&#xFD;ch objekt&#x16F; od objekt&#x16F; ostatn&#xED;ch</h1>
+		<h1>Rotace obr&#xE1;zku pomoc&#xED; transforma&#x10D;n&#xED; matice</h1>
 	</section>
 	<section class="content">
 
 
-			<table><tr>
-			<td>
-			 <!--[0]type of translation  -->
-         <a href="/zodoc/docs/en/select_round_objects"><img class="en-flag"/></a>
- 
-	 		</td>
-		 </tr></table> 
 
 	
 
 
 
 		<blockquote class="blockquote">
-<p>Tento příspevěk je pokračováním příspěvku <a href="filtering_binary_objects_with_kmeans">předchozího</a>, který se zabýval zpracováním obrázku s tvary.</p>
+<p>Tento dokument pracuje s <a href="../media/kytka256.jpg">obrázkem kytky</a> v proměnné <code>A</code> .</p>
 </blockquote>
-<p><img src="../media/2018-11-18-10-20-30.png" class="img-fluid" alt="" /></p>
-<pre><code class="language-matlab">reg_props2 = regionprops(Aa{6},'perimeter','EquivDiameter','area');
+<p>Transformační matice T je matice o velikosti 3x3, která se používá k provedení afinní transformace (posun, změna měřítka, rotace, zkosení) vůči původním souřadnicím osy. V tomto příkladu dochází pouze k rotaci.</p>
+<p><img src="../media/2018-11-23-18-23-33.jpg" class="img-fluid" alt="" /></p>
+<p>Rotace je jedním z případu afinní transformace.</p>
+<p>Funkce <code>affine2d(T)</code> vytvoří z transformační matice objekt. Tento objekt využívá funkce <code>imwarp</code> k transformaci obrázku (v tomto případě k rotaci)</p>
+<pre><code class="language-matlab">A = rgb2gray(imread('kytka256.jpg')); %načítání obrázku a převedení do šedotonu
+angle = pi/4; %úhel rotace
 
-[~,L] = bwboundaries(Aa{6},'noholes');% označení objektů čísly  1:num_of_regions
+%matice T o velikosti 3x3 nastavuje afinní transformaci roviny
+T = [  	cos(angle) 	sin(angle) 0;
+     	-sin(angle) 	cos(angle) 0;
+	    0	0	 1 ]; 
+		%poslední řadek {0 0 1} určuje posun obrázku podél os X a Y (nedochází k posunu proto 0)
+                                                
+tform = affine2d(T); %vytvoří transformační objekt
+J = imwarp(A,tform); %transformuje obrázek A podle geometrické transformace 
 
-%Kruhy v tomto obrázku nejsou zcela kulaté. Hledáme &quot;skoro&quot; kulaté objekty
-%EquivDiameter je průměr kruhu, jenž by zabíral stejnou plochu jako daný objekt
-%Area/Perimeter + maláKonstanta &gt; EquivDiameter/4   pro kruhové objekty
-%kulaté objekty (kruhy) mají nejvyšší poměr plochy/obvodu ze všech možných tvarů
-% Area/Perimeter = Diameter/4 - platí pro kruh 
-where_is_true =([reg_props2.Area] ./ [reg_props2.Perimeter]+1) &gt; [reg_props2.EquivDiameter]/4;
- 
-Aa{7} =  ismember(L, find(where_is_true));%filtrace nekulatých objektů z obrázku
-
-montage({Aa{6},Aa{7}},'bordersize',[1 1],'backgroundcolor','green')
+montage([{A},{J}]); %zobrazuje původní a transformovaný obrázky do jedného snímku
 </code></pre>
+<p>Transfromaci je možné vytvořit maticovým násobením transformační matice a souřadnic původního obrázku (to vlastně dělá funkce <code>imwarp</code>). Vzniknou tak nové souřadnice, jejichž poloha je transformována (souřadnice jsou jiné).</p>
+<p>Celý proces rotace obrázku je možné zjednodušit funkcí <code>imrotate</code>.</p>
 
 
 
