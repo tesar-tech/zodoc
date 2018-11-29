@@ -20,6 +20,7 @@ hueMask = (imgHSV(:,:,1) >= hueMin ) & (imgHSV(:,:,1) <= hueMax);
 % Apply mask on original image to desaturate background
 % (element-wise multiplication of second channel (saturation) and mask)
 imgHSV(:,:,2) = imgHSV(:,:,2) .* hueMask;
-% Display result
-imshow(imgHSV);
+% Convert back to RGB and display result
+imgResult = hsv2rgb(imgHSV);
+imshow(imgResult);
 ```
