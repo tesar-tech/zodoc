@@ -1,8 +1,7 @@
 title: Segmentace obrázku v barevném modelu HSV
 Description: Jak izolovat část obrázku podle rozsahu barev
 ---
->Tento dokument pracuje s jedním obrázkem:
-* [Obrázek kytky](../media/kytka256.jpg) v proměnné `A`
+>Tento dokument pracuje s [obrázkem kytky](../media/kytka256.jpg) v proměnné `A`
 
 Segmentace části obrázku v barevném modelu HSV, který popisuje barvy třemi parametry (odstín, sytost a jas). Prahy odstínu určují rozsah barev, který izolujeme. Pro segmentaci podle barev je vhodné použít model HSV, jelikož lépe rozlišuje mezi jednotlivými barvami.
 
