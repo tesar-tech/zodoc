@@ -8,7 +8,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="shortcut icon" href="/zodoc/assets/img/favicon.ico" type="image/x-icon">
         <link rel="icon" href="/zodoc/assets/img/favicon.ico" type="image/x-icon">
-        <title>ZODOC - Klasifikace obr&#xE1;zk&#x16F; s pomoc&#xED; alexnet</title>
+        <title>ZODOC - Image segmentation in HSV color space</title>
         <link href="/zodoc/assets/css/mermaid.css" rel="stylesheet">
         <link href="/zodoc/assets/css/highlight.css" rel="stylesheet">
         <link href="/zodoc/assets/css/bootstrap/bootstrap.css" rel="stylesheet" />
@@ -89,7 +89,7 @@
             <aside class="main-sidebar ">
                 <section class="infobar" data-spy="affix" data-offset-top="60" data-offset-bottom="200"> 
                     	
-        <div><p><a href="https://github.com/tesar-tech/zodoc/tree/master/input/docs/cs/classify_by_alexnet.md"><i class="fa fa-pencil-square" aria-hidden="true"></i> Edit Content</a></p></div>
+        <div><p><a href="https://github.com/tesar-tech/zodoc/tree/master/input/docs/en/image_segmentation_in_hsv_color_space.md"><i class="fa fa-pencil-square" aria-hidden="true"></i> Edit Content</a></p></div>
     <div id="infobar-headings"></div>
 
                 </section>
@@ -99,7 +99,7 @@
                     <ul class="sidebar-menu">
                         
 
-                <li class="treeview">
+                <li class="treeview active">
                     <a href="/zodoc/docs/en">Documentation (English)</a> <a href="#" class="expand"></a>
                     <ul class="treeview-menu">
                         
@@ -112,7 +112,7 @@
                 <li><a href="/zodoc/docs/en/handwritten_to_digital">Handwritten numbers to binary image</a></li>
                 <li><a href="/zodoc/docs/en/histogram">Histogram-based operations on images</a></li>
                 <li><a href="/zodoc/docs/en/classify_by_alexnet">Image classification using alexnet</a></li>
-                <li><a href="/zodoc/docs/en/image_segmentation_in_hsv_color_space">Image segmentation in HSV color space</a></li>
+                <li class="selected"><a href="/zodoc/docs/en/image_segmentation_in_hsv_color_space">Image segmentation in HSV color space</a></li>
                 <li><a href="/zodoc/docs/en/autofocus">Image sharpness detection and autofocus</a></li>
                 <li><a href="/zodoc/docs/en/spectrum">Image spectra, fourier transformation, low-pass and high-pass filter</a></li>
                 <li><a href="/zodoc/docs/en/increase_image_resolution_with_cnn">Increase Image Resolution with CNN</a></li>
@@ -122,7 +122,7 @@
 
                     </ul>
                 </li>
-                <li class="treeview active">
+                <li class="treeview">
                     <a href="/zodoc/docs/cs">Dokumentace (&#x10C;esky)</a> <a href="#" class="expand"></a>
                     <ul class="treeview-menu">
                         
@@ -131,7 +131,7 @@
                 <li><a href="/zodoc/docs/cs/handwritten_to_digital">Fotka s ru&#x10D;n&#x11B; psan&#xFD;mi &#x10D;&#xED;sly na bin&#xE1;rn&#xED; obraz</a></li>
                 <li><a href="/zodoc/docs/cs/histogram">Histogramov&#xE9; operace s obr&#xE1;zky</a></li>
                 <li><a href="/zodoc/docs/cs/finding_circles">Hled&#xE1;n&#xED; kru&#x17E;nic - Houghova transformace</a></li>
-                <li class="selected"><a href="/zodoc/docs/cs/classify_by_alexnet">Klasifikace obr&#xE1;zk&#x16F; s pomoc&#xED; alexnet</a></li>
+                <li><a href="/zodoc/docs/cs/classify_by_alexnet">Klasifikace obr&#xE1;zk&#x16F; s pomoc&#xED; alexnet</a></li>
                 <li><a href="/zodoc/docs/cs/randomly_two-color_image">N&#xE1;hodn&#x11B; dvoubarevn&#xFD; obr&#xE1;zek</a></li>
                 <li><a href="/zodoc/docs/cs/select_round_objects">Odd&#x11B;len&#xED; kulat&#xFD;ch objekt&#x16F; od objekt&#x16F; ostatn&#xED;ch</a></li>
                 <li><a href="/zodoc/docs/cs/compare_sharpness">Porovn&#xE1;n&#xED; ostrosti dvou obraz&#x16F;</a></li>
@@ -155,7 +155,7 @@
 
 
 	<section class="content-header">
-		<h1>Klasifikace obr&#xE1;zk&#x16F; s pomoc&#xED; alexnet</h1>
+		<h1>Image segmentation in HSV color space</h1>
 	</section>
 	<section class="content">
 
@@ -163,7 +163,7 @@
 			<table><tr>
 			<td>
 			 <!--[0]type of translation  -->
-         <a href="/zodoc/docs/en/classify_by_alexnet"><img class="en-flag"/></a>
+         <a href="/zodoc/docs/cs/image_segmentation_in_hsv_color_space"><img class="cs-flag"/></a>
  
 	 		</td>
 		 </tr></table> 
@@ -173,22 +173,25 @@
 
 
 		<blockquote class="blockquote">
-<p>Tento dokument pracuje s <a href="/zodoc/assets/img/kytka256.jpg">obrázkem</a> uloženém v proměnné<code>A</code>. Je též nutné mít v matlabu nainstalovaný přídavný prvek alexnet.</p>
+<p>This document utilizes <a href="../media/kytka256.jpg">image of flower</a> in variable <code>A</code></p>
 </blockquote>
-<p>Testovaný obrázek je klasifikován jako sedmikráska (daisy), což není správně, jelikož žlutý květ na obrázku náleží topinambuře. Nicméně topinambura není jednou z tříd do které alexnet klasifikuje (je jich celkem 1000) a sedmikrásce je vcelku podobná, takže klasifikace není zcela špatná. Pět klasifikací s nejvyšším skóre je vyobrazeno v tabulce.</p>
-<p><img src="../media/2018-11-15-0-0-0.jpg" class="img-fluid" alt="" /></p>
-<pre><code class="language-matlab">net = alexnet;
+<p>Isolate part of an image in HSV color space (which describes colors by hue, saturation, and value). Hue thresholds define a range of hues to isolate. For color-based segmentation, it's easier to manipulate images in HSV color space, because the hue channel is the mix of all RGB channels and it better distinguishes between all individual colors.</p>
+<p><img src="../media/2018-11-28-16-41-35.png" class="img-fluid" alt="" /></p>
+<pre><code class="language-matlab">% Load base image
 A = imread('kytka256.jpg');
-A_resized = imresize(A,[227 227]); %změnit velikost na 227px 227px pro vstup cnn
-[label,score] = classify(net,A_resized); % klasifikace obrázku
-
-[maxvalues, ind] = maxk(score(:), 5); %zíkání 5 klasifikací s nejvyšším skóre
-
-subplot 121; imshow(A_resized); %zobrazit původní obrázek
-title(string(label) + &quot;, &quot; + num2str(max(score)*100,3) + &quot; %&quot;); % zobrazit klasifikaci a procenta
-
-names=(net.Layers(end).ClassNames(ind)); % získání jmen pro klasifikace
-uitable('Data',[names,num2cell(maxvalues*100)],'Position',[290 150 150 130],'ColumnName',{'Class name','Score %'});% vytvoření tabulky
+% Convert RGB values to HSV
+imgHSV = rgb2hsv(A);
+% Set thresholds for hue channel in range of 0 to 1
+hueMin = 0.000; % 0 corresponds to red
+hueMax = 0.280; % 0.28 is roughly yellow
+% Mask creation from hue thresholds (hue is the first channel)
+hueMask = (imgHSV(:,:,1) &gt;= hueMin ) &amp; (imgHSV(:,:,1) &lt;= hueMax);
+% Apply mask on original image to desaturate background
+% (element-wise multiplication of second channel (saturation) and mask)
+imgHSV(:,:,2) = imgHSV(:,:,2) .* hueMask;
+% Convert back to RGB and display result
+imgResult = hsv2rgb(imgHSV);
+imshow(imgResult);
 </code></pre>
 
 
