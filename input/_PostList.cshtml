@@ -4,20 +4,64 @@
     foreach (IDocument post in Model)
     {
         string lead = post.String(BlogKeys.Lead);
-        
-        <div class="post-list">
-            <a href="@Context.GetLink(post)">
-                <h3 class="post-title">@post.WithoutSettings.String(BlogKeys.Title)</h3>
-                @if(!string.IsNullOrWhiteSpace(lead))
+
+                bool isImage = !string.IsNullOrWhiteSpace( post.String(BlogKeys.Image));
+                string imageLink = "";
+                 var Tags = post.Get<string[]>(BlogKeys.Tags);
+                if(isImage)
                 {
-                    <h4 class="post-subtitle">@lead</h4>
+                string image = post.String(BlogKeys.Image).Split('/').Last();
+                imageLink = Context.GetLink( "posts/media/"+image);
                 }
-            </a>
-            <p class="post-meta">Posted on @(post.Get<DateTime>(BlogKeys.Published).ToLongDateString(Context))</p>      
-            @if(Context.Bool(BlogKeys.ArchiveExcerpts))
+
+                <div class="post-preview">
+                    <a href="@Context.GetLink(post)">
+                        <h2 class="post-title">@post.WithoutSettings.String(BlogKeys.Title)</h2>
+                       
+                    </a>
+
+
+    @if (Tags != null)
+    {
+        <div class="tags">
+            @foreach (string tag in Tags.OrderBy(x => x))
             {
-                @Html.Raw(post.String(BlogKeys.Excerpt))
-            }            
-        </div>   
+                IDocument tagDocument = Documents[Blog.Tags].FirstOrDefault(x => x.String(BlogKeys.Tag) == tag && x.Get<int>(Keys.CurrentPage) == 1);
+                if(tagDocument != null)
+                {                
+                    <a role="button" href="@Context.GetLink(tagDocument)" class="btn btn-default btn-xs">@tag</a>
+                }
+            }
+        </div>     
+    } 
+                <table >
+                   
+                    <tr>
+                    
+                    <td> @if(isImage){
+                     <img src="@imageLink" style="float:left;width:128px;height:128px;object-fit: contain;">
+                    }
+                    </td>
+                    <td>
+                    @if(!string.IsNullOrWhiteSpace(lead))
+                        {
+                            <div style="margin:0 0 0 130;float:right;" >@lead</div>
+                        }
+                        </td>
+               </tr>
+                </table>    
+
+                    <!-- <p class="post-meta">Posted on @(post.Get<DateTime>(BlogKeys.Published).ToLongDateString(Context))</p> -->
+                   
+                    <!-- @if(Context.Bool(BlogKeys.IndexFullPosts))
+                    {
+                        @Html.Raw(post.Content)
+                    }
+                    else
+                    {
+                        @Html.Raw(post.String(BlogKeys.Excerpt))
+                    }              -->
+                </div>       
+             
     }
 }

@@ -2,21 +2,90 @@
     var Lead = Model.String(BlogKeys.Lead);
     var Published = Model.Get<DateTime>(BlogKeys.Published);   
     var Tags = Model.Get<string[]>(BlogKeys.Tags);
+        var lang = Model.String("lang");
+        var otherLangs = Model.Get<List<string>>("otherLanguagesList");
+    var datazooLink =  Context.String("datazooLink");
+    var datazooFiles = Model.Get<string[]>("datazooFiles");
+        var imgLink = Model.String(BlogKeys.Image); 
+        var similarPosts = Model.Get<List<IDocument>>("similarPosts");
 }
 
 <div class="post-heading">
+   
+
+   
     <h1>@Model.WithoutSettings.String(BlogKeys.Title)</h1>
     @if(!string.IsNullOrWhiteSpace(Lead))
     {
         <h2 class="subheading">@Lead</h2>
     }            
-    <div class="meta">        
+    <!-- <div class="meta">        
         @if (Published != default(DateTime))
         {
             <text>Published on @Published.ToLongDateString(Context)<br></text>
         }
+    </div> -->
+    <!-- <div>language:@lang </div> -->
+    <!-- @if(otherLangs !=null)
+    {
+        <ul>
+        @foreach (var la in otherLangs)
+        {
+            <li>othera @la </li>
+        }
+        </ul>
+        
+    } -->
+
+   @if(otherLangs !=null && otherLangs.Count()>0)
+{
+    
+          
+        <div class="other-langs" >
+           Other languages: 
+		  @foreach(  var lan in otherLangs   )
+		{
+			 @Html.Partial("_LanguageLinks",new string[] {"localization_languagePacks",lan,Model.String("RelativeFilePath"),Model.String("lang")}) 
+		 }	 
+         </div>
+
+}
+
+     @if(similarPosts !=null && similarPosts.Count()>0)
+{
+<div class="similar-posts" >
+                     Similar posts: 
+     @foreach(  var fil in similarPosts   )
+       {
+          
+                 
+                    <a class="btn btn-outline-info btn-xs" role="button" href="@Context.GetLink(fil)">
+                        @fil.WithoutSettings.String(BlogKeys.Title)
+                    </a>
+
+       }
+                    </div>
+
+}
+   
+
+@if(datazooFiles !=null && datazooFiles.Count()>0)
+{
+    <div class="util">
+    <ul class="list-inline">
+        <li class="list-inline-item">Utilizing those files: </li>
+       @foreach(  var fil in datazooFiles   )
+       {
+           var link = $"{datazooLink}/{fil}";
+            <li class="list-inline-item"> <u> <a href="@link"> @fil.Split('/').Last() </a> </u> </li>
+       }
+        </ul>
     </div>
-    @if (Tags != null)
+}
+
+
+
+ @if (Tags != null)
     {
         <div class="tags">
             @foreach (string tag in Tags.OrderBy(x => x))
@@ -29,4 +98,9 @@
             }
         </div>     
     } 
+
+
+
+
+<img src="@imgLink" alt="" >
 </div>

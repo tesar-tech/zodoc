@@ -4,36 +4,9 @@
 
 <div class="row">
     <div class="col-sm-8 right-border">
-        @{
-            bool first = true;
-            foreach(IDocument post in Model.DocumentList(Keys.PageDocuments))
-            {                
-                if (!first)
-                {
-                    <hr /> 
-                }
-                first = false;
-                string lead = post.String(BlogKeys.Lead);
-                <div class="post-preview">
-                    <a href="@Context.GetLink(post)">
-                        <h2 class="post-title">@post.WithoutSettings.String(BlogKeys.Title)</h2>
-                        @if(!string.IsNullOrWhiteSpace(lead))
-                        {
-                            <h3 class="post-subtitle">@lead</h3>
-                        }
-                    </a>
-                    <p class="post-meta">Posted on @(post.Get<DateTime>(BlogKeys.Published).ToLongDateString(Context))</p>
-                    @if(Context.Bool(BlogKeys.IndexFullPosts))
-                    {
-                        @Html.Raw(post.Content)
-                    }
-                    else
-                    {
-                        @Html.Raw(post.String(BlogKeys.Excerpt))
-                    }             
-                </div>       
-            }
-        }
+        <hr>
+            @Html.Partial("_PostList",  Model.DocumentList(Keys.PageDocuments))
+      
         <ul class="pager">
             <li class="previous">                
                 @if(Model.Bool(Keys.HasPreviousPage))

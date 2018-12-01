@@ -19,8 +19,8 @@
         @if (Context.String(BlogKeys.AtomPath) != null) {
         <link type="application/atom+xml" rel="alternate" title="@Context.String(BlogKeys.Title)" href="@Context.GetLink(Context.String(BlogKeys.AtomPath))" />
         }
-        <link rel="shortcut icon" href="@Context.GetLink("/favicon.ico")" type="image/x-icon">
-        <link rel="icon" href="@Context.GetLink("/favicon.ico")" type="image/x-icon">
+        <link rel="shortcut icon" href="@Context.GetLink("/assets/img/favicon.ico")" type="image/x-icon">
+        <link rel="icon" href="@Context.GetLink("/assets/img/favicon.ico")" type="image/x-icon">
 
         <link href="@Context.GetLink("/assets/css/bootstrap.min.css")" rel="stylesheet" />
         <link href="@Context.GetLink("/assets/css/highlight.css")" rel="stylesheet">
@@ -64,7 +64,7 @@
         <body>
                 
                 <!-- Navigation -->
-                <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+                <nav id="navigation_bar" class="navbar navbar-default navbar-custom navbar-fixed-top" >
                         <div class="container-fluid">
                                 <!-- Brand and toggle get grouped for better mobile display -->
                                 <div class="navbar-header page-scroll">
@@ -74,7 +74,10 @@
                                         <span class="icon-bar"></span>
                                         <span class="icon-bar"></span>
                                         </button>
-                                        <a class="navbar-brand" href="@Context.GetLink("/")">@Context.String(BlogKeys.Title)</a>
+                                        <a class="navbar-brand" href="@Context.GetLink("/")">
+                                        <img src=" @Context.GetLink("assets/img/logo.png")" width="20" height="20" style="float:left" class="d-inline-block align-top" alt="">
+                                        <text style="float:right" >@Context.String(BlogKeys.Title)</text> 
+                                        </a>
                                 </div>
                         
                                 <!-- Collect the nav links, forms, and other content for toggling -->
@@ -91,10 +94,10 @@
                 <!-- Page Header -->
                 @{
                         string backgroundImage = null;
-                        if(Model.String(BlogKeys.Image) != null)
+                        <!-- if(Model.String(BlogKeys.Image) != null)
                         {
                                 backgroundImage = $"background-image: url(\"{Model.String(BlogKeys.Image)}\")";
-                        }
+                        } -->
                 }
                 <header class="intro-header" id="intro-header" style="@backgroundImage">
                         <div class="container">
@@ -106,7 +109,8 @@
                                                 }
                                                 else
                                                 {
-                                                        @Html.Partial("_Header")                                            
+                                                        @Html.Partial("_Header")     
+
                                                 }
                                         </div>
                                 </div>
@@ -132,8 +136,7 @@
                 @Html.Partial("_Scripts")
                 <script>hljs.initHighlightingOnLoad();</script>
 
-                @if(Model.String(BlogKeys.Image) == null)
-                {
+             
                         <script type="text/javascript">                
                                 // Header background                        
                                 var colors = Please.make_color({
@@ -141,14 +144,13 @@
                                         saturation: .6
                                 });
                                 var t = new Trianglify({
-                                        x_gradient: colors,
+                                        x_gradient:colors,
                                         y_gradient: ["#FFFFFF"]
                                 });
-                                var header = document.getElementById("intro-header");
+                                var header = document.getElementById("navigation_bar");
                                 var pattern = t.generate(header.clientWidth, header.clientHeight);
                                 header.setAttribute('style', 'background-image: ' + pattern.dataUrl);                        
                         </script>
-                }
 
                 <script>
                         BackgroundCheck.init({
