@@ -5,6 +5,7 @@
 Settings[Keys.Host] = "tesar-tech.github.io/zodoc";
 Settings[BlogKeys.Title] = "ZODOC";
 Settings[BlogKeys.Description] = "Image processing and deep learning samples";
+Settings[Keys.LinkRoot] = "/zodoc";
 Settings[BlogKeys.IndexFullPosts] = false;
 Settings["Langs"] = new string[] { "en","cs","de"};
 Settings["datazooLink"] = "https://github.com/tesar-tech/zodoc/raw/master/datazoo";
