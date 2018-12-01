@@ -13,6 +13,9 @@
       padding:45px 0px 0;
     }
   }
+  .intro-header{
+    margin-bottom: 5px;
+  }
 
   .intro-header .post-heading h1 {
     font-size: 25px;

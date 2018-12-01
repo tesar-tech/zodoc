@@ -22,3 +22,8 @@ A_selective_blur = Abin_rgb.*A + (1-Abin_rgb).*A_gaussian; %nerozmazaná část 
 
 imshow(A_selective_blur)
 ```
+
+``` html
+<div>jo</div>
+
+```
