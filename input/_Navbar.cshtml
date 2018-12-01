@@ -1,23 +1,22 @@
 @{
     List<Tuple<string, string>> pages = Context
-        .Documents[Docs.Pages]
-        .Where(x => x.Bool(DocsKeys.ShowInNavbar, true))
+        .Documents[Blog.Pages]
+        .Where(x => x.Bool(BlogKeys.ShowInNavbar, true))
         .Where(x => x.FilePath(Keys.RelativeFilePath)?.FullPath?.StartsWith("index") == (bool?)false)
         .Select(x => Tuple.Create(x.WithoutSettings.String(Keys.Title), Context.GetLink(x)))
         .Where(x => !string.IsNullOrEmpty(x.Item1))
         .OrderBy(x => x.Item1)
         .ToList();
-    if(Documents[Docs.BlogPosts].Any())
+    if(Documents[Blog.Tags].Any())
     {
-        pages.Add(Tuple.Create(Context.String(DocsKeys.BlogTitle), Context.GetLink(Context.String(DocsKeys.BlogPath))));
+        pages.Insert(0, Tuple.Create("Tags", Context.GetLink("tags/index.html")));
     }
-    if(Documents[Docs.Api].Any())
+    if(Documents[Blog.BlogPosts].Any() && Context.Bool(BlogKeys.GenerateArchive))
     {
-        pages.Add(Tuple.Create("API", Context.GetLink(Context.DirectoryPath(DocsKeys.ApiPath))));
+        pages.Insert(0, Tuple.Create("Archive", Context.GetLink(Context.String(BlogKeys.PostsPath) + "/index.html")));
     }
     foreach(Tuple<string, string> page in pages)
     {
-        string active = Context.GetLink(Document).StartsWith(page.Item2) ? "active" : null;
-        <li class="@active"><a href="@(page.Item2)">@(page.Item1)</a></li>
+        <li><a href="@(page.Item2)">@(page.Item1)</a></li>
     }
 }
