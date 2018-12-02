@@ -2,7 +2,7 @@
   branches:
     only:
       - master
-      
+    
   environment:
     access_token:
       # EDIT the encrypted version of your GitHub access token
@@ -21,7 +21,7 @@
     - 7z x ..\Wyam\Wyam.zip -o..\Wyam -r
 
   build_script:
-    - ..\Wyam\wyam --output ..\output
+    - dotnet ..\Wyam\Wyam.dll --output ..\output
 
   on_success:
     # Switch branches to gh-pages, clean the folder, copy everything in from the Wyam output, and commit/push
@@ -65,7 +65,7 @@
     - 7z x ..\Wyam\Wyam.zip -o..\Wyam -r
 
   build_script:
-    - ..\Wyam\wyam --output ..\output
+    - dotnet ..\Wyam\wyam --output ..\output
 
   on_success:
     # Switch branches to gh-pages, clean the folder, copy everything in from the Wyam output, and commit/push
