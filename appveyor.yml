@@ -30,7 +30,7 @@ on_success:
   - git config --global user.email "jan@tesar.tech"
   - git config --global user.name "tesar-tech"
   - ps: Add-Content "$env:USERPROFILE\.git-credentials" "https://$($env:access_token):x-oauth-basic@github.com`n"
-  - git checkout test-pages
+  - git checkout pages-test
   - git rm -rf .
   - xcopy ..\output . /E
   # EDIT your domain name or remove if not using a custom domain
