@@ -1,0 +1,78 @@
+#r blog
+#t CleanBlog
+
+
+Settings[Keys.Host] = "zodoc.azurewebsites.net/";
+Settings[BlogKeys.Title] = "ZODOC";
+Settings[BlogKeys.Description] = "Image processing and deep learning samples";
+//Settings[Keys.LinkRoot] = "/zodoc";
+Settings[BlogKeys.IndexFullPosts] = false;
+Settings["Langs"] = new string[] { "en","cs","de"};
+Settings["datazooLink"] = "https://github.com/tesar-tech/zodoc/raw/master/datazoo";
+Settings["githubIssueLink"] = "https://github.com/tesar-tech/zodoc/issues/new";
+
+
+Pipelines["BlogPosts"].Append(
+  Meta(Keys.RelativeFilePath, (doc, ctx) =>
+  {
+    DateTime published = doc.Get<DateTime>(BlogKeys.Published);
+    //Console.WriteLine(doc.Get<String>("RelativeFileDir"));
+    string fileName = doc.Bool("FrontMatterPublished")
+      ? doc.FilePath(Keys.SourceFileName).ChangeExtension("html").FullPath
+      : doc.FilePath(Keys.SourceFileName).ChangeExtension("html").FullPath.Substring(11);//when date is specified in fileName
+    return $"{doc.Get<String>("RelativeFileDir")}/{fileName}";
+    }));
+
+Pipelines["BlogPosts"].Append(
+   Meta ("fileName", (doc,ctx) => { 
+     return doc.Get<String>("RelativeFilePath").Split('/').Last();}
+    ),
+   Meta ("lang",  (doc,ctx) => { //get language of post based on path
+       var splits = doc.Get<String>("RelativeFilePath").Split('/');
+       if(splits.Last().Split('.').First()=="index")//do not assign type to index pages
+         return "";
+      var langSplit =  splits.FirstOrDefault(x=>((string[])Settings["Langs"]).Contains(x)); //look for folder with lang string i.e. "en"                     
+        return langSplit??"" ;} 
+    )
+);
+Pipelines["BlogPosts"].Append(
+Meta("otherLanguagesList", (doc, ctx) => {//get other languages of document
+        if(doc.String("lang")=="")
+         return null;
+        var otherLangs =  ctx.Documents //search in other documents
+                        .Where(c => c.String("lang") != "" //where the language is set
+                            && c.String("lang") != doc.String("lang") //for different languages
+                            && c.String("filename")==doc.String("filename")) //same file name 
+                            //&& c.String("type")==doc.String("type")) //and same type
+                        .Select(x => x.String("lang")).Distinct();
+        return otherLangs.Count() ==0 ? null:otherLangs.ToList();//no other lang -> return null;
+}));
+
+Pipelines["BlogPosts"].Append(
+Meta("otherLanguagesList", (doc, ctx) => {//get other languages of document
+        if(doc.String("lang")=="")
+         return null;
+        var otherLangs =  ctx.Documents //search in other documents
+                        .Where(c => c.String("lang") != "" //where the language is set
+                            && c.String("lang") != doc.String("lang") //for different languages
+                            && c.String("filename")==doc.String("filename")) //same file name 
+                            //&& c.String("type")==doc.String("type")) //and same type
+                        .Select(x => x.String("lang")).Distinct();
+        return otherLangs.Count() ==0 ? null:otherLangs.ToList();//no other lang -> return null;
+}));
+
+Pipelines["BlogPosts"].Append(
+Meta("similarPosts", (doc, ctx) => {//get similar posts based on tags
+        if(doc.Get<string[]>(BlogKeys.Tags) ==null)
+         return null;
+         //search all docs
+        var docsWithSameTags = ctx.Documents.Where(c=> c.String("filename")!=doc.String("filename") //for other documents
+              && c.Get<string[]>(BlogKeys.Tags) != null)//where tags are presented
+              .Select(x=>(x,x.Get<string[]>(BlogKeys.Tags).Intersect(doc.Get<string[]>(BlogKeys.Tags)).Count() ))//get tuple: (document, numOfSameTags)
+              .Where(x=>x.Item2>0)//remove docs with 0 same tags
+              .OrderByDescending(x=>x.Item2).Take(5)//take five with topmost num of similar tags
+              .Select(x=>x.Item1);// get documents from tuples
+         return docsWithSameTags;
+        
+}));
+
