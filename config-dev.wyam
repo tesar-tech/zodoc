@@ -1,14 +1,16 @@
 #r blog
 #t CleanBlog
 
+//these 3 lines are different from config.wyam
+Settings[Keys.Host] = "zodoc.azurewebsites.net";
+Settings["datazooLink"] = "https://github.com/tesar-tech/zodoc/raw/develop/datazoo";
+//Settings[Keys.LinkRoot] = "/zodoc";
+//
 
-Settings[Keys.Host] = "zodoc.azurewebsites.net/";
 Settings[BlogKeys.Title] = "ZODOC";
 Settings[BlogKeys.Description] = "Image processing and deep learning samples";
-//Settings[Keys.LinkRoot] = "/zodoc";
 Settings[BlogKeys.IndexFullPosts] = false;
 Settings["Langs"] = new string[] { "en","cs","de"};
-Settings["datazooLink"] = "https://github.com/tesar-tech/zodoc/raw/master/datazoo";
 Settings["githubIssueLink"] = "https://github.com/tesar-tech/zodoc/issues/new";
 
 
