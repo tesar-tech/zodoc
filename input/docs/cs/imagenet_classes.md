@@ -12,7 +12,6 @@ result = strcat(ClassIndexes,repmat(":",1000, 1),str); % přiřadit do proměnn�
 disp(result) %Zobrazit výsledky
 ```
 #Výsledky 
-
 1:Afghan hound
 2:African chameleon
 3:African crocodile
