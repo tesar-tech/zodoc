@@ -25,6 +25,11 @@ Pipelines["BlogPosts"].Append(
     return $"{doc.Get<String>("RelativeFileDir")}/{fileName}";
     }));
 
+Pipelines.InsertAfter("Pages","ImagesIntro",//insert somewhere before BlogPosts
+  ReadFiles("posts/imgs_intro/*") // get all files from folder imgs_intro
+    .Where(x => new[] {  ".jpg", ".jpeg", ".gif", ".png"}.Contains(x.Path.Extension))// filter by extension
+);
+
 Pipelines["BlogPosts"].Append(
    Meta ("fileName", (doc,ctx) => { 
      return doc.Get<String>("RelativeFilePath").Split('/').Last();}
@@ -35,8 +40,26 @@ Pipelines["BlogPosts"].Append(
          return "";
       var langSplit =  splits.FirstOrDefault(x=>((string[])Settings["Langs"]).Contains(x)); //look for folder with lang string i.e. "en"                     
         return langSplit??"" ;} 
-    )
+    ),
+    Meta ("Image",  (doc,ctx) => {
+         var imgLink = doc.String(BlogKeys.Image);
+         if(String.IsNullOrEmpty(imgLink))
+         {
+            var imageWithSameNameAsPost =  ctx.Documents.FromPipeline("ImagesIntro") //get images from pipeline
+                    .Where(x=> x.Source.FileNameWithoutExtension.ToString() == doc.Source.FileNameWithoutExtension.ToString()) //convert to str for comparasion
+                    .FirstOrDefault();//just first one 
+            var imgsFileName = "no_image.png";//default for the case when image is not presented
+            if(imageWithSameNameAsPost!= null)//image found
+                imgsFileName = imageWithSameNameAsPost.Source.FileName.ToString();//get its filename
+             return $"../imgs_intro/{imgsFileName}";
+         }
+         else
+            return imgLink;//do nothing with already set image
+     })
 );
+
+
+
 Pipelines["BlogPosts"].Append(
 Meta("otherLanguagesList", (doc, ctx) => {//get other languages of document
         if(doc.String("lang")=="")

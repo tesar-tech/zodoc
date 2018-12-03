@@ -1,7 +1,6 @@
 title: Selective blur
 lead: How to blur background only
 Published: 11/03/2018
-Image: ../media/2018-11-03-09-44-29.png
 Tags:
   - filters
   - gaussian

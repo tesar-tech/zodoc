@@ -1,7 +1,6 @@
 title: Selektivní rozmazání
 lead: Jak rozmazat pouze pozadí obrázku
 Published: 11/03/2018
-Image: ../media/2018-11-03-09-44-29.png
 Tags:
   - filters
   - gaussian
@@ -21,9 +20,4 @@ Abin_rgb = repmat(Abin,[1 1 3]);%nareplikování binárního obrazu do 3 rozměr
 A_selective_blur = Abin_rgb.*A + (1-Abin_rgb).*A_gaussian; %nerozmazaná část + rozmazaná část
 
 imshow(A_selective_blur)
-```
-
-``` html
-<div>jo</div>
-
 ```

@@ -5,14 +5,9 @@
     {
         string lead = post.String(BlogKeys.Lead);
 
-                bool isImage = !string.IsNullOrWhiteSpace( post.String(BlogKeys.Image));
                 string imageLink = "";
                  var Tags = post.Get<string[]>(BlogKeys.Tags);
-                if(isImage)
-                {
-                string image = post.String(BlogKeys.Image).Split('/').Last();
-                imageLink = Context.GetLink( "posts/media/"+image);
-                }
+                imageLink = "posts" + Context.GetLink(post.String(BlogKeys.Image));
 
                 <div class="post-preview">
                     <a href="@Context.GetLink(post)">
@@ -38,9 +33,8 @@
                    
                     <tr>
                     
-                    <td> @if(isImage){
+                    <td> 
                      <img src="@imageLink" style="float:left;width:128px;height:128px;object-fit: contain;">
-                    }
                     </td>
                     <td>
                     @if(!string.IsNullOrWhiteSpace(lead))
