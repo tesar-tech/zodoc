@@ -1,6 +1,6 @@
 title: Increase Image Resolution with CNN 
 lead: Testing Very-Deep Super-Resolution (VDSR) neural network.
-Published: 12/11/2018
+Published: 2018-10-13
 Tags: [super-resolution, vdsr]
 datazooFiles: imgs/kytka256.jpg
 ---
