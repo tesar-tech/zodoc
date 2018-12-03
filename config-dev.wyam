@@ -92,6 +92,7 @@ Meta("similarPosts", (doc, ctx) => {//get similar posts based on tags
          return null;
          //search all docs
         var docsWithSameTags = ctx.Documents.Where(c=> c.String("filename")!=doc.String("filename") //for other documents
+              && c.String("lang") == doc.String("lang") //just tags for same language
               && c.Get<string[]>(BlogKeys.Tags) != null)//where tags are presented
               .Select(x=>(x,x.Get<string[]>(BlogKeys.Tags).Intersect(doc.Get<string[]>(BlogKeys.Tags)).Count() ))//get tuple: (document, numOfSameTags)
               .Where(x=>x.Item2>0)//remove docs with 0 same tags
