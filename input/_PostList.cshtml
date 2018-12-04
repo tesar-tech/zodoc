@@ -7,7 +7,7 @@
 
                 string imageLink = "";
                  var Tags = post.Get<string[]>(BlogKeys.Tags);
-                imageLink = "posts" + Context.GetLink(post.String(BlogKeys.Image));
+                imageLink = "/posts" + Context.GetLink(post.String(BlogKeys.Image));
 
                 <div class="post-preview">
                     <a href="@Context.GetLink(post)">
@@ -15,20 +15,8 @@
                        
                     </a>
 
-
-    @if (Tags != null)
-    {
-        <div class="tags">
-            @foreach (string tag in Tags.OrderBy(x => x))
-            {
-                IDocument tagDocument = Documents[Blog.Tags].FirstOrDefault(x => x.String(BlogKeys.Tag) == tag && x.Get<int>(Keys.CurrentPage) == 1);
-                if(tagDocument != null)
-                {                
-                    <a role="button" href="@Context.GetLink(tagDocument)" class="btn btn-default btn-xs">@tag</a>
-                }
-            }
-        </div>     
-    } 
+   @Html.Partial("_TagsList",Tags)
+    
                 <table >
                    
                     <tr>

@@ -1,12 +1,9 @@
 title: Selective blur
 lead: How to blur background only
 Published: 11/03/2018
-Tags:
-  - filters
-  - gaussian
-  - blur
-datazooFiles:
-  - imgs/kytka256.jpg
+Tags: [matlab, filters, gaussian, blur]
+datazooFiles: imgs/kytka256.jpg
+prerequisites: Matlab
 ---
   
 Blur only part that is not the flower itself. In fact, the entire image is blurred, and foreground is replaced by the original image.

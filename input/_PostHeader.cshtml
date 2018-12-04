@@ -8,6 +8,7 @@
     var datazooFiles = Model.Get<string[]>("datazooFiles");
         var imgLink = Model.String(BlogKeys.Image); 
         var similarPosts = Model.Get<List<IDocument>>("similarPosts");
+            var prerequisites = Model.Get<string[]>("prerequisites");
 }
 
 <div class="post-heading">
@@ -83,24 +84,21 @@
     </div>
 }
 
+@if(prerequisites !=null && prerequisites.Count()>0)
+{
+    <div class="util">
+    <ul class="list-inline">
+        <li class="list-inline-item">Prerequisites: </li>
+       @foreach(  var prere in prerequisites   )
+       {
+           var link = $"/prerequisites#{@prere.ToLower().Replace(' ','-')}";//to match the #id
+            <li class="list-inline-item"> <u> <a href="@link">@prere  </a> </u> </li>
+       }
+        </ul>
+    </div>
+}
 
-
- @if (Tags != null)
-    {
-        <div class="tags">
-            @foreach (string tag in Tags.OrderBy(x => x))
-            {
-                IDocument tagDocument = Documents[Blog.Tags].FirstOrDefault(x => x.String(BlogKeys.Tag) == tag && x.Get<int>(Keys.CurrentPage) == 1);
-                if(tagDocument != null)
-                {                
-                    <a role="button" href="@Context.GetLink(tagDocument)" class="btn btn-default btn-xs">@tag</a>
-                }
-            }
-        </div>     
-    } 
-
-
-
-
+@Html.Partial("_TagsList",Tags)
+          
 <img src="@imgLink" alt="" >
 </div>

@@ -2,10 +2,10 @@
   padding: 45px 0 0px;
   color: black;
 }
-.intro-header .post-heading a
+/* .intro-header .post-heading a
 {
     color:rgb(36, 36, 36);
-}
+} */
 
 @media only screen and (min-width: 768px) {
   
@@ -82,6 +82,10 @@
     padding: 50px 0 0px;
   color: gray;
   text-align: center;
+  }
+
+  .btn-technology{
+    color:#2c88d9;
   }
   
   .en-flag

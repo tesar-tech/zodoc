@@ -1,8 +1,9 @@
 title: Increase Image Resolution with CNN 
 lead: Testing Very-Deep Super-Resolution (VDSR) neural network.
 Published: 2018-10-13
-Tags: [super-resolution, vdsr]
+Tags: [matlab, super-resolution, vdsr]
 datazooFiles: imgs/kytka256.jpg
+prerequisites: [Matlab, Alexnet matlab add-on]
 ---
 *real results are slightly different beacause of gif conversion*
 
