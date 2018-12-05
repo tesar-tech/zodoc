@@ -1,7 +1,6 @@
 @model IEnumerable<string>
 @{
 var Tags = Model;
-//var Documents = Model.Item2;
 
 }
 
@@ -16,16 +15,8 @@ var Tags = Model;
                 IDocument tagDocument = Documents[Blog.Tags].FirstOrDefault(x => x.String(BlogKeys.Tag) == tag && x.Get<int>(Keys.CurrentPage) == 1);
                 if(tagDocument != null)
                 {      
-                    if(isFirst)
-                    {
-
-                        isFirst= false;
-                          <a role="button" href="@Context.GetLink(tagDocument)" class="btn btn-default btn-xs btn-technology">@tag</a>
-                    } 
-                    else
-                    {
-                    <a role="button" href="@Context.GetLink(tagDocument)" class="btn btn-default btn-xs">@tag</a>
-                    }
+                string buttonTechnology = isFirst ? "btn-technology" : "";isFirst = false;
+                <a role="button" href="@Context.GetLink(tagDocument)" class="btn btn-default btn-xs @buttonTechnology">@tag</a>
                 }
             }
         </div>     
