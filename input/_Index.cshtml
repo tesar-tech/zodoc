@@ -5,7 +5,8 @@
 <div class="row">
     <div class="col-sm-8 right-border">
         <hr>
-            @Html.Partial("_PostList",  Model.DocumentList(Keys.PageDocuments))
+            <!-- posts on the index page are just in english -->
+            @Html.Partial("_PostList",  Model.DocumentList(Keys.PageDocuments).Where(x=>x.String("lang") =="en"))
       
         <ul class="pager">
             <li class="previous">                
@@ -34,8 +35,8 @@
                     .OrderByDescending(x => x.Get<int>(Keys.TotalItems)).Take(10))
                 {
                     string tag = tagDocument.String(BlogKeys.Tag);
-                    string postCount = tagDocument.String(Keys.TotalItems);
-                    <a role="button" href="@Context.GetLink(tagDocument)" class="btn btn-default btn-sm"> @tag (@postCount)</a>
+                    var postCountENOnly = tagDocument.Get<IEnumerable<IDocument>>(Keys.PageDocuments).Where(x=>x.String("lang") =="en").Count();
+                    <a role="button" href="@Context.GetLink(tagDocument)" class="btn btn-default btn-sm"> @tag (@postCountENOnly)</a>
                 }
             </div>
             <ul class="pager">

@@ -3,7 +3,7 @@ Title: All Tags
 <div class="container-sm-height">
     <div class="row row-sm-height">
         <div class="col-sm-8 right-border col-sm-height">
-            @Html.Partial("_PostList", Model.DocumentList(Keys.PageDocuments).OrderByDescending(x => x.Get<DateTime>(BlogKeys.Published)))
+            @Html.Partial("_PostList", Model.DocumentList(Keys.PageDocuments).OrderByDescending(x => x.Get<DateTime>(BlogKeys.Published)).Where(x=>x.String("lang") =="en"))
 
             <nav>
                 <ul class="pager">
@@ -30,9 +30,9 @@ Title: All Tags
                 .OrderByDescending(x => x.Get<int>(Keys.TotalItems)))
             {
                 string tagName = tagDocument.String(BlogKeys.Tag);
-                string postCount = tagDocument.String(Keys.TotalItems);
+                var postCountENOnly = tagDocument.Get<IEnumerable<IDocument>>(Keys.PageDocuments).Where(x=>x.String("lang") =="en").Count();
                 string buttonStyle = tagName == Model.String(BlogKeys.Tag) ? "btn-primary" : "btn-default";
-                <a role="button" href="@Context.GetLink(tagDocument)" class="btn @buttonStyle btn-xs">@tagName (@postCount)</a>
+                <a role="button" href="@Context.GetLink(tagDocument)" class="btn @buttonStyle btn-xs">@tagName (@postCountENOnly)</a>
             }
         </div>
     </div>

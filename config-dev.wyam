@@ -2,7 +2,7 @@
 #t CleanBlog
 
 //these 3 lines are different from config.wyam
-Settings[Keys.Host] = "zodoc.azurewebsites.net";
+Settings[Keys.Host] = "zodoc.netlify.com";
 Settings["datazooLink"] = "https://github.com/tesar-tech/zodoc/raw/develop/datazoo";
 //Settings[Keys.LinkRoot] = "/zodoc";
 //
