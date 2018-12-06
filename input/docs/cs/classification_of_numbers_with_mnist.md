@@ -1,42 +1,26 @@
-
-Title: Klasifikace čísla pomocí natrénované sítě 
--
----
-
- Description: MNIST je velká databáze ručně psaných číslic, které se použivají pro školení různých systémů ve zpracování obrazu a taktéž ke školení a testování v oblasti strojového učení.
- 
+Title:Databáze MNIST
+Description: Klasifikace čísla pomocí natrénované sítě 
 ---
 >Tento dokument pracuje s obrázkem:
-[Obrázek číslice](.../media/trojka.png) v proměnné `img3`
-
-  > Jelikož databáze MNIST má dannou normalizaci pro vzhled obrázku, tak musíme upravit obr. do požadované formy. 1, Obr. musí být černobílý o veliskoti (28x28) a tloušce čáry (2pixely). 2, Číslo musí být zarovnáno na střed. 3, Obr. musí být šedotónový.
-  Viz. (trojka.png)
-  #
+[Obrázek číslice](.../media/2018-11-28-16-41-21.png) v proměnné `img3`
 
 
+MNIST je velká databáze ručně psaných číslic, které se použivají pro školení různých systémů ve zpracování obrazu a taktéž ke školení a testování v oblasti strojového učení.
+
+   Testovaný obraz musí být černobílý o veliskoti (28x28) a tloušce čáry (2pixely), Číslo musí být zarovnáno na střed, obr. musí být šedotónový.
+![](../media/2018_12_03_12_00_30.png)
+  
 ``` matlab
-%Import MNIST cnn
-mnist = importONNXNetwork('MNIST_99.29.onnx','OutputLayerType','classification','ClassNames',{'0','1','2','3','4','5','6','7','8','9'}); 
+mnist = importONNXNetwork('MNIST_99.29.onnx','OutputLayerType','classification','ClassNames',{'0','1','2','3','4','5','6','7','8','9'}); %Import MNIST cnn
 
-%Načtení obrázku
-img3 = imread('trojka.png');
+img3 = imread('trojka.png');%Načtení obrázku
 
+img1 = imresize(img3,[28 28]);%Změna velikosti (28x28)
 
-%Změna velikosti (28x28)
-img1 = imresize(img3,[28 28]);
+trojkabw = rgb2gray(img1);%Konverze do šedotónu
 
-%Konverze do šedotónu
-trojkabw = rgb2gray(img1);
+trojka = imcomplement(trojkabw);%Doplnění šedotónu do originálu
 
-
-
-%Doplnění šedotónu do originálu
-trojka = imcomplement(trojkabw);
-
-
-
-%Klasifikace obrázku za pomocí CPU.(Využiti CPU pro trenování se zdá být rychlejší varianta, než GPU)**
 [label, score] = classify(mnist,trojka,'ExecutionEnvironment','cpu');
-disp(label);
-
+disp(label);%Po exportování a importování modelu, GPU hlásí chybu. Proto pro klasifikaci využijeme CPU
 ``` 
