@@ -1,15 +1,18 @@
 #r blog
 #t CleanBlog
 
+//these 3 lines are different from config.wyam
+Settings[Keys.Host] = "zodoc.azurewebsites.net";
+Settings["datazooLink"] = "https://github.com/tesar-tech/zodoc/raw/develop/datazoo";
+//Settings[Keys.LinkRoot] = "/zodoc";
+//
 
-Settings[Keys.Host] = "tesar-tech.github.io/zodoc";
 Settings[BlogKeys.Title] = "ZODOC";
 Settings[BlogKeys.Description] = "Image processing and deep learning samples";
-Settings[Keys.LinkRoot] = "/zodoc";
 Settings[BlogKeys.IndexFullPosts] = false;
 Settings["Langs"] = new string[] { "en","cs","de"};
-Settings["datazooLink"] = "https://github.com/tesar-tech/zodoc/raw/master/datazoo";
 Settings["githubIssueLink"] = "https://github.com/tesar-tech/zodoc/issues/new";
+Settings[BlogKeys.IndexPageSize] = 20;
 
 
 Pipelines["BlogPosts"].Append(
@@ -23,6 +26,11 @@ Pipelines["BlogPosts"].Append(
     return $"{doc.Get<String>("RelativeFileDir")}/{fileName}";
     }));
 
+Pipelines.InsertAfter("Pages","ImagesIntro",//insert somewhere before BlogPosts
+  ReadFiles("posts/imgs_intro/*") // get all files from folder imgs_intro
+    .Where(x => new[] {  ".jpg", ".jpeg", ".gif", ".png"}.Contains(x.Path.Extension))// filter by extension
+);
+
 Pipelines["BlogPosts"].Append(
    Meta ("fileName", (doc,ctx) => { 
      return doc.Get<String>("RelativeFilePath").Split('/').Last();}
@@ -33,8 +41,26 @@ Pipelines["BlogPosts"].Append(
          return "";
       var langSplit =  splits.FirstOrDefault(x=>((string[])Settings["Langs"]).Contains(x)); //look for folder with lang string i.e. "en"                     
         return langSplit??"" ;} 
-    )
+    ),
+    Meta ("Image",  (doc,ctx) => {
+         var imgLink = doc.String(BlogKeys.Image);
+         if(String.IsNullOrEmpty(imgLink))
+         {
+            var imageWithSameNameAsPost =  ctx.Documents.FromPipeline("ImagesIntro") //get images from pipeline
+                    .Where(x=> x.Source.FileNameWithoutExtension.ToString() == doc.Source.FileNameWithoutExtension.ToString()) //convert to str for comparasion
+                    .FirstOrDefault();//just first one 
+            var imgsFileName = "no_image.png";//default for the case when image is not presented
+            if(imageWithSameNameAsPost!= null)//image found
+                imgsFileName = imageWithSameNameAsPost.Source.FileName.ToString();//get its filename
+             return $"../imgs_intro/{imgsFileName}";
+         }
+         else
+            return imgLink;//do nothing with already set image
+     })
 );
+
+
+
 Pipelines["BlogPosts"].Append(
 Meta("otherLanguagesList", (doc, ctx) => {//get other languages of document
         if(doc.String("lang")=="")
@@ -67,6 +93,7 @@ Meta("similarPosts", (doc, ctx) => {//get similar posts based on tags
          return null;
          //search all docs
         var docsWithSameTags = ctx.Documents.Where(c=> c.String("filename")!=doc.String("filename") //for other documents
+              && c.String("lang") == doc.String("lang") //just tags for same language
               && c.Get<string[]>(BlogKeys.Tags) != null)//where tags are presented
               .Select(x=>(x,x.Get<string[]>(BlogKeys.Tags).Intersect(doc.Get<string[]>(BlogKeys.Tags)).Count() ))//get tuple: (document, numOfSameTags)
               .Where(x=>x.Item2>0)//remove docs with 0 same tags
