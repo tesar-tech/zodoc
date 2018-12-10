@@ -1,9 +1,9 @@
-title: Increase Image Resolution with CNN 
+title: Zvýšení rozlišení obrazu pomocí konvoluční neuronové sítě
 lead: Testování neuronové sítě VDSR.
 Published: 2018-10-13
 Tags: [matlab, super-resolution, vdsr]
 datazooFiles: imgs/kytka256.jpg
-prerequisites: [Matlab, Alexnet matlab add-on]
+prerequisites: Matlab
 ---
 *skutečné výsledky jsou mírně odlišné kvůli konverzi na gif*
 

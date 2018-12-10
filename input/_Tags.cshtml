@@ -8,8 +8,8 @@ Title: All Tags
                 .OrderByDescending(x => x.Get<int>(Keys.TotalItems)))
             {
                 string tag = tagDocument.String(BlogKeys.Tag);
-                string postCount = tagDocument.String(Keys.TotalItems);
-                <a role="button" href="@Context.GetLink(tagDocument)" class="btn btn-default btn-sm"> @tag (@postCount)</a>
+                var postCountENOnly = tagDocument.Get<IEnumerable<IDocument>>(Keys.PageDocuments).Where(x=>x.String("lang") =="en").Count();
+                <a role="button" href="@Context.GetLink(tagDocument)" class="btn btn-default btn-sm"> @tag (@postCountENOnly)</a>
             }
         </div>
     </div>

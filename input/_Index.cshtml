@@ -32,7 +32,7 @@
             <div>
                 @foreach (IDocument tagDocument in Documents[Blog.Tags]
                     .GroupBy(x => x.String(BlogKeys.Tag)).Select(x => x.Where(p => p.Get<int>(Keys.CurrentPage) == 1).First())
-                    .OrderByDescending(x => x.Get<int>(Keys.TotalItems)).Take(10))
+                    .OrderByDescending(x => x.Get<int>(Keys.TotalItems)).Take(30))
                 {
                     string tag = tagDocument.String(BlogKeys.Tag);
                     var postCountENOnly = tagDocument.Get<IEnumerable<IDocument>>(Keys.PageDocuments).Where(x=>x.String("lang") =="en").Count();
