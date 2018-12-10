@@ -9,6 +9,7 @@
         var imgLink = Model.String(BlogKeys.Image); 
         var similarPosts = Model.Get<List<IDocument>>("similarPosts");
             var prerequisites = Model.Get<string[]>("prerequisites");
+                
 }
 
 <div class="post-heading">
@@ -19,7 +20,8 @@
     @if(!string.IsNullOrWhiteSpace(Lead))
     {
         <h2 class="subheading">@Lead</h2>
-    }            
+    }        
+
     <!-- <div class="meta">        
         @if (Published != default(DateTime))
         {

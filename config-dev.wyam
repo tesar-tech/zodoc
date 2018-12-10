@@ -18,6 +18,7 @@ Settings[BlogKeys.IndexPageSize] = 20;
 Pipelines["BlogPosts"].Append(
   Meta(Keys.RelativeFilePath, (doc, ctx) =>
   {
+      //Console.WriteLine(doc.Source.FullPath);
     DateTime published = doc.Get<DateTime>(BlogKeys.Published);
     //Console.WriteLine(doc.Get<String>("RelativeFileDir"));
     string fileName = doc.Bool("FrontMatterPublished")
