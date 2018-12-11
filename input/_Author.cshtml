@@ -1,7 +1,7 @@
 
 <div class="container-sm-height">
     <div class="row row-sm-height">
-        <div class="col-sm-8 right-border col-sm-height">
+        <div class="col-sm-12 col-sm-height">
             @Html.Partial("_PostList", Model.DocumentList(Keys.PageDocuments).OrderByDescending(x => x.Get<DateTime>(BlogKeys.Published)))
 
             <nav>
@@ -22,7 +22,5 @@
             </nav>
             <hr class="visible-xs-block" />
         </div>
-		
-       
     </div>
 </div>

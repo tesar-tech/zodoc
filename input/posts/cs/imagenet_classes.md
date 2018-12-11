@@ -3,6 +3,7 @@ lead: Zobrazení 1000 tříd do kterých klasifikuje například konvoluční ne
 Published: 2018-12-02
 Tags: [matlab, ImageNet,alexnet, classes]
 prerequisites: [Matlab, Alexnet matlab add-on]
+Authors: tesar-tech
 ---
 
 ```matlab

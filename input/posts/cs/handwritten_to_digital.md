@@ -4,6 +4,7 @@ published: 2018-11-14
 Tags: [matlab,binary image, classification, handwritten, digits]
 datazooFiles: imgs/cisla_ver.jpg,
 prerequisites: Matlab
+Authors: tesar-tech
 ---
 
 Zkonvertovat obrázek do binární reprezentace, kde jednotlivá čísla budou reprezentována bílou barvou a pozadí černou. Pro zvýraznění čísel k budoucí klasifikaci natrénovanou neuronovou sítí bude využita operace z matematické morfologie nazvaná dilatace, která je v MATLABu implementována pomocí funkce `imdilate`.

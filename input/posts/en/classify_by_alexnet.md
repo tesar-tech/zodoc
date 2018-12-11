@@ -4,6 +4,7 @@ Published: 2018-11-15
 Tags: [matlab, alexnet, classification]
 datazooFiles: imgs/kytka256.jpg
 prerequisites: [Matlab, Alexnet matlab add-on]
+Authors: tesar-tech
 ---
 
 Tested image is classified as "daisy", which is not correct because that yellow bloom is Jerusalem artichoke. However "Jerusalem artichoke" is not one of the alexnet classes (there are 1000 of them) and the daisy is fairly similar, so the classification is not completely wrong. Five classifications with topmost score are displayed in the table.

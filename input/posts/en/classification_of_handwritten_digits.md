@@ -4,6 +4,7 @@ Published: 2018-11-13
 Tags: [matlab, MNIST, classification, handwritten, digits]
 datazooFiles: [imgs/cisla_ver.jpg, models/MNIST_99.29.onnx ]
 prerequisites: Matlab
+Authors: tesar-tech
 ---
 
 Model in onnx format was trained on [MNIST](http://yann.lecun.com/exdb/mnist/) dataset with 99.29 % accuracy.

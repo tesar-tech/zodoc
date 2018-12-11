@@ -3,6 +3,7 @@ lead: From black&white image with different objects, select only round ones (cir
 Published: 2018-11-18
 Tags: [matlab, binary image, shapes]
 prerequisites: Matlab
+Authors: tesar-tech
 ---
 >This is a continuation from [previous post](filtering_binary_objects_with_kmeans) that is about processing of image with shapes.
 

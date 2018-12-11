@@ -4,6 +4,7 @@ Published: 2018-10-13
 Tags: [matlab, super-resolution, vdsr]
 datazooFiles: imgs/kytka256.jpg
 prerequisites: Matlab
+Authors: tesar-tech
 ---
 *real results are slightly different beacause of gif conversion*
 

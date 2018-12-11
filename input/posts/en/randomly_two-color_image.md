@@ -4,6 +4,7 @@ Published: 2018-11-12
 Tags: [matlab, binary image, RGB,random]
 datazooFiles: imgs/kytka256.jpg
 prerequisites: Matlab
+Authors: tesar-tech
 ---
 
 Converts image to binary representation and dyes it with two random colors. The code ensures that the colors and channel values will never be the same.

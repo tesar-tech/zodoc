@@ -2,8 +2,9 @@ title: Filtering binary objects with kmeans
 lead: Binarize image, fill holes, clear border and separate unwanted small objects with help of k-means algorithm
 Published: 2018-11-16
 Tags: [matlab, binary image, shapes, kmeans]
-datazooFiles:  tvary.png
+datazooFiles:  imgs/tvary.png
 prerequisites: Matlab
+Authors: tesar-tech
 ---
 
 The task is to process the image to binary representation containing only the wanted shapes like rectangle, square, triangle, circle or a star. K-means algorithm is used to determine the range for filtering the objects by their size.

@@ -3,6 +3,7 @@ lead: Displaying 1000 classes that are used to classification, e. g. by alexnet.
 Published: 2018-12-02
 Tags: [matlab, ImageNet,alexnet, classes]
 prerequisites: [Matlab, Alexnet matlab add-on]
+Authors: tesar-tech
 ---
 
 ```matlab

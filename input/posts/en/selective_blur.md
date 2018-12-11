@@ -4,6 +4,7 @@ Published: 11/03/2018
 Tags: [matlab, filters, gaussian, blur]
 datazooFiles: imgs/kytka256.jpg
 prerequisites: Matlab
+Authors: tesar-tech
 ---
   
 Blur only part that is not the flower itself. In fact, the entire image is blurred, and foreground is replaced by the original image.
