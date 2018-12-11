@@ -1,0 +1,18 @@
+Title: All Authors
+ShowInNavbar: true
+---
+<div class="container-sm-height">
+    <div class="row row-sm-height">		
+        <div class="col-sm-12 col-sm-height">            
+            @foreach (IDocument authorDocument in Documents["AuthorsArticles"].OrderByDescending(x => x.Get<int>(Keys.TotalItems)))
+                //.GroupBy(x => x.String(BlogKeys.Tag)).Select(x => x.Where(p => p.Get<int>(Keys.CurrentPage) == 1).First())
+                //.OrderByDescending(x => x.Get<int>(Keys.TotalItems)))
+            {
+                
+                var postCount = authorDocument.Get<IEnumerable<IDocument>>(BlogKeys.Posts).Count();
+                  string authorName = authorDocument.String(BlogKeys.Title);       
+                <a role="button" href="@Context.GetLink(authorDocument)" class="btn btn-default btn-sm"> @authorName (@postCount)</a>
+            }
+        </div>
+    </div>
+</div>

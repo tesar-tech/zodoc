@@ -11,6 +11,10 @@
     {
         pages.Insert(0, Tuple.Create("Tags", Context.GetLink("tags/index.html")));
     }
+    {
+        //error when checking documents count... so hope there always will be some author
+        pages.Insert(0, Tuple.Create("Authors", Context.GetLink("authors/index.html")));
+    }
     if(Documents[Blog.BlogPosts].Any() && Context.Bool(BlogKeys.GenerateArchive))
     {
         pages.Insert(0, Tuple.Create("Archive", Context.GetLink(Context.String(BlogKeys.PostsPath) + "/index.html")));

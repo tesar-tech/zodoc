@@ -4,6 +4,7 @@ published: 2018-11-04
 Tags: [matlab,edges, binary image, sharpness]
 datazooFiles: imgs/kytka256.jpg,
 prerequisites: Matlab
+Authors: tesar-tech
 ---
 
 ``` matlab
