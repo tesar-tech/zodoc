@@ -30,7 +30,7 @@ Settings[BlogKeys.Description] = "Image processing and deep learning samples";
 Settings[BlogKeys.IndexFullPosts] = false;
 Settings["Langs"] = new string[] { "en","cs","de"};
 Settings["githubIssueLink"] = "https://github.com/tesar-tech/zodoc/issues/new";
-Settings[BlogKeys.IndexPageSize] = 20;
+Settings[BlogKeys.IndexPageSize] = 100;
 
 
 
