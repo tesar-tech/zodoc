@@ -1,5 +1,5 @@
 title: 'Histogram "deequalization" - contrast decrease'
-lead: Lower contras of an image using simple math
+lead: Lower contrast of an image using simple math
 Published: 2018-11-10
 Tags: [matlab, histogram, contrast]
 datazooFiles: [imgs/kytka256.jpg ]
