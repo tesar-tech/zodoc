@@ -39,8 +39,8 @@
             $(document).ready(function(){//redirect to duckduckgo search.
                 $('#searchbtn').on('click', function(e){
                var searchText =   $('#searchInput').val();
-               var host = @{ <text>" @Context.String(Keys.Host) "</text> } ; 
-              window.location = "https://duckduckgo.com/?q="+searchText+"+site%3Ahttps%3A%2F%2F"+ host +"&ia=web";
+               var host = @{ <text>"@Context.String(Keys.Host)"</text> } ; 
+               window.location = "https://duckduckgo.com/?q="+searchText+"+site%3Ahttps%3A%2F%2F"+ host +"&ia=web";
            });
          });
         </script>
