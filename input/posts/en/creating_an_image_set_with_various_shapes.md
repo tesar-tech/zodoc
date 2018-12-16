@@ -6,6 +6,8 @@ prerequisites: [Matlab]
 Authors: tesar-tech
 ---
 
+Script creates folder `imgs_shapes` and subfolders with name of the shape. Shapes with different color, size and position are generated in those subploders. This image database will be used to train CNN for shapes classification.
+
 ``` matlab
 numImgInClass = 10;%number of imgs in every class
 imgSize= 227; %respect alexnet input size
