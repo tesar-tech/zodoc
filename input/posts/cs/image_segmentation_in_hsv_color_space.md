@@ -4,6 +4,7 @@ Published: 2018-11-28
 Tags: [matlab, segmentation, hsv]
 datazooFiles: imgs/kytka256.jpg
 prerequisites: Matlab
+Authors: [tesar-tech]
 ---
 
 Segmentace části obrázku v barevném modelu HSV, který popisuje barvy třemi parametry (odstín, sytost a jas). Prahy odstínu určují rozsah barev, který izolujeme. Pro segmentaci podle barev je vhodné použít model HSV, jelikož lépe rozlišuje mezi jednotlivými barvami.

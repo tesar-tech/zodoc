@@ -1,8 +1,26 @@
 #r blog
 #t CleanBlog
 
+
+using System.Globalization;
+using System.Text;
+
+public static class Helpers
+{
+    public static string NormalizeString(this string text)
+    {
+        if (string.IsNullOrWhiteSpace(text))
+            return text;
+
+        text = text.Normalize(NormalizationForm.FormD);
+        var chars = text.Where(c => CharUnicodeInfo.GetUnicodeCategory(c) != UnicodeCategory.NonSpacingMark).ToArray();
+        return new string(chars).Normalize(NormalizationForm.FormC).ToLower().Replace(' ', '-').Replace("#", "-sharp");
+    }
+}
+
+
 //these 3 lines are different from config.wyam
-Settings[Keys.Host] = "zodoc.azurewebsites.net";
+Settings[Keys.Host] = "zodoc.netlify.com";
 Settings["datazooLink"] = "https://github.com/tesar-tech/zodoc/raw/develop/datazoo";
 //Settings[Keys.LinkRoot] = "/zodoc";
 //
@@ -12,12 +30,16 @@ Settings[BlogKeys.Description] = "Image processing and deep learning samples";
 Settings[BlogKeys.IndexFullPosts] = false;
 Settings["Langs"] = new string[] { "en","cs","de"};
 Settings["githubIssueLink"] = "https://github.com/tesar-tech/zodoc/issues/new";
-Settings[BlogKeys.IndexPageSize] = 20;
+Settings[BlogKeys.IndexPageSize] = 100;
+
+
+
 
 
 Pipelines["BlogPosts"].Append(
   Meta(Keys.RelativeFilePath, (doc, ctx) =>
   {
+      //Console.WriteLine(doc.Source.FullPath);
     DateTime published = doc.Get<DateTime>(BlogKeys.Published);
     //Console.WriteLine(doc.Get<String>("RelativeFileDir"));
     string fileName = doc.Bool("FrontMatterPublished")
@@ -102,4 +124,33 @@ Meta("similarPosts", (doc, ctx) => {//get similar posts based on tags
          return docsWithSameTags;
         
 }));
+
+
+//taken form: https://github.com/Wyamio/Wyam/issues/615
+Pipelines.InsertAfter(nameof(Blog.Tags),
+    (IPipeline)new Wyam.Web.Pipelines.Archive(
+        "AuthorsArticles",
+        new Wyam.Web.Pipelines.ArchiveSettings
+        {
+            Pipelines = new string[] { Blog.BlogPosts },
+            TemplateFile = ctx => "_Author.cshtml",
+            Layout = "/_Layout.cshtml",
+            Group = (doc, ctx) => doc.List<string>("Authors"),
+            CaseInsensitiveGroupComparer = ctx => ctx.Bool(BlogKeys.CaseInsensitiveTags),
+            PageSize = ctx => ctx.Get(BlogKeys.IndexPageSize, int.MaxValue),
+            Title = (doc, ctx) => doc.String(Keys.GroupKey),
+            RelativePath = (doc, ctx) => $"authors/{(doc.String(Keys.GroupKey)).NormalizeString()}.html",
+            GroupDocumentsMetadataKey = BlogKeys.Posts,
+            GroupKeyMetadataKey = "Author"
+        }));
+
+Pipelines.InsertAfter("AuthorsArticles", "AuthorsIndex",
+    If(
+    ctx => ctx.Documents["AuthorsArticles"].Any(),
+    ReadFiles("_Authors.cshtml"),
+    FrontMatter(Yaml()),
+    Razor().IgnorePrefix(null).WithLayout("_Layout.cshtml"),
+    WriteFiles((doc, ctx) => "authors/index.html"))
+    .WithoutUnmatchedDocuments());
+
 

@@ -4,6 +4,7 @@ Published: 11/03/2018
 Tags: [matlab, filters, gaussian, blur]
 datazooFiles: imgs/kytka256.jpg
 prerequisites: Matlab
+Authors: tesar-tech
 ---
   
 Rozostřit pouze tu část, která není samotnou kytkou. Ve skutečnosti se rozostří celý obrázek a nerozmazaná místa se nahradí původním obrázkem.

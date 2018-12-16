@@ -3,7 +3,8 @@ lead: Testing Very-Deep Super-Resolution (VDSR) neural network.
 Published: 2018-10-13
 Tags: [matlab, super-resolution, vdsr]
 datazooFiles: imgs/kytka256.jpg
-prerequisites: [Matlab, Alexnet matlab add-on]
+prerequisites: Matlab
+Authors: tesar-tech
 ---
 *real results are slightly different beacause of gif conversion*
 

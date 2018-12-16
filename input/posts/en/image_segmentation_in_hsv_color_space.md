@@ -4,6 +4,7 @@ Published: 2018-11-28
 Tags: [matlab, segmentation, hsv]
 datazooFiles: imgs/kytka256.jpg
 prerequisites: Matlab
+Authors: tesar-tech
 ---
   
 Isolate part of an image in HSV color space (which describes colors by hue, saturation, and value). Hue thresholds define a range of hues to isolate. For color-based segmentation, it's easier to manipulate images in HSV color space, because the hue channel is the mix of all RGB channels and it better distinguishes between all individual colors.
