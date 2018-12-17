@@ -5,8 +5,22 @@
     var host = Context.String("Host");
     var relativeLink = Model.String("RelativeFilePath");
     var href = $"{ghissueLink}?title={title}&body=https://{host}/{relativeLink}%0A[Delete this and describe the issue!]";
+    var viewUrl = Context.String("BaseViewUrl") + Model.FilePath(Wyam.Web.WebKeys.EditFilePath) ;
+    var authors = Model.Get<List<string>>("authors");
+    var authorsText = authors.Count>1? "Authors:" :"Author:";
     
 }
+    <ul class="list-inline">
+  <li class="list-inline-item">@authorsText</li>
+  @foreach(var author in authors)
+  {
+<li class="list-inline-item"><a role="button" href="https://github.com/@author" class="btn btn-primary btn-xs">@author</a> </li>
+  }
+  
+ 
+</ul>
+      <div class="alert alert-info"> <a href="@viewUrl"> <i class="fa fa-file"></i> </a> Something is wrong? Let us know right <a href="@href"> here <i class="fa fa-github"></i> </a></div>
+ 
 
-<div class="alert alert-warning">Something is wrong? Let us know right <a href="@href"> here <i class="fa fa-github"></i> </a></div>
+
  
