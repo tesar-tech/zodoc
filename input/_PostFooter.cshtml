@@ -9,12 +9,14 @@
     var authors = Model.Get<List<string>>("authors");
     var authorsText = authors.Count>1? "Authors:" :"Author:";
     
+    
 }
     <ul class="list-inline">
   <li class="list-inline-item">@authorsText</li>
   @foreach(var author in authors)
   {
-<li class="list-inline-item"><a role="button" href="https://github.com/@author" class="btn btn-primary btn-xs">@author</a> </li>
+    var authorLink = Context.GetLink("authors/"+author);
+<li class="list-inline-item"><a role="button" href="@authorLink" class="btn btn-primary btn-xs">@author</a> </li>
   }
   
  
