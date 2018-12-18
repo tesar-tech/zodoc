@@ -40,41 +40,23 @@ for ii = 1:numImgInClass
     imwrite(RGBsquare,fullfile('imgs_shapes/rectangle',['square_' num2str(ii,'%03i') '.jpg']  ))
     
     %% create "random" triangle
-    %lenght of sides and angles must meet these conditions:
-    %angle size limit(because of narrow flat triangle), every side >20(because of too small triangles), triangle inequality theorem, length of every side ~=0
-    length_c = 0; length_a = 0; length_b = 0;angle_1=0; angle_2=0;
+    %coordinates and angles must meet these conditions:
+    %angle size >27 and circumference >155(because of too small,narrow or flat triangles), minimal two "x" and "y" coordinates must be different 
+    angle_1=0; angle_2=0; side_lenght=[1,1,1];point[0 0; 1 1]
     
-    while((angle_1<40 && angle_2<40) || angle_1<15 ||angle_2<15 ||(length_a<20 || length_b<20 || length_c<20) || (length_a+length_b<length_c || length_a+length_c<length_b || length_c+length_b<length_a) || (length_a==0 || length_b==0 || length_c==0))
-        for n=1:3
-            for j=1:2
-                pointRnd(n,j)=randi([40 190]); %coordinates of vertices
-            end
-        end
-        a=[pointRnd(2,1),pointRnd(2,2);pointRnd(3,1),pointRnd(3,2)]; %side "a" = starting point(vertex "b" ) and ending point(vertex "c")
-        b=[pointRnd(1,1),pointRnd(1,2);pointRnd(3,1),pointRnd(3,2)];
-        c=[pointRnd(1,1),pointRnd(1,2);pointRnd(2,1),pointRnd(2,2)];
-        %Euclidean distance between two points = length of one side
-        length_c = pdist(c,'euclidean'); 
-        length_b = pdist(b,'euclidean');
-        length_a = pdist(a,'euclidean');
-        %angle size
-        if length_c>length_a && length_c>length_b  
-            angle_1= (sin(length_b/length_c))*180/pi; 
-            angle_2= (sin(length_a/length_c))*180/pi;
-        elseif  length_b>length_a && length_b>length_c
-            angle_1=(sin(length_a/length_b))*180/pi;
-            angle_2=(sin(length_c/length_b))*180/pi;
-        elseif  length_a>length_b && length_a>length_c
-            angle_1=(sin(length_c/length_a))*180/pi;
-            angle_2=(sin(length_b/length_a))*180/pi;
-        end
-     end
-
+    while( angle_1<27 || angle_2<27 || sum(side_length)<155 || numel([point(1,1),point(2,1)]) == 1 && numel([point(1,2),point(2,2)]) == 1)
+        point=randi([40 190],[3 2]); %coordinates of vertices
+        side_length=pdist(point,'euclidean'); %Euclidean distance between two points = length of one side
+        side_lengthS=sort(side_length);
+        angle_1= (sin(side_lengthS(2)/side_lengthS(3)))*180/pi; %angle size
+        angle_2= (sin(side_lengthS(1)/side_lengthS(3)))*180/pi; 
+    end
+    
+    point_vector=[point(1,:),point(2,:),point(3,:)];
     colorRnd = rand([1 3]);
-    RGBtriangle= insertShape(Canvas,'FilledPolygon',[pointRnd(1,1) pointRnd(1,2) pointRnd(2,1) pointRnd(2,2) pointRnd(3,1) pointRnd(3,2)],'color','colorRnd');
+    RGBtriangle= insertShape(Canvas,'FilledPolygon',[point_vector],'color',colorRnd);
 
     imwrite(RGBtriangle,fullfile('imgs_shapes/triangle',['triangle_' num2str(ii,'%03i') '.jpg']  ))
-
     
     disp(['creating img db: ' num2str(ii/numImgInClass*100,'%.2f') ' %'])
 end
