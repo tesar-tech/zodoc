@@ -41,21 +41,21 @@ for ii = 1:numImgInClass
     
     %% create "random" triangle
     %coordinates and angles must meet these conditions:
-    %angle size >27 and circumference >155(because of too small,narrow or flat triangles), minimal two "x" and "y" coordinates must be different 
-    angle_1=0; angle_2=0; side_lenght=[1,1,1];point[0 0; 1 1]
+    %angle size >15 and every side >66(because of too small or narrow triangles), minimal two "x" and "y" coordinates must be different  
     
-    while( angle_1<27 || angle_2<27 || sum(side_length)<155 || numel([point(1,1),point(2,1)]) == 1 && numel([point(1,2),point(2,2)]) == 1)
-        point=randi([40 190],[3 2]); %coordinates of vertices
-        side_length=pdist(point,'euclidean'); %Euclidean distance between two points = length of one side
-        side_lengthS=sort(side_length);
-        angle_1= (sin(side_lengthS(2)/side_lengthS(3)))*180/pi; %angle size
-        angle_2= (sin(side_lengthS(1)/side_lengthS(3)))*180/pi; 
+    alpha=0; beta=0; gamma=0; sides=[1,1,1]; point=[0 0; 1 1];
+    while( rad2deg(alpha)<15 || beta<15 || gamma<15 || sum(sides(1,:)<66)>0  || numel(unique([point(1,1),point(2,1)]))==1 || numel(unique([point(1,2),point(2,2)]))==1 )
+        point=randi([40 190],[3 2]); 
+        sides=sort(pdist(point,'euclidean')); %Euclidean distance between 2 points = side length
+        alpha=acos((sides(2).^2+sides(3).^2-sides(1).^2)/(2*sides(2) * sides(3))); %Law of Cosines -> alpha angle in radians
+        beta=rad2deg(asin((sides(2)/sides(1))*sin(alpha))); %Law of Sines -> beta angle in degrees
+        gamma=180-beta-(rad2deg(alpha)); % gamma angle
     end
     
     point_vector=[point(1,:),point(2,:),point(3,:)];
     colorRnd = rand([1 3]);
-    RGBtriangle= insertShape(Canvas,'FilledPolygon',[point_vector],'color',colorRnd);
-
+    RGBtriangle= insertShape(Canvas,'FilledPolygon',point_vector,'color',colorRnd);
+    
     imwrite(RGBtriangle,fullfile('imgs_shapes/triangle',['triangle_' num2str(ii,'%03i') '.jpg']  ))
     
     disp(['creating img db: ' num2str(ii/numImgInClass*100,'%.2f') ' %'])
