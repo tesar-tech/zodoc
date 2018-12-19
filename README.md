@@ -1,5 +1,6 @@
 # ZODOC
 
+[New version](https://zodoc.netlify.com) (from develop branch)
 Source code of [zodoc](https://tesar-tech.github.io/zodoc/docs/)
 
 [![Build status](https://ci.appveyor.com/api/projects/status/r4w78a1eurq9ktnk?svg=true)](https://ci.appveyor.com/project/tesar-tech/zodoc)
@@ -12,7 +13,7 @@ Source code of [zodoc](https://tesar-tech.github.io/zodoc/docs/)
 
 ### 1. Obecné
 
-1. Soubory nazývejte výstižnými názvy v AJ (podle stejného názvu souboru se párují jazykové mutace).
+1. Soubory nazývejte výstižnými názvy v AJ (podle stejného názvu souboru se párují jazykové mutace). Názvy souborů malými písmeny, jako oddělovač využijte podtržítko. Např.: `image_segmentation.md`
 2. Používejte infinitiv namísto imperativu ("Načíst a zobrazit obrázek" vs "Načtěte a zobrazte obrázek")
 3. V případě tvorby dokumentů do sekce `Exercises` jsou konvence lehce jiné. Vysvětlené jsou v ukázkovém cvičení.
 4. Využívejte metadata `description`

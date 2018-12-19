@@ -9,7 +9,8 @@ The code runs in a loop. Firstly, select region with a single digit. This region
 
 ``` matlab
 %% import MNIST cnn
-net = importONNXNetwork('MNIST_99.29.onnx','OutputLayerType', 'classification','classnames',{'0', '1', '2', '3', '4', '5' ,'6', '7', '8', '9'});
+net = importONNXNetwork('MNIST_99.29.onnx','OutputLayerType',...
+    'classification','classnames',{'0', '1', '2', '3', '4', '5' ,'6', '7', '8', '9'});
 %% load images 
 A_orig =imread('cisla_ver.jpg');
 A_gray = rgb2gray(A_orig);%convert to gray
