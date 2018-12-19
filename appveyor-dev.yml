@@ -1,0 +1,42 @@
+branches:
+  only:
+    - develop
+    
+environment:
+  access_token:
+    # EDIT the encrypted version of your GitHub access token
+    secure: hTsWWC76zLQo/yk0xXODhPyDVUIH5sXOFYLb907zfvVDVqFhp1tY0t5C8QeklUG1
+
+install:
+  - git submodule update --init --recursive
+  - mkdir ..\Wyam
+  - mkdir ..\output
+  # Fetch the latest version of Wyam 
+  - "curl -s https://raw.githubusercontent.com/Wyamio/Wyam/master/RELEASE -o ..\\Wyam\\wyamversion.txt"
+  - set /P WYAMVERSION=< ..\Wyam\wyamversion.txt
+  - echo %WYAMVERSION%
+  # Get and unzip the latest version of Wyam
+  - ps: Start-FileDownload "https://github.com/Wyamio/Wyam/releases/download/$env:WYAMVERSION/Wyam-$env:WYAMVERSION.zip" -FileName "..\Wyam\Wyam.zip"
+  - 7z x ..\Wyam\Wyam.zip -o..\Wyam -r
+
+build_script:
+  - dotnet ..\Wyam\Wyam.dll -c "config-dev.wyam" --output ..\output
+
+on_success:
+  # Switch branches to gh-pages, clean the folder, copy everything in from the Wyam output, and commit/push
+  # See http://www.appveyor.com/docs/how-to/git-push for more info
+  - git config --global credential.helper store
+  # EDIT your Git email and name
+  - git config --global user.email "jan@tesar.tech"
+  - git config --global user.name "tesar-tech"
+  - ps: Add-Content "$env:USERPROFILE\.git-credentials" "https://$($env:access_token):x-oauth-basic@github.com`n"
+  - git checkout pages-test
+  - git rm -rf .
+  - xcopy ..\output . /E
+  # EDIT your domain name or remove if not using a custom domain
+  #- echo wyam.io > CNAME
+  # EDIT the origin of your repository - have to reset it here because AppVeyor pulls from SSH, but GitHub won't accept SSH pushes
+  - git remote set-url origin https://github.com/tesar-tech/zodoc.git
+  - git add -A
+  - git commit -a -m "Commit from AppVeyor"
+  - git push

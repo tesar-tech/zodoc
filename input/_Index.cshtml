@@ -1,0 +1,73 @@
+@section Header {
+    @Html.Partial("_IndexHeader")
+}
+
+<div class="row">
+    <div class="col-sm-8 right-border">
+        <hr>
+            <!-- posts on the index page are just in english -->
+            @Html.Partial("_PostList",  Model.DocumentList(Keys.PageDocuments).Where(x=>x.String("lang") =="en"))
+      
+        <ul class="pager">
+            <li class="previous">                
+                @if(Model.Bool(Keys.HasPreviousPage))
+                {
+                    <a href="@(Context.GetLink(Model.Document(Keys.PreviousPage)))"><span aria-hidden="true">&larr;</span> Newer</a>
+                }                
+            </li>
+            <li class="next">
+                @if(Model.Bool(Keys.HasNextPage))
+                {
+                    <a href="@(Context.GetLink(Model.Document(Keys.NextPage)))">Older <span aria-hidden="true">&rarr;</span></a>
+                }
+            </li>
+        </ul>
+    </div>
+    <div class="col-sm-4 sidebar">
+        <hr class="visible-xs-block" />
+
+        @if(Documents[Blog.Tags].Any())
+        {
+            <h5>Tags</h5>
+            <div>
+                @foreach (IDocument tagDocument in Documents[Blog.Tags]
+                    .GroupBy(x => x.String(BlogKeys.Tag)).Select(x => x.Where(p => p.Get<int>(Keys.CurrentPage) == 1).First())
+                    .OrderByDescending(x => x.Get<int>(Keys.TotalItems)).Take(30))
+                {
+                    string tag = tagDocument.String(BlogKeys.Tag);
+                    var postCountENOnly = tagDocument.Get<IEnumerable<IDocument>>(Keys.PageDocuments).Where(x=>x.String("lang") =="en").Count();
+                    <a role="button" href="@Context.GetLink(tagDocument)" class="btn btn-default btn-sm"> @tag (@postCountENOnly)</a>
+                }
+            </div>
+            <ul class="pager">
+                <li class="next">
+                    <a href="@Context.GetLink("tags/index.html")">View All Tags &rarr;</a>
+                </li>
+            </ul>
+        }
+
+        @if(!Context.Bool(BlogKeys.IndexPaging))
+        {
+            <hr />
+            <h5>Older Posts</h5>
+            <ul class="list-unstyled">
+                @foreach(IDocument post in Documents[Blog.BlogPosts].Skip(Model.DocumentList(Keys.PageDocuments).Count).Take(4))
+                {        
+                    // TODO: The skip above needs to line up with the number of posts on the index page
+                    // Also turn this section off if the index is paged
+                    <li><a href="@Context.GetLink(post)">@post.WithoutSettings.String(BlogKeys.Title)</a></li>
+                }
+            </ul>
+            @if(Context.Bool(BlogKeys.GenerateArchive))
+            {
+                <ul class="pager">
+                    <li class="next">
+                        <a href="@Context.GetLink(Context.String(BlogKeys.PostsPath))">Archive &rarr;</a>
+                    </li>
+                </ul>
+            }
+        }
+
+        @Html.Partial("_Sidebar")
+    </div> 
+</div>

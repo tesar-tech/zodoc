@@ -1,23 +1,61 @@
 @{
     List<Tuple<string, string>> pages = Context
-        .Documents[Docs.Pages]
-        .Where(x => x.Bool(DocsKeys.ShowInNavbar, true))
+        .Documents[Blog.Pages]
+        .Where(x => x.Bool(BlogKeys.ShowInNavbar, true))
         .Where(x => x.FilePath(Keys.RelativeFilePath)?.FullPath?.StartsWith("index") == (bool?)false)
         .Select(x => Tuple.Create(x.WithoutSettings.String(Keys.Title), Context.GetLink(x)))
         .Where(x => !string.IsNullOrEmpty(x.Item1))
         .OrderBy(x => x.Item1)
         .ToList();
-    if(Documents[Docs.BlogPosts].Any())
+    if(Documents[Blog.Tags].Any())
     {
-        pages.Add(Tuple.Create(Context.String(DocsKeys.BlogTitle), Context.GetLink(Context.String(DocsKeys.BlogPath))));
+        pages.Insert(0, Tuple.Create("Tags", Context.GetLink("tags/index.html")));
     }
-    if(Documents[Docs.Api].Any())
     {
-        pages.Add(Tuple.Create("API", Context.GetLink(Context.DirectoryPath(DocsKeys.ApiPath))));
+        //error when checking documents count... so hope there always will be some author
+        pages.Insert(0, Tuple.Create("Authors", Context.GetLink("authors/index.html")));
+    }
+    if(Documents[Blog.BlogPosts].Any() && Context.Bool(BlogKeys.GenerateArchive))
+    {
+        pages.Insert(0, Tuple.Create("Archive", Context.GetLink(Context.String(BlogKeys.PostsPath) + "/index.html")));
     }
     foreach(Tuple<string, string> page in pages)
     {
-        string active = Context.GetLink(Document).StartsWith(page.Item2) ? "active" : null;
-        <li class="@active"><a href="@(page.Item2)">@(page.Item1)</a></li>
+        <li><a href="@(page.Item2)">@(page.Item1)</a></li>
     }
+
+    <li >
+        <script>
+            $(document).ready(function(){//wait for enter in searchbox
+            $('#searchInput').keypress(function (e) {
+                 var key = e.which;
+                    if(key == 13)  // the enter key code
+                        {
+                        $('#searchbtn').click();
+                        return false;  
+                        }
+                    });
+             });
+            $(document).ready(function(){//redirect to duckduckgo search.
+                $('#searchbtn').on('click', function(e){
+               var searchText =   $('#searchInput').val();
+               var host = @{ <text>"@Context.String(Keys.Host)"</text> } ; 
+               window.location = "https://duckduckgo.com/?q="+searchText+"+site%3Ahttps%3A%2F%2F"+ host +"&ia=web";
+           });
+         });
+        </script>
+                <div style="padding:13px 0px;;width:200px;" class="input-group stylish-input-group">
+                    <input id="searchInput" type="text" class="form-control"  placeholder="Search" >
+                    <span class="input-group-addon">
+                        <button id="searchbtn" type="submit">
+                            <span class="glyphicon glyphicon-search"></span>
+                        </button>  
+                    </span>
+                </div>
+
+    </li>
+     <li>
+        <a href="https://github.com/tesar-tech/zodoc" > <i class="fa fa-github fa-lg"></i></a>
+    </li>
+    
 }
