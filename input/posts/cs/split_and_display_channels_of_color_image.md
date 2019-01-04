@@ -7,9 +7,9 @@ prerequisites: [Matlab]
 Authors: [tesar-tech, Karina9510]
 ---
 Script zobrazuje jednotlivé barevné kanály na RGB obrázku.
-Ve případě zobrazení vybraného barevného kanálu na původním obrázku se objevují šedé pixely. Tohle to se projevuje v tom případě, když už do existující barevného kanálu se přidává jiný barevný kanál. Tyto oblasti odpovídají hodnotám pixelů, které neobsahují žádné hodnoty přidaného RGB kanálů.
+Ve případě zobrazení vybraného barevného kanálu na původním obrázku se objevují šedé pixely. Tohle to se projevuje v tom případě, když už do existujícího barevného kanálu, který obsahuje vysokou koncentraci čistší barvy tohoto kanalu, se přidávají  jiný barevný kanál. Tyto oblasti odpovídají hodnotám pixelů, které neobsahují žádné hodnoty původně existujícího RGB kanálů.
 
-Pokud sloučením dvou barevných kanálů na obrázku se objevuji bílé oblasti, to znamená že se sčítají sejné barevné kanály nebo barva původního obrázku už obsahuje přidávající se kanál. Vysvětlením tohoto jevu je to, že každá samostatná barevná rovina na obrázku obsahuje bílou oblast, která odpovídá nejvyšším hodnotám (nejčistším odstínům) jednotlivé barvy.
+Jestli sloučením několika barevných kanálů na obrázku se objevují bílé oblasti, to znamená, že v tom to mistě se sčítají všechny tři existujicí barevné kanaly. 
 
 ``` matlab
 A = imread('kytka256.jpg');
