@@ -6,7 +6,7 @@ prerequisites: [Matlab]
 Authors: [tesar-tech, magias]
 ---
 
-Transfer learning je běžně používaná metoda deep learningovými aplikacemi. V praxi to znamená, že lze použít vytrénovanou neuronovou síť, jako výchozí bod pro učení sítě nové. Použití vlastností ideálně přednastavené sítě je většinou mnohem jednodušší a rychlejší, než nevyzkoušené nastavení neuronové sítě. Další výhodou je možnost rychlého přepojení naučené funkce pro nové úkoly neuronové sítě a to za použití menšího počtu obrázků pro její vytrénování. Pro následnou ukázku načteme obrazový dataset, který obsahuje 4 labely: circle, rectangle , triangle a star vytvořený tímto [skriptem na tvary](creating_an_image_set_with_various_shapes) a tímto [skriptem na hvezdy](creating_an_imageset_of_random_stars).
+Transfer learning je běžně používaná metoda deep learningovými aplikacemi. V praxi to znamená, že lze použít vytrénovanou neuronovou síť, jako výchozí bod pro učení sítě nové. Použití vlastností ideálně přednastavené sítě je většinou mnohem jednodušší a rychlejší, než nevyzkoušené nastavení neuronové sítě. Další výhodou je možnost rychlého přepojení naučené funkce pro nové úkoly neuronové sítě a to za použití menšího počtu obrázků pro její vytrénování. Pro následnou ukázku načteme obrazový dataset, který obsahuje 4 labely: circle, rectangle , triangle a star vytvořený tímto [skriptem na tvary](creating_an_image_set_with_various_shapes).
 
 ``` matlab
 imds = imageDatastore('imgs_shapes', ... %načtení obrázků ze složky
