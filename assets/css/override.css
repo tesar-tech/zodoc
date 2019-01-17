@@ -1,10 +1,119 @@
-.en-flag {
-  content: url('../img/en-flag.png');
-  height: 25px;
-  width: 25px;
+.intro-header .post-heading{
+  padding: 45px 0 0px;
+  color: black;
 }
-.cs-flag {
-  content: url('../img/cs-flag.png');
-  height: 25px;
-  width: 25px;
+/* .intro-header .post-heading a
+{
+    color:rgb(36, 36, 36);
+} */
+
+@media only screen and (min-width: 768px) {
+  
+    .intro-header .post-heading{
+      padding:45px 0px 0;
+    }
+  }
+  .intro-header{
+    margin-bottom: 5px;
+  }
+
+  .intro-header .post-heading h1 {
+    font-size: 25px;
+  }
+  .intro-header .post-heading .subheading {
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 19px;
+    margin: 10px 0 10px;
+    font-weight: 600;
+  }
+  #intro-header {
+    background-color: #ffffff;
+  }
+
+  /* .navbar-custom .nav li a {
+    color: rgb(61, 74, 124);
+    padding: 20px;
+  } */
+
+  /* .navbar-custom .navbar-brand {
+    color: rgb(61, 74, 124);
+    padding: 20px;
+  } */
+
+  /* .navbar-custom {
+    background: rgba(61, 74, 124, 0.438);
+   
+  } */
+
+.util 
+{
+    font-size :12px;
 }
+
+.post-heading .tags {
+    margin-top: 10px;
+  }
+  .post-heading .similar-posts,
+  .post-heading .other-langs
+  {
+      font-size: 14px;
+  }
+  .post-heading .similar-posts .btn {
+    border-color: rgb(210, 214, 255);
+    color:  rgb(53, 48, 128);
+    background-color: rgb(210, 214, 255);
+  }
+
+  .site-heading-tags {
+    padding: 58px 0 10px;
+    text-align: left;
+    margin-left: 30px;
+
+      
+    
+  }
+  .site-heading-tags div{
+    background-color: #286090;
+    display:inline-block;
+    padding:5px;
+    color: #ffffff;
+  }
+  .site-heading-index{
+    padding: 50px 0 0px;
+  color: gray;
+  text-align: center;
+  }
+
+  .btn-technology{
+    color:#2c88d9;
+  }
+  
+  .en-flag
+{
+    content: url('../img/en-flag.png'); 
+    height: 25px;
+    width: 25px;
+}
+
+.cs-flag
+{
+    content: url('../img/cs-flag.png'); 
+    height: 25px;
+    width: 25px;
+}
+
+
+/*search box*/
+.stylish-input-group .input-group-addon{
+  background: white !important; 
+}
+.stylish-input-group .form-control{
+border-right:0; 
+box-shadow:0 0 0; 
+border-color:#ccc;
+}
+.stylish-input-group button{
+  border:0;
+  background:transparent;
+}
+/*****search box*/

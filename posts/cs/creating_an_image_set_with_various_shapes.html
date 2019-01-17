@@ -1,0 +1,328 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+        <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
+
+        <title>ZODOC - Tvorba sady obr&#xE1;zk&#x16F; r&#x16F;zn&#xFD;ch geometrick&#xFD;ch tvar&#x16F;</title>
+        <meta name="description" content="Image processing and deep learning samples" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">        
+
+        <link type="application/rss+xml" rel="alternate" title="ZODOC" href="/feed.rss" />
+                <link type="application/atom+xml" rel="alternate" title="ZODOC" href="/feed.atom" />
+        <link rel="shortcut icon" href="/assets/img/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="/assets/img/favicon.ico" type="image/x-icon">
+
+        <link href="/assets/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="/assets/css/highlight.css" rel="stylesheet">
+        <link href="/assets/css/clean-blog.css" rel="stylesheet" />
+        <link href="/assets/css/master.css" rel="stylesheet" />
+        <link href="/assets/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link href='//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+        <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+        <link href="/assets/css/override.css" rel="stylesheet" />
+
+
+        <meta name="application-name" content="ZODOC" />
+        <meta name="msapplication-tooltip" content="ZODOC" />
+        <meta name="msapplication-starturl" content="/" />
+
+        <meta property="og:title" content="ZODOC - Tvorba sady obr&#xE1;zk&#x16F; r&#x16F;zn&#xFD;ch geometrick&#xFD;ch tvar&#x16F;" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="http://zodoc.netlify.com/posts/cs/creating_an_image_set_with_various_shapes" />
+        <!-- TODO: More social graph meta tags -->
+
+        <script src="/assets/js/jquery.min.js"></script>
+        <script src="/assets/js/bootstrap.min.js"></script>     
+        <script src="/assets/js/highlight.pack.js"></script>   
+        <script src="/assets/js/clean-blog.js"></script>
+        <script src="/assets/js/d3.v3.min.js"></script>
+        <script src="/assets/js/trianglify.min.js"></script>
+        <script src="/assets/js/Please-compressed.js"></script>
+        <script src="/assets/js/background-check.min.js"></script>
+                
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+                <script src="/assets/js/html5shiv.js"></script>
+                <script src="/assets/js/respond.min.js"></script>
+        <![endif]-->
+        
+        
+
+
+        </head>
+        <body>
+                
+                <!-- Navigation -->
+                <nav id="navigation_bar" class="navbar navbar-default navbar-custom navbar-fixed-top" >
+                        <div class="container-fluid">
+                                <!-- Brand and toggle get grouped for better mobile display -->
+                                <div class="navbar-header page-scroll">
+                                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
+                                        <span class="sr-only">Toggle navigation</span>
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                        </button>
+                                        <a class="navbar-brand" href="/">
+                                        <img src=" /assets/img/logo.png" width="20" height="20" style="float:left" class="d-inline-block align-top" alt="">
+                                        <text style="float:right" >ZODOC</text> 
+                                        </a>
+                                </div>
+                        
+                                <!-- Collect the nav links, forms, and other content for toggling -->
+                                <div class="collapse navbar-collapse" id="navbar-collapse">
+                                        <ul class="nav navbar-nav navbar-right">
+                                                        <li><a href="/posts">Archive</a></li>
+        <li><a href="/authors">Authors</a></li>
+        <li><a href="/tags">Tags</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/prerequisites">Prerequsites</a></li>
+    <li >
+        <script>
+            $(document).ready(function(){//wait for enter in searchbox
+            $('#searchInput').keypress(function (e) {
+                 var key = e.which;
+                    if(key == 13)  // the enter key code
+                        {
+                        $('#searchbtn').click();
+                        return false;  
+                        }
+                    });
+             });
+            $(document).ready(function(){//redirect to duckduckgo search.
+                $('#searchbtn').on('click', function(e){
+               var searchText =   $('#searchInput').val();
+               var host = "zodoc.netlify.com" ; 
+               window.location = "https://duckduckgo.com/?q="+searchText+"+site%3Ahttps%3A%2F%2F"+ host +"&ia=web";
+           });
+         });
+        </script>
+                <div style="padding:13px 0px;;width:200px;" class="input-group stylish-input-group">
+                    <input id="searchInput" type="text" class="form-control"  placeholder="Search" >
+                    <span class="input-group-addon">
+                        <button id="searchbtn" type="submit">
+                            <span class="glyphicon glyphicon-search"></span>
+                        </button>  
+                    </span>
+                </div>
+
+    </li>
+     <li>
+        <a href="https://github.com/tesar-tech/zodoc" > <i class="fa fa-github fa-lg"></i></a>
+    </li>
+ 
+                                        </ul>
+                                </div>
+                                <!-- /.navbar-collapse -->
+                        </div>
+                        <!-- /.container -->
+                </nav>
+                
+                <!-- Page Header -->
+                        <!-- if(Model.String(BlogKeys.Image) != null)
+                        {
+                                backgroundImage = $"background-image: url(\"{Model.String(BlogKeys.Image)}\")";
+                        } -->
+                <header class="intro-header" id="intro-header">
+                        <div class="container">
+                                <div class="row">
+                                        <div class="col-md-12">
+
+    
+<div class="post-heading">
+   
+
+   
+    <h1>Tvorba sady obr&#xE1;zk&#x16F; r&#x16F;zn&#xFD;ch geometrick&#xFD;ch tvar&#x16F;</h1>
+        <h2 class="subheading">Tvorba sady obr&#xE1;zk&#x16F; r&#x16F;zn&#xFD;ch tvar&#x16F; (nap&#x159;. kole&#x10D;ko nebo obd&#xE9;ln&#xED;k) pro u&#x10D;en&#xED; CNN</h2>
+
+    <!-- <div class="meta">        
+Published on Saturday, December 15, 2018<br>    </div> -->
+    <!-- <div>language:cs </div> -->
+    <!--         <ul>
+            <li>othera en </li>
+        </ul>
+ -->
+
+        <div class="other-langs" >
+           Other languages: 
+<!--[0]type of translation  -->
+         <a href="/posts/en/creating_an_image_set_with_various_shapes"><img class="en-flag"/></a>
+         </div>
+
+<div class="similar-posts" >
+                     Similar posts: 
+                    <a class="btn btn-outline-info btn-xs" role="button" href="/posts/cs/select_round_objects">
+                        Odd&#x11B;len&#xED; kulat&#xFD;ch objekt&#x16F; od objekt&#x16F; ostatn&#xED;ch
+                    </a>
+                    <a class="btn btn-outline-info btn-xs" role="button" href="/posts/cs/filtering_binary_objects_with_kmeans">
+                        Filtrov&#xE1;n&#xED; bin&#xE1;rn&#xED;ch objekt&#x16F; za pou&#x17E;it&#xED; k-means
+                    </a>
+                    <a class="btn btn-outline-info btn-xs" role="button" href="/posts/cs/randomly_two-color_image">
+                        N&#xE1;hodn&#x11B; dvoubarevn&#xFD; obr&#xE1;zek
+                    </a>
+                    <a class="btn btn-outline-info btn-xs" role="button" href="/posts/cs/training_of_convolutional_neural_network_for_classification_of_handwritten_digits">
+                        Tr&#xE9;nov&#xE1;n&#xED; konvolu&#x10D;n&#xED; neuronov&#xE9; s&#xED;t&#x11B; pro klasifikaci ru&#x10D;n&#x11B; psan&#xFD;ch &#x10D;&#xED;sel
+                    </a>
+                    <a class="btn btn-outline-info btn-xs" role="button" href="/posts/cs/classification_of_handwritten_digit">
+                        Klasifikace ru&#x10D;n&#x11B; psan&#xE9;ho &#x10D;&#xED;sla
+                    </a>
+                    </div>
+   
+
+
+    <div class="util">
+    <ul class="list-inline">
+        <li class="list-inline-item">Prerequisites: </li>
+            <li class="list-inline-item"> <u> <a href="/prerequisites#matlab">Matlab  </a> </u> </li>
+        </ul>
+    </div>
+
+
+        <div class="tags">
+                            <a role="button" href="/tags/matlab" class="btn btn-default btn-xs btn-technology">matlab</a>
+                <a role="button" href="/tags/imageset" class="btn btn-default btn-xs ">imageset</a>
+                <a role="button" href="/tags/shapes" class="btn btn-default btn-xs ">shapes</a>
+                <a role="button" href="/tags/random" class="btn btn-default btn-xs ">random</a>
+                <a role="button" href="/tags/transfer-learning" class="btn btn-default btn-xs ">transfer learning</a>
+        </div>     
+              
+          
+<img src="../imgs_intro/creating_an_image_set_with_various_shapes.jpg" alt="" >
+</div>
+                                        </div>
+                                </div>
+                        </div>
+                </header>
+                
+                <!-- Main Content -->
+                <div class="container">
+                        <div class="row">
+                                <div id="content" class="col-md-12">
+                                        
+
+<p>Skript vytváří složku <code>imgs_shapes</code> a podsložky pojmenované po jednotlivých tvarech. Tvary odlišných barev, velikostí a pozic jsou generovány do těchto podsložek. Tato databáze obrázků má být použita pro trénování CNN k rozpoznávání tvarů.</p>
+<pre><code class="language-matlab">numImgInClass = 10;%počet obrázků v každé třídě
+imgSize= 227; %respektuje velikost vstupu pro alexnet
+Canvas = zeros(imgSize);
+
+mkdir('imgs_shapes');% vytvoření složek pro ukládání tvarů
+mkdir('imgs_shapes/circle');
+mkdir('imgs_shapes/rectangle');
+mkdir('imgs_shapes/triangle');
+
+for ii = 1:numImgInClass
+    %% tvorba &quot;náhodného&quot; kolečka
+    
+    colorRnd = rand([1 3]);
+    radiusRnd = randi([10 80],1);
+    
+    posRnd = randi([radiusRnd imgSize-radiusRnd],[1 2]);
+    RGBcircle = insertShape(Canvas,'FilledCircle',[posRnd radiusRnd],'color',colorRnd);
+    
+    imwrite(RGBcircle,fullfile('imgs_shapes/circle',['circle_' num2str(ii,'%03i') '.jpg']  ))
+    
+    %% tvorba &quot;náhodného&quot; obdelníku
+    colorRnd = rand([1 3]);
+    heightHalfRnd = randi([10 80],1);
+    widthHalfRnd = randi([10 80],1);
+    
+    posRnd = randi([1 imgSize-max(heightHalfRnd,widthHalfRnd)*2],[1 2]);
+    RGBsquare = insertShape(Canvas,'FilledRectangle',[posRnd heightHalfRnd*2 widthHalfRnd*2],'color',colorRnd);
+    
+    imwrite(RGBsquare,fullfile('imgs_shapes/rectangle',['square_' num2str(ii,'%03i') '.jpg']  ))
+    
+    %% tvorba &quot;náhodného&quot; trojúhelníku
+    %souřadnice a úhly musí splňovat tyto podmínky:
+    %velikost úhlu &gt;15 a každá strana &gt;66 (kvůli příliš malým nebo úzkým trojúhelníkům), minimálně dvě &quot;x&quot; a &quot;y&quot; souřadnice musí být odlišné  
+    
+    alpha=0; beta=0; gamma=0; sides=[1,1,1]; point=[0 0; 1 1];
+    while( rad2deg(alpha)&lt;15 || beta&lt;15 || gamma&lt;15 || sum(sides(1,:)&lt;66)&gt;0  || numel(unique([point(1,1),point(2,1)]))==1 || numel(unique([point(1,2),point(2,2)]))==1 )
+        point=randi([40 190],[3 2]); 
+        sides=sort(pdist(point,'euclidean')); %Euklidovská vzdálenost mezi dvěma body = délka strany
+        alpha=acos((sides(2).^2+sides(3).^2-sides(1).^2)/(2*sides(2) * sides(3))); %kosinová věta -&gt; úhel alfa ve stupních
+        beta=rad2deg(asin((sides(2)/sides(1))*sin(alpha))); %sinová věta -&gt; úhel beta v radiánech
+        gamma=180-beta-(rad2deg(alpha)); % úhel gama
+    end
+    
+    point_vector=[point(1,:),point(2,:),point(3,:)];
+    colorRnd = rand([1 3]);
+    RGBtriangle= insertShape(Canvas,'FilledPolygon',point_vector,'color',colorRnd);
+    
+    imwrite(RGBtriangle,fullfile('imgs_shapes/triangle',['triangle_' num2str(ii,'%03i') '.jpg']  ))
+    
+    disp(['creating img db: ' num2str(ii/numImgInClass*100,'%.2f') ' %'])
+end
+
+</code></pre>
+
+
+    <ul class="list-inline">
+  <li class="list-inline-item">Authors:</li>
+<li class="list-inline-item"><a role="button" href="/authors/tesar-tech" class="btn btn-primary btn-xs">tesar-tech</a> </li>
+<li class="list-inline-item"><a role="button" href="/authors/strakka1" class="btn btn-primary btn-xs">strakka1</a> </li>
+  
+ 
+</ul>
+      <div class="alert alert-info"> <a href="https://github.com/tesar-tech/zodoc/blob/master/input/posts/cs/creating_an_image_set_with_various_shapes.md"> <i class="fa fa-file"></i> </a> Something is wrong? Let us know right <a href="https://github.com/tesar-tech/zodoc/issues/new?title=Tvorba sady obr&#xE1;zk&#x16F; r&#x16F;zn&#xFD;ch geometrick&#xFD;ch tvar&#x16F;&amp;body=https://zodoc.netlify.com/posts/cs/creating_an_image_set_with_various_shapes.html%0A[Delete this and describe the issue!]"> here <i class="fa fa-github"></i> </a></div>
+ 
+
+
+ 
+                                </div>
+                        </div>
+                </div>
+                
+                <hr>
+                
+                <!-- Footer -->
+                <footer>
+                        <div class="container">
+        <div class="row">
+                <div class="col-md-12 text-center">
+                    <p class="copyright text-muted">
+                        Copyright © 2019
+                        <br />
+                            <a href="/feed.rss"><i class="fa fa-rss"></i> RSS Feed</a>
+                        |
+                            <a href="/feed.atom"><i class="fa fa-rss"></i> Atom Feed</a>
+                        <br />
+                        <strong><a href="https://wyam.io">Generated by Wyam</a></strong>
+                    </p>
+                </div>
+        </div>
+</div>
+
+                </footer> 
+
+                
+                <script>hljs.initHighlightingOnLoad();</script>
+
+             
+                        <script type="text/javascript">                
+                                // Header background                        
+                                var colors = Please.make_color({
+                                        colors_returned: 3,
+                                        saturation: .6
+                                });
+                                var t = new Trianglify({
+                                        x_gradient:colors,
+                                        y_gradient: ["#FFFFFF"]
+                                });
+                                var header = document.getElementById("navigation_bar");
+                                var pattern = t.generate(header.clientWidth, header.clientHeight);
+                                header.setAttribute('style', 'background-image: ' + pattern.dataUrl);                        
+                        </script>
+
+                <script>
+                        BackgroundCheck.init({
+                                targets: '.intro-header,.navbar',
+                                images: '.intro-header'
+                        });
+                </script>
+        </body>
+</html>
+

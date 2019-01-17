@@ -2,19 +2,4591 @@
 <rss xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0">
 	<channel>
 		<title>ZODOC</title>
-		<link>http://tesar-tech.github.io/zodoc/zodoc</link>
-		<description />
-		<copyright>2018</copyright>
-		<pubDate>Sat, 15 Dec 2018 08:34:49 GMT</pubDate>
-		<lastBuildDate>Sat, 15 Dec 2018 08:34:49 GMT</lastBuildDate>
+		<link>http://zodoc.netlify.com/</link>
+		<description>Image processing and deep learning samples</description>
+		<copyright>2019</copyright>
+		<pubDate>Thu, 17 Jan 2019 22:39:57 GMT</pubDate>
+		<lastBuildDate>Thu, 17 Jan 2019 22:39:57 GMT</lastBuildDate>
 		<item>
-			<title>First Deploy</title>
-			<link>http://tesar-tech.github.io/zodoc/zodoc/blog/first</link>
-			<description>&lt;p&gt;ZODOC was fist launched on December 11th.&lt;/p&gt;</description>
-			<author>tesar-tech</author>
-			<guid>http://tesar-tech.github.io/zodoc/zodoc/blog/first</guid>
-			<pubDate>Mon, 11 Dec 2017 00:00:00 GMT</pubDate>
-			<content:encoded>&lt;p&gt;ZODOC was fist launched on December 11th.&lt;/p&gt;
+			<title>Training of convolutional neural network for classification of handwritten digits</title>
+			<link>http://zodoc.netlify.com/posts/en/training_of_convolutional_neural_network_for_classification_of_handwritten_digits</link>
+			<description>&lt;p&gt;This post is a simple example of CNN training. It uses the uncomplicated layer structure and training options for keeping things as simple as possible. The structure is simple enough to be trained fast on common CPU. Accuracy of trained network is over 98 %. &lt;a href="classification_of_handwritten_digit"&gt;Another post&lt;/a&gt; describes how to use this network to classify your own handwritten digit.&lt;/p&gt;</description>
+			<enclosure url="http://zodoc.netlify.com/imgs_intro/training_of_convolutional_neural_network_for_classification_of_handwritten_digits.png" length="0" type="image" />
+			<guid>http://zodoc.netlify.com/posts/en/training_of_convolutional_neural_network_for_classification_of_handwritten_digits</guid>
+			<pubDate>Thu, 20 Dec 2018 00:00:00 GMT</pubDate>
+			<content:encoded>&lt;p&gt;This post is a simple example of CNN training. It uses the uncomplicated layer structure and training options for keeping things as simple as possible. The structure is simple enough to be trained fast on common CPU. Accuracy of trained network is over 98 %. &lt;a href="classification_of_handwritten_digit"&gt;Another post&lt;/a&gt; describes how to use this network to classify your own handwritten digit.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-matlab"&gt;%% load data
+%path to build-in digits dataset (part of MNIST dataset)
+digitDatasetPath = fullfile(matlabroot,'toolbox','nnet', 'nndemos','nndatasets', 'DigitDataset');
+imds = imageDatastore(digitDatasetPath, 'IncludeSubfolders', true, 'LabelSource', 'foldernames');
+%Split data to train and test parts
+[imdsTrain, imdsValidation] = splitEachLabel (imds, 0.7, 'randomize');
+
+%% constructing cnn layer by layer
+layers = [
+    imageInputLayer([28 28 1]) % input layer (grayscale image with size of 28x28 pixels)
+    convolution2dLayer(5,16,'Padding', 'same') % 16 convolution filters with size of 5
+    batchNormalizationLayer % normalization layer
+    reluLayer %relu for additional non-linearity (input lower than 0 is changed to 0, otherwise it still unchanged)
+    
+    fullyConnectedLayer(10) % 10 - number of neurons 
+    softmaxLayer % normalization
+    classificationLayer 
+];
+
+%% specify options
+options = trainingOptions('sgdm',...% type of solver
+    'Verbose', false,...% dont output in command window
+    'Plots', 'training-progress',...% plot nice graph with training progress
+    'MaxEpoch',5,...%use every training image 5 times
+    'ValidationData', imdsValidation); % use validation data 
+
+%% train network 
+net = trainNetwork (imdsTrain, layers, options); % training of CNN
+
+&lt;/code&gt;&lt;/pre&gt;
+</content:encoded>
+		</item>
+		<item>
+			<title>Trénování konvoluční neuronové sítě pro klasifikaci ručně psaných čísel</title>
+			<link>http://zodoc.netlify.com/posts/cs/training_of_convolutional_neural_network_for_classification_of_handwritten_digits</link>
+			<description>&lt;p&gt;Tento příspěvek je jednoduchým příkladem trénování konvoluční neuronové sítě. Využívá nekomplikovanou strukturu a nastavení. Struktura je dostatečně jednoduchá, aby se síť dala natrénovat na běžném procesoru. Přesnost natrénované sítě je více než 98 %. &lt;a href="classification_of_handwritten_digit"&gt;Jiný příspěvek&lt;/a&gt; vysvětluje použití této sítě ke klasifikaci vlastních ručně psaných čísel.&lt;/p&gt;</description>
+			<enclosure url="http://zodoc.netlify.com/imgs_intro/training_of_convolutional_neural_network_for_classification_of_handwritten_digits.png" length="0" type="image" />
+			<guid>http://zodoc.netlify.com/posts/cs/training_of_convolutional_neural_network_for_classification_of_handwritten_digits</guid>
+			<pubDate>Thu, 20 Dec 2018 00:00:00 GMT</pubDate>
+			<content:encoded>&lt;p&gt;Tento příspěvek je jednoduchým příkladem trénování konvoluční neuronové sítě. Využívá nekomplikovanou strukturu a nastavení. Struktura je dostatečně jednoduchá, aby se síť dala natrénovat na běžném procesoru. Přesnost natrénované sítě je více než 98 %. &lt;a href="classification_of_handwritten_digit"&gt;Jiný příspěvek&lt;/a&gt; vysvětluje použití této sítě ke klasifikaci vlastních ručně psaných čísel.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-matlab"&gt;%% načíst data
+%cesta k zabudovanému datasetu (jenž je součástí MNIST databáze)
+digitDatasetPath = fullfile(matlabroot,'toolbox','nnet', 'nndemos','nndatasets', 'DigitDataset');
+imds = imageDatastore(digitDatasetPath, 'IncludeSubfolders', true, 'LabelSource', 'foldernames');
+%Rozdělení dat na trénovací a testovací
+[imdsTrain, imdsValidation] = splitEachLabel (imds, 0.7, 'randomize');
+
+%% Vytváření sítě po vrstvách
+layers = [
+    imageInputLayer([28 28 1]) %vstupní vrstva (šedotónový obrázek o velikosti 28x28 pixelů)
+    convolution2dLayer(5,16,'Padding', 'same') % 16 konv. filtrů o velikosti 5
+    batchNormalizationLayer % normalizační vrstva
+    reluLayer %relu vrstva přidává nelinearitu (vstup menší než nula je převeden na nulu, v ostatních případech je vstup ponechán)
+    
+    fullyConnectedLayer(10) % 10 - počet neuronů
+    softmaxLayer % normalizace
+    classificationLayer 
+];
+
+%% trénovací možnosti
+options = trainingOptions('sgdm',...% typ řešitele
+    'Verbose', false,...% bez výstupu do command window
+    'Plots', 'training-progress',...% vytvoří graf s průbehem trénování
+    'MaxEpoch',5,...%každý obrázek bude použit pro trénování 5x
+    'ValidationData', imdsValidation); % validační data
+
+%% 
+net = trainNetwork (imdsTrain, layers, options); % samotný trénink
+&lt;/code&gt;&lt;/pre&gt;
+</content:encoded>
+		</item>
+		<item>
+			<title>Tvorba sady obrázků různých geometrických tvarů</title>
+			<link>http://zodoc.netlify.com/posts/cs/creating_an_image_set_with_various_shapes</link>
+			<description>&lt;p&gt;Skript vytváří složku &lt;code&gt;imgs_shapes&lt;/code&gt; a podsložky pojmenované po jednotlivých tvarech. Tvary odlišných barev, velikostí a pozic jsou generovány do těchto podsložek. Tato databáze obrázků má být použita pro trénování CNN k rozpoznávání tvarů.&lt;/p&gt;</description>
+			<enclosure url="http://zodoc.netlify.com/imgs_intro/creating_an_image_set_with_various_shapes.jpg" length="0" type="image" />
+			<guid>http://zodoc.netlify.com/posts/cs/creating_an_image_set_with_various_shapes</guid>
+			<pubDate>Sat, 15 Dec 2018 00:00:00 GMT</pubDate>
+			<content:encoded>&lt;p&gt;Skript vytváří složku &lt;code&gt;imgs_shapes&lt;/code&gt; a podsložky pojmenované po jednotlivých tvarech. Tvary odlišných barev, velikostí a pozic jsou generovány do těchto podsložek. Tato databáze obrázků má být použita pro trénování CNN k rozpoznávání tvarů.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-matlab"&gt;numImgInClass = 10;%počet obrázků v každé třídě
+imgSize= 227; %respektuje velikost vstupu pro alexnet
+Canvas = zeros(imgSize);
+
+mkdir('imgs_shapes');% vytvoření složek pro ukládání tvarů
+mkdir('imgs_shapes/circle');
+mkdir('imgs_shapes/rectangle');
+mkdir('imgs_shapes/triangle');
+
+for ii = 1:numImgInClass
+    %% tvorba &amp;quot;náhodného&amp;quot; kolečka
+    
+    colorRnd = rand([1 3]);
+    radiusRnd = randi([10 80],1);
+    
+    posRnd = randi([radiusRnd imgSize-radiusRnd],[1 2]);
+    RGBcircle = insertShape(Canvas,'FilledCircle',[posRnd radiusRnd],'color',colorRnd);
+    
+    imwrite(RGBcircle,fullfile('imgs_shapes/circle',['circle_' num2str(ii,'%03i') '.jpg']  ))
+    
+    %% tvorba &amp;quot;náhodného&amp;quot; obdelníku
+    colorRnd = rand([1 3]);
+    heightHalfRnd = randi([10 80],1);
+    widthHalfRnd = randi([10 80],1);
+    
+    posRnd = randi([1 imgSize-max(heightHalfRnd,widthHalfRnd)*2],[1 2]);
+    RGBsquare = insertShape(Canvas,'FilledRectangle',[posRnd heightHalfRnd*2 widthHalfRnd*2],'color',colorRnd);
+    
+    imwrite(RGBsquare,fullfile('imgs_shapes/rectangle',['square_' num2str(ii,'%03i') '.jpg']  ))
+    
+    %% tvorba &amp;quot;náhodného&amp;quot; trojúhelníku
+    %souřadnice a úhly musí splňovat tyto podmínky:
+    %velikost úhlu &amp;gt;15 a každá strana &amp;gt;66 (kvůli příliš malým nebo úzkým trojúhelníkům), minimálně dvě &amp;quot;x&amp;quot; a &amp;quot;y&amp;quot; souřadnice musí být odlišné  
+    
+    alpha=0; beta=0; gamma=0; sides=[1,1,1]; point=[0 0; 1 1];
+    while( rad2deg(alpha)&amp;lt;15 || beta&amp;lt;15 || gamma&amp;lt;15 || sum(sides(1,:)&amp;lt;66)&amp;gt;0  || numel(unique([point(1,1),point(2,1)]))==1 || numel(unique([point(1,2),point(2,2)]))==1 )
+        point=randi([40 190],[3 2]); 
+        sides=sort(pdist(point,'euclidean')); %Euklidovská vzdálenost mezi dvěma body = délka strany
+        alpha=acos((sides(2).^2+sides(3).^2-sides(1).^2)/(2*sides(2) * sides(3))); %kosinová věta -&amp;gt; úhel alfa ve stupních
+        beta=rad2deg(asin((sides(2)/sides(1))*sin(alpha))); %sinová věta -&amp;gt; úhel beta v radiánech
+        gamma=180-beta-(rad2deg(alpha)); % úhel gama
+    end
+    
+    point_vector=[point(1,:),point(2,:),point(3,:)];
+    colorRnd = rand([1 3]);
+    RGBtriangle= insertShape(Canvas,'FilledPolygon',point_vector,'color',colorRnd);
+    
+    imwrite(RGBtriangle,fullfile('imgs_shapes/triangle',['triangle_' num2str(ii,'%03i') '.jpg']  ))
+    
+    disp(['creating img db: ' num2str(ii/numImgInClass*100,'%.2f') ' %'])
+end
+
+&lt;/code&gt;&lt;/pre&gt;
+</content:encoded>
+		</item>
+		<item>
+			<title>Creating an image set with various shapes</title>
+			<link>http://zodoc.netlify.com/posts/en/creating_an_image_set_with_various_shapes</link>
+			<description>&lt;p&gt;Script creates folder &lt;code&gt;imgs_shapes&lt;/code&gt; and subfolders with name of the shape. Shapes with different color, size and position are generated in those subploders. This image database will be used to train CNN for shapes classification.&lt;/p&gt;</description>
+			<enclosure url="http://zodoc.netlify.com/imgs_intro/creating_an_image_set_with_various_shapes.jpg" length="0" type="image" />
+			<guid>http://zodoc.netlify.com/posts/en/creating_an_image_set_with_various_shapes</guid>
+			<pubDate>Sat, 15 Dec 2018 00:00:00 GMT</pubDate>
+			<content:encoded>&lt;p&gt;Script creates folder &lt;code&gt;imgs_shapes&lt;/code&gt; and subfolders with name of the shape. Shapes with different color, size and position are generated in those subploders. This image database will be used to train CNN for shapes classification.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-matlab"&gt;numImgInClass = 10;%number of imgs in every class
+imgSize= 227; %respect alexnet input size
+Canvas = zeros(imgSize);
+
+mkdir('imgs_shapes');% create folders for shapes
+mkdir('imgs_shapes/circle');
+mkdir('imgs_shapes/rectangle');
+mkdir('imgs_shapes/triangle');
+
+for ii = 1:numImgInClass
+    %% create &amp;quot;random&amp;quot; circle
+    
+    colorRnd = rand([1 3]);
+    radiusRnd = randi([10 80],1);
+    
+    posRnd = randi([radiusRnd imgSize-radiusRnd],[1 2]);
+    RGBcircle = insertShape(Canvas,'FilledCircle',[posRnd radiusRnd],'color',colorRnd);
+    
+    imwrite(RGBcircle,fullfile('imgs_shapes/circle',['circle_' num2str(ii,'%03i') '.jpg']  ))
+    
+    %% create &amp;quot;random&amp;quot; rectangle
+    colorRnd = rand([1 3]);
+    heightHalfRnd = randi([10 80],1);
+    widthHalfRnd = randi([10 80],1);
+    
+    posRnd = randi([1 imgSize-max(heightHalfRnd,widthHalfRnd)*2],[1 2]);
+    RGBsquare = insertShape(Canvas,'FilledRectangle',[posRnd heightHalfRnd*2 widthHalfRnd*2],'color',colorRnd);
+    
+    imwrite(RGBsquare,fullfile('imgs_shapes/rectangle',['square_' num2str(ii,'%03i') '.jpg']  ))
+    
+    %% create &amp;quot;random&amp;quot; triangle
+    %coordinates and angles must meet these conditions:
+    %angle size &amp;gt;15 and every side &amp;gt;66(because of too small or narrow triangles), minimal two &amp;quot;x&amp;quot; and &amp;quot;y&amp;quot; coordinates must be different  
+    
+    alpha=0; beta=0; gamma=0; sides=[1,1,1]; point=[0 0; 1 1];
+    while( rad2deg(alpha)&amp;lt;15 || beta&amp;lt;15 || gamma&amp;lt;15 || sum(sides(1,:)&amp;lt;66)&amp;gt;0  || numel(unique([point(1,1),point(2,1)]))==1 || numel(unique([point(1,2),point(2,2)]))==1 )
+        point=randi([40 190],[3 2]); 
+        sides=sort(pdist(point,'euclidean')); %Euclidean distance between 2 points = side length
+        alpha=acos((sides(2).^2+sides(3).^2-sides(1).^2)/(2*sides(2) * sides(3))); %Law of Cosines -&amp;gt; alpha angle in radians
+        beta=rad2deg(asin((sides(2)/sides(1))*sin(alpha))); %Law of Sines -&amp;gt; beta angle in degrees
+        gamma=180-beta-(rad2deg(alpha)); % gamma angle
+    end
+    
+    point_vector=[point(1,:),point(2,:),point(3,:)];
+    colorRnd = rand([1 3]);
+    RGBtriangle= insertShape(Canvas,'FilledPolygon',point_vector,'color',colorRnd);
+    
+    imwrite(RGBtriangle,fullfile('imgs_shapes/triangle',['triangle_' num2str(ii,'%03i') '.jpg']  ))
+    
+    disp(['creating img db: ' num2str(ii/numImgInClass*100,'%.2f') ' %'])
+end
+
+&lt;/code&gt;&lt;/pre&gt;
+</content:encoded>
+		</item>
+		<item>
+			<title>Klasifikace ručně psaného čísla</title>
+			<link>http://zodoc.netlify.com/posts/cs/classification_of_handwritten_digit</link>
+			<description>&lt;p&gt;Model v onnx formátu byl natrénován na &lt;a href="http://yann.lecun.com/exdb/mnist/"&gt;MNIST&lt;/a&gt; datasetu s přesností 99.29 %.&lt;/p&gt;</description>
+			<enclosure url="http://zodoc.netlify.com/imgs_intro/classification_of_handwritten_digit.jpg" length="0" type="image" />
+			<guid>http://zodoc.netlify.com/posts/cs/classification_of_handwritten_digit</guid>
+			<pubDate>Tue, 11 Dec 2018 00:00:00 GMT</pubDate>
+			<content:encoded>&lt;p&gt;Model v onnx formátu byl natrénován na &lt;a href="http://yann.lecun.com/exdb/mnist/"&gt;MNIST&lt;/a&gt; datasetu s přesností 99.29 %.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-matlab"&gt;mnist_net = importONNXNetwork('MNIST_99.29.onnx','OutputLayerType','classification','ClassNames',{'0','1','2','3','4','5','6','7','8','9'}); %improt sítě
+
+A = rgb2gray(imread('single_handwritten_digit.png'));%Načíst obrázek a převést na šedotón
+A_resized = imresize(A,[28 28]);%Zmenšit na [28x28] cožodpovídá vstupní vrstvě neuronové sítě
+
+[label, score] = classify(mnist_net,A_resized,'ExecutionEnvironment','cpu');%(problém s GPU při používání onnx modelu, proto zde využito cpu)
+A_withText = insertText(A,[1 1], cellstr(&amp;quot;classified as &amp;quot; +  string(label)+newline+ &amp;quot;(&amp;quot;+ num2str(max(score)*100,'%0.2f %%)')) ,'FontSize',28); % přidat text s výsledkem kalsifikace
+imshow(A_withText)
+&lt;/code&gt;&lt;/pre&gt;
+</content:encoded>
+		</item>
+		<item>
+			<title>Classification of handwritten digit with CNN</title>
+			<link>http://zodoc.netlify.com/posts/en/classification_of_handwritten_digit</link>
+			<description>&lt;p&gt;Model in onnx format was trained on &lt;a href="http://yann.lecun.com/exdb/mnist/"&gt;MNIST&lt;/a&gt; dataset with 99.29 % accuracy.&lt;/p&gt;</description>
+			<enclosure url="http://zodoc.netlify.com/imgs_intro/classification_of_handwritten_digit.jpg" length="0" type="image" />
+			<guid>http://zodoc.netlify.com/posts/en/classification_of_handwritten_digit</guid>
+			<pubDate>Tue, 11 Dec 2018 00:00:00 GMT</pubDate>
+			<content:encoded>&lt;p&gt;Model in onnx format was trained on &lt;a href="http://yann.lecun.com/exdb/mnist/"&gt;MNIST&lt;/a&gt; dataset with 99.29 % accuracy.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-matlab"&gt;mnist = importONNXNetwork('MNIST_99.29.onnx','OutputLayerType','classification','ClassNames',{'0','1','2','3','4','5','6','7','8','9'}); %Import MNIST cnn
+
+A = rgb2gray(imread('single_handwritten_digit.png'));%Load an image and covert to grayscale
+A_resized = imresize(A,[28 28]);%Resize to [28x28] to match cnn input layer
+
+[label, score] = classify(mnist,trojka,'ExecutionEnvironment','cpu');%(there is some issue on GPU when using onnx models, so CPU is used here)
+A_withText = insertText(A,[1 1], cellstr(&amp;quot;classified as &amp;quot; +  string(label)+newline+ &amp;quot;(&amp;quot;+ num2str(max(score)*100,'%0.2f %%)')) ,'FontSize',28); % add text with classifiaction results
+imshow(A_withText)
+&lt;/code&gt;&lt;/pre&gt;
+</content:encoded>
+		</item>
+		<item>
+			<title>1000 tříd databáze ImageNet</title>
+			<link>http://zodoc.netlify.com/posts/cs/imagenet_classes</link>
+			<description>&lt;p&gt;1:tench
+2:goldfish
+3:great white shark
+4:tiger shark
+5:hammerhead
+6:electric ray
+7:stingray
+8:cock
+9:hen
+10:ostrich
+11:brambling
+12:goldfinch
+13:house finch
+14:junco
+15:indigo bunting
+16:robin
+17:bulbul
+18:jay
+19:magpie
+20:chickadee
+21:water ouzel
+22:kite
+23:bald eagle
+24:vulture
+25:great grey owl
+26:European fire salamander
+27:common newt
+28:eft
+29:spotted salamander
+30:axolotl
+31:bullfrog
+32:tree frog
+33:tailed frog
+34:loggerhead
+35:leatherback turtle
+36:mud turtle
+37:terrapin
+38:box turtle
+39:banded gecko
+40:common iguana
+41:American chameleon
+42:whiptail
+43:agama
+44:frilled lizard
+45:alligator lizard
+46:Gila monster
+47:green lizard
+48:African chameleon
+49:Komodo dragon
+50:African crocodile
+51:American alligator
+52:triceratops
+53:thunder snake
+54:ringneck snake
+55:hognose snake
+56:green snake
+57:king snake
+58:garter snake
+59:water snake
+60:vine snake
+61:night snake
+62:boa constrictor
+63:rock python
+64:Indian cobra
+65:green mamba
+66:sea snake
+67:horned viper
+68:diamondback
+69:sidewinder
+70:trilobite
+71:harvestman
+72:scorpion
+73:black and gold garden spider
+74:barn spider
+75:garden spider
+76:black widow
+77:tarantula
+78:wolf spider
+79:tick
+80:centipede
+81:black grouse
+82:ptarmigan
+83:ruffed grouse
+84:prairie chicken
+85:peacock
+86:quail
+87:partridge
+88:African grey
+89:macaw
+90:sulphur-crested cockatoo
+91:lorikeet
+92:coucal
+93:bee eater
+94:hornbill
+95:hummingbird
+96:jacamar
+97:toucan
+98:drake
+99:red-breasted merganser
+100:goose
+101:black swan
+102:tusker
+103:echidna
+104:platypus
+105:wallaby
+106:koala
+107:wombat
+108:jellyfish
+109:sea anemone
+110:brain coral
+111:flatworm
+112:nematode
+113:conch
+114:snail
+115:slug
+116:sea slug
+117:chiton
+118:chambered nautilus
+119:Dungeness crab
+120:rock crab
+121:fiddler crab
+122:king crab
+123:American lobster
+124:spiny lobster
+125:crayfish
+126:hermit crab
+127:isopod
+128:white stork
+129:black stork
+130:spoonbill
+131:flamingo
+132:little blue heron
+133:American egret
+134:bittern
+135:crane
+136:limpkin
+137:European gallinule
+138:American coot
+139:bustard
+140:ruddy turnstone
+141:red-backed sandpiper
+142:redshank
+143:dowitcher
+144:oystercatcher
+145:pelican
+146:king penguin
+147:albatross
+148:grey whale
+149:killer whale
+150:dugong
+151:sea lion
+152:Chihuahua
+153:Japanese spaniel
+154:Maltese dog
+155:Pekinese
+156:Shih-Tzu
+157:Blenheim spaniel
+158:papillon
+159:toy terrier
+160:Rhodesian ridgeback
+161:Afghan hound
+162:basset
+163:beagle
+164:bloodhound
+165:bluetick
+166:black-and-tan coonhound
+167:Walker hound
+168:English foxhound
+169:redbone
+170:borzoi
+171:Irish wolfhound
+172:Italian greyhound
+173:whippet
+174:Ibizan hound
+175:Norwegian elkhound
+176:otterhound
+177:Saluki
+178:Scottish deerhound
+179:Weimaraner
+180:Staffordshire bullterrier
+181:American Staffordshire terrier
+182:Bedlington terrier
+183:Border terrier
+184:Kerry blue terrier
+185:Irish terrier
+186:Norfolk terrier
+187:Norwich terrier
+188:Yorkshire terrier
+189:wire-haired fox terrier
+190:Lakeland terrier
+191:Sealyham terrier
+192:Airedale
+193:cairn
+194:Australian terrier
+195:Dandie Dinmont
+196:Boston bull
+197:miniature schnauzer
+198:giant schnauzer
+199:standard schnauzer
+200:Scotch terrier
+201:Tibetan terrier
+202:silky terrier
+203:soft-coated wheaten terrier
+204:West Highland white terrier
+205:Lhasa
+206:flat-coated retriever
+207:curly-coated retriever
+208:golden retriever
+209:Labrador retriever
+210:Chesapeake Bay retriever
+211:German short-haired pointer
+212:vizsla
+213:English setter
+214:Irish setter
+215:Gordon setter
+216:Brittany spaniel
+217:clumber
+218:English springer
+219:Welsh springer spaniel
+220:cocker spaniel
+221:Sussex spaniel
+222:Irish water spaniel
+223:kuvasz
+224:schipperke
+225:groenendael
+226:malinois
+227:briard
+228:kelpie
+229:komondor
+230:Old English sheepdog
+231:Shetland sheepdog
+232:collie
+233:Border collie
+234:Bouvier des Flandres
+235:Rottweiler
+236:German shepherd
+237:Doberman
+238:miniature pinscher
+239:Greater Swiss Mountain dog
+240:Bernese mountain dog
+241:Appenzeller
+242:EntleBucher
+243:boxer
+244:bull mastiff
+245:Tibetan mastiff
+246:French bulldog
+247:Great Dane
+248:Saint Bernard
+249:Eskimo dog
+250:malamute
+251:Siberian husky
+252:dalmatian
+253:affenpinscher
+254:basenji
+255:pug
+256:Leonberg
+257:Newfoundland
+258:Great Pyrenees
+259:Samoyed
+260:Pomeranian
+261:chow
+262:keeshond
+263:Brabancon griffon
+264:Pembroke
+265:Cardigan
+266:toy poodle
+267:miniature poodle
+268:standard poodle
+269:Mexican hairless
+270:timber wolf
+271:white wolf
+272:red wolf
+273:coyote
+274:dingo
+275:dhole
+276:African hunting dog
+277:hyena
+278:red fox
+279:kit fox
+280:Arctic fox
+281:grey fox
+282:tabby
+283:tiger cat
+284:Persian cat
+285:Siamese cat
+286:Egyptian cat
+287:cougar
+288:lynx
+289:leopard
+290:snow leopard
+291:jaguar
+292:lion
+293:tiger
+294:cheetah
+295:brown bear
+296:American black bear
+297:ice bear
+298:sloth bear
+299:mongoose
+300:meerkat
+301:tiger beetle
+302:ladybug
+303:ground beetle
+304:long-horned beetle
+305:leaf beetle
+306:dung beetle
+307:rhinoceros beetle
+308:weevil
+309:fly
+310:bee
+311:ant
+312:grasshopper
+313:cricket
+314:walking stick
+315:cockroach
+316:mantis
+317:cicada
+318:leafhopper
+319:lacewing
+320:dragonfly
+321:damselfly
+322:admiral
+323:ringlet
+324:monarch
+325:cabbage butterfly
+326:sulphur butterfly
+327:lycaenid
+328:starfish
+329:sea urchin
+330:sea cucumber
+331:wood rabbit
+332:hare
+333:Angora
+334:hamster
+335:porcupine
+336:fox squirrel
+337:marmot
+338:beaver
+339:guinea pig
+340:sorrel
+341:zebra
+342:hog
+343:wild boar
+344:warthog
+345:hippopotamus
+346:ox
+347:water buffalo
+348:bison
+349:ram
+350:bighorn
+351:ibex
+352:hartebeest
+353:impala
+354:gazelle
+355:Arabian camel
+356:llama
+357:weasel
+358:mink
+359:polecat
+360:black-footed ferret
+361:otter
+362:skunk
+363:badger
+364:armadillo
+365:three-toed sloth
+366:orangutan
+367:gorilla
+368:chimpanzee
+369:gibbon
+370:siamang
+371:guenon
+372:patas
+373:baboon
+374:macaque
+375:langur
+376:colobus
+377:proboscis monkey
+378:marmoset
+379:capuchin
+380:howler monkey
+381:titi
+382:spider monkey
+383:squirrel monkey
+384:Madagascar cat
+385:indri
+386:Indian elephant
+387:African elephant
+388:lesser panda
+389:giant panda
+390:barracouta
+391:eel
+392:coho
+393:rock beauty
+394:anemone fish
+395:sturgeon
+396:gar
+397:lionfish
+398:puffer
+399:abacus
+400:abaya
+401:academic gown
+402:accordion
+403:acoustic guitar
+404:aircraft carrier
+405:airliner
+406:airship
+407:altar
+408:ambulance
+409:amphibian
+410:analog clock
+411:apiary
+412:apron
+413:ashcan
+414:assault rifle
+415:backpack
+416:bakery
+417:balance beam
+418:balloon
+419:ballpoint
+420:Band Aid
+421:banjo
+422:bannister
+423:barbell
+424:barber chair
+425:barbershop
+426:barn
+427:barometer
+428:barrel
+429:barrow
+430:baseball
+431:basketball
+432:bassinet
+433:bassoon
+434:bathing cap
+435:bath towel
+436:bathtub
+437:beach wagon
+438:beacon
+439:beaker
+440:bearskin
+441:beer bottle
+442:beer glass
+443:bell cote
+444:bib
+445:bicycle-built-for-two
+446:bikini
+447:binder
+448:binoculars
+449:birdhouse
+450:boathouse
+451:bobsled
+452:bolo tie
+453:bonnet
+454:bookcase
+455:bookshop
+456:bottlecap
+457:bow
+458:bow tie
+459:brass
+460:brassiere
+461:breakwater
+462:breastplate
+463:broom
+464:bucket
+465:buckle
+466:bulletproof vest
+467:bullet train
+468:butcher shop
+469:cab
+470:caldron
+471:candle
+472:cannon
+473:canoe
+474:can opener
+475:cardigan
+476:car mirror
+477:carousel
+478:carpenter's kit
+479:carton
+480:car wheel
+481:cash machine
+482:cassette
+483:cassette player
+484:castle
+485:catamaran
+486:CD player
+487:cello
+488:cellular telephone
+489:chain
+490:chainlink fence
+491:chain mail
+492:chain saw
+493:chest
+494:chiffonier
+495:chime
+496:china cabinet
+497:Christmas stocking
+498:church
+499:cinema
+500:cleaver
+501:cliff dwelling
+502:cloak
+503:clog
+504:cocktail shaker
+505:coffee mug
+506:coffeepot
+507:coil
+508:combination lock
+509:computer keyboard
+510:confectionery
+511:container ship
+512:convertible
+513:corkscrew
+514:cornet
+515:cowboy boot
+516:cowboy hat
+517:cradle
+518:crane (machine)
+519:crash helmet
+520:crate
+521:crib
+522:Crock Pot
+523:croquet ball
+524:crutch
+525:cuirass
+526:dam
+527:desk
+528:desktop computer
+529:dial telephone
+530:diaper
+531:digital clock
+532:digital watch
+533:dining table
+534:dishrag
+535:dishwasher
+536:disk brake
+537:dock
+538:dogsled
+539:dome
+540:doormat
+541:drilling platform
+542:drum
+543:drumstick
+544:dumbbell
+545:Dutch oven
+546:electric fan
+547:electric guitar
+548:electric locomotive
+549:entertainment center
+550:envelope
+551:espresso maker
+552:face powder
+553:feather boa
+554:file
+555:fireboat
+556:fire engine
+557:fire screen
+558:flagpole
+559:flute
+560:folding chair
+561:football helmet
+562:forklift
+563:fountain
+564:fountain pen
+565:four-poster
+566:freight car
+567:French horn
+568:frying pan
+569:fur coat
+570:garbage truck
+571:gasmask
+572:gas pump
+573:goblet
+574:go-kart
+575:golf ball
+576:golfcart
+577:gondola
+578:gong
+579:gown
+580:grand piano
+581:greenhouse
+582:grille
+583:grocery store
+584:guillotine
+585:hair slide
+586:hair spray
+587:half track
+588:hammer
+589:hamper
+590:hand blower
+591:hand-held computer
+592:handkerchief
+593:hard disc
+594:harmonica
+595:harp
+596:harvester
+597:hatchet
+598:holster
+599:home theater
+600:honeycomb
+601:hook
+602:hoopskirt
+603:horizontal bar
+604:horse cart
+605:hourglass
+606:iPod
+607:iron
+608:jack-o'-lantern
+609:jean
+610:jeep
+611:jersey
+612:jigsaw puzzle
+613:jinrikisha
+614:joystick
+615:kimono
+616:knee pad
+617:knot
+618:lab coat
+619:ladle
+620:lampshade
+621:laptop
+622:lawn mower
+623:lens cap
+624:letter opener
+625:library
+626:lifeboat
+627:lighter
+628:limousine
+629:liner
+630:lipstick
+631:Loafer
+632:lotion
+633:loudspeaker
+634:loupe
+635:lumbermill
+636:magnetic compass
+637:mailbag
+638:mailbox
+639:maillot
+640:maillot, tank suit
+641:manhole cover
+642:maraca
+643:marimba
+644:mask
+645:matchstick
+646:maypole
+647:maze
+648:measuring cup
+649:medicine chest
+650:megalith
+651:microphone
+652:microwave
+653:military uniform
+654:milk can
+655:minibus
+656:miniskirt
+657:minivan
+658:missile
+659:mitten
+660:mixing bowl
+661:mobile home
+662:Model T
+663:modem
+664:monastery
+665:monitor
+666:moped
+667:mortar
+668:mortarboard
+669:mosque
+670:mosquito net
+671:motor scooter
+672:mountain bike
+673:mountain tent
+674:mouse
+675:mousetrap
+676:moving van
+677:muzzle
+678:nail
+679:neck brace
+680:necklace
+681:nipple
+682:notebook
+683:obelisk
+684:oboe
+685:ocarina
+686:odometer
+687:oil filter
+688:organ
+689:oscilloscope
+690:overskirt
+691:oxcart
+692:oxygen mask
+693:packet
+694:paddle
+695:paddlewheel
+696:padlock
+697:paintbrush
+698:pajama
+699:palace
+700:panpipe
+701:paper towel
+702:parachute
+703:parallel bars
+704:park bench
+705:parking meter
+706:passenger car
+707:patio
+708:pay-phone
+709:pedestal
+710:pencil box
+711:pencil sharpener
+712:perfume
+713:Petri dish
+714:photocopier
+715:pick
+716:pickelhaube
+717:picket fence
+718:pickup
+719:pier
+720:piggy bank
+721:pill bottle
+722:pillow
+723:ping-pong ball
+724:pinwheel
+725:pirate
+726:pitcher
+727:plane
+728:planetarium
+729:plastic bag
+730:plate rack
+731:plow
+732:plunger
+733:Polaroid camera
+734:pole
+735:police van
+736:poncho
+737:pool table
+738:pop bottle
+739:pot
+740:potter's wheel
+741:power drill
+742:prayer rug
+743:printer
+744:prison
+745:projectile
+746:projector
+747:puck
+748:punching bag
+749:purse
+750:quill
+751:quilt
+752:racer
+753:racket
+754:radiator
+755:radio
+756:radio telescope
+757:rain barrel
+758:recreational vehicle
+759:reel
+760:reflex camera
+761:refrigerator
+762:remote control
+763:restaurant
+764:revolver
+765:rifle
+766:rocking chair
+767:rotisserie
+768:rubber eraser
+769:rugby ball
+770:rule
+771:running shoe
+772:safe
+773:safety pin
+774:saltshaker
+775:sandal
+776:sarong
+777:sax
+778:scabbard
+779:scale
+780:school bus
+781:schooner
+782:scoreboard
+783:screen
+784:screw
+785:screwdriver
+786:seat belt
+787:sewing machine
+788:shield
+789:shoe shop
+790:shoji
+791:shopping basket
+792:shopping cart
+793:shovel
+794:shower cap
+795:shower curtain
+796:ski
+797:ski mask
+798:sleeping bag
+799:slide rule
+800:sliding door
+801:slot
+802:snorkel
+803:snowmobile
+804:snowplow
+805:soap dispenser
+806:soccer ball
+807:sock
+808:solar dish
+809:sombrero
+810:soup bowl
+811:space bar
+812:space heater
+813:space shuttle
+814:spatula
+815:speedboat
+816:spider web
+817:spindle
+818:sports car
+819:spotlight
+820:stage
+821:steam locomotive
+822:steel arch bridge
+823:steel drum
+824:stethoscope
+825:stole
+826:stone wall
+827:stopwatch
+828:stove
+829:strainer
+830:streetcar
+831:stretcher
+832:studio couch
+833:stupa
+834:submarine
+835:suit
+836:sundial
+837:sunglass
+838:sunglasses
+839:sunscreen
+840:suspension bridge
+841:swab
+842:sweatshirt
+843:swimming trunks
+844:swing
+845:switch
+846:syringe
+847:table lamp
+848:tank
+849:tape player
+850:teapot
+851:teddy
+852:television
+853:tennis ball
+854:thatch
+855:theater curtain
+856:thimble
+857:thresher
+858:throne
+859:tile roof
+860:toaster
+861:tobacco shop
+862:toilet seat
+863:torch
+864:totem pole
+865:tow truck
+866:toyshop
+867:tractor
+868:trailer truck
+869:tray
+870:trench coat
+871:tricycle
+872:trimaran
+873:tripod
+874:triumphal arch
+875:trolleybus
+876:trombone
+877:tub
+878:turnstile
+879:typewriter keyboard
+880:umbrella
+881:unicycle
+882:upright
+883:vacuum
+884:vase
+885:vault
+886:velvet
+887:vending machine
+888:vestment
+889:viaduct
+890:violin
+891:volleyball
+892:waffle iron
+893:wall clock
+894:wallet
+895:wardrobe
+896:warplane
+897:washbasin
+898:washer
+899:water bottle
+900:water jug
+901:water tower
+902:whiskey jug
+903:whistle
+904:wig
+905:window screen
+906:window shade
+907:Windsor tie
+908:wine bottle
+909:wing
+910:wok
+911:wooden spoon
+912:wool
+913:worm fence
+914:wreck
+915:yawl
+916:yurt
+917:web site
+918:comic book
+919:crossword puzzle
+920:street sign
+921:traffic light
+922:book jacket
+923:menu
+924:plate
+925:guacamole
+926:consomme
+927:hot pot
+928:trifle
+929:ice cream
+930:ice lolly
+931:French loaf
+932:bagel
+933:pretzel
+934:cheeseburger
+935:hotdog
+936:mashed potato
+937:head cabbage
+938:broccoli
+939:cauliflower
+940:zucchini
+941:spaghetti squash
+942:acorn squash
+943:butternut squash
+944:cucumber
+945:artichoke
+946:bell pepper
+947:cardoon
+948:mushroom
+949:Granny Smith
+950:strawberry
+951:orange
+952:lemon
+953:fig
+954:pineapple
+955:banana
+956:jackfruit
+957:custard apple
+958:pomegranate
+959:hay
+960:carbonara
+961:chocolate sauce
+962:dough
+963:meat loaf
+964:pizza
+965:potpie
+966:burrito
+967:red wine
+968:espresso
+969:cup
+970:eggnog
+971:alp
+972:bubble
+973:cliff
+974:coral reef
+975:geyser
+976:lakeside
+977:promontory
+978:sandbar
+979:seashore
+980:valley
+981:volcano
+982:ballplayer
+983:groom
+984:scuba diver
+985:rapeseed
+986:daisy
+987:yellow lady's slipper
+988:corn
+989:acorn
+990:hip
+991:buckeye
+992:coral fungus
+993:agaric
+994:gyromitra
+995:stinkhorn
+996:earthstar
+997:hen-of-the-woods
+998:bolete
+999:ear
+1000:toilet tissue&lt;/p&gt;</description>
+			<enclosure url="http://zodoc.netlify.com/imgs_intro/imagenet_classes.jpg" length="0" type="image" />
+			<guid>http://zodoc.netlify.com/posts/cs/imagenet_classes</guid>
+			<pubDate>Sun, 02 Dec 2018 00:00:00 GMT</pubDate>
+			<content:encoded>&lt;pre&gt;&lt;code class="language-matlab"&gt;net = alexnet; % načíst síť
+ClassIndexes = string(num2cell(1:1000)'); % vytvořit stringy indexů 
+ClassNamesWithIndexes = strcat(ClassIndexes,repmat(&amp;quot;:&amp;quot;,1000, 1),net.Layers(end).ClassNames); % pospojit jména a indexy
+
+disp(ClassNamesWithIndexes) % Zobrazit výsledek
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h1 id="results"&gt;Results&lt;/h1&gt;
+&lt;p&gt;1:tench
+2:goldfish
+3:great white shark
+4:tiger shark
+5:hammerhead
+6:electric ray
+7:stingray
+8:cock
+9:hen
+10:ostrich
+11:brambling
+12:goldfinch
+13:house finch
+14:junco
+15:indigo bunting
+16:robin
+17:bulbul
+18:jay
+19:magpie
+20:chickadee
+21:water ouzel
+22:kite
+23:bald eagle
+24:vulture
+25:great grey owl
+26:European fire salamander
+27:common newt
+28:eft
+29:spotted salamander
+30:axolotl
+31:bullfrog
+32:tree frog
+33:tailed frog
+34:loggerhead
+35:leatherback turtle
+36:mud turtle
+37:terrapin
+38:box turtle
+39:banded gecko
+40:common iguana
+41:American chameleon
+42:whiptail
+43:agama
+44:frilled lizard
+45:alligator lizard
+46:Gila monster
+47:green lizard
+48:African chameleon
+49:Komodo dragon
+50:African crocodile
+51:American alligator
+52:triceratops
+53:thunder snake
+54:ringneck snake
+55:hognose snake
+56:green snake
+57:king snake
+58:garter snake
+59:water snake
+60:vine snake
+61:night snake
+62:boa constrictor
+63:rock python
+64:Indian cobra
+65:green mamba
+66:sea snake
+67:horned viper
+68:diamondback
+69:sidewinder
+70:trilobite
+71:harvestman
+72:scorpion
+73:black and gold garden spider
+74:barn spider
+75:garden spider
+76:black widow
+77:tarantula
+78:wolf spider
+79:tick
+80:centipede
+81:black grouse
+82:ptarmigan
+83:ruffed grouse
+84:prairie chicken
+85:peacock
+86:quail
+87:partridge
+88:African grey
+89:macaw
+90:sulphur-crested cockatoo
+91:lorikeet
+92:coucal
+93:bee eater
+94:hornbill
+95:hummingbird
+96:jacamar
+97:toucan
+98:drake
+99:red-breasted merganser
+100:goose
+101:black swan
+102:tusker
+103:echidna
+104:platypus
+105:wallaby
+106:koala
+107:wombat
+108:jellyfish
+109:sea anemone
+110:brain coral
+111:flatworm
+112:nematode
+113:conch
+114:snail
+115:slug
+116:sea slug
+117:chiton
+118:chambered nautilus
+119:Dungeness crab
+120:rock crab
+121:fiddler crab
+122:king crab
+123:American lobster
+124:spiny lobster
+125:crayfish
+126:hermit crab
+127:isopod
+128:white stork
+129:black stork
+130:spoonbill
+131:flamingo
+132:little blue heron
+133:American egret
+134:bittern
+135:crane
+136:limpkin
+137:European gallinule
+138:American coot
+139:bustard
+140:ruddy turnstone
+141:red-backed sandpiper
+142:redshank
+143:dowitcher
+144:oystercatcher
+145:pelican
+146:king penguin
+147:albatross
+148:grey whale
+149:killer whale
+150:dugong
+151:sea lion
+152:Chihuahua
+153:Japanese spaniel
+154:Maltese dog
+155:Pekinese
+156:Shih-Tzu
+157:Blenheim spaniel
+158:papillon
+159:toy terrier
+160:Rhodesian ridgeback
+161:Afghan hound
+162:basset
+163:beagle
+164:bloodhound
+165:bluetick
+166:black-and-tan coonhound
+167:Walker hound
+168:English foxhound
+169:redbone
+170:borzoi
+171:Irish wolfhound
+172:Italian greyhound
+173:whippet
+174:Ibizan hound
+175:Norwegian elkhound
+176:otterhound
+177:Saluki
+178:Scottish deerhound
+179:Weimaraner
+180:Staffordshire bullterrier
+181:American Staffordshire terrier
+182:Bedlington terrier
+183:Border terrier
+184:Kerry blue terrier
+185:Irish terrier
+186:Norfolk terrier
+187:Norwich terrier
+188:Yorkshire terrier
+189:wire-haired fox terrier
+190:Lakeland terrier
+191:Sealyham terrier
+192:Airedale
+193:cairn
+194:Australian terrier
+195:Dandie Dinmont
+196:Boston bull
+197:miniature schnauzer
+198:giant schnauzer
+199:standard schnauzer
+200:Scotch terrier
+201:Tibetan terrier
+202:silky terrier
+203:soft-coated wheaten terrier
+204:West Highland white terrier
+205:Lhasa
+206:flat-coated retriever
+207:curly-coated retriever
+208:golden retriever
+209:Labrador retriever
+210:Chesapeake Bay retriever
+211:German short-haired pointer
+212:vizsla
+213:English setter
+214:Irish setter
+215:Gordon setter
+216:Brittany spaniel
+217:clumber
+218:English springer
+219:Welsh springer spaniel
+220:cocker spaniel
+221:Sussex spaniel
+222:Irish water spaniel
+223:kuvasz
+224:schipperke
+225:groenendael
+226:malinois
+227:briard
+228:kelpie
+229:komondor
+230:Old English sheepdog
+231:Shetland sheepdog
+232:collie
+233:Border collie
+234:Bouvier des Flandres
+235:Rottweiler
+236:German shepherd
+237:Doberman
+238:miniature pinscher
+239:Greater Swiss Mountain dog
+240:Bernese mountain dog
+241:Appenzeller
+242:EntleBucher
+243:boxer
+244:bull mastiff
+245:Tibetan mastiff
+246:French bulldog
+247:Great Dane
+248:Saint Bernard
+249:Eskimo dog
+250:malamute
+251:Siberian husky
+252:dalmatian
+253:affenpinscher
+254:basenji
+255:pug
+256:Leonberg
+257:Newfoundland
+258:Great Pyrenees
+259:Samoyed
+260:Pomeranian
+261:chow
+262:keeshond
+263:Brabancon griffon
+264:Pembroke
+265:Cardigan
+266:toy poodle
+267:miniature poodle
+268:standard poodle
+269:Mexican hairless
+270:timber wolf
+271:white wolf
+272:red wolf
+273:coyote
+274:dingo
+275:dhole
+276:African hunting dog
+277:hyena
+278:red fox
+279:kit fox
+280:Arctic fox
+281:grey fox
+282:tabby
+283:tiger cat
+284:Persian cat
+285:Siamese cat
+286:Egyptian cat
+287:cougar
+288:lynx
+289:leopard
+290:snow leopard
+291:jaguar
+292:lion
+293:tiger
+294:cheetah
+295:brown bear
+296:American black bear
+297:ice bear
+298:sloth bear
+299:mongoose
+300:meerkat
+301:tiger beetle
+302:ladybug
+303:ground beetle
+304:long-horned beetle
+305:leaf beetle
+306:dung beetle
+307:rhinoceros beetle
+308:weevil
+309:fly
+310:bee
+311:ant
+312:grasshopper
+313:cricket
+314:walking stick
+315:cockroach
+316:mantis
+317:cicada
+318:leafhopper
+319:lacewing
+320:dragonfly
+321:damselfly
+322:admiral
+323:ringlet
+324:monarch
+325:cabbage butterfly
+326:sulphur butterfly
+327:lycaenid
+328:starfish
+329:sea urchin
+330:sea cucumber
+331:wood rabbit
+332:hare
+333:Angora
+334:hamster
+335:porcupine
+336:fox squirrel
+337:marmot
+338:beaver
+339:guinea pig
+340:sorrel
+341:zebra
+342:hog
+343:wild boar
+344:warthog
+345:hippopotamus
+346:ox
+347:water buffalo
+348:bison
+349:ram
+350:bighorn
+351:ibex
+352:hartebeest
+353:impala
+354:gazelle
+355:Arabian camel
+356:llama
+357:weasel
+358:mink
+359:polecat
+360:black-footed ferret
+361:otter
+362:skunk
+363:badger
+364:armadillo
+365:three-toed sloth
+366:orangutan
+367:gorilla
+368:chimpanzee
+369:gibbon
+370:siamang
+371:guenon
+372:patas
+373:baboon
+374:macaque
+375:langur
+376:colobus
+377:proboscis monkey
+378:marmoset
+379:capuchin
+380:howler monkey
+381:titi
+382:spider monkey
+383:squirrel monkey
+384:Madagascar cat
+385:indri
+386:Indian elephant
+387:African elephant
+388:lesser panda
+389:giant panda
+390:barracouta
+391:eel
+392:coho
+393:rock beauty
+394:anemone fish
+395:sturgeon
+396:gar
+397:lionfish
+398:puffer
+399:abacus
+400:abaya
+401:academic gown
+402:accordion
+403:acoustic guitar
+404:aircraft carrier
+405:airliner
+406:airship
+407:altar
+408:ambulance
+409:amphibian
+410:analog clock
+411:apiary
+412:apron
+413:ashcan
+414:assault rifle
+415:backpack
+416:bakery
+417:balance beam
+418:balloon
+419:ballpoint
+420:Band Aid
+421:banjo
+422:bannister
+423:barbell
+424:barber chair
+425:barbershop
+426:barn
+427:barometer
+428:barrel
+429:barrow
+430:baseball
+431:basketball
+432:bassinet
+433:bassoon
+434:bathing cap
+435:bath towel
+436:bathtub
+437:beach wagon
+438:beacon
+439:beaker
+440:bearskin
+441:beer bottle
+442:beer glass
+443:bell cote
+444:bib
+445:bicycle-built-for-two
+446:bikini
+447:binder
+448:binoculars
+449:birdhouse
+450:boathouse
+451:bobsled
+452:bolo tie
+453:bonnet
+454:bookcase
+455:bookshop
+456:bottlecap
+457:bow
+458:bow tie
+459:brass
+460:brassiere
+461:breakwater
+462:breastplate
+463:broom
+464:bucket
+465:buckle
+466:bulletproof vest
+467:bullet train
+468:butcher shop
+469:cab
+470:caldron
+471:candle
+472:cannon
+473:canoe
+474:can opener
+475:cardigan
+476:car mirror
+477:carousel
+478:carpenter's kit
+479:carton
+480:car wheel
+481:cash machine
+482:cassette
+483:cassette player
+484:castle
+485:catamaran
+486:CD player
+487:cello
+488:cellular telephone
+489:chain
+490:chainlink fence
+491:chain mail
+492:chain saw
+493:chest
+494:chiffonier
+495:chime
+496:china cabinet
+497:Christmas stocking
+498:church
+499:cinema
+500:cleaver
+501:cliff dwelling
+502:cloak
+503:clog
+504:cocktail shaker
+505:coffee mug
+506:coffeepot
+507:coil
+508:combination lock
+509:computer keyboard
+510:confectionery
+511:container ship
+512:convertible
+513:corkscrew
+514:cornet
+515:cowboy boot
+516:cowboy hat
+517:cradle
+518:crane (machine)
+519:crash helmet
+520:crate
+521:crib
+522:Crock Pot
+523:croquet ball
+524:crutch
+525:cuirass
+526:dam
+527:desk
+528:desktop computer
+529:dial telephone
+530:diaper
+531:digital clock
+532:digital watch
+533:dining table
+534:dishrag
+535:dishwasher
+536:disk brake
+537:dock
+538:dogsled
+539:dome
+540:doormat
+541:drilling platform
+542:drum
+543:drumstick
+544:dumbbell
+545:Dutch oven
+546:electric fan
+547:electric guitar
+548:electric locomotive
+549:entertainment center
+550:envelope
+551:espresso maker
+552:face powder
+553:feather boa
+554:file
+555:fireboat
+556:fire engine
+557:fire screen
+558:flagpole
+559:flute
+560:folding chair
+561:football helmet
+562:forklift
+563:fountain
+564:fountain pen
+565:four-poster
+566:freight car
+567:French horn
+568:frying pan
+569:fur coat
+570:garbage truck
+571:gasmask
+572:gas pump
+573:goblet
+574:go-kart
+575:golf ball
+576:golfcart
+577:gondola
+578:gong
+579:gown
+580:grand piano
+581:greenhouse
+582:grille
+583:grocery store
+584:guillotine
+585:hair slide
+586:hair spray
+587:half track
+588:hammer
+589:hamper
+590:hand blower
+591:hand-held computer
+592:handkerchief
+593:hard disc
+594:harmonica
+595:harp
+596:harvester
+597:hatchet
+598:holster
+599:home theater
+600:honeycomb
+601:hook
+602:hoopskirt
+603:horizontal bar
+604:horse cart
+605:hourglass
+606:iPod
+607:iron
+608:jack-o'-lantern
+609:jean
+610:jeep
+611:jersey
+612:jigsaw puzzle
+613:jinrikisha
+614:joystick
+615:kimono
+616:knee pad
+617:knot
+618:lab coat
+619:ladle
+620:lampshade
+621:laptop
+622:lawn mower
+623:lens cap
+624:letter opener
+625:library
+626:lifeboat
+627:lighter
+628:limousine
+629:liner
+630:lipstick
+631:Loafer
+632:lotion
+633:loudspeaker
+634:loupe
+635:lumbermill
+636:magnetic compass
+637:mailbag
+638:mailbox
+639:maillot
+640:maillot, tank suit
+641:manhole cover
+642:maraca
+643:marimba
+644:mask
+645:matchstick
+646:maypole
+647:maze
+648:measuring cup
+649:medicine chest
+650:megalith
+651:microphone
+652:microwave
+653:military uniform
+654:milk can
+655:minibus
+656:miniskirt
+657:minivan
+658:missile
+659:mitten
+660:mixing bowl
+661:mobile home
+662:Model T
+663:modem
+664:monastery
+665:monitor
+666:moped
+667:mortar
+668:mortarboard
+669:mosque
+670:mosquito net
+671:motor scooter
+672:mountain bike
+673:mountain tent
+674:mouse
+675:mousetrap
+676:moving van
+677:muzzle
+678:nail
+679:neck brace
+680:necklace
+681:nipple
+682:notebook
+683:obelisk
+684:oboe
+685:ocarina
+686:odometer
+687:oil filter
+688:organ
+689:oscilloscope
+690:overskirt
+691:oxcart
+692:oxygen mask
+693:packet
+694:paddle
+695:paddlewheel
+696:padlock
+697:paintbrush
+698:pajama
+699:palace
+700:panpipe
+701:paper towel
+702:parachute
+703:parallel bars
+704:park bench
+705:parking meter
+706:passenger car
+707:patio
+708:pay-phone
+709:pedestal
+710:pencil box
+711:pencil sharpener
+712:perfume
+713:Petri dish
+714:photocopier
+715:pick
+716:pickelhaube
+717:picket fence
+718:pickup
+719:pier
+720:piggy bank
+721:pill bottle
+722:pillow
+723:ping-pong ball
+724:pinwheel
+725:pirate
+726:pitcher
+727:plane
+728:planetarium
+729:plastic bag
+730:plate rack
+731:plow
+732:plunger
+733:Polaroid camera
+734:pole
+735:police van
+736:poncho
+737:pool table
+738:pop bottle
+739:pot
+740:potter's wheel
+741:power drill
+742:prayer rug
+743:printer
+744:prison
+745:projectile
+746:projector
+747:puck
+748:punching bag
+749:purse
+750:quill
+751:quilt
+752:racer
+753:racket
+754:radiator
+755:radio
+756:radio telescope
+757:rain barrel
+758:recreational vehicle
+759:reel
+760:reflex camera
+761:refrigerator
+762:remote control
+763:restaurant
+764:revolver
+765:rifle
+766:rocking chair
+767:rotisserie
+768:rubber eraser
+769:rugby ball
+770:rule
+771:running shoe
+772:safe
+773:safety pin
+774:saltshaker
+775:sandal
+776:sarong
+777:sax
+778:scabbard
+779:scale
+780:school bus
+781:schooner
+782:scoreboard
+783:screen
+784:screw
+785:screwdriver
+786:seat belt
+787:sewing machine
+788:shield
+789:shoe shop
+790:shoji
+791:shopping basket
+792:shopping cart
+793:shovel
+794:shower cap
+795:shower curtain
+796:ski
+797:ski mask
+798:sleeping bag
+799:slide rule
+800:sliding door
+801:slot
+802:snorkel
+803:snowmobile
+804:snowplow
+805:soap dispenser
+806:soccer ball
+807:sock
+808:solar dish
+809:sombrero
+810:soup bowl
+811:space bar
+812:space heater
+813:space shuttle
+814:spatula
+815:speedboat
+816:spider web
+817:spindle
+818:sports car
+819:spotlight
+820:stage
+821:steam locomotive
+822:steel arch bridge
+823:steel drum
+824:stethoscope
+825:stole
+826:stone wall
+827:stopwatch
+828:stove
+829:strainer
+830:streetcar
+831:stretcher
+832:studio couch
+833:stupa
+834:submarine
+835:suit
+836:sundial
+837:sunglass
+838:sunglasses
+839:sunscreen
+840:suspension bridge
+841:swab
+842:sweatshirt
+843:swimming trunks
+844:swing
+845:switch
+846:syringe
+847:table lamp
+848:tank
+849:tape player
+850:teapot
+851:teddy
+852:television
+853:tennis ball
+854:thatch
+855:theater curtain
+856:thimble
+857:thresher
+858:throne
+859:tile roof
+860:toaster
+861:tobacco shop
+862:toilet seat
+863:torch
+864:totem pole
+865:tow truck
+866:toyshop
+867:tractor
+868:trailer truck
+869:tray
+870:trench coat
+871:tricycle
+872:trimaran
+873:tripod
+874:triumphal arch
+875:trolleybus
+876:trombone
+877:tub
+878:turnstile
+879:typewriter keyboard
+880:umbrella
+881:unicycle
+882:upright
+883:vacuum
+884:vase
+885:vault
+886:velvet
+887:vending machine
+888:vestment
+889:viaduct
+890:violin
+891:volleyball
+892:waffle iron
+893:wall clock
+894:wallet
+895:wardrobe
+896:warplane
+897:washbasin
+898:washer
+899:water bottle
+900:water jug
+901:water tower
+902:whiskey jug
+903:whistle
+904:wig
+905:window screen
+906:window shade
+907:Windsor tie
+908:wine bottle
+909:wing
+910:wok
+911:wooden spoon
+912:wool
+913:worm fence
+914:wreck
+915:yawl
+916:yurt
+917:web site
+918:comic book
+919:crossword puzzle
+920:street sign
+921:traffic light
+922:book jacket
+923:menu
+924:plate
+925:guacamole
+926:consomme
+927:hot pot
+928:trifle
+929:ice cream
+930:ice lolly
+931:French loaf
+932:bagel
+933:pretzel
+934:cheeseburger
+935:hotdog
+936:mashed potato
+937:head cabbage
+938:broccoli
+939:cauliflower
+940:zucchini
+941:spaghetti squash
+942:acorn squash
+943:butternut squash
+944:cucumber
+945:artichoke
+946:bell pepper
+947:cardoon
+948:mushroom
+949:Granny Smith
+950:strawberry
+951:orange
+952:lemon
+953:fig
+954:pineapple
+955:banana
+956:jackfruit
+957:custard apple
+958:pomegranate
+959:hay
+960:carbonara
+961:chocolate sauce
+962:dough
+963:meat loaf
+964:pizza
+965:potpie
+966:burrito
+967:red wine
+968:espresso
+969:cup
+970:eggnog
+971:alp
+972:bubble
+973:cliff
+974:coral reef
+975:geyser
+976:lakeside
+977:promontory
+978:sandbar
+979:seashore
+980:valley
+981:volcano
+982:ballplayer
+983:groom
+984:scuba diver
+985:rapeseed
+986:daisy
+987:yellow lady's slipper
+988:corn
+989:acorn
+990:hip
+991:buckeye
+992:coral fungus
+993:agaric
+994:gyromitra
+995:stinkhorn
+996:earthstar
+997:hen-of-the-woods
+998:bolete
+999:ear
+1000:toilet tissue&lt;/p&gt;
+</content:encoded>
+		</item>
+		<item>
+			<title>1000 classes of ImageNet</title>
+			<link>http://zodoc.netlify.com/posts/en/imagenet_classes</link>
+			<description>&lt;p&gt;1:tench
+2:goldfish
+3:great white shark
+4:tiger shark
+5:hammerhead
+6:electric ray
+7:stingray
+8:cock
+9:hen
+10:ostrich
+11:brambling
+12:goldfinch
+13:house finch
+14:junco
+15:indigo bunting
+16:robin
+17:bulbul
+18:jay
+19:magpie
+20:chickadee
+21:water ouzel
+22:kite
+23:bald eagle
+24:vulture
+25:great grey owl
+26:European fire salamander
+27:common newt
+28:eft
+29:spotted salamander
+30:axolotl
+31:bullfrog
+32:tree frog
+33:tailed frog
+34:loggerhead
+35:leatherback turtle
+36:mud turtle
+37:terrapin
+38:box turtle
+39:banded gecko
+40:common iguana
+41:American chameleon
+42:whiptail
+43:agama
+44:frilled lizard
+45:alligator lizard
+46:Gila monster
+47:green lizard
+48:African chameleon
+49:Komodo dragon
+50:African crocodile
+51:American alligator
+52:triceratops
+53:thunder snake
+54:ringneck snake
+55:hognose snake
+56:green snake
+57:king snake
+58:garter snake
+59:water snake
+60:vine snake
+61:night snake
+62:boa constrictor
+63:rock python
+64:Indian cobra
+65:green mamba
+66:sea snake
+67:horned viper
+68:diamondback
+69:sidewinder
+70:trilobite
+71:harvestman
+72:scorpion
+73:black and gold garden spider
+74:barn spider
+75:garden spider
+76:black widow
+77:tarantula
+78:wolf spider
+79:tick
+80:centipede
+81:black grouse
+82:ptarmigan
+83:ruffed grouse
+84:prairie chicken
+85:peacock
+86:quail
+87:partridge
+88:African grey
+89:macaw
+90:sulphur-crested cockatoo
+91:lorikeet
+92:coucal
+93:bee eater
+94:hornbill
+95:hummingbird
+96:jacamar
+97:toucan
+98:drake
+99:red-breasted merganser
+100:goose
+101:black swan
+102:tusker
+103:echidna
+104:platypus
+105:wallaby
+106:koala
+107:wombat
+108:jellyfish
+109:sea anemone
+110:brain coral
+111:flatworm
+112:nematode
+113:conch
+114:snail
+115:slug
+116:sea slug
+117:chiton
+118:chambered nautilus
+119:Dungeness crab
+120:rock crab
+121:fiddler crab
+122:king crab
+123:American lobster
+124:spiny lobster
+125:crayfish
+126:hermit crab
+127:isopod
+128:white stork
+129:black stork
+130:spoonbill
+131:flamingo
+132:little blue heron
+133:American egret
+134:bittern
+135:crane
+136:limpkin
+137:European gallinule
+138:American coot
+139:bustard
+140:ruddy turnstone
+141:red-backed sandpiper
+142:redshank
+143:dowitcher
+144:oystercatcher
+145:pelican
+146:king penguin
+147:albatross
+148:grey whale
+149:killer whale
+150:dugong
+151:sea lion
+152:Chihuahua
+153:Japanese spaniel
+154:Maltese dog
+155:Pekinese
+156:Shih-Tzu
+157:Blenheim spaniel
+158:papillon
+159:toy terrier
+160:Rhodesian ridgeback
+161:Afghan hound
+162:basset
+163:beagle
+164:bloodhound
+165:bluetick
+166:black-and-tan coonhound
+167:Walker hound
+168:English foxhound
+169:redbone
+170:borzoi
+171:Irish wolfhound
+172:Italian greyhound
+173:whippet
+174:Ibizan hound
+175:Norwegian elkhound
+176:otterhound
+177:Saluki
+178:Scottish deerhound
+179:Weimaraner
+180:Staffordshire bullterrier
+181:American Staffordshire terrier
+182:Bedlington terrier
+183:Border terrier
+184:Kerry blue terrier
+185:Irish terrier
+186:Norfolk terrier
+187:Norwich terrier
+188:Yorkshire terrier
+189:wire-haired fox terrier
+190:Lakeland terrier
+191:Sealyham terrier
+192:Airedale
+193:cairn
+194:Australian terrier
+195:Dandie Dinmont
+196:Boston bull
+197:miniature schnauzer
+198:giant schnauzer
+199:standard schnauzer
+200:Scotch terrier
+201:Tibetan terrier
+202:silky terrier
+203:soft-coated wheaten terrier
+204:West Highland white terrier
+205:Lhasa
+206:flat-coated retriever
+207:curly-coated retriever
+208:golden retriever
+209:Labrador retriever
+210:Chesapeake Bay retriever
+211:German short-haired pointer
+212:vizsla
+213:English setter
+214:Irish setter
+215:Gordon setter
+216:Brittany spaniel
+217:clumber
+218:English springer
+219:Welsh springer spaniel
+220:cocker spaniel
+221:Sussex spaniel
+222:Irish water spaniel
+223:kuvasz
+224:schipperke
+225:groenendael
+226:malinois
+227:briard
+228:kelpie
+229:komondor
+230:Old English sheepdog
+231:Shetland sheepdog
+232:collie
+233:Border collie
+234:Bouvier des Flandres
+235:Rottweiler
+236:German shepherd
+237:Doberman
+238:miniature pinscher
+239:Greater Swiss Mountain dog
+240:Bernese mountain dog
+241:Appenzeller
+242:EntleBucher
+243:boxer
+244:bull mastiff
+245:Tibetan mastiff
+246:French bulldog
+247:Great Dane
+248:Saint Bernard
+249:Eskimo dog
+250:malamute
+251:Siberian husky
+252:dalmatian
+253:affenpinscher
+254:basenji
+255:pug
+256:Leonberg
+257:Newfoundland
+258:Great Pyrenees
+259:Samoyed
+260:Pomeranian
+261:chow
+262:keeshond
+263:Brabancon griffon
+264:Pembroke
+265:Cardigan
+266:toy poodle
+267:miniature poodle
+268:standard poodle
+269:Mexican hairless
+270:timber wolf
+271:white wolf
+272:red wolf
+273:coyote
+274:dingo
+275:dhole
+276:African hunting dog
+277:hyena
+278:red fox
+279:kit fox
+280:Arctic fox
+281:grey fox
+282:tabby
+283:tiger cat
+284:Persian cat
+285:Siamese cat
+286:Egyptian cat
+287:cougar
+288:lynx
+289:leopard
+290:snow leopard
+291:jaguar
+292:lion
+293:tiger
+294:cheetah
+295:brown bear
+296:American black bear
+297:ice bear
+298:sloth bear
+299:mongoose
+300:meerkat
+301:tiger beetle
+302:ladybug
+303:ground beetle
+304:long-horned beetle
+305:leaf beetle
+306:dung beetle
+307:rhinoceros beetle
+308:weevil
+309:fly
+310:bee
+311:ant
+312:grasshopper
+313:cricket
+314:walking stick
+315:cockroach
+316:mantis
+317:cicada
+318:leafhopper
+319:lacewing
+320:dragonfly
+321:damselfly
+322:admiral
+323:ringlet
+324:monarch
+325:cabbage butterfly
+326:sulphur butterfly
+327:lycaenid
+328:starfish
+329:sea urchin
+330:sea cucumber
+331:wood rabbit
+332:hare
+333:Angora
+334:hamster
+335:porcupine
+336:fox squirrel
+337:marmot
+338:beaver
+339:guinea pig
+340:sorrel
+341:zebra
+342:hog
+343:wild boar
+344:warthog
+345:hippopotamus
+346:ox
+347:water buffalo
+348:bison
+349:ram
+350:bighorn
+351:ibex
+352:hartebeest
+353:impala
+354:gazelle
+355:Arabian camel
+356:llama
+357:weasel
+358:mink
+359:polecat
+360:black-footed ferret
+361:otter
+362:skunk
+363:badger
+364:armadillo
+365:three-toed sloth
+366:orangutan
+367:gorilla
+368:chimpanzee
+369:gibbon
+370:siamang
+371:guenon
+372:patas
+373:baboon
+374:macaque
+375:langur
+376:colobus
+377:proboscis monkey
+378:marmoset
+379:capuchin
+380:howler monkey
+381:titi
+382:spider monkey
+383:squirrel monkey
+384:Madagascar cat
+385:indri
+386:Indian elephant
+387:African elephant
+388:lesser panda
+389:giant panda
+390:barracouta
+391:eel
+392:coho
+393:rock beauty
+394:anemone fish
+395:sturgeon
+396:gar
+397:lionfish
+398:puffer
+399:abacus
+400:abaya
+401:academic gown
+402:accordion
+403:acoustic guitar
+404:aircraft carrier
+405:airliner
+406:airship
+407:altar
+408:ambulance
+409:amphibian
+410:analog clock
+411:apiary
+412:apron
+413:ashcan
+414:assault rifle
+415:backpack
+416:bakery
+417:balance beam
+418:balloon
+419:ballpoint
+420:Band Aid
+421:banjo
+422:bannister
+423:barbell
+424:barber chair
+425:barbershop
+426:barn
+427:barometer
+428:barrel
+429:barrow
+430:baseball
+431:basketball
+432:bassinet
+433:bassoon
+434:bathing cap
+435:bath towel
+436:bathtub
+437:beach wagon
+438:beacon
+439:beaker
+440:bearskin
+441:beer bottle
+442:beer glass
+443:bell cote
+444:bib
+445:bicycle-built-for-two
+446:bikini
+447:binder
+448:binoculars
+449:birdhouse
+450:boathouse
+451:bobsled
+452:bolo tie
+453:bonnet
+454:bookcase
+455:bookshop
+456:bottlecap
+457:bow
+458:bow tie
+459:brass
+460:brassiere
+461:breakwater
+462:breastplate
+463:broom
+464:bucket
+465:buckle
+466:bulletproof vest
+467:bullet train
+468:butcher shop
+469:cab
+470:caldron
+471:candle
+472:cannon
+473:canoe
+474:can opener
+475:cardigan
+476:car mirror
+477:carousel
+478:carpenter's kit
+479:carton
+480:car wheel
+481:cash machine
+482:cassette
+483:cassette player
+484:castle
+485:catamaran
+486:CD player
+487:cello
+488:cellular telephone
+489:chain
+490:chainlink fence
+491:chain mail
+492:chain saw
+493:chest
+494:chiffonier
+495:chime
+496:china cabinet
+497:Christmas stocking
+498:church
+499:cinema
+500:cleaver
+501:cliff dwelling
+502:cloak
+503:clog
+504:cocktail shaker
+505:coffee mug
+506:coffeepot
+507:coil
+508:combination lock
+509:computer keyboard
+510:confectionery
+511:container ship
+512:convertible
+513:corkscrew
+514:cornet
+515:cowboy boot
+516:cowboy hat
+517:cradle
+518:crane (machine)
+519:crash helmet
+520:crate
+521:crib
+522:Crock Pot
+523:croquet ball
+524:crutch
+525:cuirass
+526:dam
+527:desk
+528:desktop computer
+529:dial telephone
+530:diaper
+531:digital clock
+532:digital watch
+533:dining table
+534:dishrag
+535:dishwasher
+536:disk brake
+537:dock
+538:dogsled
+539:dome
+540:doormat
+541:drilling platform
+542:drum
+543:drumstick
+544:dumbbell
+545:Dutch oven
+546:electric fan
+547:electric guitar
+548:electric locomotive
+549:entertainment center
+550:envelope
+551:espresso maker
+552:face powder
+553:feather boa
+554:file
+555:fireboat
+556:fire engine
+557:fire screen
+558:flagpole
+559:flute
+560:folding chair
+561:football helmet
+562:forklift
+563:fountain
+564:fountain pen
+565:four-poster
+566:freight car
+567:French horn
+568:frying pan
+569:fur coat
+570:garbage truck
+571:gasmask
+572:gas pump
+573:goblet
+574:go-kart
+575:golf ball
+576:golfcart
+577:gondola
+578:gong
+579:gown
+580:grand piano
+581:greenhouse
+582:grille
+583:grocery store
+584:guillotine
+585:hair slide
+586:hair spray
+587:half track
+588:hammer
+589:hamper
+590:hand blower
+591:hand-held computer
+592:handkerchief
+593:hard disc
+594:harmonica
+595:harp
+596:harvester
+597:hatchet
+598:holster
+599:home theater
+600:honeycomb
+601:hook
+602:hoopskirt
+603:horizontal bar
+604:horse cart
+605:hourglass
+606:iPod
+607:iron
+608:jack-o'-lantern
+609:jean
+610:jeep
+611:jersey
+612:jigsaw puzzle
+613:jinrikisha
+614:joystick
+615:kimono
+616:knee pad
+617:knot
+618:lab coat
+619:ladle
+620:lampshade
+621:laptop
+622:lawn mower
+623:lens cap
+624:letter opener
+625:library
+626:lifeboat
+627:lighter
+628:limousine
+629:liner
+630:lipstick
+631:Loafer
+632:lotion
+633:loudspeaker
+634:loupe
+635:lumbermill
+636:magnetic compass
+637:mailbag
+638:mailbox
+639:maillot
+640:maillot, tank suit
+641:manhole cover
+642:maraca
+643:marimba
+644:mask
+645:matchstick
+646:maypole
+647:maze
+648:measuring cup
+649:medicine chest
+650:megalith
+651:microphone
+652:microwave
+653:military uniform
+654:milk can
+655:minibus
+656:miniskirt
+657:minivan
+658:missile
+659:mitten
+660:mixing bowl
+661:mobile home
+662:Model T
+663:modem
+664:monastery
+665:monitor
+666:moped
+667:mortar
+668:mortarboard
+669:mosque
+670:mosquito net
+671:motor scooter
+672:mountain bike
+673:mountain tent
+674:mouse
+675:mousetrap
+676:moving van
+677:muzzle
+678:nail
+679:neck brace
+680:necklace
+681:nipple
+682:notebook
+683:obelisk
+684:oboe
+685:ocarina
+686:odometer
+687:oil filter
+688:organ
+689:oscilloscope
+690:overskirt
+691:oxcart
+692:oxygen mask
+693:packet
+694:paddle
+695:paddlewheel
+696:padlock
+697:paintbrush
+698:pajama
+699:palace
+700:panpipe
+701:paper towel
+702:parachute
+703:parallel bars
+704:park bench
+705:parking meter
+706:passenger car
+707:patio
+708:pay-phone
+709:pedestal
+710:pencil box
+711:pencil sharpener
+712:perfume
+713:Petri dish
+714:photocopier
+715:pick
+716:pickelhaube
+717:picket fence
+718:pickup
+719:pier
+720:piggy bank
+721:pill bottle
+722:pillow
+723:ping-pong ball
+724:pinwheel
+725:pirate
+726:pitcher
+727:plane
+728:planetarium
+729:plastic bag
+730:plate rack
+731:plow
+732:plunger
+733:Polaroid camera
+734:pole
+735:police van
+736:poncho
+737:pool table
+738:pop bottle
+739:pot
+740:potter's wheel
+741:power drill
+742:prayer rug
+743:printer
+744:prison
+745:projectile
+746:projector
+747:puck
+748:punching bag
+749:purse
+750:quill
+751:quilt
+752:racer
+753:racket
+754:radiator
+755:radio
+756:radio telescope
+757:rain barrel
+758:recreational vehicle
+759:reel
+760:reflex camera
+761:refrigerator
+762:remote control
+763:restaurant
+764:revolver
+765:rifle
+766:rocking chair
+767:rotisserie
+768:rubber eraser
+769:rugby ball
+770:rule
+771:running shoe
+772:safe
+773:safety pin
+774:saltshaker
+775:sandal
+776:sarong
+777:sax
+778:scabbard
+779:scale
+780:school bus
+781:schooner
+782:scoreboard
+783:screen
+784:screw
+785:screwdriver
+786:seat belt
+787:sewing machine
+788:shield
+789:shoe shop
+790:shoji
+791:shopping basket
+792:shopping cart
+793:shovel
+794:shower cap
+795:shower curtain
+796:ski
+797:ski mask
+798:sleeping bag
+799:slide rule
+800:sliding door
+801:slot
+802:snorkel
+803:snowmobile
+804:snowplow
+805:soap dispenser
+806:soccer ball
+807:sock
+808:solar dish
+809:sombrero
+810:soup bowl
+811:space bar
+812:space heater
+813:space shuttle
+814:spatula
+815:speedboat
+816:spider web
+817:spindle
+818:sports car
+819:spotlight
+820:stage
+821:steam locomotive
+822:steel arch bridge
+823:steel drum
+824:stethoscope
+825:stole
+826:stone wall
+827:stopwatch
+828:stove
+829:strainer
+830:streetcar
+831:stretcher
+832:studio couch
+833:stupa
+834:submarine
+835:suit
+836:sundial
+837:sunglass
+838:sunglasses
+839:sunscreen
+840:suspension bridge
+841:swab
+842:sweatshirt
+843:swimming trunks
+844:swing
+845:switch
+846:syringe
+847:table lamp
+848:tank
+849:tape player
+850:teapot
+851:teddy
+852:television
+853:tennis ball
+854:thatch
+855:theater curtain
+856:thimble
+857:thresher
+858:throne
+859:tile roof
+860:toaster
+861:tobacco shop
+862:toilet seat
+863:torch
+864:totem pole
+865:tow truck
+866:toyshop
+867:tractor
+868:trailer truck
+869:tray
+870:trench coat
+871:tricycle
+872:trimaran
+873:tripod
+874:triumphal arch
+875:trolleybus
+876:trombone
+877:tub
+878:turnstile
+879:typewriter keyboard
+880:umbrella
+881:unicycle
+882:upright
+883:vacuum
+884:vase
+885:vault
+886:velvet
+887:vending machine
+888:vestment
+889:viaduct
+890:violin
+891:volleyball
+892:waffle iron
+893:wall clock
+894:wallet
+895:wardrobe
+896:warplane
+897:washbasin
+898:washer
+899:water bottle
+900:water jug
+901:water tower
+902:whiskey jug
+903:whistle
+904:wig
+905:window screen
+906:window shade
+907:Windsor tie
+908:wine bottle
+909:wing
+910:wok
+911:wooden spoon
+912:wool
+913:worm fence
+914:wreck
+915:yawl
+916:yurt
+917:web site
+918:comic book
+919:crossword puzzle
+920:street sign
+921:traffic light
+922:book jacket
+923:menu
+924:plate
+925:guacamole
+926:consomme
+927:hot pot
+928:trifle
+929:ice cream
+930:ice lolly
+931:French loaf
+932:bagel
+933:pretzel
+934:cheeseburger
+935:hotdog
+936:mashed potato
+937:head cabbage
+938:broccoli
+939:cauliflower
+940:zucchini
+941:spaghetti squash
+942:acorn squash
+943:butternut squash
+944:cucumber
+945:artichoke
+946:bell pepper
+947:cardoon
+948:mushroom
+949:Granny Smith
+950:strawberry
+951:orange
+952:lemon
+953:fig
+954:pineapple
+955:banana
+956:jackfruit
+957:custard apple
+958:pomegranate
+959:hay
+960:carbonara
+961:chocolate sauce
+962:dough
+963:meat loaf
+964:pizza
+965:potpie
+966:burrito
+967:red wine
+968:espresso
+969:cup
+970:eggnog
+971:alp
+972:bubble
+973:cliff
+974:coral reef
+975:geyser
+976:lakeside
+977:promontory
+978:sandbar
+979:seashore
+980:valley
+981:volcano
+982:ballplayer
+983:groom
+984:scuba diver
+985:rapeseed
+986:daisy
+987:yellow lady's slipper
+988:corn
+989:acorn
+990:hip
+991:buckeye
+992:coral fungus
+993:agaric
+994:gyromitra
+995:stinkhorn
+996:earthstar
+997:hen-of-the-woods
+998:bolete
+999:ear
+1000:toilet tissue&lt;/p&gt;</description>
+			<enclosure url="http://zodoc.netlify.com/imgs_intro/imagenet_classes.jpg" length="0" type="image" />
+			<guid>http://zodoc.netlify.com/posts/en/imagenet_classes</guid>
+			<pubDate>Sun, 02 Dec 2018 00:00:00 GMT</pubDate>
+			<content:encoded>&lt;pre&gt;&lt;code class="language-matlab"&gt;net = alexnet; % load a network
+ClassIndexes = string(num2cell(1:1000)'); % indexes to string
+ClassNamesWithIndexes = strcat(ClassIndexes,repmat(&amp;quot;:&amp;quot;,1000, 1),net.Layers(end).ClassNames); % concatenate names and indexes
+
+disp(ClassNamesWithIndexes) % Display result
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h1 id="results"&gt;Results&lt;/h1&gt;
+&lt;p&gt;1:tench
+2:goldfish
+3:great white shark
+4:tiger shark
+5:hammerhead
+6:electric ray
+7:stingray
+8:cock
+9:hen
+10:ostrich
+11:brambling
+12:goldfinch
+13:house finch
+14:junco
+15:indigo bunting
+16:robin
+17:bulbul
+18:jay
+19:magpie
+20:chickadee
+21:water ouzel
+22:kite
+23:bald eagle
+24:vulture
+25:great grey owl
+26:European fire salamander
+27:common newt
+28:eft
+29:spotted salamander
+30:axolotl
+31:bullfrog
+32:tree frog
+33:tailed frog
+34:loggerhead
+35:leatherback turtle
+36:mud turtle
+37:terrapin
+38:box turtle
+39:banded gecko
+40:common iguana
+41:American chameleon
+42:whiptail
+43:agama
+44:frilled lizard
+45:alligator lizard
+46:Gila monster
+47:green lizard
+48:African chameleon
+49:Komodo dragon
+50:African crocodile
+51:American alligator
+52:triceratops
+53:thunder snake
+54:ringneck snake
+55:hognose snake
+56:green snake
+57:king snake
+58:garter snake
+59:water snake
+60:vine snake
+61:night snake
+62:boa constrictor
+63:rock python
+64:Indian cobra
+65:green mamba
+66:sea snake
+67:horned viper
+68:diamondback
+69:sidewinder
+70:trilobite
+71:harvestman
+72:scorpion
+73:black and gold garden spider
+74:barn spider
+75:garden spider
+76:black widow
+77:tarantula
+78:wolf spider
+79:tick
+80:centipede
+81:black grouse
+82:ptarmigan
+83:ruffed grouse
+84:prairie chicken
+85:peacock
+86:quail
+87:partridge
+88:African grey
+89:macaw
+90:sulphur-crested cockatoo
+91:lorikeet
+92:coucal
+93:bee eater
+94:hornbill
+95:hummingbird
+96:jacamar
+97:toucan
+98:drake
+99:red-breasted merganser
+100:goose
+101:black swan
+102:tusker
+103:echidna
+104:platypus
+105:wallaby
+106:koala
+107:wombat
+108:jellyfish
+109:sea anemone
+110:brain coral
+111:flatworm
+112:nematode
+113:conch
+114:snail
+115:slug
+116:sea slug
+117:chiton
+118:chambered nautilus
+119:Dungeness crab
+120:rock crab
+121:fiddler crab
+122:king crab
+123:American lobster
+124:spiny lobster
+125:crayfish
+126:hermit crab
+127:isopod
+128:white stork
+129:black stork
+130:spoonbill
+131:flamingo
+132:little blue heron
+133:American egret
+134:bittern
+135:crane
+136:limpkin
+137:European gallinule
+138:American coot
+139:bustard
+140:ruddy turnstone
+141:red-backed sandpiper
+142:redshank
+143:dowitcher
+144:oystercatcher
+145:pelican
+146:king penguin
+147:albatross
+148:grey whale
+149:killer whale
+150:dugong
+151:sea lion
+152:Chihuahua
+153:Japanese spaniel
+154:Maltese dog
+155:Pekinese
+156:Shih-Tzu
+157:Blenheim spaniel
+158:papillon
+159:toy terrier
+160:Rhodesian ridgeback
+161:Afghan hound
+162:basset
+163:beagle
+164:bloodhound
+165:bluetick
+166:black-and-tan coonhound
+167:Walker hound
+168:English foxhound
+169:redbone
+170:borzoi
+171:Irish wolfhound
+172:Italian greyhound
+173:whippet
+174:Ibizan hound
+175:Norwegian elkhound
+176:otterhound
+177:Saluki
+178:Scottish deerhound
+179:Weimaraner
+180:Staffordshire bullterrier
+181:American Staffordshire terrier
+182:Bedlington terrier
+183:Border terrier
+184:Kerry blue terrier
+185:Irish terrier
+186:Norfolk terrier
+187:Norwich terrier
+188:Yorkshire terrier
+189:wire-haired fox terrier
+190:Lakeland terrier
+191:Sealyham terrier
+192:Airedale
+193:cairn
+194:Australian terrier
+195:Dandie Dinmont
+196:Boston bull
+197:miniature schnauzer
+198:giant schnauzer
+199:standard schnauzer
+200:Scotch terrier
+201:Tibetan terrier
+202:silky terrier
+203:soft-coated wheaten terrier
+204:West Highland white terrier
+205:Lhasa
+206:flat-coated retriever
+207:curly-coated retriever
+208:golden retriever
+209:Labrador retriever
+210:Chesapeake Bay retriever
+211:German short-haired pointer
+212:vizsla
+213:English setter
+214:Irish setter
+215:Gordon setter
+216:Brittany spaniel
+217:clumber
+218:English springer
+219:Welsh springer spaniel
+220:cocker spaniel
+221:Sussex spaniel
+222:Irish water spaniel
+223:kuvasz
+224:schipperke
+225:groenendael
+226:malinois
+227:briard
+228:kelpie
+229:komondor
+230:Old English sheepdog
+231:Shetland sheepdog
+232:collie
+233:Border collie
+234:Bouvier des Flandres
+235:Rottweiler
+236:German shepherd
+237:Doberman
+238:miniature pinscher
+239:Greater Swiss Mountain dog
+240:Bernese mountain dog
+241:Appenzeller
+242:EntleBucher
+243:boxer
+244:bull mastiff
+245:Tibetan mastiff
+246:French bulldog
+247:Great Dane
+248:Saint Bernard
+249:Eskimo dog
+250:malamute
+251:Siberian husky
+252:dalmatian
+253:affenpinscher
+254:basenji
+255:pug
+256:Leonberg
+257:Newfoundland
+258:Great Pyrenees
+259:Samoyed
+260:Pomeranian
+261:chow
+262:keeshond
+263:Brabancon griffon
+264:Pembroke
+265:Cardigan
+266:toy poodle
+267:miniature poodle
+268:standard poodle
+269:Mexican hairless
+270:timber wolf
+271:white wolf
+272:red wolf
+273:coyote
+274:dingo
+275:dhole
+276:African hunting dog
+277:hyena
+278:red fox
+279:kit fox
+280:Arctic fox
+281:grey fox
+282:tabby
+283:tiger cat
+284:Persian cat
+285:Siamese cat
+286:Egyptian cat
+287:cougar
+288:lynx
+289:leopard
+290:snow leopard
+291:jaguar
+292:lion
+293:tiger
+294:cheetah
+295:brown bear
+296:American black bear
+297:ice bear
+298:sloth bear
+299:mongoose
+300:meerkat
+301:tiger beetle
+302:ladybug
+303:ground beetle
+304:long-horned beetle
+305:leaf beetle
+306:dung beetle
+307:rhinoceros beetle
+308:weevil
+309:fly
+310:bee
+311:ant
+312:grasshopper
+313:cricket
+314:walking stick
+315:cockroach
+316:mantis
+317:cicada
+318:leafhopper
+319:lacewing
+320:dragonfly
+321:damselfly
+322:admiral
+323:ringlet
+324:monarch
+325:cabbage butterfly
+326:sulphur butterfly
+327:lycaenid
+328:starfish
+329:sea urchin
+330:sea cucumber
+331:wood rabbit
+332:hare
+333:Angora
+334:hamster
+335:porcupine
+336:fox squirrel
+337:marmot
+338:beaver
+339:guinea pig
+340:sorrel
+341:zebra
+342:hog
+343:wild boar
+344:warthog
+345:hippopotamus
+346:ox
+347:water buffalo
+348:bison
+349:ram
+350:bighorn
+351:ibex
+352:hartebeest
+353:impala
+354:gazelle
+355:Arabian camel
+356:llama
+357:weasel
+358:mink
+359:polecat
+360:black-footed ferret
+361:otter
+362:skunk
+363:badger
+364:armadillo
+365:three-toed sloth
+366:orangutan
+367:gorilla
+368:chimpanzee
+369:gibbon
+370:siamang
+371:guenon
+372:patas
+373:baboon
+374:macaque
+375:langur
+376:colobus
+377:proboscis monkey
+378:marmoset
+379:capuchin
+380:howler monkey
+381:titi
+382:spider monkey
+383:squirrel monkey
+384:Madagascar cat
+385:indri
+386:Indian elephant
+387:African elephant
+388:lesser panda
+389:giant panda
+390:barracouta
+391:eel
+392:coho
+393:rock beauty
+394:anemone fish
+395:sturgeon
+396:gar
+397:lionfish
+398:puffer
+399:abacus
+400:abaya
+401:academic gown
+402:accordion
+403:acoustic guitar
+404:aircraft carrier
+405:airliner
+406:airship
+407:altar
+408:ambulance
+409:amphibian
+410:analog clock
+411:apiary
+412:apron
+413:ashcan
+414:assault rifle
+415:backpack
+416:bakery
+417:balance beam
+418:balloon
+419:ballpoint
+420:Band Aid
+421:banjo
+422:bannister
+423:barbell
+424:barber chair
+425:barbershop
+426:barn
+427:barometer
+428:barrel
+429:barrow
+430:baseball
+431:basketball
+432:bassinet
+433:bassoon
+434:bathing cap
+435:bath towel
+436:bathtub
+437:beach wagon
+438:beacon
+439:beaker
+440:bearskin
+441:beer bottle
+442:beer glass
+443:bell cote
+444:bib
+445:bicycle-built-for-two
+446:bikini
+447:binder
+448:binoculars
+449:birdhouse
+450:boathouse
+451:bobsled
+452:bolo tie
+453:bonnet
+454:bookcase
+455:bookshop
+456:bottlecap
+457:bow
+458:bow tie
+459:brass
+460:brassiere
+461:breakwater
+462:breastplate
+463:broom
+464:bucket
+465:buckle
+466:bulletproof vest
+467:bullet train
+468:butcher shop
+469:cab
+470:caldron
+471:candle
+472:cannon
+473:canoe
+474:can opener
+475:cardigan
+476:car mirror
+477:carousel
+478:carpenter's kit
+479:carton
+480:car wheel
+481:cash machine
+482:cassette
+483:cassette player
+484:castle
+485:catamaran
+486:CD player
+487:cello
+488:cellular telephone
+489:chain
+490:chainlink fence
+491:chain mail
+492:chain saw
+493:chest
+494:chiffonier
+495:chime
+496:china cabinet
+497:Christmas stocking
+498:church
+499:cinema
+500:cleaver
+501:cliff dwelling
+502:cloak
+503:clog
+504:cocktail shaker
+505:coffee mug
+506:coffeepot
+507:coil
+508:combination lock
+509:computer keyboard
+510:confectionery
+511:container ship
+512:convertible
+513:corkscrew
+514:cornet
+515:cowboy boot
+516:cowboy hat
+517:cradle
+518:crane (machine)
+519:crash helmet
+520:crate
+521:crib
+522:Crock Pot
+523:croquet ball
+524:crutch
+525:cuirass
+526:dam
+527:desk
+528:desktop computer
+529:dial telephone
+530:diaper
+531:digital clock
+532:digital watch
+533:dining table
+534:dishrag
+535:dishwasher
+536:disk brake
+537:dock
+538:dogsled
+539:dome
+540:doormat
+541:drilling platform
+542:drum
+543:drumstick
+544:dumbbell
+545:Dutch oven
+546:electric fan
+547:electric guitar
+548:electric locomotive
+549:entertainment center
+550:envelope
+551:espresso maker
+552:face powder
+553:feather boa
+554:file
+555:fireboat
+556:fire engine
+557:fire screen
+558:flagpole
+559:flute
+560:folding chair
+561:football helmet
+562:forklift
+563:fountain
+564:fountain pen
+565:four-poster
+566:freight car
+567:French horn
+568:frying pan
+569:fur coat
+570:garbage truck
+571:gasmask
+572:gas pump
+573:goblet
+574:go-kart
+575:golf ball
+576:golfcart
+577:gondola
+578:gong
+579:gown
+580:grand piano
+581:greenhouse
+582:grille
+583:grocery store
+584:guillotine
+585:hair slide
+586:hair spray
+587:half track
+588:hammer
+589:hamper
+590:hand blower
+591:hand-held computer
+592:handkerchief
+593:hard disc
+594:harmonica
+595:harp
+596:harvester
+597:hatchet
+598:holster
+599:home theater
+600:honeycomb
+601:hook
+602:hoopskirt
+603:horizontal bar
+604:horse cart
+605:hourglass
+606:iPod
+607:iron
+608:jack-o'-lantern
+609:jean
+610:jeep
+611:jersey
+612:jigsaw puzzle
+613:jinrikisha
+614:joystick
+615:kimono
+616:knee pad
+617:knot
+618:lab coat
+619:ladle
+620:lampshade
+621:laptop
+622:lawn mower
+623:lens cap
+624:letter opener
+625:library
+626:lifeboat
+627:lighter
+628:limousine
+629:liner
+630:lipstick
+631:Loafer
+632:lotion
+633:loudspeaker
+634:loupe
+635:lumbermill
+636:magnetic compass
+637:mailbag
+638:mailbox
+639:maillot
+640:maillot, tank suit
+641:manhole cover
+642:maraca
+643:marimba
+644:mask
+645:matchstick
+646:maypole
+647:maze
+648:measuring cup
+649:medicine chest
+650:megalith
+651:microphone
+652:microwave
+653:military uniform
+654:milk can
+655:minibus
+656:miniskirt
+657:minivan
+658:missile
+659:mitten
+660:mixing bowl
+661:mobile home
+662:Model T
+663:modem
+664:monastery
+665:monitor
+666:moped
+667:mortar
+668:mortarboard
+669:mosque
+670:mosquito net
+671:motor scooter
+672:mountain bike
+673:mountain tent
+674:mouse
+675:mousetrap
+676:moving van
+677:muzzle
+678:nail
+679:neck brace
+680:necklace
+681:nipple
+682:notebook
+683:obelisk
+684:oboe
+685:ocarina
+686:odometer
+687:oil filter
+688:organ
+689:oscilloscope
+690:overskirt
+691:oxcart
+692:oxygen mask
+693:packet
+694:paddle
+695:paddlewheel
+696:padlock
+697:paintbrush
+698:pajama
+699:palace
+700:panpipe
+701:paper towel
+702:parachute
+703:parallel bars
+704:park bench
+705:parking meter
+706:passenger car
+707:patio
+708:pay-phone
+709:pedestal
+710:pencil box
+711:pencil sharpener
+712:perfume
+713:Petri dish
+714:photocopier
+715:pick
+716:pickelhaube
+717:picket fence
+718:pickup
+719:pier
+720:piggy bank
+721:pill bottle
+722:pillow
+723:ping-pong ball
+724:pinwheel
+725:pirate
+726:pitcher
+727:plane
+728:planetarium
+729:plastic bag
+730:plate rack
+731:plow
+732:plunger
+733:Polaroid camera
+734:pole
+735:police van
+736:poncho
+737:pool table
+738:pop bottle
+739:pot
+740:potter's wheel
+741:power drill
+742:prayer rug
+743:printer
+744:prison
+745:projectile
+746:projector
+747:puck
+748:punching bag
+749:purse
+750:quill
+751:quilt
+752:racer
+753:racket
+754:radiator
+755:radio
+756:radio telescope
+757:rain barrel
+758:recreational vehicle
+759:reel
+760:reflex camera
+761:refrigerator
+762:remote control
+763:restaurant
+764:revolver
+765:rifle
+766:rocking chair
+767:rotisserie
+768:rubber eraser
+769:rugby ball
+770:rule
+771:running shoe
+772:safe
+773:safety pin
+774:saltshaker
+775:sandal
+776:sarong
+777:sax
+778:scabbard
+779:scale
+780:school bus
+781:schooner
+782:scoreboard
+783:screen
+784:screw
+785:screwdriver
+786:seat belt
+787:sewing machine
+788:shield
+789:shoe shop
+790:shoji
+791:shopping basket
+792:shopping cart
+793:shovel
+794:shower cap
+795:shower curtain
+796:ski
+797:ski mask
+798:sleeping bag
+799:slide rule
+800:sliding door
+801:slot
+802:snorkel
+803:snowmobile
+804:snowplow
+805:soap dispenser
+806:soccer ball
+807:sock
+808:solar dish
+809:sombrero
+810:soup bowl
+811:space bar
+812:space heater
+813:space shuttle
+814:spatula
+815:speedboat
+816:spider web
+817:spindle
+818:sports car
+819:spotlight
+820:stage
+821:steam locomotive
+822:steel arch bridge
+823:steel drum
+824:stethoscope
+825:stole
+826:stone wall
+827:stopwatch
+828:stove
+829:strainer
+830:streetcar
+831:stretcher
+832:studio couch
+833:stupa
+834:submarine
+835:suit
+836:sundial
+837:sunglass
+838:sunglasses
+839:sunscreen
+840:suspension bridge
+841:swab
+842:sweatshirt
+843:swimming trunks
+844:swing
+845:switch
+846:syringe
+847:table lamp
+848:tank
+849:tape player
+850:teapot
+851:teddy
+852:television
+853:tennis ball
+854:thatch
+855:theater curtain
+856:thimble
+857:thresher
+858:throne
+859:tile roof
+860:toaster
+861:tobacco shop
+862:toilet seat
+863:torch
+864:totem pole
+865:tow truck
+866:toyshop
+867:tractor
+868:trailer truck
+869:tray
+870:trench coat
+871:tricycle
+872:trimaran
+873:tripod
+874:triumphal arch
+875:trolleybus
+876:trombone
+877:tub
+878:turnstile
+879:typewriter keyboard
+880:umbrella
+881:unicycle
+882:upright
+883:vacuum
+884:vase
+885:vault
+886:velvet
+887:vending machine
+888:vestment
+889:viaduct
+890:violin
+891:volleyball
+892:waffle iron
+893:wall clock
+894:wallet
+895:wardrobe
+896:warplane
+897:washbasin
+898:washer
+899:water bottle
+900:water jug
+901:water tower
+902:whiskey jug
+903:whistle
+904:wig
+905:window screen
+906:window shade
+907:Windsor tie
+908:wine bottle
+909:wing
+910:wok
+911:wooden spoon
+912:wool
+913:worm fence
+914:wreck
+915:yawl
+916:yurt
+917:web site
+918:comic book
+919:crossword puzzle
+920:street sign
+921:traffic light
+922:book jacket
+923:menu
+924:plate
+925:guacamole
+926:consomme
+927:hot pot
+928:trifle
+929:ice cream
+930:ice lolly
+931:French loaf
+932:bagel
+933:pretzel
+934:cheeseburger
+935:hotdog
+936:mashed potato
+937:head cabbage
+938:broccoli
+939:cauliflower
+940:zucchini
+941:spaghetti squash
+942:acorn squash
+943:butternut squash
+944:cucumber
+945:artichoke
+946:bell pepper
+947:cardoon
+948:mushroom
+949:Granny Smith
+950:strawberry
+951:orange
+952:lemon
+953:fig
+954:pineapple
+955:banana
+956:jackfruit
+957:custard apple
+958:pomegranate
+959:hay
+960:carbonara
+961:chocolate sauce
+962:dough
+963:meat loaf
+964:pizza
+965:potpie
+966:burrito
+967:red wine
+968:espresso
+969:cup
+970:eggnog
+971:alp
+972:bubble
+973:cliff
+974:coral reef
+975:geyser
+976:lakeside
+977:promontory
+978:sandbar
+979:seashore
+980:valley
+981:volcano
+982:ballplayer
+983:groom
+984:scuba diver
+985:rapeseed
+986:daisy
+987:yellow lady's slipper
+988:corn
+989:acorn
+990:hip
+991:buckeye
+992:coral fungus
+993:agaric
+994:gyromitra
+995:stinkhorn
+996:earthstar
+997:hen-of-the-woods
+998:bolete
+999:ear
+1000:toilet tissue&lt;/p&gt;
+</content:encoded>
+		</item>
+		<item>
+			<title>Segmentace obrázku v barevném modelu HSV</title>
+			<link>http://zodoc.netlify.com/posts/cs/image_segmentation_in_hsv_color_space</link>
+			<description>&lt;p&gt;Segmentace části obrázku v barevném modelu HSV, který popisuje barvy třemi parametry (odstín, sytost a jas). Prahy odstínu určují rozsah barev, který izolujeme. Pro segmentaci podle barev je vhodné použít model HSV, jelikož lépe rozlišuje mezi jednotlivými barvami.&lt;/p&gt;</description>
+			<enclosure url="http://zodoc.netlify.com/imgs_intro/image_segmentation_in_hsv_color_space.png" length="0" type="image" />
+			<guid>http://zodoc.netlify.com/posts/cs/image_segmentation_in_hsv_color_space</guid>
+			<pubDate>Wed, 28 Nov 2018 00:00:00 GMT</pubDate>
+			<content:encoded>&lt;p&gt;Segmentace části obrázku v barevném modelu HSV, který popisuje barvy třemi parametry (odstín, sytost a jas). Prahy odstínu určují rozsah barev, který izolujeme. Pro segmentaci podle barev je vhodné použít model HSV, jelikož lépe rozlišuje mezi jednotlivými barvami.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-matlab"&gt;% Načtení výchozího obrázku
+A = imread('kytka256.jpg');
+% Převod hodnot RGB do HSV
+imgHSV = rgb2hsv(A);
+% Nastevní prahů odstínu v rozmezí 0 až 1
+hueMin = 0.000; % 0 odpovídá červené
+hueMax = 0.280; % 0.28 zhruba odpovídá žluté
+% Vytvoření masky z prahů (odstín je v prvním kanálu)
+hueMask = (imgHSV(:,:,1) &amp;gt;= hueMin ) &amp;amp; (imgHSV(:,:,1) &amp;lt;= hueMax);
+% Použití masky na původní obrázek k odbarvení pozadí
+% (Hadamardův součin kanálu sytosti původního obrázku a masky)
+imgHSV(:,:,2) = imgHSV(:,:,2) .* hueMask;
+% Převod výsledného obrázku zpět do modelu RGB
+imgResult = hsv2rgb(imgHSV);
+imshow(imgResult);
+&lt;/code&gt;&lt;/pre&gt;
+</content:encoded>
+		</item>
+		<item>
+			<title>Image segmentation in HSV color space</title>
+			<link>http://zodoc.netlify.com/posts/en/image_segmentation_in_hsv_color_space</link>
+			<description>&lt;p&gt;Isolate part of an image in HSV color space (which describes colors by hue, saturation, and value). Hue thresholds define a range of hues to isolate. For color-based segmentation, it's easier to manipulate images in HSV color space, because the hue channel is the mix of all RGB channels and it better distinguishes between all individual colors.&lt;/p&gt;</description>
+			<enclosure url="http://zodoc.netlify.com/imgs_intro/image_segmentation_in_hsv_color_space.png" length="0" type="image" />
+			<guid>http://zodoc.netlify.com/posts/en/image_segmentation_in_hsv_color_space</guid>
+			<pubDate>Wed, 28 Nov 2018 00:00:00 GMT</pubDate>
+			<content:encoded>&lt;p&gt;Isolate part of an image in HSV color space (which describes colors by hue, saturation, and value). Hue thresholds define a range of hues to isolate. For color-based segmentation, it's easier to manipulate images in HSV color space, because the hue channel is the mix of all RGB channels and it better distinguishes between all individual colors.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-matlab"&gt;% Load base image
+A = imread('kytka256.jpg');
+% Convert RGB values to HSV
+imgHSV = rgb2hsv(A);
+% Set thresholds for hue channel in range of 0 to 1
+hueMin = 0.000; % 0 corresponds to red
+hueMax = 0.280; % 0.28 is roughly yellow
+% Mask creation from hue thresholds (hue is the first channel)
+hueMask = (imgHSV(:,:,1) &amp;gt;= hueMin ) &amp;amp; (imgHSV(:,:,1) &amp;lt;= hueMax);
+% Apply mask on original image to desaturate background
+% (element-wise multiplication of second channel (saturation) and mask)
+imgHSV(:,:,2) = imgHSV(:,:,2) .* hueMask;
+% Convert back to RGB and display result
+imgResult = hsv2rgb(imgHSV);
+imshow(imgResult);
+&lt;/code&gt;&lt;/pre&gt;
+</content:encoded>
+		</item>
+		<item>
+			<title>Oddělení kulatých objektů od objektů ostatních</title>
+			<link>http://zodoc.netlify.com/posts/cs/select_round_objects</link>
+			<description>&lt;p&gt;Tento příspevěk je pokračováním příspěvku &lt;a href="filtering_binary_objects_with_kmeans"&gt;předchozího&lt;/a&gt;, který se zabýval zpracováním obrázku s tvary.&lt;/p&gt;</description>
+			<enclosure url="http://zodoc.netlify.com/imgs_intro/select_round_objects.png" length="0" type="image" />
+			<guid>http://zodoc.netlify.com/posts/cs/select_round_objects</guid>
+			<pubDate>Sun, 18 Nov 2018 00:00:00 GMT</pubDate>
+			<content:encoded>&lt;blockquote class="blockquote"&gt;
+&lt;p&gt;Tento příspevěk je pokračováním příspěvku &lt;a href="filtering_binary_objects_with_kmeans"&gt;předchozího&lt;/a&gt;, který se zabýval zpracováním obrázku s tvary.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code class="language-matlab"&gt;reg_props2 = regionprops(Aa{6},'perimeter','EquivDiameter','area');
+
+[~,L] = bwboundaries(Aa{6},'noholes');% označení objektů čísly  1:num_of_regions
+
+%Kruhy v tomto obrázku nejsou zcela kulaté. Hledáme &amp;quot;skoro&amp;quot; kulaté objekty
+%EquivDiameter je průměr kruhu, jenž by zabíral stejnou plochu jako daný objekt
+%Area/Perimeter + maláKonstanta &amp;gt; EquivDiameter/4   pro kruhové objekty
+%kulaté objekty (kruhy) mají nejvyšší poměr plochy/obvodu ze všech možných tvarů
+% Area/Perimeter = Diameter/4 - platí pro kruh 
+where_is_true =([reg_props2.Area] ./ [reg_props2.Perimeter]+1) &amp;gt; [reg_props2.EquivDiameter]/4;
+ 
+Aa{7} =  ismember(L, find(where_is_true));%filtrace nekulatých objektů z obrázku
+
+montage({Aa{6},Aa{7}},'bordersize',[1 1],'backgroundcolor','green')
+&lt;/code&gt;&lt;/pre&gt;
+</content:encoded>
+		</item>
+		<item>
+			<title>Distinguish between round and other binary objects</title>
+			<link>http://zodoc.netlify.com/posts/en/select_round_objects</link>
+			<description>&lt;p&gt;This is a continuation from &lt;a href="filtering_binary_objects_with_kmeans"&gt;previous post&lt;/a&gt; that is about processing of image with shapes.&lt;/p&gt;</description>
+			<enclosure url="http://zodoc.netlify.com/imgs_intro/select_round_objects.png" length="0" type="image" />
+			<guid>http://zodoc.netlify.com/posts/en/select_round_objects</guid>
+			<pubDate>Sun, 18 Nov 2018 00:00:00 GMT</pubDate>
+			<content:encoded>&lt;blockquote class="blockquote"&gt;
+&lt;p&gt;This is a continuation from &lt;a href="filtering_binary_objects_with_kmeans"&gt;previous post&lt;/a&gt; that is about processing of image with shapes.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code class="language-matlab"&gt;reg_props2 = regionprops(Aa{6},'perimeter','EquivDiameter','area');
+
+[~,L] = bwboundaries(Aa{6},'noholes');% marking regions by numbers from 1:num_of_regions
+
+%circle objects on the image are not perfectly round. Looking for &amp;quot;almost&amp;quot; round objects
+%EquivDiameter is diameter for circle with same Area as object.
+%Area/Perimeter + smallConstant &amp;gt; EquivDiameter/4   for round objects
+%round objects (circles) have topmost Area/perimeter ration from all objects.
+% Area/Perimeter = Diameter/4 for circles 
+where_is_true =([reg_props2.Area] ./ [reg_props2.Perimeter]+1) &amp;gt; [reg_props2.EquivDiameter]/4;
+ 
+Aa{7} =  ismember(L, find(where_is_true));
+
+montage({Aa{6},Aa{7}},'bordersize',[1 1],'backgroundcolor','green')
+&lt;/code&gt;&lt;/pre&gt;
+</content:encoded>
+		</item>
+		<item>
+			<title>Filtrování binárních objektů za použití k-means</title>
+			<link>http://zodoc.netlify.com/posts/cs/filtering_binary_objects_with_kmeans</link>
+			<description>&lt;p&gt;Úkolem je zpracovat obrázek do binární reprezentace tak, aby obsahoval pouze žádoucí tvary jako je obdélník, čtverec, trojúhelník kruh nebo hvězda. K-means algoritmus slouží k určení meze pro filtrování objektů dle jejich velikostí.&lt;/p&gt;</description>
+			<enclosure url="http://zodoc.netlify.com/imgs_intro/filtering_binary_objects_with_kmeans.png" length="0" type="image" />
+			<guid>http://zodoc.netlify.com/posts/cs/filtering_binary_objects_with_kmeans</guid>
+			<pubDate>Fri, 16 Nov 2018 00:00:00 GMT</pubDate>
+			<content:encoded>&lt;p&gt;Úkolem je zpracovat obrázek do binární reprezentace tak, aby obsahoval pouze žádoucí tvary jako je obdélník, čtverec, trojúhelník kruh nebo hvězda. K-means algoritmus slouží k určení meze pro filtrování objektů dle jejich velikostí.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-matlab"&gt;A = imread('tvary.png');
+Aa = {};
+Aa{1} =A; %barevný obrázek
+Ag =imadjust(rgb2gray(A));% upraví kontrast a převede na šedotón
+Aa{2} = Ag;
+Aa{3} = imbinarize(Ag,'adaptive','ForegroundPolarity','dark','Sensitivity',0.55); %na černobílý obrázek
+Aa{4} = imfill(~Aa{end},'holes'); %zaplní díry
+Aa{5} = imclearborder(Aa{end}); % vyčístí objekty z hran 
+%% filtrace za použití k-means
+reg_props = regionprops(Aa{5},'area');%získání velikostí ploch (area) každého objektu
+areas =  [reg_props.Area]';% převede plochy na vektor
+%hist(areas,30) % zobrazí histogram velikostí ploch
+[indx, ~] = kmeans(areas,3);% oddělí objekty do 3 shluků na základě jejich velikostí.
+%jeden shluk zahrnuje větší objekty, druhý shluk menší objekty a &amp;quot;šumovité&amp;quot; objekty (které chceme odstranit)
+% jsou v jednom vlastím shluku.
+% (nefunguje to příliš dobře pouze pro 2 shluky)
+
+%Nevím předem který ze shluků obsahuje ty nejmenší objekty.
+%Vezme největší objekty z každého shluku. Minimum těchto tří objektů
+%je vzato jako limit pro filtrování ()
+min_max = min([max(areas(indx==1)),max(areas(indx==2)),max(areas(indx==3)) ]);
+Aa{6} = bwareafilt(Aa{5},[min_max+1 Inf]);
+%%
+montage(Aa,'bordersize',[1 1],'backgroundcolor','green')
+&lt;/code&gt;&lt;/pre&gt;
+</content:encoded>
+		</item>
+		<item>
+			<title>Filtering binary objects with kmeans</title>
+			<link>http://zodoc.netlify.com/posts/en/filtering_binary_objects_with_kmeans</link>
+			<description>&lt;p&gt;The task is to process the image to binary representation containing only the wanted shapes like rectangle, square, triangle, circle or a star. K-means algorithm is used to determine the range for filtering the objects by their size.&lt;/p&gt;</description>
+			<enclosure url="http://zodoc.netlify.com/imgs_intro/filtering_binary_objects_with_kmeans.png" length="0" type="image" />
+			<guid>http://zodoc.netlify.com/posts/en/filtering_binary_objects_with_kmeans</guid>
+			<pubDate>Fri, 16 Nov 2018 00:00:00 GMT</pubDate>
+			<content:encoded>&lt;p&gt;The task is to process the image to binary representation containing only the wanted shapes like rectangle, square, triangle, circle or a star. K-means algorithm is used to determine the range for filtering the objects by their size.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-matlab"&gt;A = imread('tvary.png');
+Aa = {};
+Aa{1} =A; %colorful image
+Ag =imadjust(rgb2gray(A));% adujust contrast and convert to grayscale
+Aa{2} = Ag;
+Aa{3} = imbinarize(Ag,'adaptive','ForegroundPolarity','dark','Sensitivity',0.55); %to black&amp;amp;white image
+Aa{4} = imfill(~Aa{end},'holes'); %fill holes
+Aa{5} = imclearborder(Aa{end}); % clear object on borders 
+%% filtration using k-means
+reg_props = regionprops(Aa{5},'area');%get area of every object
+areas =  [reg_props.Area]';% get areas to vector 
+%hist(areas,30) % display histogram of areas
+[indx, ~] = kmeans(areas,3);% separate objects to 3 clusters based on their sizes.
+%one cluster includes biger objects, second smaller objects and &amp;quot;noise&amp;quot; object (that we want to exclude)
+% are in own cluster.
+% (it does not work well for only 2 clusters)
+
+%We don't know in advance which cluster containst the smallest objects
+%take the biggest object from every cluster. Min from these 3 objects is
+%taken as a limit for filtering.
+min_max = min([max(areas(indx==1)),max(areas(indx==2)),max(areas(indx==3)) ]);
+Aa{6} = bwareafilt(Aa{5},[min_max+1 Inf]);
+%%
+montage(Aa,'bordersize',[1 1],'backgroundcolor','green')
+&lt;/code&gt;&lt;/pre&gt;
+&lt;blockquote class="blockquote"&gt;
+&lt;p&gt;Here is the &lt;a href="select_round_objects"&gt;post&lt;/a&gt; about subsequent processiong of result image.&lt;/p&gt;
+&lt;/blockquote&gt;
+</content:encoded>
+		</item>
+		<item>
+			<title>Animation of binary image with variable threshold</title>
+			<link>http://zodoc.netlify.com/posts/en/animation_of_binary_image_with_variable_threshold</link>
+			<enclosure url="http://zodoc.netlify.com/imgs_intro/animation_of_binary_image_with_variable_threshold.gif" length="0" type="image" />
+			<guid>http://zodoc.netlify.com/posts/en/animation_of_binary_image_with_variable_threshold</guid>
+			<pubDate>Thu, 15 Nov 2018 00:00:00 GMT</pubDate>
+			<content:encoded>&lt;pre&gt;&lt;code class="language-matlab"&gt;Ag = rgb2gray(imread('kytka256.jpg'));
+firstTime = 1;gifName = 'bw_anim.gif';
+for ii = 1:5:256
+   curr_img = (Ag&amp;lt;ii)*255;% or use imbinarize instead
+   [A,map] = gray2ind(curr_img,2); % change to indexed image
+   
+    if firstTime ==1%save first frame in different manner
+        imwrite(A,map,gifName,'gif','LoopCount',Inf,'DelayTime',0.001);
+    firstTime = 0;
+    else
+        imwrite(A,map,gifName,'gif','WriteMode','append','DelayTime',0.001);
+    end 
+ end
+&lt;/code&gt;&lt;/pre&gt;
+</content:encoded>
+		</item>
+		<item>
+			<title>Image classification using alexnet</title>
+			<link>http://zodoc.netlify.com/posts/en/classify_by_alexnet</link>
+			<description>&lt;p&gt;Tested image is classified as "daisy", which is not correct because that yellow bloom is Jerusalem artichoke. However "Jerusalem artichoke" is not one of the alexnet classes (there are 1000 of them) and the daisy is fairly similar, so the classification is not completely wrong. Five classifications with topmost score are displayed in the table.&lt;/p&gt;</description>
+			<enclosure url="http://zodoc.netlify.com/imgs_intro/classify_by_alexnet.jpg" length="0" type="image" />
+			<guid>http://zodoc.netlify.com/posts/en/classify_by_alexnet</guid>
+			<pubDate>Thu, 15 Nov 2018 00:00:00 GMT</pubDate>
+			<content:encoded>&lt;p&gt;Tested image is classified as &amp;quot;daisy&amp;quot;, which is not correct because that yellow bloom is Jerusalem artichoke. However &amp;quot;Jerusalem artichoke&amp;quot; is not one of the alexnet classes (there are 1000 of them) and the daisy is fairly similar, so the classification is not completely wrong. Five classifications with topmost score are displayed in the table.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-matlab"&gt;net = alexnet;
+A = imread('kytka256.jpg');
+A_resized = imresize(A,[227 227]); %resize image to 227px 227px for cnn input
+[label,score] = classify(net,A_resized); % classify the image
+
+[maxvalues, ind] = maxk(score(:), 5); %get five most succesfull classifications
+
+subplot 121; imshow(A_resized); %display original image
+title(string(label) + &amp;quot;, &amp;quot; + num2str(max(score)*100,3) + &amp;quot; %&amp;quot;); % display name and percentage
+
+names=(net.Layers(end).ClassNames(ind)); %get label names 
+uitable('Data',[names,num2cell(maxvalues*100)],'Position',[290 150 150 130],'ColumnName',{'Class name','Score %'});% create table
+&lt;/code&gt;&lt;/pre&gt;
+</content:encoded>
+		</item>
+		<item>
+			<title>Animation of binary image with variable threshold</title>
+			<link>http://zodoc.netlify.com/posts/cs/animation_of_binary_image_with_variable_threshold</link>
+			<enclosure url="http://zodoc.netlify.com/imgs_intro/animation_of_binary_image_with_variable_threshold.gif" length="0" type="image" />
+			<guid>http://zodoc.netlify.com/posts/cs/animation_of_binary_image_with_variable_threshold</guid>
+			<pubDate>Thu, 15 Nov 2018 00:00:00 GMT</pubDate>
+			<content:encoded>&lt;pre&gt;&lt;code class="language-matlab"&gt;Ag = rgb2gray(imread('kytka256.jpg'));
+firstTime = 1;gifName = 'bw_anim.gif';
+for ii = 1:5:256
+   curr_img = (Ag&amp;lt;ii)*255;% or use imbinarize instead
+   [A,map] = gray2ind(curr_img,2); % change to indexed image
+   
+    if firstTime ==1%save first frame in different manner
+        imwrite(A,map,gifName,'gif','LoopCount',Inf,'DelayTime',0.001);
+    firstTime = 0;
+    else
+        imwrite(A,map,gifName,'gif','WriteMode','append','DelayTime',0.001);
+    end 
+ end
+&lt;/code&gt;&lt;/pre&gt;
+</content:encoded>
+		</item>
+		<item>
+			<title>Klasifikace obrázků s pomocí alexnet</title>
+			<link>http://zodoc.netlify.com/posts/cs/classify_by_alexnet</link>
+			<description>&lt;p&gt;Testovaný obrázek je klasifikován jako sedmikráska (daisy), což není správně, jelikož žlutý květ na obrázku náleží topinambuře. Nicméně topinambura není jednou z tříd do které alexnet klasifikuje (je jich celkem 1000) a sedmikrásce je vcelku podobná, takže klasifikace není zcela špatná. Pět klasifikací s nejvyšším skóre je vyobrazeno v tabulce.&lt;/p&gt;</description>
+			<enclosure url="http://zodoc.netlify.com/imgs_intro/classify_by_alexnet.jpg" length="0" type="image" />
+			<guid>http://zodoc.netlify.com/posts/cs/classify_by_alexnet</guid>
+			<pubDate>Thu, 15 Nov 2018 00:00:00 GMT</pubDate>
+			<content:encoded>&lt;p&gt;Testovaný obrázek je klasifikován jako sedmikráska (daisy), což není správně, jelikož žlutý květ na obrázku náleží topinambuře. Nicméně topinambura není jednou z tříd do které alexnet klasifikuje (je jich celkem 1000) a sedmikrásce je vcelku podobná, takže klasifikace není zcela špatná. Pět klasifikací s nejvyšším skóre je vyobrazeno v tabulce.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-matlab"&gt;net = alexnet;
+A = imread('kytka256.jpg');
+A_resized = imresize(A,[227 227]); %změnit velikost na 227px 227px pro vstup cnn
+[label,score] = classify(net,A_resized); % klasifikace obrázku
+
+[maxvalues, ind] = maxk(score(:), 5); %zíkání 5 klasifikací s nejvyšším skóre
+
+subplot 121; imshow(A_resized); %zobrazit původní obrázek
+title(string(label) + &amp;quot;, &amp;quot; + num2str(max(score)*100,3) + &amp;quot; %&amp;quot;); % zobrazit klasifikaci a procenta
+
+names=(net.Layers(end).ClassNames(ind)); % získání jmen pro klasifikace
+uitable('Data',[names,num2cell(maxvalues*100)],'Position',[290 150 150 130],'ColumnName',{'Class name','Score %'});% vytvoření tabulky
+&lt;/code&gt;&lt;/pre&gt;
+</content:encoded>
+		</item>
+		<item>
+			<title>Handwritten numbers to binary image</title>
+			<link>http://zodoc.netlify.com/posts/en/handwritten_to_digital</link>
+			<description>&lt;p&gt;Convert the image to binary representation where numbers are going to be represented in white color, while the background is going to be black. However, the numbers won't be very clearly visible for possible future classification by neural networks, so a mathematical morphology operation called dilation will be used, implemented in MATLAB with function &lt;code&gt;imdilate&lt;/code&gt;.&lt;/p&gt;</description>
+			<enclosure url="http://zodoc.netlify.com/imgs_intro/handwritten_to_digital.png" length="0" type="image" />
+			<guid>http://zodoc.netlify.com/posts/en/handwritten_to_digital</guid>
+			<pubDate>Wed, 14 Nov 2018 00:00:00 GMT</pubDate>
+			<content:encoded>&lt;p&gt;Convert the image to binary representation where numbers are going to be represented in white color, while the background is going to be black. However, the numbers won't be very clearly visible for possible future classification by neural networks, so a mathematical morphology operation called dilation will be used, implemented in MATLAB with function &lt;code&gt;imdilate&lt;/code&gt;.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-matlab"&gt;A = imread('cisla_ver.jpg'); % load an image
+AGray = rgb2gray(A); % conversion to grayscale
+ABinary = imbinarize(AGray, 'adaptive', 'ForegroundPolarity', 'dark', 'Sensitivity', 0.3); % binarization of image. ForegroundPolarity parameter indicates that the foreground is darker than the background.
+ABinaryComplement = ~ABinary; % turning numbers to white color
+StructuringElement = strel('disk', 7); % creating a disk-shaped structuring element to probe the binary image
+DilatedABinaryComplement = imdilate(ABinaryComplement, StructuringElement); % dilation of image
+subplot(1, 3, 1), imshow(A)
+subplot(1, 3, 2), imshow(ABinaryComplement)
+subplot(1, 3, 3), imshow(DilatedABinaryComplement)
+&lt;/code&gt;&lt;/pre&gt;
+</content:encoded>
+		</item>
+		<item>
+			<title>Fotka s ručně psanými čísly na binární obraz</title>
+			<link>http://zodoc.netlify.com/posts/cs/handwritten_to_digital</link>
+			<description>&lt;p&gt;Zkonvertovat obrázek do binární reprezentace, kde jednotlivá čísla budou reprezentována bílou barvou a pozadí černou. Pro zvýraznění čísel k budoucí klasifikaci natrénovanou neuronovou sítí bude využita operace z matematické morfologie nazvaná dilatace, která je v MATLABu implementována pomocí funkce &lt;code&gt;imdilate&lt;/code&gt;.&lt;/p&gt;</description>
+			<enclosure url="http://zodoc.netlify.com/imgs_intro/handwritten_to_digital.png" length="0" type="image" />
+			<guid>http://zodoc.netlify.com/posts/cs/handwritten_to_digital</guid>
+			<pubDate>Wed, 14 Nov 2018 00:00:00 GMT</pubDate>
+			<content:encoded>&lt;p&gt;Zkonvertovat obrázek do binární reprezentace, kde jednotlivá čísla budou reprezentována bílou barvou a pozadí černou. Pro zvýraznění čísel k budoucí klasifikaci natrénovanou neuronovou sítí bude využita operace z matematické morfologie nazvaná dilatace, která je v MATLABu implementována pomocí funkce &lt;code&gt;imdilate&lt;/code&gt;.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-matlab"&gt;A = imread('cisla_ver.jpg'); % načtení obrazu
+AGray = rgb2gray(A); % konverze do šedotónu
+ABinary = imbinarize(AGray, 'adaptive', 'ForegroundPolarity', 'dark', 'Sensitivity', 0.3); % binarizace obrazu. ForegroundPolarity parametr značí ,že popředí je tmavší, než pozadí.
+ABinaryComplement = ~ABinary; % bitová inverze matice
+StructuringElement = strel('disk', 7); % vytvoření strukturního elementu ve tvaru kruhu, který slouží k prozkoumání původního obrazu
+DilatedABinaryComplement = imdilate(ABinaryComplement, StructuringElement); % dilatace obrazu
+subplot(1, 3, 1), imshow(A)
+subplot(1, 3, 2), imshow(ABinaryComplement)
+subplot(1, 3, 3), imshow(DilatedABinaryComplement)
+&lt;/code&gt;&lt;/pre&gt;
 </content:encoded>
 		</item>
 	</channel>
