@@ -20,10 +20,10 @@ public static class Helpers
 
 
 //these 3 lines are different from config.wyam
-Settings[Keys.Host] = "zodoc.netlify.com";
+Settings[Keys.Host] = "tesar-tech.github.io/zodoc";
 Settings["datazooLink"] = "https://github.com/tesar-tech/zodoc/raw/develop/datazoo";
 Settings["BaseViewUrl"] = "https://github.com/tesar-tech/zodoc/blob/develop/input/";
-//Settings[Keys.LinkRoot] = "/zodoc";
+Settings[Keys.LinkRoot] = "/zodoc";
 //
 
 Settings[BlogKeys.Title] = "ZODOC";
