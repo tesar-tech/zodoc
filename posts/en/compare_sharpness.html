@@ -9,44 +9,44 @@
         <meta name="description" content="Image processing and deep learning samples" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">        
 
-        <link type="application/rss+xml" rel="alternate" title="ZODOC" href="/feed.rss" />
-                <link type="application/atom+xml" rel="alternate" title="ZODOC" href="/feed.atom" />
-        <link rel="shortcut icon" href="/assets/img/favicon.ico" type="image/x-icon">
-        <link rel="icon" href="/assets/img/favicon.ico" type="image/x-icon">
+        <link type="application/rss+xml" rel="alternate" title="ZODOC" href="/zodoc/feed.rss" />
+                <link type="application/atom+xml" rel="alternate" title="ZODOC" href="/zodoc/feed.atom" />
+        <link rel="shortcut icon" href="/zodoc/assets/img/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="/zodoc/assets/img/favicon.ico" type="image/x-icon">
 
-        <link href="/assets/css/bootstrap.min.css" rel="stylesheet" />
-        <link href="/assets/css/highlight.css" rel="stylesheet">
-        <link href="/assets/css/clean-blog.css" rel="stylesheet" />
-        <link href="/assets/css/master.css" rel="stylesheet" />
-        <link href="/assets/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link href="/zodoc/assets/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="/zodoc/assets/css/highlight.css" rel="stylesheet">
+        <link href="/zodoc/assets/css/clean-blog.css" rel="stylesheet" />
+        <link href="/zodoc/assets/css/master.css" rel="stylesheet" />
+        <link href="/zodoc/assets/css/font-awesome.min.css" rel="stylesheet" type="text/css">
         <link href='//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
         <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
-        <link href="/assets/css/override.css" rel="stylesheet" />
+        <link href="/zodoc/assets/css/override.css" rel="stylesheet" />
 
 
         <meta name="application-name" content="ZODOC" />
         <meta name="msapplication-tooltip" content="ZODOC" />
-        <meta name="msapplication-starturl" content="/" />
+        <meta name="msapplication-starturl" content="/zodoc/" />
 
         <meta property="og:title" content="ZODOC - Detect which image is sharper" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="http://zodoc.netlify.com/posts/en/compare_sharpness" />
+        <meta property="og:url" content="http://tesar-tech.github.io/zodoc/zodoc/posts/en/compare_sharpness" />
         <!-- TODO: More social graph meta tags -->
 
-        <script src="/assets/js/jquery.min.js"></script>
-        <script src="/assets/js/bootstrap.min.js"></script>     
-        <script src="/assets/js/highlight.pack.js"></script>   
-        <script src="/assets/js/clean-blog.js"></script>
-        <script src="/assets/js/d3.v3.min.js"></script>
-        <script src="/assets/js/trianglify.min.js"></script>
-        <script src="/assets/js/Please-compressed.js"></script>
-        <script src="/assets/js/background-check.min.js"></script>
+        <script src="/zodoc/assets/js/jquery.min.js"></script>
+        <script src="/zodoc/assets/js/bootstrap.min.js"></script>     
+        <script src="/zodoc/assets/js/highlight.pack.js"></script>   
+        <script src="/zodoc/assets/js/clean-blog.js"></script>
+        <script src="/zodoc/assets/js/d3.v3.min.js"></script>
+        <script src="/zodoc/assets/js/trianglify.min.js"></script>
+        <script src="/zodoc/assets/js/Please-compressed.js"></script>
+        <script src="/zodoc/assets/js/background-check.min.js"></script>
                 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
-                <script src="/assets/js/html5shiv.js"></script>
-                <script src="/assets/js/respond.min.js"></script>
+                <script src="/zodoc/assets/js/html5shiv.js"></script>
+                <script src="/zodoc/assets/js/respond.min.js"></script>
         <![endif]-->
         
         
@@ -66,8 +66,8 @@
                                         <span class="icon-bar"></span>
                                         <span class="icon-bar"></span>
                                         </button>
-                                        <a class="navbar-brand" href="/">
-                                        <img src=" /assets/img/logo.png" width="20" height="20" style="float:left" class="d-inline-block align-top" alt="">
+                                        <a class="navbar-brand" href="/zodoc/">
+                                        <img src=" /zodoc/assets/img/logo.png" width="20" height="20" style="float:left" class="d-inline-block align-top" alt="">
                                         <text style="float:right" >ZODOC</text> 
                                         </a>
                                 </div>
@@ -75,11 +75,11 @@
                                 <!-- Collect the nav links, forms, and other content for toggling -->
                                 <div class="collapse navbar-collapse" id="navbar-collapse">
                                         <ul class="nav navbar-nav navbar-right">
-                                                        <li><a href="/posts">Archive</a></li>
-        <li><a href="/authors">Authors</a></li>
-        <li><a href="/tags">Tags</a></li>
-        <li><a href="/about">About</a></li>
-        <li><a href="/prerequisites">Prerequsites</a></li>
+                                                        <li><a href="/zodoc/posts">Archive</a></li>
+        <li><a href="/zodoc/authors">Authors</a></li>
+        <li><a href="/zodoc/tags">Tags</a></li>
+        <li><a href="/zodoc/about">About</a></li>
+        <li><a href="/zodoc/prerequisites">Prerequsites</a></li>
     <li >
         <script>
             $(document).ready(function(){//wait for enter in searchbox
@@ -95,7 +95,7 @@
             $(document).ready(function(){//redirect to duckduckgo search.
                 $('#searchbtn').on('click', function(e){
                var searchText =   $('#searchInput').val();
-               var host = "zodoc.netlify.com" ; 
+               var host = "tesar-tech.github.io/zodoc" ; 
                window.location = "https://duckduckgo.com/?q="+searchText+"+site%3Ahttps%3A%2F%2F"+ host +"&ia=web";
            });
          });
@@ -150,24 +150,24 @@ Published on Sunday, November 4, 2018<br>    </div> -->
         <div class="other-langs" >
            Other languages: 
 <!--[0]type of translation  -->
-         <a href="/posts/cs/compare_sharpness"><img class="cs-flag"/></a>
+         <a href="/zodoc/posts/cs/compare_sharpness"><img class="cs-flag"/></a>
          </div>
 
 <div class="similar-posts" >
                      Similar posts: 
-                    <a class="btn btn-outline-info btn-xs" role="button" href="/posts/en/select_round_objects">
+                    <a class="btn btn-outline-info btn-xs" role="button" href="/zodoc/posts/en/select_round_objects">
                         Distinguish between round and other binary objects
                     </a>
-                    <a class="btn btn-outline-info btn-xs" role="button" href="/posts/en/filtering_binary_objects_with_kmeans">
+                    <a class="btn btn-outline-info btn-xs" role="button" href="/zodoc/posts/en/filtering_binary_objects_with_kmeans">
                         Filtering binary objects with kmeans
                     </a>
-                    <a class="btn btn-outline-info btn-xs" role="button" href="/posts/en/animation_of_binary_image_with_variable_threshold">
+                    <a class="btn btn-outline-info btn-xs" role="button" href="/zodoc/posts/en/animation_of_binary_image_with_variable_threshold">
                         Animation of binary image with variable threshold
                     </a>
-                    <a class="btn btn-outline-info btn-xs" role="button" href="/posts/en/handwritten_to_digital">
+                    <a class="btn btn-outline-info btn-xs" role="button" href="/zodoc/posts/en/handwritten_to_digital">
                         Handwritten numbers to binary image
                     </a>
-                    <a class="btn btn-outline-info btn-xs" role="button" href="/posts/en/randomly_two-color_image">
+                    <a class="btn btn-outline-info btn-xs" role="button" href="/zodoc/posts/en/randomly_two-color_image">
                         Randomly two-color image
                     </a>
                     </div>
@@ -176,7 +176,7 @@ Published on Sunday, November 4, 2018<br>    </div> -->
     <div class="util">
     <ul class="list-inline">
         <li class="list-inline-item">Utilizing those files: </li>
-            <li class="list-inline-item"> <u> <a href="https://github.com/tesar-tech/zodoc/raw/master/datazoo/imgs/kytka256.jpg,"> kytka256.jpg, </a> </u> </li>
+            <li class="list-inline-item"> <u> <a href="https://github.com/tesar-tech/zodoc/raw/develop/datazoo/imgs/kytka256.jpg,"> kytka256.jpg, </a> </u> </li>
         </ul>
     </div>
 
@@ -189,10 +189,10 @@ Published on Sunday, November 4, 2018<br>    </div> -->
 
 
         <div class="tags">
-                            <a role="button" href="/tags/matlab" class="btn btn-default btn-xs btn-technology">matlab</a>
-                <a role="button" href="/tags/edges" class="btn btn-default btn-xs ">edges</a>
-                <a role="button" href="/tags/binary-image" class="btn btn-default btn-xs ">binary image</a>
-                <a role="button" href="/tags/sharpness" class="btn btn-default btn-xs ">sharpness</a>
+                            <a role="button" href="/zodoc/tags/matlab" class="btn btn-default btn-xs btn-technology">matlab</a>
+                <a role="button" href="/zodoc/tags/edges" class="btn btn-default btn-xs ">edges</a>
+                <a role="button" href="/zodoc/tags/binary-image" class="btn btn-default btn-xs ">binary image</a>
+                <a role="button" href="/zodoc/tags/sharpness" class="btn btn-default btn-xs ">sharpness</a>
         </div>     
               
           
@@ -230,11 +230,11 @@ montage({A,A_blurred,A_E,A_blurred_E})
 
     <ul class="list-inline">
   <li class="list-inline-item">Author:</li>
-<li class="list-inline-item"><a role="button" href="/authors/tesar-tech" class="btn btn-primary btn-xs">tesar-tech</a> </li>
+<li class="list-inline-item"><a role="button" href="/zodoc/authors/tesar-tech" class="btn btn-primary btn-xs">tesar-tech</a> </li>
   
  
 </ul>
-      <div class="alert alert-info"> <a href="https://github.com/tesar-tech/zodoc/blob/master/input/posts/en/compare_sharpness.md"> <i class="fa fa-file"></i> </a> Something is wrong? Let us know right <a href="https://github.com/tesar-tech/zodoc/issues/new?title=Detect which image is sharper&amp;body=https://zodoc.netlify.com/posts/en/compare_sharpness.html%0A[Delete this and describe the issue!]"> here <i class="fa fa-github"></i> </a></div>
+      <div class="alert alert-info"> <a href="https://github.com/tesar-tech/zodoc/blob/develop/input/posts/en/compare_sharpness.md"> <i class="fa fa-file"></i> </a> Something is wrong? Let us know right <a href="https://github.com/tesar-tech/zodoc/issues/new?title=Detect which image is sharper&amp;body=https://tesar-tech.github.io/zodoc/posts/en/compare_sharpness.html%0A[Delete this and describe the issue!]"> here <i class="fa fa-github"></i> </a></div>
  
 
 
@@ -253,9 +253,9 @@ montage({A,A_blurred,A_E,A_blurred_E})
                     <p class="copyright text-muted">
                         Copyright © 2019
                         <br />
-                            <a href="/feed.rss"><i class="fa fa-rss"></i> RSS Feed</a>
+                            <a href="/zodoc/feed.rss"><i class="fa fa-rss"></i> RSS Feed</a>
                         |
-                            <a href="/feed.atom"><i class="fa fa-rss"></i> Atom Feed</a>
+                            <a href="/zodoc/feed.atom"><i class="fa fa-rss"></i> Atom Feed</a>
                         <br />
                         <strong><a href="https://wyam.io">Generated by Wyam</a></strong>
                     </p>

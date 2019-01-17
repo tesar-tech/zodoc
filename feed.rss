@@ -2,56 +2,17 @@
 <rss xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0">
 	<channel>
 		<title>ZODOC</title>
-		<link>http://zodoc.netlify.com/</link>
+		<link>http://tesar-tech.github.io/zodoc/zodoc</link>
 		<description>Image processing and deep learning samples</description>
 		<copyright>2019</copyright>
-		<pubDate>Thu, 17 Jan 2019 22:48:23 GMT</pubDate>
-		<lastBuildDate>Thu, 17 Jan 2019 22:48:23 GMT</lastBuildDate>
-		<item>
-			<title>Trénování konvoluční neuronové sítě pro klasifikaci ručně psaných čísel</title>
-			<link>http://zodoc.netlify.com/posts/cs/training_of_convolutional_neural_network_for_classification_of_handwritten_digits</link>
-			<description>&lt;p&gt;Tento příspěvek je jednoduchým příkladem trénování konvoluční neuronové sítě. Využívá nekomplikovanou strukturu a nastavení. Struktura je dostatečně jednoduchá, aby se síť dala natrénovat na běžném procesoru. Přesnost natrénované sítě je více než 98 %. &lt;a href="classification_of_handwritten_digit"&gt;Jiný příspěvek&lt;/a&gt; vysvětluje použití této sítě ke klasifikaci vlastních ručně psaných čísel.&lt;/p&gt;</description>
-			<enclosure url="http://zodoc.netlify.com/imgs_intro/training_of_convolutional_neural_network_for_classification_of_handwritten_digits.png" length="0" type="image" />
-			<guid>http://zodoc.netlify.com/posts/cs/training_of_convolutional_neural_network_for_classification_of_handwritten_digits</guid>
-			<pubDate>Thu, 20 Dec 2018 00:00:00 GMT</pubDate>
-			<content:encoded>&lt;p&gt;Tento příspěvek je jednoduchým příkladem trénování konvoluční neuronové sítě. Využívá nekomplikovanou strukturu a nastavení. Struktura je dostatečně jednoduchá, aby se síť dala natrénovat na běžném procesoru. Přesnost natrénované sítě je více než 98 %. &lt;a href="classification_of_handwritten_digit"&gt;Jiný příspěvek&lt;/a&gt; vysvětluje použití této sítě ke klasifikaci vlastních ručně psaných čísel.&lt;/p&gt;
-&lt;pre&gt;&lt;code class="language-matlab"&gt;%% načíst data
-%cesta k zabudovanému datasetu (jenž je součástí MNIST databáze)
-digitDatasetPath = fullfile(matlabroot,'toolbox','nnet', 'nndemos','nndatasets', 'DigitDataset');
-imds = imageDatastore(digitDatasetPath, 'IncludeSubfolders', true, 'LabelSource', 'foldernames');
-%Rozdělení dat na trénovací a testovací
-[imdsTrain, imdsValidation] = splitEachLabel (imds, 0.7, 'randomize');
-
-%% Vytváření sítě po vrstvách
-layers = [
-    imageInputLayer([28 28 1]) %vstupní vrstva (šedotónový obrázek o velikosti 28x28 pixelů)
-    convolution2dLayer(5,16,'Padding', 'same') % 16 konv. filtrů o velikosti 5
-    batchNormalizationLayer % normalizační vrstva
-    reluLayer %relu vrstva přidává nelinearitu (vstup menší než nula je převeden na nulu, v ostatních případech je vstup ponechán)
-    
-    fullyConnectedLayer(10) % 10 - počet neuronů
-    softmaxLayer % normalizace
-    classificationLayer 
-];
-
-%% trénovací možnosti
-options = trainingOptions('sgdm',...% typ řešitele
-    'Verbose', false,...% bez výstupu do command window
-    'Plots', 'training-progress',...% vytvoří graf s průbehem trénování
-    'MaxEpoch',5,...%každý obrázek bude použit pro trénování 5x
-    'ValidationData', imdsValidation); % validační data
-
-%% 
-net = trainNetwork (imdsTrain, layers, options); % samotný trénink
-&lt;/code&gt;&lt;/pre&gt;
-</content:encoded>
-		</item>
+		<pubDate>Thu, 17 Jan 2019 23:05:56 GMT</pubDate>
+		<lastBuildDate>Thu, 17 Jan 2019 23:05:56 GMT</lastBuildDate>
 		<item>
 			<title>Training of convolutional neural network for classification of handwritten digits</title>
-			<link>http://zodoc.netlify.com/posts/en/training_of_convolutional_neural_network_for_classification_of_handwritten_digits</link>
+			<link>http://tesar-tech.github.io/zodoc/zodoc/posts/en/training_of_convolutional_neural_network_for_classification_of_handwritten_digits</link>
 			<description>&lt;p&gt;This post is a simple example of CNN training. It uses the uncomplicated layer structure and training options for keeping things as simple as possible. The structure is simple enough to be trained fast on common CPU. Accuracy of trained network is over 98 %. &lt;a href="classification_of_handwritten_digit"&gt;Another post&lt;/a&gt; describes how to use this network to classify your own handwritten digit.&lt;/p&gt;</description>
-			<enclosure url="http://zodoc.netlify.com/imgs_intro/training_of_convolutional_neural_network_for_classification_of_handwritten_digits.png" length="0" type="image" />
-			<guid>http://zodoc.netlify.com/posts/en/training_of_convolutional_neural_network_for_classification_of_handwritten_digits</guid>
+			<enclosure url="http://tesar-tech.github.io/zodoc/imgs_intro/training_of_convolutional_neural_network_for_classification_of_handwritten_digits.png" length="0" type="image" />
+			<guid>http://tesar-tech.github.io/zodoc/zodoc/posts/en/training_of_convolutional_neural_network_for_classification_of_handwritten_digits</guid>
 			<pubDate>Thu, 20 Dec 2018 00:00:00 GMT</pubDate>
 			<content:encoded>&lt;p&gt;This post is a simple example of CNN training. It uses the uncomplicated layer structure and training options for keeping things as simple as possible. The structure is simple enough to be trained fast on common CPU. Accuracy of trained network is over 98 %. &lt;a href="classification_of_handwritten_digit"&gt;Another post&lt;/a&gt; describes how to use this network to classify your own handwritten digit.&lt;/p&gt;
 &lt;pre&gt;&lt;code class="language-matlab"&gt;%% load data
@@ -87,11 +48,50 @@ net = trainNetwork (imdsTrain, layers, options); % training of CNN
 </content:encoded>
 		</item>
 		<item>
+			<title>Trénování konvoluční neuronové sítě pro klasifikaci ručně psaných čísel</title>
+			<link>http://tesar-tech.github.io/zodoc/zodoc/posts/cs/training_of_convolutional_neural_network_for_classification_of_handwritten_digits</link>
+			<description>&lt;p&gt;Tento příspěvek je jednoduchým příkladem trénování konvoluční neuronové sítě. Využívá nekomplikovanou strukturu a nastavení. Struktura je dostatečně jednoduchá, aby se síť dala natrénovat na běžném procesoru. Přesnost natrénované sítě je více než 98 %. &lt;a href="classification_of_handwritten_digit"&gt;Jiný příspěvek&lt;/a&gt; vysvětluje použití této sítě ke klasifikaci vlastních ručně psaných čísel.&lt;/p&gt;</description>
+			<enclosure url="http://tesar-tech.github.io/zodoc/imgs_intro/training_of_convolutional_neural_network_for_classification_of_handwritten_digits.png" length="0" type="image" />
+			<guid>http://tesar-tech.github.io/zodoc/zodoc/posts/cs/training_of_convolutional_neural_network_for_classification_of_handwritten_digits</guid>
+			<pubDate>Thu, 20 Dec 2018 00:00:00 GMT</pubDate>
+			<content:encoded>&lt;p&gt;Tento příspěvek je jednoduchým příkladem trénování konvoluční neuronové sítě. Využívá nekomplikovanou strukturu a nastavení. Struktura je dostatečně jednoduchá, aby se síť dala natrénovat na běžném procesoru. Přesnost natrénované sítě je více než 98 %. &lt;a href="classification_of_handwritten_digit"&gt;Jiný příspěvek&lt;/a&gt; vysvětluje použití této sítě ke klasifikaci vlastních ručně psaných čísel.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-matlab"&gt;%% načíst data
+%cesta k zabudovanému datasetu (jenž je součástí MNIST databáze)
+digitDatasetPath = fullfile(matlabroot,'toolbox','nnet', 'nndemos','nndatasets', 'DigitDataset');
+imds = imageDatastore(digitDatasetPath, 'IncludeSubfolders', true, 'LabelSource', 'foldernames');
+%Rozdělení dat na trénovací a testovací
+[imdsTrain, imdsValidation] = splitEachLabel (imds, 0.7, 'randomize');
+
+%% Vytváření sítě po vrstvách
+layers = [
+    imageInputLayer([28 28 1]) %vstupní vrstva (šedotónový obrázek o velikosti 28x28 pixelů)
+    convolution2dLayer(5,16,'Padding', 'same') % 16 konv. filtrů o velikosti 5
+    batchNormalizationLayer % normalizační vrstva
+    reluLayer %relu vrstva přidává nelinearitu (vstup menší než nula je převeden na nulu, v ostatních případech je vstup ponechán)
+    
+    fullyConnectedLayer(10) % 10 - počet neuronů
+    softmaxLayer % normalizace
+    classificationLayer 
+];
+
+%% trénovací možnosti
+options = trainingOptions('sgdm',...% typ řešitele
+    'Verbose', false,...% bez výstupu do command window
+    'Plots', 'training-progress',...% vytvoří graf s průbehem trénování
+    'MaxEpoch',5,...%každý obrázek bude použit pro trénování 5x
+    'ValidationData', imdsValidation); % validační data
+
+%% 
+net = trainNetwork (imdsTrain, layers, options); % samotný trénink
+&lt;/code&gt;&lt;/pre&gt;
+</content:encoded>
+		</item>
+		<item>
 			<title>Tvorba sady obrázků různých geometrických tvarů</title>
-			<link>http://zodoc.netlify.com/posts/cs/creating_an_image_set_with_various_shapes</link>
+			<link>http://tesar-tech.github.io/zodoc/zodoc/posts/cs/creating_an_image_set_with_various_shapes</link>
 			<description>&lt;p&gt;Skript vytváří složku &lt;code&gt;imgs_shapes&lt;/code&gt; a podsložky pojmenované po jednotlivých tvarech. Tvary odlišných barev, velikostí a pozic jsou generovány do těchto podsložek. Tato databáze obrázků má být použita pro trénování CNN k rozpoznávání tvarů.&lt;/p&gt;</description>
-			<enclosure url="http://zodoc.netlify.com/imgs_intro/creating_an_image_set_with_various_shapes.jpg" length="0" type="image" />
-			<guid>http://zodoc.netlify.com/posts/cs/creating_an_image_set_with_various_shapes</guid>
+			<enclosure url="http://tesar-tech.github.io/zodoc/imgs_intro/creating_an_image_set_with_various_shapes.jpg" length="0" type="image" />
+			<guid>http://tesar-tech.github.io/zodoc/zodoc/posts/cs/creating_an_image_set_with_various_shapes</guid>
 			<pubDate>Sat, 15 Dec 2018 00:00:00 GMT</pubDate>
 			<content:encoded>&lt;p&gt;Skript vytváří složku &lt;code&gt;imgs_shapes&lt;/code&gt; a podsložky pojmenované po jednotlivých tvarech. Tvary odlišných barev, velikostí a pozic jsou generovány do těchto podsložek. Tato databáze obrázků má být použita pro trénování CNN k rozpoznávání tvarů.&lt;/p&gt;
 &lt;pre&gt;&lt;code class="language-matlab"&gt;numImgInClass = 10;%počet obrázků v každé třídě
@@ -151,10 +151,10 @@ end
 		</item>
 		<item>
 			<title>Creating an image set with various shapes</title>
-			<link>http://zodoc.netlify.com/posts/en/creating_an_image_set_with_various_shapes</link>
+			<link>http://tesar-tech.github.io/zodoc/zodoc/posts/en/creating_an_image_set_with_various_shapes</link>
 			<description>&lt;p&gt;Script creates folder &lt;code&gt;imgs_shapes&lt;/code&gt; and subfolders with name of the shape. Shapes with different color, size and position are generated in those subploders. This image database will be used to train CNN for shapes classification.&lt;/p&gt;</description>
-			<enclosure url="http://zodoc.netlify.com/imgs_intro/creating_an_image_set_with_various_shapes.jpg" length="0" type="image" />
-			<guid>http://zodoc.netlify.com/posts/en/creating_an_image_set_with_various_shapes</guid>
+			<enclosure url="http://tesar-tech.github.io/zodoc/imgs_intro/creating_an_image_set_with_various_shapes.jpg" length="0" type="image" />
+			<guid>http://tesar-tech.github.io/zodoc/zodoc/posts/en/creating_an_image_set_with_various_shapes</guid>
 			<pubDate>Sat, 15 Dec 2018 00:00:00 GMT</pubDate>
 			<content:encoded>&lt;p&gt;Script creates folder &lt;code&gt;imgs_shapes&lt;/code&gt; and subfolders with name of the shape. Shapes with different color, size and position are generated in those subploders. This image database will be used to train CNN for shapes classification.&lt;/p&gt;
 &lt;pre&gt;&lt;code class="language-matlab"&gt;numImgInClass = 10;%number of imgs in every class
@@ -214,10 +214,10 @@ end
 		</item>
 		<item>
 			<title>Classification of handwritten digit with CNN</title>
-			<link>http://zodoc.netlify.com/posts/en/classification_of_handwritten_digit</link>
+			<link>http://tesar-tech.github.io/zodoc/zodoc/posts/en/classification_of_handwritten_digit</link>
 			<description>&lt;p&gt;Model in onnx format was trained on &lt;a href="http://yann.lecun.com/exdb/mnist/"&gt;MNIST&lt;/a&gt; dataset with 99.29 % accuracy.&lt;/p&gt;</description>
-			<enclosure url="http://zodoc.netlify.com/imgs_intro/classification_of_handwritten_digit.jpg" length="0" type="image" />
-			<guid>http://zodoc.netlify.com/posts/en/classification_of_handwritten_digit</guid>
+			<enclosure url="http://tesar-tech.github.io/zodoc/imgs_intro/classification_of_handwritten_digit.jpg" length="0" type="image" />
+			<guid>http://tesar-tech.github.io/zodoc/zodoc/posts/en/classification_of_handwritten_digit</guid>
 			<pubDate>Tue, 11 Dec 2018 00:00:00 GMT</pubDate>
 			<content:encoded>&lt;p&gt;Model in onnx format was trained on &lt;a href="http://yann.lecun.com/exdb/mnist/"&gt;MNIST&lt;/a&gt; dataset with 99.29 % accuracy.&lt;/p&gt;
 &lt;pre&gt;&lt;code class="language-matlab"&gt;mnist = importONNXNetwork('MNIST_99.29.onnx','OutputLayerType','classification','ClassNames',{'0','1','2','3','4','5','6','7','8','9'}); %Import MNIST cnn
@@ -233,10 +233,10 @@ imshow(A_withText)
 		</item>
 		<item>
 			<title>Klasifikace ručně psaného čísla</title>
-			<link>http://zodoc.netlify.com/posts/cs/classification_of_handwritten_digit</link>
+			<link>http://tesar-tech.github.io/zodoc/zodoc/posts/cs/classification_of_handwritten_digit</link>
 			<description>&lt;p&gt;Model v onnx formátu byl natrénován na &lt;a href="http://yann.lecun.com/exdb/mnist/"&gt;MNIST&lt;/a&gt; datasetu s přesností 99.29 %.&lt;/p&gt;</description>
-			<enclosure url="http://zodoc.netlify.com/imgs_intro/classification_of_handwritten_digit.jpg" length="0" type="image" />
-			<guid>http://zodoc.netlify.com/posts/cs/classification_of_handwritten_digit</guid>
+			<enclosure url="http://tesar-tech.github.io/zodoc/imgs_intro/classification_of_handwritten_digit.jpg" length="0" type="image" />
+			<guid>http://tesar-tech.github.io/zodoc/zodoc/posts/cs/classification_of_handwritten_digit</guid>
 			<pubDate>Tue, 11 Dec 2018 00:00:00 GMT</pubDate>
 			<content:encoded>&lt;p&gt;Model v onnx formátu byl natrénován na &lt;a href="http://yann.lecun.com/exdb/mnist/"&gt;MNIST&lt;/a&gt; datasetu s přesností 99.29 %.&lt;/p&gt;
 &lt;pre&gt;&lt;code class="language-matlab"&gt;mnist_net = importONNXNetwork('MNIST_99.29.onnx','OutputLayerType','classification','ClassNames',{'0','1','2','3','4','5','6','7','8','9'}); %improt sítě
@@ -252,7 +252,7 @@ imshow(A_withText)
 		</item>
 		<item>
 			<title>1000 tříd databáze ImageNet</title>
-			<link>http://zodoc.netlify.com/posts/cs/imagenet_classes</link>
+			<link>http://tesar-tech.github.io/zodoc/zodoc/posts/cs/imagenet_classes</link>
 			<description>&lt;p&gt;1:tench
 2:goldfish
 3:great white shark
@@ -1253,8 +1253,8 @@ imshow(A_withText)
 998:bolete
 999:ear
 1000:toilet tissue&lt;/p&gt;</description>
-			<enclosure url="http://zodoc.netlify.com/imgs_intro/imagenet_classes.png" length="0" type="image" />
-			<guid>http://zodoc.netlify.com/posts/cs/imagenet_classes</guid>
+			<enclosure url="http://tesar-tech.github.io/zodoc/imgs_intro/imagenet_classes.jpg" length="0" type="image" />
+			<guid>http://tesar-tech.github.io/zodoc/zodoc/posts/cs/imagenet_classes</guid>
 			<pubDate>Sun, 02 Dec 2018 00:00:00 GMT</pubDate>
 			<content:encoded>&lt;pre&gt;&lt;code class="language-matlab"&gt;net = alexnet; % načíst síť
 ClassIndexes = string(num2cell(1:1000)'); % vytvořit stringy indexů 
@@ -2267,7 +2267,7 @@ disp(ClassNamesWithIndexes) % Zobrazit výsledek
 		</item>
 		<item>
 			<title>1000 classes of ImageNet</title>
-			<link>http://zodoc.netlify.com/posts/en/imagenet_classes</link>
+			<link>http://tesar-tech.github.io/zodoc/zodoc/posts/en/imagenet_classes</link>
 			<description>&lt;p&gt;1:tench
 2:goldfish
 3:great white shark
@@ -3268,8 +3268,8 @@ disp(ClassNamesWithIndexes) % Zobrazit výsledek
 998:bolete
 999:ear
 1000:toilet tissue&lt;/p&gt;</description>
-			<enclosure url="http://zodoc.netlify.com/imgs_intro/imagenet_classes.png" length="0" type="image" />
-			<guid>http://zodoc.netlify.com/posts/en/imagenet_classes</guid>
+			<enclosure url="http://tesar-tech.github.io/zodoc/imgs_intro/imagenet_classes.jpg" length="0" type="image" />
+			<guid>http://tesar-tech.github.io/zodoc/zodoc/posts/en/imagenet_classes</guid>
 			<pubDate>Sun, 02 Dec 2018 00:00:00 GMT</pubDate>
 			<content:encoded>&lt;pre&gt;&lt;code class="language-matlab"&gt;net = alexnet; % load a network
 ClassIndexes = string(num2cell(1:1000)'); % indexes to string
@@ -4282,10 +4282,10 @@ disp(ClassNamesWithIndexes) % Display result
 		</item>
 		<item>
 			<title>Segmentace obrázku v barevném modelu HSV</title>
-			<link>http://zodoc.netlify.com/posts/cs/image_segmentation_in_hsv_color_space</link>
+			<link>http://tesar-tech.github.io/zodoc/zodoc/posts/cs/image_segmentation_in_hsv_color_space</link>
 			<description>&lt;p&gt;Segmentace části obrázku v barevném modelu HSV, který popisuje barvy třemi parametry (odstín, sytost a jas). Prahy odstínu určují rozsah barev, který izolujeme. Pro segmentaci podle barev je vhodné použít model HSV, jelikož lépe rozlišuje mezi jednotlivými barvami.&lt;/p&gt;</description>
-			<enclosure url="http://zodoc.netlify.com/imgs_intro/image_segmentation_in_hsv_color_space.png" length="0" type="image" />
-			<guid>http://zodoc.netlify.com/posts/cs/image_segmentation_in_hsv_color_space</guid>
+			<enclosure url="http://tesar-tech.github.io/zodoc/imgs_intro/image_segmentation_in_hsv_color_space.png" length="0" type="image" />
+			<guid>http://tesar-tech.github.io/zodoc/zodoc/posts/cs/image_segmentation_in_hsv_color_space</guid>
 			<pubDate>Wed, 28 Nov 2018 00:00:00 GMT</pubDate>
 			<content:encoded>&lt;p&gt;Segmentace části obrázku v barevném modelu HSV, který popisuje barvy třemi parametry (odstín, sytost a jas). Prahy odstínu určují rozsah barev, který izolujeme. Pro segmentaci podle barev je vhodné použít model HSV, jelikož lépe rozlišuje mezi jednotlivými barvami.&lt;/p&gt;
 &lt;pre&gt;&lt;code class="language-matlab"&gt;% Načtení výchozího obrázku
@@ -4308,10 +4308,10 @@ imshow(imgResult);
 		</item>
 		<item>
 			<title>Image segmentation in HSV color space</title>
-			<link>http://zodoc.netlify.com/posts/en/image_segmentation_in_hsv_color_space</link>
+			<link>http://tesar-tech.github.io/zodoc/zodoc/posts/en/image_segmentation_in_hsv_color_space</link>
 			<description>&lt;p&gt;Isolate part of an image in HSV color space (which describes colors by hue, saturation, and value). Hue thresholds define a range of hues to isolate. For color-based segmentation, it's easier to manipulate images in HSV color space, because the hue channel is the mix of all RGB channels and it better distinguishes between all individual colors.&lt;/p&gt;</description>
-			<enclosure url="http://zodoc.netlify.com/imgs_intro/image_segmentation_in_hsv_color_space.png" length="0" type="image" />
-			<guid>http://zodoc.netlify.com/posts/en/image_segmentation_in_hsv_color_space</guid>
+			<enclosure url="http://tesar-tech.github.io/zodoc/imgs_intro/image_segmentation_in_hsv_color_space.png" length="0" type="image" />
+			<guid>http://tesar-tech.github.io/zodoc/zodoc/posts/en/image_segmentation_in_hsv_color_space</guid>
 			<pubDate>Wed, 28 Nov 2018 00:00:00 GMT</pubDate>
 			<content:encoded>&lt;p&gt;Isolate part of an image in HSV color space (which describes colors by hue, saturation, and value). Hue thresholds define a range of hues to isolate. For color-based segmentation, it's easier to manipulate images in HSV color space, because the hue channel is the mix of all RGB channels and it better distinguishes between all individual colors.&lt;/p&gt;
 &lt;pre&gt;&lt;code class="language-matlab"&gt;% Load base image
@@ -4334,10 +4334,10 @@ imshow(imgResult);
 		</item>
 		<item>
 			<title>Oddělení kulatých objektů od objektů ostatních</title>
-			<link>http://zodoc.netlify.com/posts/cs/select_round_objects</link>
+			<link>http://tesar-tech.github.io/zodoc/zodoc/posts/cs/select_round_objects</link>
 			<description>&lt;p&gt;Tento příspevěk je pokračováním příspěvku &lt;a href="filtering_binary_objects_with_kmeans"&gt;předchozího&lt;/a&gt;, který se zabýval zpracováním obrázku s tvary.&lt;/p&gt;</description>
-			<enclosure url="http://zodoc.netlify.com/imgs_intro/select_round_objects.png" length="0" type="image" />
-			<guid>http://zodoc.netlify.com/posts/cs/select_round_objects</guid>
+			<enclosure url="http://tesar-tech.github.io/zodoc/imgs_intro/select_round_objects.png" length="0" type="image" />
+			<guid>http://tesar-tech.github.io/zodoc/zodoc/posts/cs/select_round_objects</guid>
 			<pubDate>Sun, 18 Nov 2018 00:00:00 GMT</pubDate>
 			<content:encoded>&lt;blockquote class="blockquote"&gt;
 &lt;p&gt;Tento příspevěk je pokračováním příspěvku &lt;a href="filtering_binary_objects_with_kmeans"&gt;předchozího&lt;/a&gt;, který se zabýval zpracováním obrázku s tvary.&lt;/p&gt;
@@ -4361,10 +4361,10 @@ montage({Aa{6},Aa{7}},'bordersize',[1 1],'backgroundcolor','green')
 		</item>
 		<item>
 			<title>Distinguish between round and other binary objects</title>
-			<link>http://zodoc.netlify.com/posts/en/select_round_objects</link>
+			<link>http://tesar-tech.github.io/zodoc/zodoc/posts/en/select_round_objects</link>
 			<description>&lt;p&gt;This is a continuation from &lt;a href="filtering_binary_objects_with_kmeans"&gt;previous post&lt;/a&gt; that is about processing of image with shapes.&lt;/p&gt;</description>
-			<enclosure url="http://zodoc.netlify.com/imgs_intro/select_round_objects.png" length="0" type="image" />
-			<guid>http://zodoc.netlify.com/posts/en/select_round_objects</guid>
+			<enclosure url="http://tesar-tech.github.io/zodoc/imgs_intro/select_round_objects.png" length="0" type="image" />
+			<guid>http://tesar-tech.github.io/zodoc/zodoc/posts/en/select_round_objects</guid>
 			<pubDate>Sun, 18 Nov 2018 00:00:00 GMT</pubDate>
 			<content:encoded>&lt;blockquote class="blockquote"&gt;
 &lt;p&gt;This is a continuation from &lt;a href="filtering_binary_objects_with_kmeans"&gt;previous post&lt;/a&gt; that is about processing of image with shapes.&lt;/p&gt;
@@ -4387,46 +4387,11 @@ montage({Aa{6},Aa{7}},'bordersize',[1 1],'backgroundcolor','green')
 </content:encoded>
 		</item>
 		<item>
-			<title>Filtrování binárních objektů za použití k-means</title>
-			<link>http://zodoc.netlify.com/posts/cs/filtering_binary_objects_with_kmeans</link>
-			<description>&lt;p&gt;Úkolem je zpracovat obrázek do binární reprezentace tak, aby obsahoval pouze žádoucí tvary jako je obdélník, čtverec, trojúhelník kruh nebo hvězda. K-means algoritmus slouží k určení meze pro filtrování objektů dle jejich velikostí.&lt;/p&gt;</description>
-			<enclosure url="http://zodoc.netlify.com/imgs_intro/filtering_binary_objects_with_kmeans.png" length="0" type="image" />
-			<guid>http://zodoc.netlify.com/posts/cs/filtering_binary_objects_with_kmeans</guid>
-			<pubDate>Fri, 16 Nov 2018 00:00:00 GMT</pubDate>
-			<content:encoded>&lt;p&gt;Úkolem je zpracovat obrázek do binární reprezentace tak, aby obsahoval pouze žádoucí tvary jako je obdélník, čtverec, trojúhelník kruh nebo hvězda. K-means algoritmus slouží k určení meze pro filtrování objektů dle jejich velikostí.&lt;/p&gt;
-&lt;pre&gt;&lt;code class="language-matlab"&gt;A = imread('tvary.png');
-Aa = {};
-Aa{1} =A; %barevný obrázek
-Ag =imadjust(rgb2gray(A));% upraví kontrast a převede na šedotón
-Aa{2} = Ag;
-Aa{3} = imbinarize(Ag,'adaptive','ForegroundPolarity','dark','Sensitivity',0.55); %na černobílý obrázek
-Aa{4} = imfill(~Aa{end},'holes'); %zaplní díry
-Aa{5} = imclearborder(Aa{end}); % vyčístí objekty z hran 
-%% filtrace za použití k-means
-reg_props = regionprops(Aa{5},'area');%získání velikostí ploch (area) každého objektu
-areas =  [reg_props.Area]';% převede plochy na vektor
-%hist(areas,30) % zobrazí histogram velikostí ploch
-[indx, ~] = kmeans(areas,3);% oddělí objekty do 3 shluků na základě jejich velikostí.
-%jeden shluk zahrnuje větší objekty, druhý shluk menší objekty a &amp;quot;šumovité&amp;quot; objekty (které chceme odstranit)
-% jsou v jednom vlastím shluku.
-% (nefunguje to příliš dobře pouze pro 2 shluky)
-
-%Nevím předem který ze shluků obsahuje ty nejmenší objekty.
-%Vezme největší objekty z každého shluku. Minimum těchto tří objektů
-%je vzato jako limit pro filtrování ()
-min_max = min([max(areas(indx==1)),max(areas(indx==2)),max(areas(indx==3)) ]);
-Aa{6} = bwareafilt(Aa{5},[min_max+1 Inf]);
-%%
-montage(Aa,'bordersize',[1 1],'backgroundcolor','green')
-&lt;/code&gt;&lt;/pre&gt;
-</content:encoded>
-		</item>
-		<item>
 			<title>Filtering binary objects with kmeans</title>
-			<link>http://zodoc.netlify.com/posts/en/filtering_binary_objects_with_kmeans</link>
+			<link>http://tesar-tech.github.io/zodoc/zodoc/posts/en/filtering_binary_objects_with_kmeans</link>
 			<description>&lt;p&gt;The task is to process the image to binary representation containing only the wanted shapes like rectangle, square, triangle, circle or a star. K-means algorithm is used to determine the range for filtering the objects by their size.&lt;/p&gt;</description>
-			<enclosure url="http://zodoc.netlify.com/imgs_intro/filtering_binary_objects_with_kmeans.png" length="0" type="image" />
-			<guid>http://zodoc.netlify.com/posts/en/filtering_binary_objects_with_kmeans</guid>
+			<enclosure url="http://tesar-tech.github.io/zodoc/imgs_intro/filtering_binary_objects_with_kmeans.png" length="0" type="image" />
+			<guid>http://tesar-tech.github.io/zodoc/zodoc/posts/en/filtering_binary_objects_with_kmeans</guid>
 			<pubDate>Fri, 16 Nov 2018 00:00:00 GMT</pubDate>
 			<content:encoded>&lt;p&gt;The task is to process the image to binary representation containing only the wanted shapes like rectangle, square, triangle, circle or a star. K-means algorithm is used to determine the range for filtering the objects by their size.&lt;/p&gt;
 &lt;pre&gt;&lt;code class="language-matlab"&gt;A = imread('tvary.png');
@@ -4460,11 +4425,68 @@ montage(Aa,'bordersize',[1 1],'backgroundcolor','green')
 </content:encoded>
 		</item>
 		<item>
+			<title>Filtrování binárních objektů za použití k-means</title>
+			<link>http://tesar-tech.github.io/zodoc/zodoc/posts/cs/filtering_binary_objects_with_kmeans</link>
+			<description>&lt;p&gt;Úkolem je zpracovat obrázek do binární reprezentace tak, aby obsahoval pouze žádoucí tvary jako je obdélník, čtverec, trojúhelník kruh nebo hvězda. K-means algoritmus slouží k určení meze pro filtrování objektů dle jejich velikostí.&lt;/p&gt;</description>
+			<enclosure url="http://tesar-tech.github.io/zodoc/imgs_intro/filtering_binary_objects_with_kmeans.png" length="0" type="image" />
+			<guid>http://tesar-tech.github.io/zodoc/zodoc/posts/cs/filtering_binary_objects_with_kmeans</guid>
+			<pubDate>Fri, 16 Nov 2018 00:00:00 GMT</pubDate>
+			<content:encoded>&lt;p&gt;Úkolem je zpracovat obrázek do binární reprezentace tak, aby obsahoval pouze žádoucí tvary jako je obdélník, čtverec, trojúhelník kruh nebo hvězda. K-means algoritmus slouží k určení meze pro filtrování objektů dle jejich velikostí.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-matlab"&gt;A = imread('tvary.png');
+Aa = {};
+Aa{1} =A; %barevný obrázek
+Ag =imadjust(rgb2gray(A));% upraví kontrast a převede na šedotón
+Aa{2} = Ag;
+Aa{3} = imbinarize(Ag,'adaptive','ForegroundPolarity','dark','Sensitivity',0.55); %na černobílý obrázek
+Aa{4} = imfill(~Aa{end},'holes'); %zaplní díry
+Aa{5} = imclearborder(Aa{end}); % vyčístí objekty z hran 
+%% filtrace za použití k-means
+reg_props = regionprops(Aa{5},'area');%získání velikostí ploch (area) každého objektu
+areas =  [reg_props.Area]';% převede plochy na vektor
+%hist(areas,30) % zobrazí histogram velikostí ploch
+[indx, ~] = kmeans(areas,3);% oddělí objekty do 3 shluků na základě jejich velikostí.
+%jeden shluk zahrnuje větší objekty, druhý shluk menší objekty a &amp;quot;šumovité&amp;quot; objekty (které chceme odstranit)
+% jsou v jednom vlastím shluku.
+% (nefunguje to příliš dobře pouze pro 2 shluky)
+
+%Nevím předem který ze shluků obsahuje ty nejmenší objekty.
+%Vezme největší objekty z každého shluku. Minimum těchto tří objektů
+%je vzato jako limit pro filtrování ()
+min_max = min([max(areas(indx==1)),max(areas(indx==2)),max(areas(indx==3)) ]);
+Aa{6} = bwareafilt(Aa{5},[min_max+1 Inf]);
+%%
+montage(Aa,'bordersize',[1 1],'backgroundcolor','green')
+&lt;/code&gt;&lt;/pre&gt;
+</content:encoded>
+		</item>
+		<item>
+			<title>Animation of binary image with variable threshold</title>
+			<link>http://tesar-tech.github.io/zodoc/zodoc/posts/cs/animation_of_binary_image_with_variable_threshold</link>
+			<enclosure url="http://tesar-tech.github.io/zodoc/imgs_intro/animation_of_binary_image_with_variable_threshold.gif" length="0" type="image" />
+			<guid>http://tesar-tech.github.io/zodoc/zodoc/posts/cs/animation_of_binary_image_with_variable_threshold</guid>
+			<pubDate>Thu, 15 Nov 2018 00:00:00 GMT</pubDate>
+			<content:encoded>&lt;pre&gt;&lt;code class="language-matlab"&gt;Ag = rgb2gray(imread('kytka256.jpg'));
+firstTime = 1;gifName = 'bw_anim.gif';
+for ii = 1:5:256
+   curr_img = (Ag&amp;lt;ii)*255;% or use imbinarize instead
+   [A,map] = gray2ind(curr_img,2); % change to indexed image
+   
+    if firstTime ==1%save first frame in different manner
+        imwrite(A,map,gifName,'gif','LoopCount',Inf,'DelayTime',0.001);
+    firstTime = 0;
+    else
+        imwrite(A,map,gifName,'gif','WriteMode','append','DelayTime',0.001);
+    end 
+ end
+&lt;/code&gt;&lt;/pre&gt;
+</content:encoded>
+		</item>
+		<item>
 			<title>Klasifikace obrázků s pomocí alexnet</title>
-			<link>http://zodoc.netlify.com/posts/cs/classify_by_alexnet</link>
+			<link>http://tesar-tech.github.io/zodoc/zodoc/posts/cs/classify_by_alexnet</link>
 			<description>&lt;p&gt;Testovaný obrázek je klasifikován jako sedmikráska (daisy), což není správně, jelikož žlutý květ na obrázku náleží topinambuře. Nicméně topinambura není jednou z tříd do které alexnet klasifikuje (je jich celkem 1000) a sedmikrásce je vcelku podobná, takže klasifikace není zcela špatná. Pět klasifikací s nejvyšším skóre je vyobrazeno v tabulce.&lt;/p&gt;</description>
-			<enclosure url="http://zodoc.netlify.com/imgs_intro/classify_by_alexnet.jpg" length="0" type="image" />
-			<guid>http://zodoc.netlify.com/posts/cs/classify_by_alexnet</guid>
+			<enclosure url="http://tesar-tech.github.io/zodoc/imgs_intro/classify_by_alexnet.jpg" length="0" type="image" />
+			<guid>http://tesar-tech.github.io/zodoc/zodoc/posts/cs/classify_by_alexnet</guid>
 			<pubDate>Thu, 15 Nov 2018 00:00:00 GMT</pubDate>
 			<content:encoded>&lt;p&gt;Testovaný obrázek je klasifikován jako sedmikráska (daisy), což není správně, jelikož žlutý květ na obrázku náleží topinambuře. Nicméně topinambura není jednou z tříd do které alexnet klasifikuje (je jich celkem 1000) a sedmikrásce je vcelku podobná, takže klasifikace není zcela špatná. Pět klasifikací s nejvyšším skóre je vyobrazeno v tabulce.&lt;/p&gt;
 &lt;pre&gt;&lt;code class="language-matlab"&gt;net = alexnet;
@@ -4484,9 +4506,9 @@ uitable('Data',[names,num2cell(maxvalues*100)],'Position',[290 150 150 130],'Col
 		</item>
 		<item>
 			<title>Animation of binary image with variable threshold</title>
-			<link>http://zodoc.netlify.com/posts/en/animation_of_binary_image_with_variable_threshold</link>
-			<enclosure url="http://zodoc.netlify.com/imgs_intro/animation_of_binary_image_with_variable_threshold.gif" length="0" type="image" />
-			<guid>http://zodoc.netlify.com/posts/en/animation_of_binary_image_with_variable_threshold</guid>
+			<link>http://tesar-tech.github.io/zodoc/zodoc/posts/en/animation_of_binary_image_with_variable_threshold</link>
+			<enclosure url="http://tesar-tech.github.io/zodoc/imgs_intro/animation_of_binary_image_with_variable_threshold.gif" length="0" type="image" />
+			<guid>http://tesar-tech.github.io/zodoc/zodoc/posts/en/animation_of_binary_image_with_variable_threshold</guid>
 			<pubDate>Thu, 15 Nov 2018 00:00:00 GMT</pubDate>
 			<content:encoded>&lt;pre&gt;&lt;code class="language-matlab"&gt;Ag = rgb2gray(imread('kytka256.jpg'));
 firstTime = 1;gifName = 'bw_anim.gif';
@@ -4506,10 +4528,10 @@ for ii = 1:5:256
 		</item>
 		<item>
 			<title>Image classification using alexnet</title>
-			<link>http://zodoc.netlify.com/posts/en/classify_by_alexnet</link>
+			<link>http://tesar-tech.github.io/zodoc/zodoc/posts/en/classify_by_alexnet</link>
 			<description>&lt;p&gt;Tested image is classified as "daisy", which is not correct because that yellow bloom is Jerusalem artichoke. However "Jerusalem artichoke" is not one of the alexnet classes (there are 1000 of them) and the daisy is fairly similar, so the classification is not completely wrong. Five classifications with topmost score are displayed in the table.&lt;/p&gt;</description>
-			<enclosure url="http://zodoc.netlify.com/imgs_intro/classify_by_alexnet.jpg" length="0" type="image" />
-			<guid>http://zodoc.netlify.com/posts/en/classify_by_alexnet</guid>
+			<enclosure url="http://tesar-tech.github.io/zodoc/imgs_intro/classify_by_alexnet.jpg" length="0" type="image" />
+			<guid>http://tesar-tech.github.io/zodoc/zodoc/posts/en/classify_by_alexnet</guid>
 			<pubDate>Thu, 15 Nov 2018 00:00:00 GMT</pubDate>
 			<content:encoded>&lt;p&gt;Tested image is classified as &amp;quot;daisy&amp;quot;, which is not correct because that yellow bloom is Jerusalem artichoke. However &amp;quot;Jerusalem artichoke&amp;quot; is not one of the alexnet classes (there are 1000 of them) and the daisy is fairly similar, so the classification is not completely wrong. Five classifications with topmost score are displayed in the table.&lt;/p&gt;
 &lt;pre&gt;&lt;code class="language-matlab"&gt;net = alexnet;
@@ -4528,53 +4550,11 @@ uitable('Data',[names,num2cell(maxvalues*100)],'Position',[290 150 150 130],'Col
 </content:encoded>
 		</item>
 		<item>
-			<title>Animation of binary image with variable threshold</title>
-			<link>http://zodoc.netlify.com/posts/cs/animation_of_binary_image_with_variable_threshold</link>
-			<enclosure url="http://zodoc.netlify.com/imgs_intro/animation_of_binary_image_with_variable_threshold.gif" length="0" type="image" />
-			<guid>http://zodoc.netlify.com/posts/cs/animation_of_binary_image_with_variable_threshold</guid>
-			<pubDate>Thu, 15 Nov 2018 00:00:00 GMT</pubDate>
-			<content:encoded>&lt;pre&gt;&lt;code class="language-matlab"&gt;Ag = rgb2gray(imread('kytka256.jpg'));
-firstTime = 1;gifName = 'bw_anim.gif';
-for ii = 1:5:256
-   curr_img = (Ag&amp;lt;ii)*255;% or use imbinarize instead
-   [A,map] = gray2ind(curr_img,2); % change to indexed image
-   
-    if firstTime ==1%save first frame in different manner
-        imwrite(A,map,gifName,'gif','LoopCount',Inf,'DelayTime',0.001);
-    firstTime = 0;
-    else
-        imwrite(A,map,gifName,'gif','WriteMode','append','DelayTime',0.001);
-    end 
- end
-&lt;/code&gt;&lt;/pre&gt;
-</content:encoded>
-		</item>
-		<item>
-			<title>Handwritten numbers to binary image</title>
-			<link>http://zodoc.netlify.com/posts/en/handwritten_to_digital</link>
-			<description>&lt;p&gt;Convert the image to binary representation where numbers are going to be represented in white color, while the background is going to be black. However, the numbers won't be very clearly visible for possible future classification by neural networks, so a mathematical morphology operation called dilation will be used, implemented in MATLAB with function &lt;code&gt;imdilate&lt;/code&gt;.&lt;/p&gt;</description>
-			<enclosure url="http://zodoc.netlify.com/imgs_intro/handwritten_to_digital.png" length="0" type="image" />
-			<guid>http://zodoc.netlify.com/posts/en/handwritten_to_digital</guid>
-			<pubDate>Wed, 14 Nov 2018 00:00:00 GMT</pubDate>
-			<content:encoded>&lt;p&gt;Convert the image to binary representation where numbers are going to be represented in white color, while the background is going to be black. However, the numbers won't be very clearly visible for possible future classification by neural networks, so a mathematical morphology operation called dilation will be used, implemented in MATLAB with function &lt;code&gt;imdilate&lt;/code&gt;.&lt;/p&gt;
-&lt;pre&gt;&lt;code class="language-matlab"&gt;A = imread('cisla_ver.jpg'); % load an image
-AGray = rgb2gray(A); % conversion to grayscale
-ABinary = imbinarize(AGray, 'adaptive', 'ForegroundPolarity', 'dark', 'Sensitivity', 0.3); % binarization of image. ForegroundPolarity parameter indicates that the foreground is darker than the background.
-ABinaryComplement = ~ABinary; % turning numbers to white color
-StructuringElement = strel('disk', 7); % creating a disk-shaped structuring element to probe the binary image
-DilatedABinaryComplement = imdilate(ABinaryComplement, StructuringElement); % dilation of image
-subplot(1, 3, 1), imshow(A)
-subplot(1, 3, 2), imshow(ABinaryComplement)
-subplot(1, 3, 3), imshow(DilatedABinaryComplement)
-&lt;/code&gt;&lt;/pre&gt;
-</content:encoded>
-		</item>
-		<item>
 			<title>Fotka s ručně psanými čísly na binární obraz</title>
-			<link>http://zodoc.netlify.com/posts/cs/handwritten_to_digital</link>
+			<link>http://tesar-tech.github.io/zodoc/zodoc/posts/cs/handwritten_to_digital</link>
 			<description>&lt;p&gt;Zkonvertovat obrázek do binární reprezentace, kde jednotlivá čísla budou reprezentována bílou barvou a pozadí černou. Pro zvýraznění čísel k budoucí klasifikaci natrénovanou neuronovou sítí bude využita operace z matematické morfologie nazvaná dilatace, která je v MATLABu implementována pomocí funkce &lt;code&gt;imdilate&lt;/code&gt;.&lt;/p&gt;</description>
-			<enclosure url="http://zodoc.netlify.com/imgs_intro/handwritten_to_digital.png" length="0" type="image" />
-			<guid>http://zodoc.netlify.com/posts/cs/handwritten_to_digital</guid>
+			<enclosure url="http://tesar-tech.github.io/zodoc/imgs_intro/handwritten_to_digital.png" length="0" type="image" />
+			<guid>http://tesar-tech.github.io/zodoc/zodoc/posts/cs/handwritten_to_digital</guid>
 			<pubDate>Wed, 14 Nov 2018 00:00:00 GMT</pubDate>
 			<content:encoded>&lt;p&gt;Zkonvertovat obrázek do binární reprezentace, kde jednotlivá čísla budou reprezentována bílou barvou a pozadí černou. Pro zvýraznění čísel k budoucí klasifikaci natrénovanou neuronovou sítí bude využita operace z matematické morfologie nazvaná dilatace, která je v MATLABu implementována pomocí funkce &lt;code&gt;imdilate&lt;/code&gt;.&lt;/p&gt;
 &lt;pre&gt;&lt;code class="language-matlab"&gt;A = imread('cisla_ver.jpg'); % načtení obrazu
@@ -4583,6 +4563,26 @@ ABinary = imbinarize(AGray, 'adaptive', 'ForegroundPolarity', 'dark', 'Sensitivi
 ABinaryComplement = ~ABinary; % bitová inverze matice
 StructuringElement = strel('disk', 7); % vytvoření strukturního elementu ve tvaru kruhu, který slouží k prozkoumání původního obrazu
 DilatedABinaryComplement = imdilate(ABinaryComplement, StructuringElement); % dilatace obrazu
+subplot(1, 3, 1), imshow(A)
+subplot(1, 3, 2), imshow(ABinaryComplement)
+subplot(1, 3, 3), imshow(DilatedABinaryComplement)
+&lt;/code&gt;&lt;/pre&gt;
+</content:encoded>
+		</item>
+		<item>
+			<title>Handwritten numbers to binary image</title>
+			<link>http://tesar-tech.github.io/zodoc/zodoc/posts/en/handwritten_to_digital</link>
+			<description>&lt;p&gt;Convert the image to binary representation where numbers are going to be represented in white color, while the background is going to be black. However, the numbers won't be very clearly visible for possible future classification by neural networks, so a mathematical morphology operation called dilation will be used, implemented in MATLAB with function &lt;code&gt;imdilate&lt;/code&gt;.&lt;/p&gt;</description>
+			<enclosure url="http://tesar-tech.github.io/zodoc/imgs_intro/handwritten_to_digital.png" length="0" type="image" />
+			<guid>http://tesar-tech.github.io/zodoc/zodoc/posts/en/handwritten_to_digital</guid>
+			<pubDate>Wed, 14 Nov 2018 00:00:00 GMT</pubDate>
+			<content:encoded>&lt;p&gt;Convert the image to binary representation where numbers are going to be represented in white color, while the background is going to be black. However, the numbers won't be very clearly visible for possible future classification by neural networks, so a mathematical morphology operation called dilation will be used, implemented in MATLAB with function &lt;code&gt;imdilate&lt;/code&gt;.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-matlab"&gt;A = imread('cisla_ver.jpg'); % load an image
+AGray = rgb2gray(A); % conversion to grayscale
+ABinary = imbinarize(AGray, 'adaptive', 'ForegroundPolarity', 'dark', 'Sensitivity', 0.3); % binarization of image. ForegroundPolarity parameter indicates that the foreground is darker than the background.
+ABinaryComplement = ~ABinary; % turning numbers to white color
+StructuringElement = strel('disk', 7); % creating a disk-shaped structuring element to probe the binary image
+DilatedABinaryComplement = imdilate(ABinaryComplement, StructuringElement); % dilation of image
 subplot(1, 3, 1), imshow(A)
 subplot(1, 3, 2), imshow(ABinaryComplement)
 subplot(1, 3, 3), imshow(DilatedABinaryComplement)
