@@ -6,7 +6,7 @@
         var otherLangs = Model.Get<List<string>>("otherLanguagesList");
     var datazooLink =  Context.String("datazooLink");
     var datazooFiles = Model.Get<string[]>("datazooFiles");
-        var imgLink = Model.String(BlogKeys.Image); 
+        var imgLink =Context.GetLink( Model.String(BlogKeys.Image)); 
         var similarPosts = Model.Get<List<IDocument>>("similarPosts");
             var prerequisites = Model.Get<string[]>("prerequisites");
                 

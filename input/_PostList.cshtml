@@ -6,8 +6,8 @@
         string lead = post.String(BlogKeys.Lead);
 
                 string imageLink = "";
-                 var Tags = post.Get<string[]>(BlogKeys.Tags);
-                imageLink = "/posts" + Context.GetLink(post.String(BlogKeys.Image));
+                var Tags = post.Get<string[]>(BlogKeys.Tags);
+                imageLink = Context.GetLink(post.String(BlogKeys.Image));
 
                 <div class="post-preview">
                     <a href="@Context.GetLink(post)">
