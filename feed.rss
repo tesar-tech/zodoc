@@ -5,8 +5,8 @@
 		<link>http://tesar-tech.github.io/zodoc/zodoc</link>
 		<description>Image processing and deep learning samples</description>
 		<copyright>2019</copyright>
-		<pubDate>Wed, 30 Jan 2019 20:16:08 GMT</pubDate>
-		<lastBuildDate>Wed, 30 Jan 2019 20:16:08 GMT</lastBuildDate>
+		<pubDate>Wed, 30 Jan 2019 20:24:21 GMT</pubDate>
+		<lastBuildDate>Wed, 30 Jan 2019 20:24:21 GMT</lastBuildDate>
 		<item>
 			<title>Training of convolutional neural network for classification of handwritten digits</title>
 			<link>http://tesar-tech.github.io/zodoc/zodoc/posts/en/training_of_convolutional_neural_network_for_classification_of_handwritten_digits</link>
@@ -87,69 +87,6 @@ net = trainNetwork (imdsTrain, layers, options); % samotný trénink
 </content:encoded>
 		</item>
 		<item>
-			<title>Tvorba sady obrázků různých geometrických tvarů</title>
-			<link>http://tesar-tech.github.io/zodoc/zodoc/posts/cs/creating_an_image_set_with_various_shapes</link>
-			<description>&lt;p&gt;Skript vytváří složku &lt;code&gt;imgs_shapes&lt;/code&gt; a podsložky pojmenované po jednotlivých tvarech. Tvary odlišných barev, velikostí a pozic jsou generovány do těchto podsložek. Tato databáze obrázků má být použita pro trénování CNN k rozpoznávání tvarů.&lt;/p&gt;</description>
-			<enclosure url="http://tesar-tech.github.io/zodoc/zodoc/posts/imgs_intro/creating_an_image_set_with_various_shapes.jpg" length="0" type="image" />
-			<guid>http://tesar-tech.github.io/zodoc/zodoc/posts/cs/creating_an_image_set_with_various_shapes</guid>
-			<pubDate>Sat, 15 Dec 2018 00:00:00 GMT</pubDate>
-			<content:encoded>&lt;p&gt;Skript vytváří složku &lt;code&gt;imgs_shapes&lt;/code&gt; a podsložky pojmenované po jednotlivých tvarech. Tvary odlišných barev, velikostí a pozic jsou generovány do těchto podsložek. Tato databáze obrázků má být použita pro trénování CNN k rozpoznávání tvarů.&lt;/p&gt;
-&lt;pre&gt;&lt;code class="language-matlab"&gt;numImgInClass = 10;%počet obrázků v každé třídě
-imgSize= 227; %respektuje velikost vstupu pro alexnet
-Canvas = zeros(imgSize);
-
-mkdir('imgs_shapes');% vytvoření složek pro ukládání tvarů
-mkdir('imgs_shapes/circle');
-mkdir('imgs_shapes/rectangle');
-mkdir('imgs_shapes/triangle');
-
-for ii = 1:numImgInClass
-    %% tvorba &amp;quot;náhodného&amp;quot; kolečka
-    
-    colorRnd = rand([1 3]);
-    radiusRnd = randi([10 80],1);
-    
-    posRnd = randi([radiusRnd imgSize-radiusRnd],[1 2]);
-    RGBcircle = insertShape(Canvas,'FilledCircle',[posRnd radiusRnd],'color',colorRnd);
-    
-    imwrite(RGBcircle,fullfile('imgs_shapes/circle',['circle_' num2str(ii,'%03i') '.jpg']  ))
-    
-    %% tvorba &amp;quot;náhodného&amp;quot; obdelníku
-    colorRnd = rand([1 3]);
-    heightHalfRnd = randi([10 80],1);
-    widthHalfRnd = randi([10 80],1);
-    
-    posRnd = randi([1 imgSize-max(heightHalfRnd,widthHalfRnd)*2],[1 2]);
-    RGBsquare = insertShape(Canvas,'FilledRectangle',[posRnd heightHalfRnd*2 widthHalfRnd*2],'color',colorRnd);
-    
-    imwrite(RGBsquare,fullfile('imgs_shapes/rectangle',['square_' num2str(ii,'%03i') '.jpg']  ))
-    
-    %% tvorba &amp;quot;náhodného&amp;quot; trojúhelníku
-    %souřadnice a úhly musí splňovat tyto podmínky:
-    %velikost úhlu &amp;gt;15 a každá strana &amp;gt;66 (kvůli příliš malým nebo úzkým trojúhelníkům), minimálně dvě &amp;quot;x&amp;quot; a &amp;quot;y&amp;quot; souřadnice musí být odlišné  
-    
-    alpha=0; beta=0; gamma=0; sides=[1,1,1]; point=[0 0; 1 1];
-    while( rad2deg(alpha)&amp;lt;15 || beta&amp;lt;15 || gamma&amp;lt;15 || sum(sides(1,:)&amp;lt;66)&amp;gt;0  || numel(unique([point(1,1),point(2,1)]))==1 || numel(unique([point(1,2),point(2,2)]))==1 )
-        point=randi([40 190],[3 2]); 
-        sides=sort(pdist(point,'euclidean')); %Euklidovská vzdálenost mezi dvěma body = délka strany
-        alpha=acos((sides(2).^2+sides(3).^2-sides(1).^2)/(2*sides(2) * sides(3))); %kosinová věta -&amp;gt; úhel alfa ve stupních
-        beta=rad2deg(asin((sides(2)/sides(1))*sin(alpha))); %sinová věta -&amp;gt; úhel beta v radiánech
-        gamma=180-beta-(rad2deg(alpha)); % úhel gama
-    end
-    
-    point_vector=[point(1,:),point(2,:),point(3,:)];
-    colorRnd = rand([1 3]);
-    RGBtriangle= insertShape(Canvas,'FilledPolygon',point_vector,'color',colorRnd);
-    
-    imwrite(RGBtriangle,fullfile('imgs_shapes/triangle',['triangle_' num2str(ii,'%03i') '.jpg']  ))
-    
-    disp(['creating img db: ' num2str(ii/numImgInClass*100,'%.2f') ' %'])
-end
-
-&lt;/code&gt;&lt;/pre&gt;
-</content:encoded>
-		</item>
-		<item>
 			<title>Creating an image set with various shapes</title>
 			<link>http://tesar-tech.github.io/zodoc/zodoc/posts/en/creating_an_image_set_with_various_shapes</link>
 			<description>&lt;p&gt;Script creates folder &lt;code&gt;imgs_shapes&lt;/code&gt; and subfolders with name of the shape. Shapes with different color, size and position are generated in those subploders. This image database will be used to train CNN for shapes classification.&lt;/p&gt;</description>
@@ -213,21 +150,65 @@ end
 </content:encoded>
 		</item>
 		<item>
-			<title>Klasifikace ručně psaného čísla</title>
-			<link>http://tesar-tech.github.io/zodoc/zodoc/posts/cs/classification_of_handwritten_digit</link>
-			<description>&lt;p&gt;Model v onnx formátu byl natrénován na &lt;a href="http://yann.lecun.com/exdb/mnist/"&gt;MNIST&lt;/a&gt; datasetu s přesností 99.29 %.&lt;/p&gt;</description>
-			<enclosure url="http://tesar-tech.github.io/zodoc/zodoc/posts/imgs_intro/classification_of_handwritten_digit.jpg" length="0" type="image" />
-			<guid>http://tesar-tech.github.io/zodoc/zodoc/posts/cs/classification_of_handwritten_digit</guid>
-			<pubDate>Tue, 11 Dec 2018 00:00:00 GMT</pubDate>
-			<content:encoded>&lt;p&gt;Model v onnx formátu byl natrénován na &lt;a href="http://yann.lecun.com/exdb/mnist/"&gt;MNIST&lt;/a&gt; datasetu s přesností 99.29 %.&lt;/p&gt;
-&lt;pre&gt;&lt;code class="language-matlab"&gt;mnist_net = importONNXNetwork('MNIST_99.29.onnx','OutputLayerType','classification','ClassNames',{'0','1','2','3','4','5','6','7','8','9'}); %improt sítě
+			<title>Tvorba sady obrázků různých geometrických tvarů</title>
+			<link>http://tesar-tech.github.io/zodoc/zodoc/posts/cs/creating_an_image_set_with_various_shapes</link>
+			<description>&lt;p&gt;Skript vytváří složku &lt;code&gt;imgs_shapes&lt;/code&gt; a podsložky pojmenované po jednotlivých tvarech. Tvary odlišných barev, velikostí a pozic jsou generovány do těchto podsložek. Tato databáze obrázků má být použita pro trénování CNN k rozpoznávání tvarů.&lt;/p&gt;</description>
+			<enclosure url="http://tesar-tech.github.io/zodoc/zodoc/posts/imgs_intro/creating_an_image_set_with_various_shapes.jpg" length="0" type="image" />
+			<guid>http://tesar-tech.github.io/zodoc/zodoc/posts/cs/creating_an_image_set_with_various_shapes</guid>
+			<pubDate>Sat, 15 Dec 2018 00:00:00 GMT</pubDate>
+			<content:encoded>&lt;p&gt;Skript vytváří složku &lt;code&gt;imgs_shapes&lt;/code&gt; a podsložky pojmenované po jednotlivých tvarech. Tvary odlišných barev, velikostí a pozic jsou generovány do těchto podsložek. Tato databáze obrázků má být použita pro trénování CNN k rozpoznávání tvarů.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-matlab"&gt;numImgInClass = 10;%počet obrázků v každé třídě
+imgSize= 227; %respektuje velikost vstupu pro alexnet
+Canvas = zeros(imgSize);
 
-A = rgb2gray(imread('single_handwritten_digit.png'));%Načíst obrázek a převést na šedotón
-A_resized = imresize(A,[28 28]);%Zmenšit na [28x28] cožodpovídá vstupní vrstvě neuronové sítě
+mkdir('imgs_shapes');% vytvoření složek pro ukládání tvarů
+mkdir('imgs_shapes/circle');
+mkdir('imgs_shapes/rectangle');
+mkdir('imgs_shapes/triangle');
 
-[label, score] = classify(mnist_net,A_resized,'ExecutionEnvironment','cpu');%(problém s GPU při používání onnx modelu, proto zde využito cpu)
-A_withText = insertText(A,[1 1], cellstr(&amp;quot;classified as &amp;quot; +  string(label)+newline+ &amp;quot;(&amp;quot;+ num2str(max(score)*100,'%0.2f %%)')) ,'FontSize',28); % přidat text s výsledkem kalsifikace
-imshow(A_withText)
+for ii = 1:numImgInClass
+    %% tvorba &amp;quot;náhodného&amp;quot; kolečka
+    
+    colorRnd = rand([1 3]);
+    radiusRnd = randi([10 80],1);
+    
+    posRnd = randi([radiusRnd imgSize-radiusRnd],[1 2]);
+    RGBcircle = insertShape(Canvas,'FilledCircle',[posRnd radiusRnd],'color',colorRnd);
+    
+    imwrite(RGBcircle,fullfile('imgs_shapes/circle',['circle_' num2str(ii,'%03i') '.jpg']  ))
+    
+    %% tvorba &amp;quot;náhodného&amp;quot; obdelníku
+    colorRnd = rand([1 3]);
+    heightHalfRnd = randi([10 80],1);
+    widthHalfRnd = randi([10 80],1);
+    
+    posRnd = randi([1 imgSize-max(heightHalfRnd,widthHalfRnd)*2],[1 2]);
+    RGBsquare = insertShape(Canvas,'FilledRectangle',[posRnd heightHalfRnd*2 widthHalfRnd*2],'color',colorRnd);
+    
+    imwrite(RGBsquare,fullfile('imgs_shapes/rectangle',['square_' num2str(ii,'%03i') '.jpg']  ))
+    
+    %% tvorba &amp;quot;náhodného&amp;quot; trojúhelníku
+    %souřadnice a úhly musí splňovat tyto podmínky:
+    %velikost úhlu &amp;gt;15 a každá strana &amp;gt;66 (kvůli příliš malým nebo úzkým trojúhelníkům), minimálně dvě &amp;quot;x&amp;quot; a &amp;quot;y&amp;quot; souřadnice musí být odlišné  
+    
+    alpha=0; beta=0; gamma=0; sides=[1,1,1]; point=[0 0; 1 1];
+    while( rad2deg(alpha)&amp;lt;15 || beta&amp;lt;15 || gamma&amp;lt;15 || sum(sides(1,:)&amp;lt;66)&amp;gt;0  || numel(unique([point(1,1),point(2,1)]))==1 || numel(unique([point(1,2),point(2,2)]))==1 )
+        point=randi([40 190],[3 2]); 
+        sides=sort(pdist(point,'euclidean')); %Euklidovská vzdálenost mezi dvěma body = délka strany
+        alpha=acos((sides(2).^2+sides(3).^2-sides(1).^2)/(2*sides(2) * sides(3))); %kosinová věta -&amp;gt; úhel alfa ve stupních
+        beta=rad2deg(asin((sides(2)/sides(1))*sin(alpha))); %sinová věta -&amp;gt; úhel beta v radiánech
+        gamma=180-beta-(rad2deg(alpha)); % úhel gama
+    end
+    
+    point_vector=[point(1,:),point(2,:),point(3,:)];
+    colorRnd = rand([1 3]);
+    RGBtriangle= insertShape(Canvas,'FilledPolygon',point_vector,'color',colorRnd);
+    
+    imwrite(RGBtriangle,fullfile('imgs_shapes/triangle',['triangle_' num2str(ii,'%03i') '.jpg']  ))
+    
+    disp(['creating img db: ' num2str(ii/numImgInClass*100,'%.2f') ' %'])
+end
+
 &lt;/code&gt;&lt;/pre&gt;
 </content:encoded>
 		</item>
@@ -246,6 +227,25 @@ A_resized = imresize(A,[28 28]);%Resize to [28x28] to match cnn input layer
 
 [label, score] = classify(mnist,trojka,'ExecutionEnvironment','cpu');%(there is some issue on GPU when using onnx models, so CPU is used here)
 A_withText = insertText(A,[1 1], cellstr(&amp;quot;classified as &amp;quot; +  string(label)+newline+ &amp;quot;(&amp;quot;+ num2str(max(score)*100,'%0.2f %%)')) ,'FontSize',28); % add text with classifiaction results
+imshow(A_withText)
+&lt;/code&gt;&lt;/pre&gt;
+</content:encoded>
+		</item>
+		<item>
+			<title>Klasifikace ručně psaného čísla</title>
+			<link>http://tesar-tech.github.io/zodoc/zodoc/posts/cs/classification_of_handwritten_digit</link>
+			<description>&lt;p&gt;Model v onnx formátu byl natrénován na &lt;a href="http://yann.lecun.com/exdb/mnist/"&gt;MNIST&lt;/a&gt; datasetu s přesností 99.29 %.&lt;/p&gt;</description>
+			<enclosure url="http://tesar-tech.github.io/zodoc/zodoc/posts/imgs_intro/classification_of_handwritten_digit.jpg" length="0" type="image" />
+			<guid>http://tesar-tech.github.io/zodoc/zodoc/posts/cs/classification_of_handwritten_digit</guid>
+			<pubDate>Tue, 11 Dec 2018 00:00:00 GMT</pubDate>
+			<content:encoded>&lt;p&gt;Model v onnx formátu byl natrénován na &lt;a href="http://yann.lecun.com/exdb/mnist/"&gt;MNIST&lt;/a&gt; datasetu s přesností 99.29 %.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-matlab"&gt;mnist_net = importONNXNetwork('MNIST_99.29.onnx','OutputLayerType','classification','ClassNames',{'0','1','2','3','4','5','6','7','8','9'}); %improt sítě
+
+A = rgb2gray(imread('single_handwritten_digit.png'));%Načíst obrázek a převést na šedotón
+A_resized = imresize(A,[28 28]);%Zmenšit na [28x28] cožodpovídá vstupní vrstvě neuronové sítě
+
+[label, score] = classify(mnist_net,A_resized,'ExecutionEnvironment','cpu');%(problém s GPU při používání onnx modelu, proto zde využito cpu)
+A_withText = insertText(A,[1 1], cellstr(&amp;quot;classified as &amp;quot; +  string(label)+newline+ &amp;quot;(&amp;quot;+ num2str(max(score)*100,'%0.2f %%)')) ,'FontSize',28); % přidat text s výsledkem kalsifikace
 imshow(A_withText)
 &lt;/code&gt;&lt;/pre&gt;
 </content:encoded>
@@ -4281,32 +4281,6 @@ disp(ClassNamesWithIndexes) % Display result
 </content:encoded>
 		</item>
 		<item>
-			<title>Segmentace obrázku v barevném modelu HSV</title>
-			<link>http://tesar-tech.github.io/zodoc/zodoc/posts/cs/image_segmentation_in_hsv_color_space</link>
-			<description>&lt;p&gt;Segmentace části obrázku v barevném modelu HSV, který popisuje barvy třemi parametry (odstín, sytost a jas). Prahy odstínu určují rozsah barev, který izolujeme. Pro segmentaci podle barev je vhodné použít model HSV, jelikož lépe rozlišuje mezi jednotlivými barvami.&lt;/p&gt;</description>
-			<enclosure url="http://tesar-tech.github.io/zodoc/zodoc/posts/imgs_intro/image_segmentation_in_hsv_color_space.png" length="0" type="image" />
-			<guid>http://tesar-tech.github.io/zodoc/zodoc/posts/cs/image_segmentation_in_hsv_color_space</guid>
-			<pubDate>Wed, 28 Nov 2018 00:00:00 GMT</pubDate>
-			<content:encoded>&lt;p&gt;Segmentace části obrázku v barevném modelu HSV, který popisuje barvy třemi parametry (odstín, sytost a jas). Prahy odstínu určují rozsah barev, který izolujeme. Pro segmentaci podle barev je vhodné použít model HSV, jelikož lépe rozlišuje mezi jednotlivými barvami.&lt;/p&gt;
-&lt;pre&gt;&lt;code class="language-matlab"&gt;% Načtení výchozího obrázku
-A = imread('kytka256.jpg');
-% Převod hodnot RGB do HSV
-imgHSV = rgb2hsv(A);
-% Nastevní prahů odstínu v rozmezí 0 až 1
-hueMin = 0.000; % 0 odpovídá červené
-hueMax = 0.280; % 0.28 zhruba odpovídá žluté
-% Vytvoření masky z prahů (odstín je v prvním kanálu)
-hueMask = (imgHSV(:,:,1) &amp;gt;= hueMin ) &amp;amp; (imgHSV(:,:,1) &amp;lt;= hueMax);
-% Použití masky na původní obrázek k odbarvení pozadí
-% (Hadamardův součin kanálu sytosti původního obrázku a masky)
-imgHSV(:,:,2) = imgHSV(:,:,2) .* hueMask;
-% Převod výsledného obrázku zpět do modelu RGB
-imgResult = hsv2rgb(imgHSV);
-imshow(imgResult);
-&lt;/code&gt;&lt;/pre&gt;
-</content:encoded>
-		</item>
-		<item>
 			<title>Image segmentation in HSV color space</title>
 			<link>http://tesar-tech.github.io/zodoc/zodoc/posts/en/image_segmentation_in_hsv_color_space</link>
 			<description>&lt;p&gt;Isolate part of an image in HSV color space (which describes colors by hue, saturation, and value). Hue thresholds define a range of hues to isolate. For color-based segmentation, it's easier to manipulate images in HSV color space, because the hue channel is the mix of all RGB channels and it better distinguishes between all individual colors.&lt;/p&gt;</description>
@@ -4333,29 +4307,28 @@ imshow(imgResult);
 </content:encoded>
 		</item>
 		<item>
-			<title>Oddělení kulatých objektů od objektů ostatních</title>
-			<link>http://tesar-tech.github.io/zodoc/zodoc/posts/cs/select_round_objects</link>
-			<description>&lt;p&gt;Tento příspevěk je pokračováním příspěvku &lt;a href="filtering_binary_objects_with_kmeans"&gt;předchozího&lt;/a&gt;, který se zabýval zpracováním obrázku s tvary.&lt;/p&gt;</description>
-			<enclosure url="http://tesar-tech.github.io/zodoc/zodoc/posts/imgs_intro/select_round_objects.png" length="0" type="image" />
-			<guid>http://tesar-tech.github.io/zodoc/zodoc/posts/cs/select_round_objects</guid>
-			<pubDate>Sun, 18 Nov 2018 00:00:00 GMT</pubDate>
-			<content:encoded>&lt;blockquote class="blockquote"&gt;
-&lt;p&gt;Tento příspevěk je pokračováním příspěvku &lt;a href="filtering_binary_objects_with_kmeans"&gt;předchozího&lt;/a&gt;, který se zabýval zpracováním obrázku s tvary.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;pre&gt;&lt;code class="language-matlab"&gt;reg_props2 = regionprops(Aa{6},'perimeter','EquivDiameter','area');
-
-[~,L] = bwboundaries(Aa{6},'noholes');% označení objektů čísly  1:num_of_regions
-
-%Kruhy v tomto obrázku nejsou zcela kulaté. Hledáme &amp;quot;skoro&amp;quot; kulaté objekty
-%EquivDiameter je průměr kruhu, jenž by zabíral stejnou plochu jako daný objekt
-%Area/Perimeter + maláKonstanta &amp;gt; EquivDiameter/4   pro kruhové objekty
-%kulaté objekty (kruhy) mají nejvyšší poměr plochy/obvodu ze všech možných tvarů
-% Area/Perimeter = Diameter/4 - platí pro kruh 
-where_is_true =([reg_props2.Area] ./ [reg_props2.Perimeter]+1) &amp;gt; [reg_props2.EquivDiameter]/4;
- 
-Aa{7} =  ismember(L, find(where_is_true));%filtrace nekulatých objektů z obrázku
-
-montage({Aa{6},Aa{7}},'bordersize',[1 1],'backgroundcolor','green')
+			<title>Segmentace obrázku v barevném modelu HSV</title>
+			<link>http://tesar-tech.github.io/zodoc/zodoc/posts/cs/image_segmentation_in_hsv_color_space</link>
+			<description>&lt;p&gt;Segmentace části obrázku v barevném modelu HSV, který popisuje barvy třemi parametry (odstín, sytost a jas). Prahy odstínu určují rozsah barev, který izolujeme. Pro segmentaci podle barev je vhodné použít model HSV, jelikož lépe rozlišuje mezi jednotlivými barvami.&lt;/p&gt;</description>
+			<enclosure url="http://tesar-tech.github.io/zodoc/zodoc/posts/imgs_intro/image_segmentation_in_hsv_color_space.png" length="0" type="image" />
+			<guid>http://tesar-tech.github.io/zodoc/zodoc/posts/cs/image_segmentation_in_hsv_color_space</guid>
+			<pubDate>Wed, 28 Nov 2018 00:00:00 GMT</pubDate>
+			<content:encoded>&lt;p&gt;Segmentace části obrázku v barevném modelu HSV, který popisuje barvy třemi parametry (odstín, sytost a jas). Prahy odstínu určují rozsah barev, který izolujeme. Pro segmentaci podle barev je vhodné použít model HSV, jelikož lépe rozlišuje mezi jednotlivými barvami.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-matlab"&gt;% Načtení výchozího obrázku
+A = imread('kytka256.jpg');
+% Převod hodnot RGB do HSV
+imgHSV = rgb2hsv(A);
+% Nastevní prahů odstínu v rozmezí 0 až 1
+hueMin = 0.000; % 0 odpovídá červené
+hueMax = 0.280; % 0.28 zhruba odpovídá žluté
+% Vytvoření masky z prahů (odstín je v prvním kanálu)
+hueMask = (imgHSV(:,:,1) &amp;gt;= hueMin ) &amp;amp; (imgHSV(:,:,1) &amp;lt;= hueMax);
+% Použití masky na původní obrázek k odbarvení pozadí
+% (Hadamardův součin kanálu sytosti původního obrázku a masky)
+imgHSV(:,:,2) = imgHSV(:,:,2) .* hueMask;
+% Převod výsledného obrázku zpět do modelu RGB
+imgResult = hsv2rgb(imgHSV);
+imshow(imgResult);
 &lt;/code&gt;&lt;/pre&gt;
 </content:encoded>
 		</item>
@@ -4381,6 +4354,33 @@ montage({Aa{6},Aa{7}},'bordersize',[1 1],'backgroundcolor','green')
 where_is_true =([reg_props2.Area] ./ [reg_props2.Perimeter]+1) &amp;gt; [reg_props2.EquivDiameter]/4;
  
 Aa{7} =  ismember(L, find(where_is_true));
+
+montage({Aa{6},Aa{7}},'bordersize',[1 1],'backgroundcolor','green')
+&lt;/code&gt;&lt;/pre&gt;
+</content:encoded>
+		</item>
+		<item>
+			<title>Oddělení kulatých objektů od objektů ostatních</title>
+			<link>http://tesar-tech.github.io/zodoc/zodoc/posts/cs/select_round_objects</link>
+			<description>&lt;p&gt;Tento příspevěk je pokračováním příspěvku &lt;a href="filtering_binary_objects_with_kmeans"&gt;předchozího&lt;/a&gt;, který se zabýval zpracováním obrázku s tvary.&lt;/p&gt;</description>
+			<enclosure url="http://tesar-tech.github.io/zodoc/zodoc/posts/imgs_intro/select_round_objects.png" length="0" type="image" />
+			<guid>http://tesar-tech.github.io/zodoc/zodoc/posts/cs/select_round_objects</guid>
+			<pubDate>Sun, 18 Nov 2018 00:00:00 GMT</pubDate>
+			<content:encoded>&lt;blockquote class="blockquote"&gt;
+&lt;p&gt;Tento příspevěk je pokračováním příspěvku &lt;a href="filtering_binary_objects_with_kmeans"&gt;předchozího&lt;/a&gt;, který se zabýval zpracováním obrázku s tvary.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code class="language-matlab"&gt;reg_props2 = regionprops(Aa{6},'perimeter','EquivDiameter','area');
+
+[~,L] = bwboundaries(Aa{6},'noholes');% označení objektů čísly  1:num_of_regions
+
+%Kruhy v tomto obrázku nejsou zcela kulaté. Hledáme &amp;quot;skoro&amp;quot; kulaté objekty
+%EquivDiameter je průměr kruhu, jenž by zabíral stejnou plochu jako daný objekt
+%Area/Perimeter + maláKonstanta &amp;gt; EquivDiameter/4   pro kruhové objekty
+%kulaté objekty (kruhy) mají nejvyšší poměr plochy/obvodu ze všech možných tvarů
+% Area/Perimeter = Diameter/4 - platí pro kruh 
+where_is_true =([reg_props2.Area] ./ [reg_props2.Perimeter]+1) &amp;gt; [reg_props2.EquivDiameter]/4;
+ 
+Aa{7} =  ismember(L, find(where_is_true));%filtrace nekulatých objektů z obrázku
 
 montage({Aa{6},Aa{7}},'bordersize',[1 1],'backgroundcolor','green')
 &lt;/code&gt;&lt;/pre&gt;
