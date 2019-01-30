@@ -10,22 +10,22 @@ variables:
 
 steps:
 - task: DotNetCoreInstaller@0
- displayName: Install .NET Core SDK
- name: install_dotnetcore_sdk
- enabled: true
- inputs:
+  displayName: Install .NET Core SDK
+  name: install_dotnetcore_sdk
+  enabled: true
+  inputs:
    packageType: 'sdk'
    version: '2.2.101'
 
 - script: dotnet tool install -g Wyam.Tool
- displayName: Install Wyam
+  displayName: Install Wyam
 
 - script: wyam
- displayName: Build Site 
+  displayName: Build Site 
 
 - task: ArchiveFiles@2
- displayName: Zip Site
- inputs:
+  displayName: Zip Site
+  inputs:
    rootFolderOrFile: '$(Agent.BuildDirectory)/s/output' 
    includeRootFolder: true
    archiveType: 'zip'
@@ -38,5 +38,5 @@ steps:
      -H 'Content-Type: application/zip'
      --data-binary '@$(Build.BuildId).zip'
      https://api.netlify.com/api/v1/sites/$(netlifySiteId)/deploys
- workingDirectory: '$(Build.ArtifactStagingDirectory)'
- displayName: 'Upload to Netlify'
+  workingDirectory: '$(Build.ArtifactStagingDirectory)'
+  displayName: 'Upload to Netlify'
