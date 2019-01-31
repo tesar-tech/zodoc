@@ -5,7 +5,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
 
-        <title>ZODOC - Selective blur</title>
+        <title>ZODOC - Transfer Learning s pou&#x17E;it&#xED;m AlexNet</title>
         <meta name="description" content="Image processing and deep learning samples" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">        
 
@@ -28,9 +28,9 @@
         <meta name="msapplication-tooltip" content="ZODOC" />
         <meta name="msapplication-starturl" content="/zodoc/" />
 
-        <meta property="og:title" content="ZODOC - Selective blur" />
+        <meta property="og:title" content="ZODOC - Transfer Learning s pou&#x17E;it&#xED;m AlexNet" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="http://tesar-tech.github.io/zodoc/zodoc/posts/en/selective_blur" />
+        <meta property="og:url" content="http://tesar-tech.github.io/zodoc/zodoc/posts/cs/transfer_learning_with_alexnet" />
         <!-- TODO: More social graph meta tags -->
 
         <script src="/zodoc/assets/js/jquery.min.js"></script>
@@ -136,67 +136,62 @@
    
 
    
-    <h1>Selective blur</h1>
-        <h2 class="subheading">How to blur background only</h2>
+    <h1>Transfer Learning s pou&#x17E;it&#xED;m AlexNet</h1>
+        <h2 class="subheading">Pou&#x17E;it&#xED; transfer learningu na neuronov&#xE9; s&#xED;ti Alexnet s datab&#xE1;z&#xED; vygenerovan&#xFD;ch tvar&#x16F;</h2>
 
     <!-- <div class="meta">        
-Published on Saturday, November 3, 2018<br>    </div> -->
-    <!-- <div>language:en </div> -->
+Published on Wednesday, January 9, 2019<br>    </div> -->
+    <!-- <div>language:cs </div> -->
     <!--         <ul>
-            <li>othera cs </li>
+            <li>othera en </li>
         </ul>
  -->
 
         <div class="other-langs" >
            Other languages: 
 <!--[0]type of translation  -->
-         <a href="/zodoc/posts/cs/selective_blur"><img class="cs-flag"/></a>
+         <a href="/zodoc/posts/en/transfer_learning_with_alexnet"><img class="en-flag"/></a>
          </div>
 
 <div class="similar-posts" >
                      Similar posts: 
-                    <a class="btn btn-outline-info btn-xs" role="button" href="/zodoc/posts/en/transfer_learning_with_alexnet">
-                        Transfer Learning With AlexNet
+                    <a class="btn btn-outline-info btn-xs" role="button" href="/zodoc/posts/cs/creating_an_image_set_with_various_shapes">
+                        Tvorba sady obr&#xE1;zk&#x16F; r&#x16F;zn&#xFD;ch geometrick&#xFD;ch tvar&#x16F;
                     </a>
-                    <a class="btn btn-outline-info btn-xs" role="button" href="/zodoc/posts/en/training_of_convolutional_neural_network_for_classification_of_handwritten_digits">
-                        Training of convolutional neural network for classification of handwritten digits
+                    <a class="btn btn-outline-info btn-xs" role="button" href="/zodoc/posts/cs/select_round_objects">
+                        Odd&#x11B;len&#xED; kulat&#xFD;ch objekt&#x16F; od objekt&#x16F; ostatn&#xED;ch
                     </a>
-                    <a class="btn btn-outline-info btn-xs" role="button" href="/zodoc/posts/en/creating_an_image_set_with_various_shapes">
-                        Creating an image set with various shapes
+                    <a class="btn btn-outline-info btn-xs" role="button" href="/zodoc/posts/cs/filtering_binary_objects_with_kmeans">
+                        Filtrov&#xE1;n&#xED; bin&#xE1;rn&#xED;ch objekt&#x16F; za pou&#x17E;it&#xED; k-means
                     </a>
-                    <a class="btn btn-outline-info btn-xs" role="button" href="/zodoc/posts/en/classification_of_handwritten_digit">
-                        Classification of handwritten digit with CNN
+                    <a class="btn btn-outline-info btn-xs" role="button" href="/zodoc/posts/cs/training_of_convolutional_neural_network_for_classification_of_handwritten_digits">
+                        Tr&#xE9;nov&#xE1;n&#xED; konvolu&#x10D;n&#xED; neuronov&#xE9; s&#xED;t&#x11B; pro klasifikaci ru&#x10D;n&#x11B; psan&#xFD;ch &#x10D;&#xED;sel
                     </a>
-                    <a class="btn btn-outline-info btn-xs" role="button" href="/zodoc/posts/en/imagenet_classes">
-                        1000 classes of ImageNet
+                    <a class="btn btn-outline-info btn-xs" role="button" href="/zodoc/posts/cs/classification_of_handwritten_digit">
+                        Klasifikace ru&#x10D;n&#x11B; psan&#xE9;ho &#x10D;&#xED;sla
                     </a>
                     </div>
    
 
-    <div class="util">
-    <ul class="list-inline">
-        <li class="list-inline-item">Utilizing those files: </li>
-            <li class="list-inline-item"> <u> <a href="https://github.com/tesar-tech/zodoc/raw/develop/datazoo/imgs/kytka256.jpg"> kytka256.jpg </a> </u> </li>
-        </ul>
-    </div>
 
     <div class="util">
     <ul class="list-inline">
         <li class="list-inline-item">Prerequisites: </li>
             <li class="list-inline-item"> <u> <a href="/prerequisites#matlab">Matlab  </a> </u> </li>
+            <li class="list-inline-item"> <u> <a href="/prerequisites#alexnet-matlab-add-on">Alexnet matlab add-on  </a> </u> </li>
         </ul>
     </div>
 
 
         <div class="tags">
                             <a role="button" href="/zodoc/tags/matlab" class="btn btn-default btn-xs btn-technology">matlab</a>
-                <a role="button" href="/zodoc/tags/filters" class="btn btn-default btn-xs ">filters</a>
-                <a role="button" href="/zodoc/tags/gaussian" class="btn btn-default btn-xs ">gaussian</a>
-                <a role="button" href="/zodoc/tags/blur" class="btn btn-default btn-xs ">blur</a>
+                <a role="button" href="/zodoc/tags/imageset" class="btn btn-default btn-xs ">imageset</a>
+                <a role="button" href="/zodoc/tags/shapes" class="btn btn-default btn-xs ">shapes</a>
+                <a role="button" href="/zodoc/tags/transfer-learning" class="btn btn-default btn-xs ">transfer learning</a>
         </div>     
               
           
-<img src="/zodoc/posts/imgs_intro/selective_blur.png" alt="" >
+<img src="/zodoc/posts/imgs_intro/transfer_learning_with_alexnet.png" alt="" >
 </div>
                                         </div>
                                 </div>
@@ -209,25 +204,54 @@ Published on Saturday, November 3, 2018<br>    </div> -->
                                 <div id="content" class="col-md-12">
                                         
 
-<p>Blur only part that is not the flower itself. In fact, the entire image is blurred, and foreground is replaced by the original image.</p>
-<pre><code class="language-matlab">Abin = uint8(rgb2gray(A)&gt;128);% thresholding of image
+<p>Transfer learning je běžně používaná metoda deep learningovými aplikacemi. V praxi to znamená, že lze použít vytrénovanou neuronovou síť, jako výchozí bod pro učení sítě nové. Použití vlastností předtrénované sítě je většinou mnohem jednodušší a rychlejší, než učení sítě od začátku. Další výhodou je velikost databáze, která pro transfer learning nemusí být zdaleka tak veliká. Pro tuto ukázku načteme obrazový dataset, který obsahuje čtyři třídy: kruh, obdélník, trojúhelník a hvězda vytvořený tímto <a href="creating_an_image_set_with_various_shapes">skriptem</a>.</p>
+<pre><code class="language-matlab">imds = imageDatastore('imgs_shapes', ... %načtení obrázků ze složky
+    'IncludeSubfolders',true, ... %načtení podsložek
+    'LabelSource','foldernames'); %použití označení podle názvu souborů 
 
-f_gaussian = fspecial('gaussian',20,4); % gaussian filter
-A_gaussian = imfilter(A,f_gaussian,'same');% applying filter. 'same' size of image after filtration.
-Abin_rgb = repmat(Abin,[1 1 3]);%replication of binary image to 3 dimensions (to be able to multiply RGB image)
-A_selective_blur = Abin_rgb.*A + (1-Abin_rgb).*A_gaussian; %unblurred part + blurred part
+%rozdělí dataset podle labelu na dva datasety trenovací a validační
+[imdsTrain,imdsValidation] = splitEachLabel(imds,0.7,'randomized');
 
-imshow(A_selective_blur)
+% Načtení Předtrénované Neuronové Sítě
+net = alexnet;
+
+% Výměna posledních tří vrstev 
+inputSize = net.Layers(1).InputSize; % velikost vstupu
+layersTransfer = net.Layers(1:end-3);
+numClasses = numel(categories(imdsTrain.Labels)); % počet labelů
+
+%Přesuneme vrstvy pro novou klasifikační úlohu 
+layers = [
+    layersTransfer
+    fullyConnectedLayer(numClasses,'WeightLearnRateFactor',20,'BiasLearnRateFactor',20)
+    softmaxLayer
+    classificationLayer];
+
+% Trénování Neuronové Sítě
+%Zadáme nastavení pro tréning neuronové sítě
+options = trainingOptions('sgdm', ...
+    'MiniBatchSize',10, ...
+    'MaxEpochs',12, ... 
+    'InitialLearnRate',1e-4, ...
+    'Shuffle','every-epoch', ...
+    'ValidationData',imdsValidation, ...
+    'ValidationFrequency',3, ...
+    'Verbose',false, ...
+    'Plots','training-progress');
+
+%Začneme trénovat síť, která se skládá z přenesených a upravených vrstev.
+netTransfer = trainNetwork(imdsTrain,layers,options);
 </code></pre>
 
 
     <ul class="list-inline">
-  <li class="list-inline-item">Author:</li>
+  <li class="list-inline-item">Authors:</li>
 <li class="list-inline-item"><a role="button" href="/zodoc/authors/tesar-tech" class="btn btn-primary btn-xs">tesar-tech</a> </li>
+<li class="list-inline-item"><a role="button" href="/zodoc/authors/magias" class="btn btn-primary btn-xs">magias</a> </li>
   
  
 </ul>
-      <div class="alert alert-info"> <a href="https://github.com/tesar-tech/zodoc/blob/develop/input/posts/en/selective_blur.md"> <i class="fa fa-file"></i> </a> Something is wrong? Let us know right <a href="https://github.com/tesar-tech/zodoc/issues/new?title=Selective blur&amp;body=https://tesar-tech.github.io/zodoc/posts/en/selective_blur.html%0A[Delete this and describe the issue!]"> here <i class="fa fa-github"></i> </a></div>
+      <div class="alert alert-info"> <a href="https://github.com/tesar-tech/zodoc/blob/develop/input/posts/cs/transfer_learning_with_alexnet.md"> <i class="fa fa-file"></i> </a> Something is wrong? Let us know right <a href="https://github.com/tesar-tech/zodoc/issues/new?title=Transfer Learning s pou&#x17E;it&#xED;m AlexNet&amp;body=https://tesar-tech.github.io/zodoc/posts/cs/transfer_learning_with_alexnet.html%0A[Delete this and describe the issue!]"> here <i class="fa fa-github"></i> </a></div>
  
 
 

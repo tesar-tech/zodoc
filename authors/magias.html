@@ -5,7 +5,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
 
-        <title>ZODOC - Creating an image set with various shapes</title>
+        <title>ZODOC - magias</title>
         <meta name="description" content="Image processing and deep learning samples" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">        
 
@@ -28,9 +28,9 @@
         <meta name="msapplication-tooltip" content="ZODOC" />
         <meta name="msapplication-starturl" content="/zodoc/" />
 
-        <meta property="og:title" content="ZODOC - Creating an image set with various shapes" />
+        <meta property="og:title" content="ZODOC - magias" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="http://tesar-tech.github.io/zodoc/zodoc/posts/en/creating_an_image_set_with_various_shapes" />
+        <meta property="og:url" content="http://tesar-tech.github.io/zodoc/zodoc/authors/magias" />
         <!-- TODO: More social graph meta tags -->
 
         <script src="/zodoc/assets/js/jquery.min.js"></script>
@@ -130,70 +130,10 @@
                         <div class="container">
                                 <div class="row">
                                         <div class="col-md-12">
-
-    
-<div class="post-heading">
-   
-
-   
-    <h1>Creating an image set with various shapes</h1>
-        <h2 class="subheading">Generating imageset with different shapes like circle or rectangle for CNN learning</h2>
-
-    <!-- <div class="meta">        
-Published on Saturday, December 15, 2018<br>    </div> -->
-    <!-- <div>language:en </div> -->
-    <!--         <ul>
-            <li>othera cs </li>
-        </ul>
- -->
-
-        <div class="other-langs" >
-           Other languages: 
-<!--[0]type of translation  -->
-         <a href="/zodoc/posts/cs/creating_an_image_set_with_various_shapes"><img class="cs-flag"/></a>
-         </div>
-
-<div class="similar-posts" >
-                     Similar posts: 
-                    <a class="btn btn-outline-info btn-xs" role="button" href="/zodoc/posts/en/transfer_learning_with_alexnet">
-                        Transfer Learning With AlexNet
-                    </a>
-                    <a class="btn btn-outline-info btn-xs" role="button" href="/zodoc/posts/en/select_round_objects">
-                        Distinguish between round and other binary objects
-                    </a>
-                    <a class="btn btn-outline-info btn-xs" role="button" href="/zodoc/posts/en/filtering_binary_objects_with_kmeans">
-                        Filtering binary objects with kmeans
-                    </a>
-                    <a class="btn btn-outline-info btn-xs" role="button" href="/zodoc/posts/en/randomly_two-color_image">
-                        Randomly two-color image
-                    </a>
-                    <a class="btn btn-outline-info btn-xs" role="button" href="/zodoc/posts/en/training_of_convolutional_neural_network_for_classification_of_handwritten_digits">
-                        Training of convolutional neural network for classification of handwritten digits
-                    </a>
-                    </div>
-   
-
-
-    <div class="util">
-    <ul class="list-inline">
-        <li class="list-inline-item">Prerequisites: </li>
-            <li class="list-inline-item"> <u> <a href="/prerequisites#matlab">Matlab  </a> </u> </li>
-        </ul>
-    </div>
-
-
-        <div class="tags">
-                            <a role="button" href="/zodoc/tags/matlab" class="btn btn-default btn-xs btn-technology">matlab</a>
-                <a role="button" href="/zodoc/tags/imageset" class="btn btn-default btn-xs ">imageset</a>
-                <a role="button" href="/zodoc/tags/shapes" class="btn btn-default btn-xs ">shapes</a>
-                <a role="button" href="/zodoc/tags/random" class="btn btn-default btn-xs ">random</a>
-                <a role="button" href="/zodoc/tags/transfer-learning" class="btn btn-default btn-xs ">transfer learning</a>
-        </div>     
-              
-          
-<img src="/zodoc/posts/imgs_intro/creating_an_image_set_with_various_shapes.jpg" alt="" >
-</div>
-                                        </div>
+<div class="site-heading-tags">
+    <div> <h1> magias </h1></div>
+    <hr>
+</div>                                            </div>
                                 </div>
                         </div>
                 </header>
@@ -203,124 +143,154 @@ Published on Saturday, December 15, 2018<br>    </div> -->
                         <div class="row">
                                 <div id="content" class="col-md-12">
                                         
+<div class="container-sm-height">
+    <div class="row row-sm-height">
+        <div class="col-sm-12 col-sm-height">
+            
+                <div class="post-preview">
+                    <a href="/zodoc/posts/en/transfer_learning_with_alexnet">
+                        <h2 class="post-title">Transfer Learning With AlexNet</h2>
+                       
+                    </a>
 
-<p>Script creates folder <code>imgs_shapes</code> and subfolders with name of the shape. Shapes with different color, size and position are generated in those subploders. This image database will be used to train CNN for shapes classification.</p>
-<pre><code class="language-matlab">numImgInClass = 10;%number of imgs in every class
-imgSize= 227; %respect alexnet input size
-Canvas = zeros(imgSize);
-
-stepSize = 360 / 5; %angle for pentagons
-angles1 = 0 : stepSize : 360; %angle for first pentagon
-angles2 = stepSize/2 : stepSize : 360 + stepSize/2; %angle for second pentagon
-
-mkdir('imgs_shapes');% create folders for shapes
-mkdir('imgs_shapes/circle');
-mkdir('imgs_shapes/rectangle');
-mkdir('imgs_shapes/triangle');
-mkdir('imgs_shapes/star');
-
-for ii = 1:numImgInClass
-    %% create &quot;random&quot; circle
+   
+        <div class="tags">
+                            <a role="button" href="/zodoc/tags/matlab" class="btn btn-default btn-xs btn-technology">matlab</a>
+                <a role="button" href="/zodoc/tags/imageset" class="btn btn-default btn-xs ">imageset</a>
+                <a role="button" href="/zodoc/tags/shapes" class="btn btn-default btn-xs ">shapes</a>
+                <a role="button" href="/zodoc/tags/transfer-learning" class="btn btn-default btn-xs ">transfer learning</a>
+        </div>     
+              
     
-    colorRnd = rand([1 3]);
-    radiusRnd = randi([10 80],1);
+                <table >
+                   
+                    <tr>
+                    
+                    <td style="background:rgb(235, 235, 235)"> 
+                     <img src="/zodoc/posts/imgs_intro/transfer_learning_with_alexnet.png" style="float:left;width:128px;height:128px;object-fit: contain;">
+                    </td>
+                    <td style="padding-left: 10px">
+                            <div style="margin:0 0 0 130;float:right;" >An example of transfer learning with Alexnet neural network on a database of generated shapes</div>
+                        </td>
+               </tr>
+                </table>    
+
+                    <!-- <p class="post-meta">Posted on Wednesday, January 9, 2019</p> -->
+                   
+                    <!-- <p>Transfer learning is commonly used by deep learning applications. In practice, you can take a pretrained network and use it as a starting point to learn a new task. Fine-tuning a network with transfer learning is usually much faster and easier than training a network with randomly initialized weights from scratch. You can quickly transfer learned features to a new task using a smaller number of training images. For this example we will use Image dataset, that contains 4 labels: circle, rectangle, triangle and star, created with this <a href="creating_an_image_set_with_various_shapes">script</a>.</p>              -->
+                </div>       
+                <div class="post-preview">
+                    <a href="/zodoc/posts/cs/transfer_learning_with_alexnet">
+                        <h2 class="post-title">Transfer Learning s pou&#x17E;it&#xED;m AlexNet</h2>
+                       
+                    </a>
+
+   
+        <div class="tags">
+                            <a role="button" href="/zodoc/tags/matlab" class="btn btn-default btn-xs btn-technology">matlab</a>
+                <a role="button" href="/zodoc/tags/imageset" class="btn btn-default btn-xs ">imageset</a>
+                <a role="button" href="/zodoc/tags/shapes" class="btn btn-default btn-xs ">shapes</a>
+                <a role="button" href="/zodoc/tags/transfer-learning" class="btn btn-default btn-xs ">transfer learning</a>
+        </div>     
+              
     
-    posRnd = randi([radiusRnd imgSize-radiusRnd],[1 2]);
-    RGBcircle = insertShape(Canvas,'FilledCircle',[posRnd radiusRnd],'color',colorRnd);
+                <table >
+                   
+                    <tr>
+                    
+                    <td style="background:rgb(235, 235, 235)"> 
+                     <img src="/zodoc/posts/imgs_intro/transfer_learning_with_alexnet.png" style="float:left;width:128px;height:128px;object-fit: contain;">
+                    </td>
+                    <td style="padding-left: 10px">
+                            <div style="margin:0 0 0 130;float:right;" >Pou&#x17E;it&#xED; transfer learningu na neuronov&#xE9; s&#xED;ti Alexnet s datab&#xE1;z&#xED; vygenerovan&#xFD;ch tvar&#x16F;</div>
+                        </td>
+               </tr>
+                </table>    
+
+                    <!-- <p class="post-meta">Posted on Wednesday, January 9, 2019</p> -->
+                   
+                    <!-- <p>Transfer learning je běžně používaná metoda deep learningovými aplikacemi. V praxi to znamená, že lze použít vytrénovanou neuronovou síť, jako výchozí bod pro učení sítě nové. Použití vlastností předtrénované sítě je většinou mnohem jednodušší a rychlejší, než učení sítě od začátku. Další výhodou je velikost databáze, která pro transfer learning nemusí být zdaleka tak veliká. Pro tuto ukázku načteme obrazový dataset, který obsahuje čtyři třídy: kruh, obdélník, trojúhelník a hvězda vytvořený tímto <a href="creating_an_image_set_with_various_shapes">skriptem</a>.</p>              -->
+                </div>       
+                <div class="post-preview">
+                    <a href="/zodoc/posts/en/creating_an_image_set_with_various_shapes">
+                        <h2 class="post-title">Creating an image set with various shapes</h2>
+                       
+                    </a>
+
+   
+        <div class="tags">
+                            <a role="button" href="/zodoc/tags/matlab" class="btn btn-default btn-xs btn-technology">matlab</a>
+                <a role="button" href="/zodoc/tags/imageset" class="btn btn-default btn-xs ">imageset</a>
+                <a role="button" href="/zodoc/tags/shapes" class="btn btn-default btn-xs ">shapes</a>
+                <a role="button" href="/zodoc/tags/random" class="btn btn-default btn-xs ">random</a>
+                <a role="button" href="/zodoc/tags/transfer-learning" class="btn btn-default btn-xs ">transfer learning</a>
+        </div>     
+              
     
-    imwrite(RGBcircle,fullfile('imgs_shapes/circle',['circle_' num2str(ii,'%03i') '.jpg']  ))
+                <table >
+                   
+                    <tr>
+                    
+                    <td style="background:rgb(235, 235, 235)"> 
+                     <img src="/zodoc/posts/imgs_intro/creating_an_image_set_with_various_shapes.jpg" style="float:left;width:128px;height:128px;object-fit: contain;">
+                    </td>
+                    <td style="padding-left: 10px">
+                            <div style="margin:0 0 0 130;float:right;" >Generating imageset with different shapes like circle or rectangle for CNN learning</div>
+                        </td>
+               </tr>
+                </table>    
+
+                    <!-- <p class="post-meta">Posted on Saturday, December 15, 2018</p> -->
+                   
+                    <!-- <p>Script creates folder <code>imgs_shapes</code> and subfolders with name of the shape. Shapes with different color, size and position are generated in those subploders. This image database will be used to train CNN for shapes classification.</p>              -->
+                </div>       
+                <div class="post-preview">
+                    <a href="/zodoc/posts/cs/creating_an_image_set_with_various_shapes">
+                        <h2 class="post-title">Tvorba sady obr&#xE1;zk&#x16F; r&#x16F;zn&#xFD;ch geometrick&#xFD;ch tvar&#x16F;</h2>
+                       
+                    </a>
+
+   
+        <div class="tags">
+                            <a role="button" href="/zodoc/tags/matlab" class="btn btn-default btn-xs btn-technology">matlab</a>
+                <a role="button" href="/zodoc/tags/imageset" class="btn btn-default btn-xs ">imageset</a>
+                <a role="button" href="/zodoc/tags/shapes" class="btn btn-default btn-xs ">shapes</a>
+                <a role="button" href="/zodoc/tags/random" class="btn btn-default btn-xs ">random</a>
+                <a role="button" href="/zodoc/tags/transfer-learning" class="btn btn-default btn-xs ">transfer learning</a>
+        </div>     
+              
     
-    %% create &quot;random&quot; rectangle
-    colorRnd = rand([1 3]);
-    heightHalfRnd = randi([10 80],1);
-    widthHalfRnd = randi([10 80],1);
-    
-    posRnd = randi([1 imgSize-max(heightHalfRnd,widthHalfRnd)*2],[1 2]);
-    RGBsquare = insertShape(Canvas,'FilledRectangle',[posRnd heightHalfRnd*2 widthHalfRnd*2],'color',colorRnd);
-    
-    imwrite(RGBsquare,fullfile('imgs_shapes/rectangle',['square_' num2str(ii,'%03i') '.jpg']  ))
-    
-    %% create &quot;random&quot; triangle
-    %coordinates and angles must meet these conditions:
-    %angle size &gt;15 and every side &gt;66(because of too small or narrow triangles), minimal two &quot;x&quot; and &quot;y&quot; coordinates must be different  
-    
-    alpha=0; beta=0; gamma=0; sides=[1,1,1]; point=[0 0; 1 1];
-    while( rad2deg(alpha)&lt;15 || beta&lt;15 || gamma&lt;15 || sum(sides(1,:)&lt;66)&gt;0  || numel(unique([point(1,1),point(2,1)]))==1 || numel(unique([point(1,2),point(2,2)]))==1 )
-        point=randi([40 190],[3 2]); 
-        sides=sort(pdist(point,'euclidean')); %Euclidean distance between 2 points = side length
-        alpha=acos((sides(2).^2+sides(3).^2-sides(1).^2)/(2*sides(2) * sides(3)));  %Law of Cosines -&gt; alpha angle in radians
-        beta=rad2deg(asin((sides(2)/sides(1))*sin(alpha))); %Law of Sines -&gt; beta angle in degrees
-        gamma=180-beta-(rad2deg(alpha)); % gamma angle
-    end
-    
-    point_vector=[point(1,:),point(2,:),point(3,:)];
-    colorRnd = rand([1 3]);
-    RGBtriangle= insertShape(Canvas,'FilledPolygon',point_vector,'color',colorRnd);
-    
-    imwrite(RGBtriangle,fullfile('imgs_shapes/triangle',['triangle_' num2str(ii,'%03i') '.jpg']  ))
+                <table >
+                   
+                    <tr>
+                    
+                    <td style="background:rgb(235, 235, 235)"> 
+                     <img src="/zodoc/posts/imgs_intro/creating_an_image_set_with_various_shapes.jpg" style="float:left;width:128px;height:128px;object-fit: contain;">
+                    </td>
+                    <td style="padding-left: 10px">
+                            <div style="margin:0 0 0 130;float:right;" >Tvorba sady obr&#xE1;zk&#x16F; r&#x16F;zn&#xFD;ch tvar&#x16F; (nap&#x159;. kole&#x10D;ko nebo obd&#xE9;ln&#xED;k) pro u&#x10D;en&#xED; CNN</div>
+                        </td>
+               </tr>
+                </table>    
 
-    %% Create stars 
-    %Random size of both pentagons
-    r1 = randi([10 30],1);
-    r2 = randi([40 80],1);
-
-    %Generate coordinates for both pentagons
-    x1 = r1 * cosd(angles1);
-    y1 = r1 * sind(angles1);
-    x2 = r2 * cosd(angles2);
-    y2 = r2 * sind(angles2);
-
-    %Redraw coordinates of pivotal pentagons into a star shape polygon
-    x3 = reshape([x1;x2], 1, []);
-    y3 = reshape([y1;y2], 1, []);
-
-    %Move coordinates in the middle
-    x3 = x3+imgSize/2;
-    y3 = y3+imgSize/2;
-
-    % Random shift
-    x3 = x3+randi([-round(min(x3)) (imgSize - round(max(x3)))],1);
-    y3 = y3+randi([-round(min(y3)) (imgSize - round(max(y3)))],1);
-
-    % Redners mask of the 227x227 binary image from polygon coordinates into the star.
-    maskImage = poly2mask(x3, y3, imgSize, imgSize);
-
-    %Random rotation angle
-    angleRand=randi([0 360],1);
-
-    %Image rotation
-    rotateImg = imrotate(maskImage,angleRand,'crop');
-
-    %single channel whitestar
-    whiteImage = 255 * uint8(rotateImg);
-
-    %Radnom RGB channel generator
-    RRand=randi([0 255],1);
-    GRand=randi([0 255],1);
-    BRand=randi([0 255],1);
-
-    %Creates RGB image of the star with random color
-    RGB = cat(3, whiteImage-RRand, whiteImage-GRand, whiteImage-BRand);
-    imwrite(RGB,fullfile('imgs_shapes/star',['star_' num2str(ii,'%03i') '.jpg']  ))
-
-    disp(['creating img db: ' num2str(ii/numImgInClass*100,'%.2f') ' %'])
-end
-</code></pre>
+                    <!-- <p class="post-meta">Posted on Saturday, December 15, 2018</p> -->
+                   
+                    <!-- <p>Skript vytváří složku <code>imgs_shapes</code> a podsložky pojmenované po jednotlivých tvarech. Tvary odlišných barev, velikostí a pozic jsou generovány do těchto podsložek. Tato databáze obrázků má být použita pro trénování CNN k rozpoznávání tvarů.</p>              -->
+                </div>       
 
 
-    <ul class="list-inline">
-  <li class="list-inline-item">Authors:</li>
-<li class="list-inline-item"><a role="button" href="/zodoc/authors/tesar-tech" class="btn btn-primary btn-xs">tesar-tech</a> </li>
-<li class="list-inline-item"><a role="button" href="/zodoc/authors/strakka1" class="btn btn-primary btn-xs">strakka1</a> </li>
-<li class="list-inline-item"><a role="button" href="/zodoc/authors/magias" class="btn btn-primary btn-xs">magias</a> </li>
-  
- 
-</ul>
-      <div class="alert alert-info"> <a href="https://github.com/tesar-tech/zodoc/blob/develop/input/posts/en/creating_an_image_set_with_various_shapes.md"> <i class="fa fa-file"></i> </a> Something is wrong? Let us know right <a href="https://github.com/tesar-tech/zodoc/issues/new?title=Creating an image set with various shapes&amp;body=https://tesar-tech.github.io/zodoc/posts/en/creating_an_image_set_with_various_shapes.html%0A[Delete this and describe the issue!]"> here <i class="fa fa-github"></i> </a></div>
- 
-
-
- 
+            <nav>
+                <ul class="pager">
+                    <li class="previous">                
+                    </li>
+                    <li class="next">
+                    </li>
+                </ul>
+            </nav>
+            <hr class="visible-xs-block" />
+        </div>
+    </div>
+</div>
                                 </div>
                         </div>
                 </div>

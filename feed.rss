@@ -5,45 +5,98 @@
 		<link>http://tesar-tech.github.io/zodoc/zodoc</link>
 		<description>Image processing and deep learning samples</description>
 		<copyright>2019</copyright>
-		<pubDate>Wed, 30 Jan 2019 20:24:21 GMT</pubDate>
-		<lastBuildDate>Wed, 30 Jan 2019 20:24:21 GMT</lastBuildDate>
+		<pubDate>Thu, 31 Jan 2019 08:36:26 GMT</pubDate>
+		<lastBuildDate>Thu, 31 Jan 2019 08:36:26 GMT</lastBuildDate>
 		<item>
-			<title>Training of convolutional neural network for classification of handwritten digits</title>
-			<link>http://tesar-tech.github.io/zodoc/zodoc/posts/en/training_of_convolutional_neural_network_for_classification_of_handwritten_digits</link>
-			<description>&lt;p&gt;This post is a simple example of CNN training. It uses the uncomplicated layer structure and training options for keeping things as simple as possible. The structure is simple enough to be trained fast on common CPU. Accuracy of trained network is over 98 %. &lt;a href="classification_of_handwritten_digit"&gt;Another post&lt;/a&gt; describes how to use this network to classify your own handwritten digit.&lt;/p&gt;</description>
-			<enclosure url="http://tesar-tech.github.io/zodoc/zodoc/posts/imgs_intro/training_of_convolutional_neural_network_for_classification_of_handwritten_digits.png" length="0" type="image" />
-			<guid>http://tesar-tech.github.io/zodoc/zodoc/posts/en/training_of_convolutional_neural_network_for_classification_of_handwritten_digits</guid>
-			<pubDate>Thu, 20 Dec 2018 00:00:00 GMT</pubDate>
-			<content:encoded>&lt;p&gt;This post is a simple example of CNN training. It uses the uncomplicated layer structure and training options for keeping things as simple as possible. The structure is simple enough to be trained fast on common CPU. Accuracy of trained network is over 98 %. &lt;a href="classification_of_handwritten_digit"&gt;Another post&lt;/a&gt; describes how to use this network to classify your own handwritten digit.&lt;/p&gt;
-&lt;pre&gt;&lt;code class="language-matlab"&gt;%% load data
-%path to build-in digits dataset (part of MNIST dataset)
-digitDatasetPath = fullfile(matlabroot,'toolbox','nnet', 'nndemos','nndatasets', 'DigitDataset');
-imds = imageDatastore(digitDatasetPath, 'IncludeSubfolders', true, 'LabelSource', 'foldernames');
-%Split data to train and test parts
-[imdsTrain, imdsValidation] = splitEachLabel (imds, 0.7, 'randomize');
+			<title>Transfer Learning With AlexNet</title>
+			<link>http://tesar-tech.github.io/zodoc/zodoc/posts/en/transfer_learning_with_alexnet</link>
+			<description>&lt;p&gt;Transfer learning is commonly used by deep learning applications. In practice, you can take a pretrained network and use it as a starting point to learn a new task. Fine-tuning a network with transfer learning is usually much faster and easier than training a network with randomly initialized weights from scratch. You can quickly transfer learned features to a new task using a smaller number of training images. For this example we will use Image dataset, that contains 4 labels: circle, rectangle, triangle and star, created with this &lt;a href="creating_an_image_set_with_various_shapes"&gt;script&lt;/a&gt;.&lt;/p&gt;</description>
+			<enclosure url="http://tesar-tech.github.io/zodoc/zodoc/posts/imgs_intro/transfer_learning_with_alexnet.png" length="0" type="image" />
+			<guid>http://tesar-tech.github.io/zodoc/zodoc/posts/en/transfer_learning_with_alexnet</guid>
+			<pubDate>Wed, 09 Jan 2019 00:00:00 GMT</pubDate>
+			<content:encoded>&lt;p&gt;Transfer learning is commonly used by deep learning applications. In practice, you can take a pretrained network and use it as a starting point to learn a new task. Fine-tuning a network with transfer learning is usually much faster and easier than training a network with randomly initialized weights from scratch. You can quickly transfer learned features to a new task using a smaller number of training images. For this example we will use Image dataset, that contains 4 labels: circle, rectangle, triangle and star, created with this &lt;a href="creating_an_image_set_with_various_shapes"&gt;script&lt;/a&gt;.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-matlab"&gt;imds = imageDatastore('imgs_shapes', ... %Load image from folder
+    'IncludeSubfolders',true, ... %Load also from subflder
+    'LabelSource','foldernames'); %Use label source same as the file names 
+%Split dataset on training and validation
+[imdsTrain,imdsValidation] = splitEachLabel(imds,0.7,'randomized');
 
-%% constructing cnn layer by layer
+%Load pretrained neaural network
+net = alexnet;
+
+%Last 3 layers will be replaced 
+inputSize = net.Layers(1).InputSize; %input size
+layersTransfer = net.Layers(1:end-3);
+numClasses = numel(categories(imdsTrain.Labels)); %Label count
+
+%Final layers for our new neural network
 layers = [
-    imageInputLayer([28 28 1]) % input layer (grayscale image with size of 28x28 pixels)
-    convolution2dLayer(5,16,'Padding', 'same') % 16 convolution filters with size of 5
-    batchNormalizationLayer % normalization layer
-    reluLayer %relu for additional non-linearity (input lower than 0 is changed to 0, otherwise it still unchanged)
-    
-    fullyConnectedLayer(10) % 10 - number of neurons 
-    softmaxLayer % normalization
-    classificationLayer 
-];
+    layersTransfer
+    fullyConnectedLayer(numClasses,'WeightLearnRateFactor',20,'BiasLearnRateFactor',20)
+    softmaxLayer
+    classificationLayer];
 
-%% specify options
-options = trainingOptions('sgdm',...% type of solver
-    'Verbose', false,...% dont output in command window
-    'Plots', 'training-progress',...% plot nice graph with training progress
-    'MaxEpoch',5,...%use every training image 5 times
-    'ValidationData', imdsValidation); % use validation data 
+%Train Network
+%Options for Training
+options = trainingOptions('sgdm', ...
+    'MiniBatchSize',10, ...
+    'MaxEpochs',12, ... 
+    'InitialLearnRate',1e-4, ...
+    'Shuffle','every-epoch', ...
+    'ValidationData',imdsValidation, ...
+    'ValidationFrequency',3, ...
+    'Verbose',false, ...
+    'Plots','training-progress');
 
-%% train network 
-net = trainNetwork (imdsTrain, layers, options); % training of CNN
+%Start training of our neural network with transfered and modified layers
+netTransfer = trainNetwork(imdsTrain,layers,options);
+&lt;/code&gt;&lt;/pre&gt;
+</content:encoded>
+		</item>
+		<item>
+			<title>Transfer Learning s použitím AlexNet</title>
+			<link>http://tesar-tech.github.io/zodoc/zodoc/posts/cs/transfer_learning_with_alexnet</link>
+			<description>&lt;p&gt;Transfer learning je běžně používaná metoda deep learningovými aplikacemi. V praxi to znamená, že lze použít vytrénovanou neuronovou síť, jako výchozí bod pro učení sítě nové. Použití vlastností předtrénované sítě je většinou mnohem jednodušší a rychlejší, než učení sítě od začátku. Další výhodou je velikost databáze, která pro transfer learning nemusí být zdaleka tak veliká. Pro tuto ukázku načteme obrazový dataset, který obsahuje čtyři třídy: kruh, obdélník, trojúhelník a hvězda vytvořený tímto &lt;a href="creating_an_image_set_with_various_shapes"&gt;skriptem&lt;/a&gt;.&lt;/p&gt;</description>
+			<enclosure url="http://tesar-tech.github.io/zodoc/zodoc/posts/imgs_intro/transfer_learning_with_alexnet.png" length="0" type="image" />
+			<guid>http://tesar-tech.github.io/zodoc/zodoc/posts/cs/transfer_learning_with_alexnet</guid>
+			<pubDate>Wed, 09 Jan 2019 00:00:00 GMT</pubDate>
+			<content:encoded>&lt;p&gt;Transfer learning je běžně používaná metoda deep learningovými aplikacemi. V praxi to znamená, že lze použít vytrénovanou neuronovou síť, jako výchozí bod pro učení sítě nové. Použití vlastností předtrénované sítě je většinou mnohem jednodušší a rychlejší, než učení sítě od začátku. Další výhodou je velikost databáze, která pro transfer learning nemusí být zdaleka tak veliká. Pro tuto ukázku načteme obrazový dataset, který obsahuje čtyři třídy: kruh, obdélník, trojúhelník a hvězda vytvořený tímto &lt;a href="creating_an_image_set_with_various_shapes"&gt;skriptem&lt;/a&gt;.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-matlab"&gt;imds = imageDatastore('imgs_shapes', ... %načtení obrázků ze složky
+    'IncludeSubfolders',true, ... %načtení podsložek
+    'LabelSource','foldernames'); %použití označení podle názvu souborů 
 
+%rozdělí dataset podle labelu na dva datasety trenovací a validační
+[imdsTrain,imdsValidation] = splitEachLabel(imds,0.7,'randomized');
+
+% Načtení Předtrénované Neuronové Sítě
+net = alexnet;
+
+% Výměna posledních tří vrstev 
+inputSize = net.Layers(1).InputSize; % velikost vstupu
+layersTransfer = net.Layers(1:end-3);
+numClasses = numel(categories(imdsTrain.Labels)); % počet labelů
+
+%Přesuneme vrstvy pro novou klasifikační úlohu 
+layers = [
+    layersTransfer
+    fullyConnectedLayer(numClasses,'WeightLearnRateFactor',20,'BiasLearnRateFactor',20)
+    softmaxLayer
+    classificationLayer];
+
+% Trénování Neuronové Sítě
+%Zadáme nastavení pro tréning neuronové sítě
+options = trainingOptions('sgdm', ...
+    'MiniBatchSize',10, ...
+    'MaxEpochs',12, ... 
+    'InitialLearnRate',1e-4, ...
+    'Shuffle','every-epoch', ...
+    'ValidationData',imdsValidation, ...
+    'ValidationFrequency',3, ...
+    'Verbose',false, ...
+    'Plots','training-progress');
+
+%Začneme trénovat síť, která se skládá z přenesených a upravených vrstev.
+netTransfer = trainNetwork(imdsTrain,layers,options);
 &lt;/code&gt;&lt;/pre&gt;
 </content:encoded>
 		</item>
@@ -87,6 +140,46 @@ net = trainNetwork (imdsTrain, layers, options); % samotný trénink
 </content:encoded>
 		</item>
 		<item>
+			<title>Training of convolutional neural network for classification of handwritten digits</title>
+			<link>http://tesar-tech.github.io/zodoc/zodoc/posts/en/training_of_convolutional_neural_network_for_classification_of_handwritten_digits</link>
+			<description>&lt;p&gt;This post is a simple example of CNN training. It uses the uncomplicated layer structure and training options for keeping things as simple as possible. The structure is simple enough to be trained fast on common CPU. Accuracy of trained network is over 98 %. &lt;a href="classification_of_handwritten_digit"&gt;Another post&lt;/a&gt; describes how to use this network to classify your own handwritten digit.&lt;/p&gt;</description>
+			<enclosure url="http://tesar-tech.github.io/zodoc/zodoc/posts/imgs_intro/training_of_convolutional_neural_network_for_classification_of_handwritten_digits.png" length="0" type="image" />
+			<guid>http://tesar-tech.github.io/zodoc/zodoc/posts/en/training_of_convolutional_neural_network_for_classification_of_handwritten_digits</guid>
+			<pubDate>Thu, 20 Dec 2018 00:00:00 GMT</pubDate>
+			<content:encoded>&lt;p&gt;This post is a simple example of CNN training. It uses the uncomplicated layer structure and training options for keeping things as simple as possible. The structure is simple enough to be trained fast on common CPU. Accuracy of trained network is over 98 %. &lt;a href="classification_of_handwritten_digit"&gt;Another post&lt;/a&gt; describes how to use this network to classify your own handwritten digit.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-matlab"&gt;%% load data
+%path to build-in digits dataset (part of MNIST dataset)
+digitDatasetPath = fullfile(matlabroot,'toolbox','nnet', 'nndemos','nndatasets', 'DigitDataset');
+imds = imageDatastore(digitDatasetPath, 'IncludeSubfolders', true, 'LabelSource', 'foldernames');
+%Split data to train and test parts
+[imdsTrain, imdsValidation] = splitEachLabel (imds, 0.7, 'randomize');
+
+%% constructing cnn layer by layer
+layers = [
+    imageInputLayer([28 28 1]) % input layer (grayscale image with size of 28x28 pixels)
+    convolution2dLayer(5,16,'Padding', 'same') % 16 convolution filters with size of 5
+    batchNormalizationLayer % normalization layer
+    reluLayer %relu for additional non-linearity (input lower than 0 is changed to 0, otherwise it still unchanged)
+    
+    fullyConnectedLayer(10) % 10 - number of neurons 
+    softmaxLayer % normalization
+    classificationLayer 
+];
+
+%% specify options
+options = trainingOptions('sgdm',...% type of solver
+    'Verbose', false,...% dont output in command window
+    'Plots', 'training-progress',...% plot nice graph with training progress
+    'MaxEpoch',5,...%use every training image 5 times
+    'ValidationData', imdsValidation); % use validation data 
+
+%% train network 
+net = trainNetwork (imdsTrain, layers, options); % training of CNN
+
+&lt;/code&gt;&lt;/pre&gt;
+</content:encoded>
+		</item>
+		<item>
 			<title>Creating an image set with various shapes</title>
 			<link>http://tesar-tech.github.io/zodoc/zodoc/posts/en/creating_an_image_set_with_various_shapes</link>
 			<description>&lt;p&gt;Script creates folder &lt;code&gt;imgs_shapes&lt;/code&gt; and subfolders with name of the shape. Shapes with different color, size and position are generated in those subploders. This image database will be used to train CNN for shapes classification.&lt;/p&gt;</description>
@@ -98,10 +191,15 @@ net = trainNetwork (imdsTrain, layers, options); % samotný trénink
 imgSize= 227; %respect alexnet input size
 Canvas = zeros(imgSize);
 
+stepSize = 360 / 5; %angle for pentagons
+angles1 = 0 : stepSize : 360; %angle for first pentagon
+angles2 = stepSize/2 : stepSize : 360 + stepSize/2; %angle for second pentagon
+
 mkdir('imgs_shapes');% create folders for shapes
 mkdir('imgs_shapes/circle');
 mkdir('imgs_shapes/rectangle');
 mkdir('imgs_shapes/triangle');
+mkdir('imgs_shapes/star');
 
 for ii = 1:numImgInClass
     %% create &amp;quot;random&amp;quot; circle
@@ -132,7 +230,7 @@ for ii = 1:numImgInClass
     while( rad2deg(alpha)&amp;lt;15 || beta&amp;lt;15 || gamma&amp;lt;15 || sum(sides(1,:)&amp;lt;66)&amp;gt;0  || numel(unique([point(1,1),point(2,1)]))==1 || numel(unique([point(1,2),point(2,2)]))==1 )
         point=randi([40 190],[3 2]); 
         sides=sort(pdist(point,'euclidean')); %Euclidean distance between 2 points = side length
-        alpha=acos((sides(2).^2+sides(3).^2-sides(1).^2)/(2*sides(2) * sides(3))); %Law of Cosines -&amp;gt; alpha angle in radians
+        alpha=acos((sides(2).^2+sides(3).^2-sides(1).^2)/(2*sides(2) * sides(3)));  %Law of Cosines -&amp;gt; alpha angle in radians
         beta=rad2deg(asin((sides(2)/sides(1))*sin(alpha))); %Law of Sines -&amp;gt; beta angle in degrees
         gamma=180-beta-(rad2deg(alpha)); % gamma angle
     end
@@ -142,10 +240,53 @@ for ii = 1:numImgInClass
     RGBtriangle= insertShape(Canvas,'FilledPolygon',point_vector,'color',colorRnd);
     
     imwrite(RGBtriangle,fullfile('imgs_shapes/triangle',['triangle_' num2str(ii,'%03i') '.jpg']  ))
-    
+
+    %% Create stars 
+    %Random size of both pentagons
+    r1 = randi([10 30],1);
+    r2 = randi([40 80],1);
+
+    %Generate coordinates for both pentagons
+    x1 = r1 * cosd(angles1);
+    y1 = r1 * sind(angles1);
+    x2 = r2 * cosd(angles2);
+    y2 = r2 * sind(angles2);
+
+    %Redraw coordinates of pivotal pentagons into a star shape polygon
+    x3 = reshape([x1;x2], 1, []);
+    y3 = reshape([y1;y2], 1, []);
+
+    %Move coordinates in the middle
+    x3 = x3+imgSize/2;
+    y3 = y3+imgSize/2;
+
+    % Random shift
+    x3 = x3+randi([-round(min(x3)) (imgSize - round(max(x3)))],1);
+    y3 = y3+randi([-round(min(y3)) (imgSize - round(max(y3)))],1);
+
+    % Redners mask of the 227x227 binary image from polygon coordinates into the star.
+    maskImage = poly2mask(x3, y3, imgSize, imgSize);
+
+    %Random rotation angle
+    angleRand=randi([0 360],1);
+
+    %Image rotation
+    rotateImg = imrotate(maskImage,angleRand,'crop');
+
+    %single channel whitestar
+    whiteImage = 255 * uint8(rotateImg);
+
+    %Radnom RGB channel generator
+    RRand=randi([0 255],1);
+    GRand=randi([0 255],1);
+    BRand=randi([0 255],1);
+
+    %Creates RGB image of the star with random color
+    RGB = cat(3, whiteImage-RRand, whiteImage-GRand, whiteImage-BRand);
+    imwrite(RGB,fullfile('imgs_shapes/star',['star_' num2str(ii,'%03i') '.jpg']  ))
+
     disp(['creating img db: ' num2str(ii/numImgInClass*100,'%.2f') ' %'])
 end
-
 &lt;/code&gt;&lt;/pre&gt;
 </content:encoded>
 		</item>
@@ -161,10 +302,15 @@ end
 imgSize= 227; %respektuje velikost vstupu pro alexnet
 Canvas = zeros(imgSize);
 
+stepSize = 360 / 5; %úhel pro pravidelné pětiúhelníky
+angles1 = 0 : stepSize : 360; %úhly pro prvni pětiúhelník
+angles2 = stepSize/2 : stepSize : 360 + stepSize/2; %úhly pro prvni pětiúhelník
+
 mkdir('imgs_shapes');% vytvoření složek pro ukládání tvarů
 mkdir('imgs_shapes/circle');
 mkdir('imgs_shapes/rectangle');
 mkdir('imgs_shapes/triangle');
+mkdir('imgs_shapes/star');
 
 for ii = 1:numImgInClass
     %% tvorba &amp;quot;náhodného&amp;quot; kolečka
@@ -205,29 +351,53 @@ for ii = 1:numImgInClass
     RGBtriangle= insertShape(Canvas,'FilledPolygon',point_vector,'color',colorRnd);
     
     imwrite(RGBtriangle,fullfile('imgs_shapes/triangle',['triangle_' num2str(ii,'%03i') '.jpg']  ))
-    
+
+    %% Tvorba Hvězd 
+    %Náhodna velikost obou pětiúhelníků
+    r1 = randi([10 30],1);
+    r2 = randi([40 80],1);
+
+    %Vygenerovaní souřadnic pro oba pětiúhelníky
+    x1 = r1 * cosd(angles1);
+    y1 = r1 * sind(angles1);
+    x2 = r2 * cosd(angles2);
+    y2 = r2 * sind(angles2);
+
+    %Překreslení souřadnic otočených pětiúhelníků do polygonu tvaru hvězdy
+    x3 = reshape([x1;x2], 1, []);
+    y3 = reshape([y1;y2], 1, []);
+
+    % Přesun souřadnic doprostřed
+    x3 = x3+imgSize/2;
+    y3 = y3+imgSize/2;
+
+    % Náhodný posun
+    x3 = x3+randi([-round(min(x3)) (imgSize - round(max(x3)))],1);
+    y3 = y3+randi([-round(min(y3)) (imgSize - round(max(y3)))],1);
+
+    % Uděla masku 227x227 binárního obrazu ze souřadnic polygonu ve tvaru hvězdy
+    maskImage = poly2mask(x3, y3, imgSize, imgSize);
+
+    %random úhel pro rotaci
+    angleRand=randi([0 360],1);
+
+    %otočení obrazu zanechání velikosti
+    rotateImg = imrotate(maskImage,angleRand,'crop');
+
+    %jednokanálová bíla hvězda
+    whiteImage = 255 * uint8(rotateImg);
+
+    %náhodný generator barevných kanálů
+    RRand=randi([0 255],1);
+    GRand=randi([0 255],1);
+    BRand=randi([0 255],1);
+
+    %vytvoření RGB obrázku každý kanál má náhodnou sílu své barvy
+    RGB = cat(3, whiteImage-RRand, whiteImage-GRand, whiteImage-BRand);
+    imwrite(RGB,fullfile('imgs_shapes/star',['star_' num2str(ii,'%03i') '.jpg']  ))
+
     disp(['creating img db: ' num2str(ii/numImgInClass*100,'%.2f') ' %'])
 end
-
-&lt;/code&gt;&lt;/pre&gt;
-</content:encoded>
-		</item>
-		<item>
-			<title>Classification of handwritten digit with CNN</title>
-			<link>http://tesar-tech.github.io/zodoc/zodoc/posts/en/classification_of_handwritten_digit</link>
-			<description>&lt;p&gt;Model in onnx format was trained on &lt;a href="http://yann.lecun.com/exdb/mnist/"&gt;MNIST&lt;/a&gt; dataset with 99.29 % accuracy.&lt;/p&gt;</description>
-			<enclosure url="http://tesar-tech.github.io/zodoc/zodoc/posts/imgs_intro/classification_of_handwritten_digit.jpg" length="0" type="image" />
-			<guid>http://tesar-tech.github.io/zodoc/zodoc/posts/en/classification_of_handwritten_digit</guid>
-			<pubDate>Tue, 11 Dec 2018 00:00:00 GMT</pubDate>
-			<content:encoded>&lt;p&gt;Model in onnx format was trained on &lt;a href="http://yann.lecun.com/exdb/mnist/"&gt;MNIST&lt;/a&gt; dataset with 99.29 % accuracy.&lt;/p&gt;
-&lt;pre&gt;&lt;code class="language-matlab"&gt;mnist = importONNXNetwork('MNIST_99.29.onnx','OutputLayerType','classification','ClassNames',{'0','1','2','3','4','5','6','7','8','9'}); %Import MNIST cnn
-
-A = rgb2gray(imread('single_handwritten_digit.png'));%Load an image and covert to grayscale
-A_resized = imresize(A,[28 28]);%Resize to [28x28] to match cnn input layer
-
-[label, score] = classify(mnist,trojka,'ExecutionEnvironment','cpu');%(there is some issue on GPU when using onnx models, so CPU is used here)
-A_withText = insertText(A,[1 1], cellstr(&amp;quot;classified as &amp;quot; +  string(label)+newline+ &amp;quot;(&amp;quot;+ num2str(max(score)*100,'%0.2f %%)')) ,'FontSize',28); % add text with classifiaction results
-imshow(A_withText)
 &lt;/code&gt;&lt;/pre&gt;
 </content:encoded>
 		</item>
@@ -246,6 +416,25 @@ A_resized = imresize(A,[28 28]);%Zmenšit na [28x28] cožodpovídá vstupní vrs
 
 [label, score] = classify(mnist_net,A_resized,'ExecutionEnvironment','cpu');%(problém s GPU při používání onnx modelu, proto zde využito cpu)
 A_withText = insertText(A,[1 1], cellstr(&amp;quot;classified as &amp;quot; +  string(label)+newline+ &amp;quot;(&amp;quot;+ num2str(max(score)*100,'%0.2f %%)')) ,'FontSize',28); % přidat text s výsledkem kalsifikace
+imshow(A_withText)
+&lt;/code&gt;&lt;/pre&gt;
+</content:encoded>
+		</item>
+		<item>
+			<title>Classification of handwritten digit with CNN</title>
+			<link>http://tesar-tech.github.io/zodoc/zodoc/posts/en/classification_of_handwritten_digit</link>
+			<description>&lt;p&gt;Model in onnx format was trained on &lt;a href="http://yann.lecun.com/exdb/mnist/"&gt;MNIST&lt;/a&gt; dataset with 99.29 % accuracy.&lt;/p&gt;</description>
+			<enclosure url="http://tesar-tech.github.io/zodoc/zodoc/posts/imgs_intro/classification_of_handwritten_digit.jpg" length="0" type="image" />
+			<guid>http://tesar-tech.github.io/zodoc/zodoc/posts/en/classification_of_handwritten_digit</guid>
+			<pubDate>Tue, 11 Dec 2018 00:00:00 GMT</pubDate>
+			<content:encoded>&lt;p&gt;Model in onnx format was trained on &lt;a href="http://yann.lecun.com/exdb/mnist/"&gt;MNIST&lt;/a&gt; dataset with 99.29 % accuracy.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-matlab"&gt;mnist = importONNXNetwork('MNIST_99.29.onnx','OutputLayerType','classification','ClassNames',{'0','1','2','3','4','5','6','7','8','9'}); %Import MNIST cnn
+
+A = rgb2gray(imread('single_handwritten_digit.png'));%Load an image and covert to grayscale
+A_resized = imresize(A,[28 28]);%Resize to [28x28] to match cnn input layer
+
+[label, score] = classify(mnist,trojka,'ExecutionEnvironment','cpu');%(there is some issue on GPU when using onnx models, so CPU is used here)
+A_withText = insertText(A,[1 1], cellstr(&amp;quot;classified as &amp;quot; +  string(label)+newline+ &amp;quot;(&amp;quot;+ num2str(max(score)*100,'%0.2f %%)')) ,'FontSize',28); % add text with classifiaction results
 imshow(A_withText)
 &lt;/code&gt;&lt;/pre&gt;
 </content:encoded>
@@ -4281,32 +4470,6 @@ disp(ClassNamesWithIndexes) % Display result
 </content:encoded>
 		</item>
 		<item>
-			<title>Image segmentation in HSV color space</title>
-			<link>http://tesar-tech.github.io/zodoc/zodoc/posts/en/image_segmentation_in_hsv_color_space</link>
-			<description>&lt;p&gt;Isolate part of an image in HSV color space (which describes colors by hue, saturation, and value). Hue thresholds define a range of hues to isolate. For color-based segmentation, it's easier to manipulate images in HSV color space, because the hue channel is the mix of all RGB channels and it better distinguishes between all individual colors.&lt;/p&gt;</description>
-			<enclosure url="http://tesar-tech.github.io/zodoc/zodoc/posts/imgs_intro/image_segmentation_in_hsv_color_space.png" length="0" type="image" />
-			<guid>http://tesar-tech.github.io/zodoc/zodoc/posts/en/image_segmentation_in_hsv_color_space</guid>
-			<pubDate>Wed, 28 Nov 2018 00:00:00 GMT</pubDate>
-			<content:encoded>&lt;p&gt;Isolate part of an image in HSV color space (which describes colors by hue, saturation, and value). Hue thresholds define a range of hues to isolate. For color-based segmentation, it's easier to manipulate images in HSV color space, because the hue channel is the mix of all RGB channels and it better distinguishes between all individual colors.&lt;/p&gt;
-&lt;pre&gt;&lt;code class="language-matlab"&gt;% Load base image
-A = imread('kytka256.jpg');
-% Convert RGB values to HSV
-imgHSV = rgb2hsv(A);
-% Set thresholds for hue channel in range of 0 to 1
-hueMin = 0.000; % 0 corresponds to red
-hueMax = 0.280; % 0.28 is roughly yellow
-% Mask creation from hue thresholds (hue is the first channel)
-hueMask = (imgHSV(:,:,1) &amp;gt;= hueMin ) &amp;amp; (imgHSV(:,:,1) &amp;lt;= hueMax);
-% Apply mask on original image to desaturate background
-% (element-wise multiplication of second channel (saturation) and mask)
-imgHSV(:,:,2) = imgHSV(:,:,2) .* hueMask;
-% Convert back to RGB and display result
-imgResult = hsv2rgb(imgHSV);
-imshow(imgResult);
-&lt;/code&gt;&lt;/pre&gt;
-</content:encoded>
-		</item>
-		<item>
 			<title>Segmentace obrázku v barevném modelu HSV</title>
 			<link>http://tesar-tech.github.io/zodoc/zodoc/posts/cs/image_segmentation_in_hsv_color_space</link>
 			<description>&lt;p&gt;Segmentace části obrázku v barevném modelu HSV, který popisuje barvy třemi parametry (odstín, sytost a jas). Prahy odstínu určují rozsah barev, který izolujeme. Pro segmentaci podle barev je vhodné použít model HSV, jelikož lépe rozlišuje mezi jednotlivými barvami.&lt;/p&gt;</description>
@@ -4327,6 +4490,32 @@ hueMask = (imgHSV(:,:,1) &amp;gt;= hueMin ) &amp;amp; (imgHSV(:,:,1) &amp;lt;= h
 % (Hadamardův součin kanálu sytosti původního obrázku a masky)
 imgHSV(:,:,2) = imgHSV(:,:,2) .* hueMask;
 % Převod výsledného obrázku zpět do modelu RGB
+imgResult = hsv2rgb(imgHSV);
+imshow(imgResult);
+&lt;/code&gt;&lt;/pre&gt;
+</content:encoded>
+		</item>
+		<item>
+			<title>Image segmentation in HSV color space</title>
+			<link>http://tesar-tech.github.io/zodoc/zodoc/posts/en/image_segmentation_in_hsv_color_space</link>
+			<description>&lt;p&gt;Isolate part of an image in HSV color space (which describes colors by hue, saturation, and value). Hue thresholds define a range of hues to isolate. For color-based segmentation, it's easier to manipulate images in HSV color space, because the hue channel is the mix of all RGB channels and it better distinguishes between all individual colors.&lt;/p&gt;</description>
+			<enclosure url="http://tesar-tech.github.io/zodoc/zodoc/posts/imgs_intro/image_segmentation_in_hsv_color_space.png" length="0" type="image" />
+			<guid>http://tesar-tech.github.io/zodoc/zodoc/posts/en/image_segmentation_in_hsv_color_space</guid>
+			<pubDate>Wed, 28 Nov 2018 00:00:00 GMT</pubDate>
+			<content:encoded>&lt;p&gt;Isolate part of an image in HSV color space (which describes colors by hue, saturation, and value). Hue thresholds define a range of hues to isolate. For color-based segmentation, it's easier to manipulate images in HSV color space, because the hue channel is the mix of all RGB channels and it better distinguishes between all individual colors.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-matlab"&gt;% Load base image
+A = imread('kytka256.jpg');
+% Convert RGB values to HSV
+imgHSV = rgb2hsv(A);
+% Set thresholds for hue channel in range of 0 to 1
+hueMin = 0.000; % 0 corresponds to red
+hueMax = 0.280; % 0.28 is roughly yellow
+% Mask creation from hue thresholds (hue is the first channel)
+hueMask = (imgHSV(:,:,1) &amp;gt;= hueMin ) &amp;amp; (imgHSV(:,:,1) &amp;lt;= hueMax);
+% Apply mask on original image to desaturate background
+% (element-wise multiplication of second channel (saturation) and mask)
+imgHSV(:,:,2) = imgHSV(:,:,2) .* hueMask;
+% Convert back to RGB and display result
 imgResult = hsv2rgb(imgHSV);
 imshow(imgResult);
 &lt;/code&gt;&lt;/pre&gt;
@@ -4387,41 +4576,6 @@ montage({Aa{6},Aa{7}},'bordersize',[1 1],'backgroundcolor','green')
 </content:encoded>
 		</item>
 		<item>
-			<title>Filtrování binárních objektů za použití k-means</title>
-			<link>http://tesar-tech.github.io/zodoc/zodoc/posts/cs/filtering_binary_objects_with_kmeans</link>
-			<description>&lt;p&gt;Úkolem je zpracovat obrázek do binární reprezentace tak, aby obsahoval pouze žádoucí tvary jako je obdélník, čtverec, trojúhelník kruh nebo hvězda. K-means algoritmus slouží k určení meze pro filtrování objektů dle jejich velikostí.&lt;/p&gt;</description>
-			<enclosure url="http://tesar-tech.github.io/zodoc/zodoc/posts/imgs_intro/filtering_binary_objects_with_kmeans.png" length="0" type="image" />
-			<guid>http://tesar-tech.github.io/zodoc/zodoc/posts/cs/filtering_binary_objects_with_kmeans</guid>
-			<pubDate>Fri, 16 Nov 2018 00:00:00 GMT</pubDate>
-			<content:encoded>&lt;p&gt;Úkolem je zpracovat obrázek do binární reprezentace tak, aby obsahoval pouze žádoucí tvary jako je obdélník, čtverec, trojúhelník kruh nebo hvězda. K-means algoritmus slouží k určení meze pro filtrování objektů dle jejich velikostí.&lt;/p&gt;
-&lt;pre&gt;&lt;code class="language-matlab"&gt;A = imread('tvary.png');
-Aa = {};
-Aa{1} =A; %barevný obrázek
-Ag =imadjust(rgb2gray(A));% upraví kontrast a převede na šedotón
-Aa{2} = Ag;
-Aa{3} = imbinarize(Ag,'adaptive','ForegroundPolarity','dark','Sensitivity',0.55); %na černobílý obrázek
-Aa{4} = imfill(~Aa{end},'holes'); %zaplní díry
-Aa{5} = imclearborder(Aa{end}); % vyčístí objekty z hran 
-%% filtrace za použití k-means
-reg_props = regionprops(Aa{5},'area');%získání velikostí ploch (area) každého objektu
-areas =  [reg_props.Area]';% převede plochy na vektor
-%hist(areas,30) % zobrazí histogram velikostí ploch
-[indx, ~] = kmeans(areas,3);% oddělí objekty do 3 shluků na základě jejich velikostí.
-%jeden shluk zahrnuje větší objekty, druhý shluk menší objekty a &amp;quot;šumovité&amp;quot; objekty (které chceme odstranit)
-% jsou v jednom vlastím shluku.
-% (nefunguje to příliš dobře pouze pro 2 shluky)
-
-%Nevím předem který ze shluků obsahuje ty nejmenší objekty.
-%Vezme největší objekty z každého shluku. Minimum těchto tří objektů
-%je vzato jako limit pro filtrování ()
-min_max = min([max(areas(indx==1)),max(areas(indx==2)),max(areas(indx==3)) ]);
-Aa{6} = bwareafilt(Aa{5},[min_max+1 Inf]);
-%%
-montage(Aa,'bordersize',[1 1],'backgroundcolor','green')
-&lt;/code&gt;&lt;/pre&gt;
-</content:encoded>
-		</item>
-		<item>
 			<title>Filtering binary objects with kmeans</title>
 			<link>http://tesar-tech.github.io/zodoc/zodoc/posts/en/filtering_binary_objects_with_kmeans</link>
 			<description>&lt;p&gt;The task is to process the image to binary representation containing only the wanted shapes like rectangle, square, triangle, circle or a star. K-means algorithm is used to determine the range for filtering the objects by their size.&lt;/p&gt;</description>
@@ -4457,6 +4611,64 @@ montage(Aa,'bordersize',[1 1],'backgroundcolor','green')
 &lt;blockquote class="blockquote"&gt;
 &lt;p&gt;Here is the &lt;a href="select_round_objects"&gt;post&lt;/a&gt; about subsequent processiong of result image.&lt;/p&gt;
 &lt;/blockquote&gt;
+</content:encoded>
+		</item>
+		<item>
+			<title>Filtrování binárních objektů za použití k-means</title>
+			<link>http://tesar-tech.github.io/zodoc/zodoc/posts/cs/filtering_binary_objects_with_kmeans</link>
+			<description>&lt;p&gt;Úkolem je zpracovat obrázek do binární reprezentace tak, aby obsahoval pouze žádoucí tvary jako je obdélník, čtverec, trojúhelník kruh nebo hvězda. K-means algoritmus slouží k určení meze pro filtrování objektů dle jejich velikostí.&lt;/p&gt;</description>
+			<enclosure url="http://tesar-tech.github.io/zodoc/zodoc/posts/imgs_intro/filtering_binary_objects_with_kmeans.png" length="0" type="image" />
+			<guid>http://tesar-tech.github.io/zodoc/zodoc/posts/cs/filtering_binary_objects_with_kmeans</guid>
+			<pubDate>Fri, 16 Nov 2018 00:00:00 GMT</pubDate>
+			<content:encoded>&lt;p&gt;Úkolem je zpracovat obrázek do binární reprezentace tak, aby obsahoval pouze žádoucí tvary jako je obdélník, čtverec, trojúhelník kruh nebo hvězda. K-means algoritmus slouží k určení meze pro filtrování objektů dle jejich velikostí.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-matlab"&gt;A = imread('tvary.png');
+Aa = {};
+Aa{1} =A; %barevný obrázek
+Ag =imadjust(rgb2gray(A));% upraví kontrast a převede na šedotón
+Aa{2} = Ag;
+Aa{3} = imbinarize(Ag,'adaptive','ForegroundPolarity','dark','Sensitivity',0.55); %na černobílý obrázek
+Aa{4} = imfill(~Aa{end},'holes'); %zaplní díry
+Aa{5} = imclearborder(Aa{end}); % vyčístí objekty z hran 
+%% filtrace za použití k-means
+reg_props = regionprops(Aa{5},'area');%získání velikostí ploch (area) každého objektu
+areas =  [reg_props.Area]';% převede plochy na vektor
+%hist(areas,30) % zobrazí histogram velikostí ploch
+[indx, ~] = kmeans(areas,3);% oddělí objekty do 3 shluků na základě jejich velikostí.
+%jeden shluk zahrnuje větší objekty, druhý shluk menší objekty a &amp;quot;šumovité&amp;quot; objekty (které chceme odstranit)
+% jsou v jednom vlastím shluku.
+% (nefunguje to příliš dobře pouze pro 2 shluky)
+
+%Nevím předem který ze shluků obsahuje ty nejmenší objekty.
+%Vezme největší objekty z každého shluku. Minimum těchto tří objektů
+%je vzato jako limit pro filtrování ()
+min_max = min([max(areas(indx==1)),max(areas(indx==2)),max(areas(indx==3)) ]);
+Aa{6} = bwareafilt(Aa{5},[min_max+1 Inf]);
+%%
+montage(Aa,'bordersize',[1 1],'backgroundcolor','green')
+&lt;/code&gt;&lt;/pre&gt;
+</content:encoded>
+		</item>
+		<item>
+			<title>Image classification using alexnet</title>
+			<link>http://tesar-tech.github.io/zodoc/zodoc/posts/en/classify_by_alexnet</link>
+			<description>&lt;p&gt;Tested image is classified as "daisy", which is not correct because that yellow bloom is Jerusalem artichoke. However "Jerusalem artichoke" is not one of the alexnet classes (there are 1000 of them) and the daisy is fairly similar, so the classification is not completely wrong. Five classifications with topmost score are displayed in the table.&lt;/p&gt;</description>
+			<enclosure url="http://tesar-tech.github.io/zodoc/zodoc/posts/imgs_intro/classify_by_alexnet.jpg" length="0" type="image" />
+			<guid>http://tesar-tech.github.io/zodoc/zodoc/posts/en/classify_by_alexnet</guid>
+			<pubDate>Thu, 15 Nov 2018 00:00:00 GMT</pubDate>
+			<content:encoded>&lt;p&gt;Tested image is classified as &amp;quot;daisy&amp;quot;, which is not correct because that yellow bloom is Jerusalem artichoke. However &amp;quot;Jerusalem artichoke&amp;quot; is not one of the alexnet classes (there are 1000 of them) and the daisy is fairly similar, so the classification is not completely wrong. Five classifications with topmost score are displayed in the table.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-matlab"&gt;net = alexnet;
+A = imread('kytka256.jpg');
+A_resized = imresize(A,[227 227]); %resize image to 227px 227px for cnn input
+[label,score] = classify(net,A_resized); % classify the image
+
+[maxvalues, ind] = maxk(score(:), 5); %get five most succesfull classifications
+
+subplot 121; imshow(A_resized); %display original image
+title(string(label) + &amp;quot;, &amp;quot; + num2str(max(score)*100,3) + &amp;quot; %&amp;quot;); % display name and percentage
+
+names=(net.Layers(end).ClassNames(ind)); %get label names 
+uitable('Data',[names,num2cell(maxvalues*100)],'Position',[290 150 150 130],'ColumnName',{'Class name','Score %'});% create table
+&lt;/code&gt;&lt;/pre&gt;
 </content:encoded>
 		</item>
 		<item>
@@ -4523,69 +4735,6 @@ for ii = 1:5:256
         imwrite(A,map,gifName,'gif','WriteMode','append','DelayTime',0.001);
     end 
  end
-&lt;/code&gt;&lt;/pre&gt;
-</content:encoded>
-		</item>
-		<item>
-			<title>Image classification using alexnet</title>
-			<link>http://tesar-tech.github.io/zodoc/zodoc/posts/en/classify_by_alexnet</link>
-			<description>&lt;p&gt;Tested image is classified as "daisy", which is not correct because that yellow bloom is Jerusalem artichoke. However "Jerusalem artichoke" is not one of the alexnet classes (there are 1000 of them) and the daisy is fairly similar, so the classification is not completely wrong. Five classifications with topmost score are displayed in the table.&lt;/p&gt;</description>
-			<enclosure url="http://tesar-tech.github.io/zodoc/zodoc/posts/imgs_intro/classify_by_alexnet.jpg" length="0" type="image" />
-			<guid>http://tesar-tech.github.io/zodoc/zodoc/posts/en/classify_by_alexnet</guid>
-			<pubDate>Thu, 15 Nov 2018 00:00:00 GMT</pubDate>
-			<content:encoded>&lt;p&gt;Tested image is classified as &amp;quot;daisy&amp;quot;, which is not correct because that yellow bloom is Jerusalem artichoke. However &amp;quot;Jerusalem artichoke&amp;quot; is not one of the alexnet classes (there are 1000 of them) and the daisy is fairly similar, so the classification is not completely wrong. Five classifications with topmost score are displayed in the table.&lt;/p&gt;
-&lt;pre&gt;&lt;code class="language-matlab"&gt;net = alexnet;
-A = imread('kytka256.jpg');
-A_resized = imresize(A,[227 227]); %resize image to 227px 227px for cnn input
-[label,score] = classify(net,A_resized); % classify the image
-
-[maxvalues, ind] = maxk(score(:), 5); %get five most succesfull classifications
-
-subplot 121; imshow(A_resized); %display original image
-title(string(label) + &amp;quot;, &amp;quot; + num2str(max(score)*100,3) + &amp;quot; %&amp;quot;); % display name and percentage
-
-names=(net.Layers(end).ClassNames(ind)); %get label names 
-uitable('Data',[names,num2cell(maxvalues*100)],'Position',[290 150 150 130],'ColumnName',{'Class name','Score %'});% create table
-&lt;/code&gt;&lt;/pre&gt;
-</content:encoded>
-		</item>
-		<item>
-			<title>Fotka s ručně psanými čísly na binární obraz</title>
-			<link>http://tesar-tech.github.io/zodoc/zodoc/posts/cs/handwritten_to_digital</link>
-			<description>&lt;p&gt;Zkonvertovat obrázek do binární reprezentace, kde jednotlivá čísla budou reprezentována bílou barvou a pozadí černou. Pro zvýraznění čísel k budoucí klasifikaci natrénovanou neuronovou sítí bude využita operace z matematické morfologie nazvaná dilatace, která je v MATLABu implementována pomocí funkce &lt;code&gt;imdilate&lt;/code&gt;.&lt;/p&gt;</description>
-			<enclosure url="http://tesar-tech.github.io/zodoc/zodoc/posts/imgs_intro/handwritten_to_digital.png" length="0" type="image" />
-			<guid>http://tesar-tech.github.io/zodoc/zodoc/posts/cs/handwritten_to_digital</guid>
-			<pubDate>Wed, 14 Nov 2018 00:00:00 GMT</pubDate>
-			<content:encoded>&lt;p&gt;Zkonvertovat obrázek do binární reprezentace, kde jednotlivá čísla budou reprezentována bílou barvou a pozadí černou. Pro zvýraznění čísel k budoucí klasifikaci natrénovanou neuronovou sítí bude využita operace z matematické morfologie nazvaná dilatace, která je v MATLABu implementována pomocí funkce &lt;code&gt;imdilate&lt;/code&gt;.&lt;/p&gt;
-&lt;pre&gt;&lt;code class="language-matlab"&gt;A = imread('cisla_ver.jpg'); % načtení obrazu
-AGray = rgb2gray(A); % konverze do šedotónu
-ABinary = imbinarize(AGray, 'adaptive', 'ForegroundPolarity', 'dark', 'Sensitivity', 0.3); % binarizace obrazu. ForegroundPolarity parametr značí ,že popředí je tmavší, než pozadí.
-ABinaryComplement = ~ABinary; % bitová inverze matice
-StructuringElement = strel('disk', 7); % vytvoření strukturního elementu ve tvaru kruhu, který slouží k prozkoumání původního obrazu
-DilatedABinaryComplement = imdilate(ABinaryComplement, StructuringElement); % dilatace obrazu
-subplot(1, 3, 1), imshow(A)
-subplot(1, 3, 2), imshow(ABinaryComplement)
-subplot(1, 3, 3), imshow(DilatedABinaryComplement)
-&lt;/code&gt;&lt;/pre&gt;
-</content:encoded>
-		</item>
-		<item>
-			<title>Handwritten numbers to binary image</title>
-			<link>http://tesar-tech.github.io/zodoc/zodoc/posts/en/handwritten_to_digital</link>
-			<description>&lt;p&gt;Convert the image to binary representation where numbers are going to be represented in white color, while the background is going to be black. However, the numbers won't be very clearly visible for possible future classification by neural networks, so a mathematical morphology operation called dilation will be used, implemented in MATLAB with function &lt;code&gt;imdilate&lt;/code&gt;.&lt;/p&gt;</description>
-			<enclosure url="http://tesar-tech.github.io/zodoc/zodoc/posts/imgs_intro/handwritten_to_digital.png" length="0" type="image" />
-			<guid>http://tesar-tech.github.io/zodoc/zodoc/posts/en/handwritten_to_digital</guid>
-			<pubDate>Wed, 14 Nov 2018 00:00:00 GMT</pubDate>
-			<content:encoded>&lt;p&gt;Convert the image to binary representation where numbers are going to be represented in white color, while the background is going to be black. However, the numbers won't be very clearly visible for possible future classification by neural networks, so a mathematical morphology operation called dilation will be used, implemented in MATLAB with function &lt;code&gt;imdilate&lt;/code&gt;.&lt;/p&gt;
-&lt;pre&gt;&lt;code class="language-matlab"&gt;A = imread('cisla_ver.jpg'); % load an image
-AGray = rgb2gray(A); % conversion to grayscale
-ABinary = imbinarize(AGray, 'adaptive', 'ForegroundPolarity', 'dark', 'Sensitivity', 0.3); % binarization of image. ForegroundPolarity parameter indicates that the foreground is darker than the background.
-ABinaryComplement = ~ABinary; % turning numbers to white color
-StructuringElement = strel('disk', 7); % creating a disk-shaped structuring element to probe the binary image
-DilatedABinaryComplement = imdilate(ABinaryComplement, StructuringElement); % dilation of image
-subplot(1, 3, 1), imshow(A)
-subplot(1, 3, 2), imshow(ABinaryComplement)
-subplot(1, 3, 3), imshow(DilatedABinaryComplement)
 &lt;/code&gt;&lt;/pre&gt;
 </content:encoded>
 		</item>
