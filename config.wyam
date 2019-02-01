@@ -25,7 +25,6 @@ Settings["datazooLink"] = "https://github.com/tesar-tech/zodoc/raw/master/datazo
 Settings["BaseViewUrl"] = "https://github.com/tesar-tech/zodoc/blob/master/input/";
 //Settings[Keys.LinkRoot] = "/zodoc";
 //
-
 Settings[BlogKeys.Title] = "ZODOC";
 Settings[BlogKeys.Description] = "Image processing and deep learning samples";
 Settings[BlogKeys.IndexFullPosts] = false;
@@ -34,15 +33,12 @@ Settings["githubIssueLink"] = "https://github.com/tesar-tech/zodoc/issues/new";
 Settings[BlogKeys.IndexPageSize] = 100;
 
 
-
-
-
 Pipelines["BlogPosts"].Append(
-  Meta(Keys.RelativeFilePath, (doc, ctx) =>
+  Meta(Keys.RelativeFilePath, (doc, ctx) =>//change relative file path
   {
-      //Console.WriteLine(doc.Source.FullPath);
+    
     DateTime published = doc.Get<DateTime>(BlogKeys.Published);
-    //Console.WriteLine(doc.Get<String>("RelativeFileDir"));
+    
     string fileName = doc.Bool("FrontMatterPublished")
       ? doc.FilePath(Keys.SourceFileName).ChangeExtension("html").FullPath
       : doc.FilePath(Keys.SourceFileName).ChangeExtension("html").FullPath.Substring(11);//when date is specified in fileName
@@ -65,7 +61,7 @@ Pipelines["BlogPosts"].Append(
       var langSplit =  splits.FirstOrDefault(x=>((string[])Settings["Langs"]).Contains(x)); //look for folder with lang string i.e. "en"                     
         return langSplit??"" ;} 
     ),
-    Meta ("Image",  (doc,ctx) => {
+    Meta ("Image",  (doc,ctx) => {//get link to post Image (either the on set in .md, or from imgs_infro folder, or default one)
          var imgLink = doc.String(BlogKeys.Image);
          if(String.IsNullOrEmpty(imgLink))
          {
@@ -75,7 +71,7 @@ Pipelines["BlogPosts"].Append(
             var imgsFileName = "no_image.png";//default for the case when image is not presented
             if(imageWithSameNameAsPost!= null)//image found
                 imgsFileName = imageWithSameNameAsPost.Source.FileName.ToString();//get its filename
-             return $"../imgs_intro/{imgsFileName}";
+             return $"posts/imgs_intro/{imgsFileName}";
          }
          else
             return imgLink;//do nothing with already set image
@@ -83,19 +79,6 @@ Pipelines["BlogPosts"].Append(
 );
 
 
-
-Pipelines["BlogPosts"].Append(
-Meta("otherLanguagesList", (doc, ctx) => {//get other languages of document
-        if(doc.String("lang")=="")
-         return null;
-        var otherLangs =  ctx.Documents //search in other documents
-                        .Where(c => c.String("lang") != "" //where the language is set
-                            && c.String("lang") != doc.String("lang") //for different languages
-                            && c.String("filename")==doc.String("filename")) //same file name 
-                            //&& c.String("type")==doc.String("type")) //and same type
-                        .Select(x => x.String("lang")).Distinct();
-        return otherLangs.Count() ==0 ? null:otherLangs.ToList();//no other lang -> return null;
-}));
 
 Pipelines["BlogPosts"].Append(
 Meta("otherLanguagesList", (doc, ctx) => {//get other languages of document
@@ -153,5 +136,3 @@ Pipelines.InsertAfter("AuthorsArticles", "AuthorsIndex",
     Razor().IgnorePrefix(null).WithLayout("_Layout.cshtml"),
     WriteFiles((doc, ctx) => "authors/index.html"))
     .WithoutUnmatchedDocuments());
-
-
