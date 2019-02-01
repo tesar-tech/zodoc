@@ -218,7 +218,7 @@ Published on Tuesday, December 11, 2018<br>    </div> -->
 A = rgb2gray(imread('single_handwritten_digit.png'));%Načíst obrázek a převést na šedotón
 A_resized = imresize(A,[28 28]);%Zmenšit na [28x28] cožodpovídá vstupní vrstvě neuronové sítě
 
-[label, score] = classify(mnist_net,A_resized,'ExecutionEnvironment','cpu');%(problém s GPU při používání onnx modelu, proto zde využito cpu)
+[label, score] = classify(mnist_net,A_resized);
 A_withText = insertText(A,[1 1], cellstr(&quot;classified as &quot; +  string(label)+newline+ &quot;(&quot;+ num2str(max(score)*100,'%0.2f %%)')) ,'FontSize',28); % přidat text s výsledkem kalsifikace
 imshow(A_withText)
 </code></pre>
