@@ -164,11 +164,11 @@ Published on Tuesday, December 11, 2018<br>    </div> -->
                     <a class="btn btn-outline-info btn-xs" role="button" href="/posts/cs/classify_by_alexnet">
                         Klasifikace obr&#xE1;zk&#x16F; s pomoc&#xED; alexnet
                     </a>
+                    <a class="btn btn-outline-info btn-xs" role="button" href="/posts/cs/transfer_learning_with_alexnet">
+                        Transfer Learning s pou&#x17E;it&#xED;m AlexNet
+                    </a>
                     <a class="btn btn-outline-info btn-xs" role="button" href="/posts/cs/creating_an_image_set_with_various_shapes">
                         Tvorba sady obr&#xE1;zk&#x16F; r&#x16F;zn&#xFD;ch geometrick&#xFD;ch tvar&#x16F;
-                    </a>
-                    <a class="btn btn-outline-info btn-xs" role="button" href="/posts/cs/imagenet_classes">
-                        1000 t&#x159;&#xED;d datab&#xE1;ze ImageNet
                     </a>
                     </div>
    
@@ -199,7 +199,7 @@ Published on Tuesday, December 11, 2018<br>    </div> -->
         </div>     
               
           
-<img src="../imgs_intro/classification_of_handwritten_digit.jpg" alt="" >
+<img src="/posts/imgs_intro/classification_of_handwritten_digit.jpg" alt="" >
 </div>
                                         </div>
                                 </div>
@@ -218,7 +218,7 @@ Published on Tuesday, December 11, 2018<br>    </div> -->
 A = rgb2gray(imread('single_handwritten_digit.png'));%Načíst obrázek a převést na šedotón
 A_resized = imresize(A,[28 28]);%Zmenšit na [28x28] cožodpovídá vstupní vrstvě neuronové sítě
 
-[label, score] = classify(mnist_net,A_resized,'ExecutionEnvironment','cpu');%(problém s GPU při používání onnx modelu, proto zde využito cpu)
+[label, score] = classify(mnist_net,A_resized);
 A_withText = insertText(A,[1 1], cellstr(&quot;classified as &quot; +  string(label)+newline+ &quot;(&quot;+ num2str(max(score)*100,'%0.2f %%)')) ,'FontSize',28); % přidat text s výsledkem kalsifikace
 imshow(A_withText)
 </code></pre>

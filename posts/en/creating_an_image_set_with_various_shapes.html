@@ -155,6 +155,9 @@ Published on Saturday, December 15, 2018<br>    </div> -->
 
 <div class="similar-posts" >
                      Similar posts: 
+                    <a class="btn btn-outline-info btn-xs" role="button" href="/posts/en/transfer_learning_with_alexnet">
+                        Transfer Learning With AlexNet
+                    </a>
                     <a class="btn btn-outline-info btn-xs" role="button" href="/posts/en/select_round_objects">
                         Distinguish between round and other binary objects
                     </a>
@@ -166,9 +169,6 @@ Published on Saturday, December 15, 2018<br>    </div> -->
                     </a>
                     <a class="btn btn-outline-info btn-xs" role="button" href="/posts/en/training_of_convolutional_neural_network_for_classification_of_handwritten_digits">
                         Training of convolutional neural network for classification of handwritten digits
-                    </a>
-                    <a class="btn btn-outline-info btn-xs" role="button" href="/posts/en/classification_of_handwritten_digit">
-                        Classification of handwritten digit with CNN
                     </a>
                     </div>
    
@@ -191,7 +191,7 @@ Published on Saturday, December 15, 2018<br>    </div> -->
         </div>     
               
           
-<img src="../imgs_intro/creating_an_image_set_with_various_shapes.jpg" alt="" >
+<img src="/posts/imgs_intro/creating_an_image_set_with_various_shapes.jpg" alt="" >
 </div>
                                         </div>
                                 </div>
@@ -209,10 +209,15 @@ Published on Saturday, December 15, 2018<br>    </div> -->
 imgSize= 227; %respect alexnet input size
 Canvas = zeros(imgSize);
 
+stepSize = 360 / 5; %angle for pentagons
+angles1 = 0 : stepSize : 360; %angle for first pentagon
+angles2 = stepSize/2 : stepSize : 360 + stepSize/2; %angle for second pentagon
+
 mkdir('imgs_shapes');% create folders for shapes
 mkdir('imgs_shapes/circle');
 mkdir('imgs_shapes/rectangle');
 mkdir('imgs_shapes/triangle');
+mkdir('imgs_shapes/star');
 
 for ii = 1:numImgInClass
     %% create &quot;random&quot; circle
@@ -243,7 +248,7 @@ for ii = 1:numImgInClass
     while( rad2deg(alpha)&lt;15 || beta&lt;15 || gamma&lt;15 || sum(sides(1,:)&lt;66)&gt;0  || numel(unique([point(1,1),point(2,1)]))==1 || numel(unique([point(1,2),point(2,2)]))==1 )
         point=randi([40 190],[3 2]); 
         sides=sort(pdist(point,'euclidean')); %Euclidean distance between 2 points = side length
-        alpha=acos((sides(2).^2+sides(3).^2-sides(1).^2)/(2*sides(2) * sides(3))); %Law of Cosines -&gt; alpha angle in radians
+        alpha=acos((sides(2).^2+sides(3).^2-sides(1).^2)/(2*sides(2) * sides(3)));  %Law of Cosines -&gt; alpha angle in radians
         beta=rad2deg(asin((sides(2)/sides(1))*sin(alpha))); %Law of Sines -&gt; beta angle in degrees
         gamma=180-beta-(rad2deg(alpha)); % gamma angle
     end
@@ -253,10 +258,53 @@ for ii = 1:numImgInClass
     RGBtriangle= insertShape(Canvas,'FilledPolygon',point_vector,'color',colorRnd);
     
     imwrite(RGBtriangle,fullfile('imgs_shapes/triangle',['triangle_' num2str(ii,'%03i') '.jpg']  ))
-    
+
+    %% Create stars 
+    %Random size of both pentagons
+    r1 = randi([10 30],1);
+    r2 = randi([40 80],1);
+
+    %Generate coordinates for both pentagons
+    x1 = r1 * cosd(angles1);
+    y1 = r1 * sind(angles1);
+    x2 = r2 * cosd(angles2);
+    y2 = r2 * sind(angles2);
+
+    %Redraw coordinates of pivotal pentagons into a star shape polygon
+    x3 = reshape([x1;x2], 1, []);
+    y3 = reshape([y1;y2], 1, []);
+
+    %Move coordinates in the middle
+    x3 = x3+imgSize/2;
+    y3 = y3+imgSize/2;
+
+    % Random shift
+    x3 = x3+randi([-round(min(x3)) (imgSize - round(max(x3)))],1);
+    y3 = y3+randi([-round(min(y3)) (imgSize - round(max(y3)))],1);
+
+    % Redners mask of the 227x227 binary image from polygon coordinates into the star.
+    maskImage = poly2mask(x3, y3, imgSize, imgSize);
+
+    %Random rotation angle
+    angleRand=randi([0 360],1);
+
+    %Image rotation
+    rotateImg = imrotate(maskImage,angleRand,'crop');
+
+    %single channel whitestar
+    whiteImage = 255 * uint8(rotateImg);
+
+    %Radnom RGB channel generator
+    RRand=randi([0 255],1);
+    GRand=randi([0 255],1);
+    BRand=randi([0 255],1);
+
+    %Creates RGB image of the star with random color
+    RGB = cat(3, whiteImage-RRand, whiteImage-GRand, whiteImage-BRand);
+    imwrite(RGB,fullfile('imgs_shapes/star',['star_' num2str(ii,'%03i') '.jpg']  ))
+
     disp(['creating img db: ' num2str(ii/numImgInClass*100,'%.2f') ' %'])
 end
-
 </code></pre>
 
 
@@ -264,6 +312,7 @@ end
   <li class="list-inline-item">Authors:</li>
 <li class="list-inline-item"><a role="button" href="/authors/tesar-tech" class="btn btn-primary btn-xs">tesar-tech</a> </li>
 <li class="list-inline-item"><a role="button" href="/authors/strakka1" class="btn btn-primary btn-xs">strakka1</a> </li>
+<li class="list-inline-item"><a role="button" href="/authors/magias" class="btn btn-primary btn-xs">magias</a> </li>
   
  
 </ul>
