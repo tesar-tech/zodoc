@@ -1,7 +1,7 @@
 title: Transfer Learning s použitím AlexNet
 lead: Použití transfer learningu na neuronové síti Alexnet s databází vygenerovaných tvarů
 Published: 2019-01-09
-Tags: [matlab, imageset, shapes, transfer learning]
+Tags: [matlab,alexnet, imageset, shapes, transfer learning]
 prerequisites: [Matlab, Alexnet matlab add-on]
 Authors: [tesar-tech, magias]
 ---
