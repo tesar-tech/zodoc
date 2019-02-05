@@ -1,6 +1,6 @@
 title: Classification of handwritten digits
 lead: Select ROI from image and let it classify by CNN trained on MNIST dataset
-Published: 2018-11-13
+Published: 2019-02-01
 Tags: [matlab, MNIST, classification, handwritten, digits]
 datazooFiles: [imgs/cisla_ver.jpg, models/MNIST_99.29.onnx ]
 prerequisites: [Matlab,Matlab onnx support add-on]

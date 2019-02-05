@@ -1,6 +1,6 @@
 title: Klasifikace ručně psaného čísla
 lead: Načíst konvoluční neuronovou síť v onnx formátu. Zmenšit a klasifikovat obrázek
-Published: 2018-12-11
+Published: 2019-02-01
 Tags: [matlab, MNIST, classification, handwritten, digits]
 datazooFiles: [imgs/single_handwritten_digit.png, models/MNIST_99.29.onnx ]
 prerequisites: [Matlab,Matlab onnx support add-on]
