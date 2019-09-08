@@ -5,7 +5,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
 
-        <title>ZODOC - edges</title>
+        <title>ZODOC - Flower in 3D</title>
         <meta name="description" content="Image processing and deep learning samples" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">        
 
@@ -28,9 +28,9 @@
         <meta name="msapplication-tooltip" content="ZODOC" />
         <meta name="msapplication-starturl" content="/zodoc/" />
 
-        <meta property="og:title" content="ZODOC - edges" />
+        <meta property="og:title" content="ZODOC - Flower in 3D" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="http://tesar-tech.github.io/zodoc/zodoc/tags/edges" />
+        <meta property="og:url" content="http://tesar-tech.github.io/zodoc/zodoc/posts/en/flower_in_3d" />
         <!-- TODO: More social graph meta tags -->
 
         <script src="/zodoc/assets/js/jquery.min.js"></script>
@@ -130,10 +130,66 @@
                         <div class="container">
                                 <div class="row">
                                         <div class="col-md-12">
-<div class="site-heading-tags">
-    <div> <h1> edges </h1></div>
-    <hr>
-</div>                                            </div>
+
+    
+<div class="post-heading">
+   
+
+   
+    <h1>Flower in 3D</h1>
+        <h2 class="subheading">Convert color to third dimension</h2>
+
+    <!-- <div class="meta">        
+Published on Friday, August 9, 2019<br>    </div> -->
+    <!-- <div>language:en </div> -->
+    <!--  -->
+
+
+<div class="similar-posts" >
+                     Similar posts: 
+                    <a class="btn btn-outline-info btn-xs" role="button" href="/zodoc/posts/en/split_and_colorize_channels_of_color_image">
+                        Split and colorize channels of color image
+                    </a>
+                    <a class="btn btn-outline-info btn-xs" role="button" href="/zodoc/posts/en/split_and_display_channels_of_color_image">
+                        Split and display channels of color image
+                    </a>
+                    <a class="btn btn-outline-info btn-xs" role="button" href="/zodoc/posts/en/reduce_the_number_of_colors_by_converting_to_indexed_image">
+                        Reduce the number of colors by converting to indexed image
+                    </a>
+                    <a class="btn btn-outline-info btn-xs" role="button" href="/zodoc/posts/en/classification_of_shapes_by_cnn">
+                        Classification of shapes by CNN
+                    </a>
+                    <a class="btn btn-outline-info btn-xs" role="button" href="/zodoc/posts/en/classification_of_handwritten_digits">
+                        Classification of handwritten digits
+                    </a>
+                    </div>
+   
+
+    <div class="util">
+    <ul class="list-inline">
+        <li class="list-inline-item">Utilizing those files: </li>
+            <li class="list-inline-item"> <u> <a href="https://github.com/tesar-tech/zodoc/raw/develop/datazoo/imgs/kytka256.jpg"> kytka256.jpg </a> </u> </li>
+        </ul>
+    </div>
+
+    <div class="util">
+    <ul class="list-inline">
+        <li class="list-inline-item">Prerequisites: </li>
+            <li class="list-inline-item"> <u> <a href="/prerequisites#matlab">Matlab  </a> </u> </li>
+        </ul>
+    </div>
+
+
+        <div class="tags">
+                            <a role="button" href="/zodoc/tags/matlab" class="btn btn-default btn-xs btn-technology">matlab</a>
+                <a role="button" href="/zodoc/tags/colors" class="btn btn-default btn-xs ">colors</a>
+                <a role="button" href="/zodoc/tags/3D" class="btn btn-default btn-xs ">3D</a>
+        </div>     
+              
+          
+<img src="/zodoc/posts/imgs_intro/flower_in_3d.gif" alt="" >
+</div>
+                                        </div>
                                 </div>
                         </div>
                 </header>
@@ -142,94 +198,35 @@
                 <div class="container">
                         <div class="row">
                                 <div id="content" class="col-md-12">
-                                        <div class="container-sm-height">
-    <div class="row row-sm-height">
-        <div class="col-sm-8 right-border col-sm-height">
-            
-                <div class="post-preview">
-                    <a href="/zodoc/posts/en/compare_sharpness">
-                        <h2 class="post-title">Detect which image is sharper</h2>
-                       
-                    </a>
+                                        
 
-   
-        <div class="tags">
-                            <a role="button" href="/zodoc/tags/matlab" class="btn btn-default btn-xs btn-technology">matlab</a>
-                <a role="button" href="/zodoc/tags/edges" class="btn btn-default btn-xs ">edges</a>
-                <a role="button" href="/zodoc/tags/binary-image" class="btn btn-default btn-xs ">binary image</a>
-                <a role="button" href="/zodoc/tags/sharpness" class="btn btn-default btn-xs ">sharpness</a>
-        </div>     
-              
-    
-                <table >
-                   
-                    <tr>
-                    
-                    <td style="background:rgb(235, 235, 235)"> 
-                     <img src="/zodoc/posts/imgs_intro/compare_sharpness.jpg" style="float:left;width:128px;height:128px;object-fit: contain;">
-                    </td>
-                    <td style="padding-left: 10px">
-                            <div style="margin:0 0 0 130;float:right;" >Using edge detection to decide which image is sharper</div>
-                        </td>
-               </tr>
-                </table>    
+<p>Usage of <code>mesh</code> function in matlab to display image of flower in 3D. Brighter locations are displayed as higher peaks. Color of mesh depends on used colormap (parula for this image).</p>
+<pre><code class="language-matlab">A = imread('kytka256.jpg');
+Ag = rgb2gray(A);
+mesh(Ag)
+axis off;
+axis vis3d;grid off
 
-                    <!-- <p class="post-meta">Posted on Sunday, November 4, 2018</p> -->
-                   
-                    <!--               -->
-                </div>       
+while(true)%% bude se točit pořád
+    for ii = 1:360
+        view(ii,45)
+        pause(0.01)
+    end
+end
+</code></pre>
 
 
-            <nav>
-                <ul class="pager">
-                    <li class="previous">                
-                    </li>
-                    <li class="next">
-                    </li>
-                </ul>
-            </nav>
-            <hr class="visible-xs-block" />
-        </div>
-		
-        <div class="col-sm-4 col-sm-height">
-                <a role="button" href="/zodoc/tags/matlab" class="btn btn-default btn-xs">matlab (25)</a>
-                <a role="button" href="/zodoc/tags/binary-image" class="btn btn-default btn-xs">binary image (6)</a>
-                <a role="button" href="/zodoc/tags/classification" class="btn btn-default btn-xs">classification (6)</a>
-                <a role="button" href="/zodoc/tags/shapes" class="btn btn-default btn-xs">shapes (5)</a>
-                <a role="button" href="/zodoc/tags/colors" class="btn btn-default btn-xs">colors (4)</a>
-                <a role="button" href="/zodoc/tags/alexnet" class="btn btn-default btn-xs">alexnet (4)</a>
-                <a role="button" href="/zodoc/tags/handwritten" class="btn btn-default btn-xs">handwritten (4)</a>
-                <a role="button" href="/zodoc/tags/digits" class="btn btn-default btn-xs">digits (4)</a>
-                <a role="button" href="/zodoc/tags/RGB" class="btn btn-default btn-xs">RGB (3)</a>
-                <a role="button" href="/zodoc/tags/histogram" class="btn btn-default btn-xs">histogram (3)</a>
-                <a role="button" href="/zodoc/tags/contrast" class="btn btn-default btn-xs">contrast (3)</a>
-                <a role="button" href="/zodoc/tags/transfer-learning" class="btn btn-default btn-xs">transfer learning (3)</a>
-                <a role="button" href="/zodoc/tags/MNIST" class="btn btn-default btn-xs">MNIST (3)</a>
-                <a role="button" href="/zodoc/tags/imageset" class="btn btn-default btn-xs">imageset (2)</a>
-                <a role="button" href="/zodoc/tags/random" class="btn btn-default btn-xs">random (2)</a>
-                <a role="button" href="/zodoc/tags/training" class="btn btn-default btn-xs">training (1)</a>
-                <a role="button" href="/zodoc/tags/ImageNet" class="btn btn-default btn-xs">ImageNet (1)</a>
-                <a role="button" href="/zodoc/tags/classes" class="btn btn-default btn-xs">classes (1)</a>
-                <a role="button" href="/zodoc/tags/segmentation" class="btn btn-default btn-xs">segmentation (1)</a>
-                <a role="button" href="/zodoc/tags/hsv" class="btn btn-default btn-xs">hsv (1)</a>
-                <a role="button" href="/zodoc/tags/kmeans" class="btn btn-default btn-xs">kmeans (1)</a>
-                <a role="button" href="/zodoc/tags/animation" class="btn btn-default btn-xs">animation (1)</a>
-                <a role="button" href="/zodoc/tags/gif" class="btn btn-default btn-xs">gif (1)</a>
-                <a role="button" href="/zodoc/tags/dental" class="btn btn-default btn-xs">dental (1)</a>
-                <a role="button" href="/zodoc/tags/x-ray" class="btn btn-default btn-xs">x-ray (1)</a>
-                <a role="button" href="/zodoc/tags/indexed-image" class="btn btn-default btn-xs">indexed image (1)</a>
-                <a role="button" href="/zodoc/tags/negative" class="btn btn-default btn-xs">negative (1)</a>
-                <a role="button" href="/zodoc/tags/edges" class="btn btn-primary btn-xs">edges (1)</a>
-                <a role="button" href="/zodoc/tags/sharpness" class="btn btn-default btn-xs">sharpness (1)</a>
-                <a role="button" href="/zodoc/tags/filters" class="btn btn-default btn-xs">filters (1)</a>
-                <a role="button" href="/zodoc/tags/gaussian" class="btn btn-default btn-xs">gaussian (1)</a>
-                <a role="button" href="/zodoc/tags/blur" class="btn btn-default btn-xs">blur (1)</a>
-                <a role="button" href="/zodoc/tags/super-resolution" class="btn btn-default btn-xs">super-resolution (1)</a>
-                <a role="button" href="/zodoc/tags/vdsr" class="btn btn-default btn-xs">vdsr (1)</a>
-                <a role="button" href="/zodoc/tags/3D" class="btn btn-default btn-xs">3D (1)</a>
-        </div>
-    </div>
-</div>
+    <ul class="list-inline">
+  <li class="list-inline-item">Author:</li>
+<li class="list-inline-item"><a role="button" href="/zodoc/authors/tesar-tech" class="btn btn-primary btn-xs">tesar-tech</a> </li>
+  
+ 
+</ul>
+      <div class="alert alert-info"> <a href="https://github.com/tesar-tech/zodoc/blob/develop/input/posts/en/flower_in_3d.md"> <i class="fa fa-file"></i> </a> Something is wrong? Let us know right <a href="https://github.com/tesar-tech/zodoc/issues/new?title=Flower in 3D&amp;body=https://tesar-tech.github.io/zodoc/posts/en/flower_in_3d.html%0A[Delete this and describe the issue!]"> here <i class="fa fa-github"></i> </a></div>
+ 
+
+
+ 
                                 </div>
                         </div>
                 </div>

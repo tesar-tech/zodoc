@@ -5,8 +5,31 @@
 		<link>http://tesar-tech.github.io/zodoc/zodoc</link>
 		<description>Image processing and deep learning samples</description>
 		<copyright>2019</copyright>
-		<pubDate>Mon, 04 Feb 2019 22:18:01 GMT</pubDate>
-		<lastBuildDate>Mon, 04 Feb 2019 22:18:01 GMT</lastBuildDate>
+		<pubDate>Sun, 08 Sep 2019 08:11:30 GMT</pubDate>
+		<lastBuildDate>Sun, 08 Sep 2019 08:11:30 GMT</lastBuildDate>
+		<item>
+			<title>Flower in 3D</title>
+			<link>http://tesar-tech.github.io/zodoc/zodoc/posts/en/flower_in_3d</link>
+			<description>&lt;p&gt;Usage of &lt;code&gt;mesh&lt;/code&gt; function in matlab to display image of flower in 3D. Brighter locations are displayed as higher peaks. Color of mesh depends on used colormap (parula for this image).&lt;/p&gt;</description>
+			<enclosure url="http://tesar-tech.github.io/zodoc/zodoc/posts/imgs_intro/flower_in_3d.gif" length="0" type="image" />
+			<guid>http://tesar-tech.github.io/zodoc/zodoc/posts/en/flower_in_3d</guid>
+			<pubDate>Fri, 09 Aug 2019 00:00:00 GMT</pubDate>
+			<content:encoded>&lt;p&gt;Usage of &lt;code&gt;mesh&lt;/code&gt; function in matlab to display image of flower in 3D. Brighter locations are displayed as higher peaks. Color of mesh depends on used colormap (parula for this image).&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-matlab"&gt;A = imread('kytka256.jpg');
+Ag = rgb2gray(A);
+mesh(Ag)
+axis off;
+axis vis3d;grid off
+
+while(true)%% bude se točit pořád
+    for ii = 1:360
+        view(ii,45)
+        pause(0.01)
+    end
+end
+&lt;/code&gt;&lt;/pre&gt;
+</content:encoded>
+		</item>
 		<item>
 			<title>Classification of shapes by CNN</title>
 			<link>http://tesar-tech.github.io/zodoc/zodoc/posts/en/classification_of_shapes_by_cnn</link>
@@ -33,25 +56,6 @@ for ii = 1:4
 end
 
 montage(Classified_images)
-&lt;/code&gt;&lt;/pre&gt;
-</content:encoded>
-		</item>
-		<item>
-			<title>Klasifikace ručně psaného čísla</title>
-			<link>http://tesar-tech.github.io/zodoc/zodoc/posts/cs/classification_of_handwritten_digit</link>
-			<description>&lt;p&gt;Model v onnx formátu byl natrénován na &lt;a href="http://yann.lecun.com/exdb/mnist/"&gt;MNIST&lt;/a&gt; datasetu s přesností 99.29 %.&lt;/p&gt;</description>
-			<enclosure url="http://tesar-tech.github.io/zodoc/zodoc/posts/imgs_intro/classification_of_handwritten_digit.jpg" length="0" type="image" />
-			<guid>http://tesar-tech.github.io/zodoc/zodoc/posts/cs/classification_of_handwritten_digit</guid>
-			<pubDate>Fri, 01 Feb 2019 00:00:00 GMT</pubDate>
-			<content:encoded>&lt;p&gt;Model v onnx formátu byl natrénován na &lt;a href="http://yann.lecun.com/exdb/mnist/"&gt;MNIST&lt;/a&gt; datasetu s přesností 99.29 %.&lt;/p&gt;
-&lt;pre&gt;&lt;code class="language-matlab"&gt;mnist_net = importONNXNetwork('MNIST_99.29.onnx','OutputLayerType','classification','ClassNames',{'0','1','2','3','4','5','6','7','8','9'}); %improt sítě
-
-A = rgb2gray(imread('single_handwritten_digit.png'));%Načíst obrázek a převést na šedotón
-A_resized = imresize(A,[28 28]);%Zmenšit na [28x28] cožodpovídá vstupní vrstvě neuronové sítě
-
-[label, score] = classify(mnist_net,A_resized);
-A_withText = insertText(A,[1 1], cellstr(&amp;quot;classified as &amp;quot; +  string(label)+newline+ &amp;quot;(&amp;quot;+ num2str(max(score)*100,'%0.2f %%)')) ,'FontSize',28); % přidat text s výsledkem kalsifikace
-imshow(A_withText)
 &lt;/code&gt;&lt;/pre&gt;
 </content:encoded>
 		</item>
@@ -83,6 +87,25 @@ while 1
     te = text(10,160,['Classified as ' cellstr(cl)],'FontSize',14,'color','blue');
     rect.delete;
 end
+&lt;/code&gt;&lt;/pre&gt;
+</content:encoded>
+		</item>
+		<item>
+			<title>Klasifikace ručně psaného čísla</title>
+			<link>http://tesar-tech.github.io/zodoc/zodoc/posts/cs/classification_of_handwritten_digit</link>
+			<description>&lt;p&gt;Model v onnx formátu byl natrénován na &lt;a href="http://yann.lecun.com/exdb/mnist/"&gt;MNIST&lt;/a&gt; datasetu s přesností 99.29 %.&lt;/p&gt;</description>
+			<enclosure url="http://tesar-tech.github.io/zodoc/zodoc/posts/imgs_intro/classification_of_handwritten_digit.jpg" length="0" type="image" />
+			<guid>http://tesar-tech.github.io/zodoc/zodoc/posts/cs/classification_of_handwritten_digit</guid>
+			<pubDate>Fri, 01 Feb 2019 00:00:00 GMT</pubDate>
+			<content:encoded>&lt;p&gt;Model v onnx formátu byl natrénován na &lt;a href="http://yann.lecun.com/exdb/mnist/"&gt;MNIST&lt;/a&gt; datasetu s přesností 99.29 %.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-matlab"&gt;mnist_net = importONNXNetwork('MNIST_99.29.onnx','OutputLayerType','classification','ClassNames',{'0','1','2','3','4','5','6','7','8','9'}); %improt sítě
+
+A = rgb2gray(imread('single_handwritten_digit.png'));%Načíst obrázek a převést na šedotón
+A_resized = imresize(A,[28 28]);%Zmenšit na [28x28] cožodpovídá vstupní vrstvě neuronové sítě
+
+[label, score] = classify(mnist_net,A_resized);
+A_withText = insertText(A,[1 1], cellstr(&amp;quot;classified as &amp;quot; +  string(label)+newline+ &amp;quot;(&amp;quot;+ num2str(max(score)*100,'%0.2f %%)')) ,'FontSize',28); % přidat text s výsledkem kalsifikace
+imshow(A_withText)
 &lt;/code&gt;&lt;/pre&gt;
 </content:encoded>
 		</item>
@@ -1503,7 +1526,7 @@ imshow(A_withText)
 998:bolete
 999:ear
 1000:toilet tissue&lt;/p&gt;</description>
-			<enclosure url="http://tesar-tech.github.io/zodoc/zodoc/posts/imgs_intro/imagenet_classes.jpg" length="0" type="image" />
+			<enclosure url="http://tesar-tech.github.io/zodoc/zodoc/posts/imgs_intro/imagenet_classes.png" length="0" type="image" />
 			<guid>http://tesar-tech.github.io/zodoc/zodoc/posts/cs/imagenet_classes</guid>
 			<pubDate>Sun, 02 Dec 2018 00:00:00 GMT</pubDate>
 			<content:encoded>&lt;pre&gt;&lt;code class="language-matlab"&gt;net = alexnet; % načíst síť
@@ -3518,7 +3541,7 @@ disp(ClassNamesWithIndexes) % Zobrazit výsledek
 998:bolete
 999:ear
 1000:toilet tissue&lt;/p&gt;</description>
-			<enclosure url="http://tesar-tech.github.io/zodoc/zodoc/posts/imgs_intro/imagenet_classes.jpg" length="0" type="image" />
+			<enclosure url="http://tesar-tech.github.io/zodoc/zodoc/posts/imgs_intro/imagenet_classes.png" length="0" type="image" />
 			<guid>http://tesar-tech.github.io/zodoc/zodoc/posts/en/imagenet_classes</guid>
 			<pubDate>Sun, 02 Dec 2018 00:00:00 GMT</pubDate>
 			<content:encoded>&lt;pre&gt;&lt;code class="language-matlab"&gt;net = alexnet; % load a network
@@ -4637,41 +4660,6 @@ montage({Aa{6},Aa{7}},'bordersize',[1 1],'backgroundcolor','green')
 </content:encoded>
 		</item>
 		<item>
-			<title>Filtrování binárních objektů za použití k-means</title>
-			<link>http://tesar-tech.github.io/zodoc/zodoc/posts/cs/filtering_binary_objects_with_kmeans</link>
-			<description>&lt;p&gt;Úkolem je zpracovat obrázek do binární reprezentace tak, aby obsahoval pouze žádoucí tvary jako je obdélník, čtverec, trojúhelník kruh nebo hvězda. K-means algoritmus slouží k určení meze pro filtrování objektů dle jejich velikostí.&lt;/p&gt;</description>
-			<enclosure url="http://tesar-tech.github.io/zodoc/zodoc/posts/imgs_intro/filtering_binary_objects_with_kmeans.png" length="0" type="image" />
-			<guid>http://tesar-tech.github.io/zodoc/zodoc/posts/cs/filtering_binary_objects_with_kmeans</guid>
-			<pubDate>Fri, 16 Nov 2018 00:00:00 GMT</pubDate>
-			<content:encoded>&lt;p&gt;Úkolem je zpracovat obrázek do binární reprezentace tak, aby obsahoval pouze žádoucí tvary jako je obdélník, čtverec, trojúhelník kruh nebo hvězda. K-means algoritmus slouží k určení meze pro filtrování objektů dle jejich velikostí.&lt;/p&gt;
-&lt;pre&gt;&lt;code class="language-matlab"&gt;A = imread('tvary.png');
-Aa = {};
-Aa{1} =A; %barevný obrázek
-Ag =imadjust(rgb2gray(A));% upraví kontrast a převede na šedotón
-Aa{2} = Ag;
-Aa{3} = imbinarize(Ag,'adaptive','ForegroundPolarity','dark','Sensitivity',0.55); %na černobílý obrázek
-Aa{4} = imfill(~Aa{end},'holes'); %zaplní díry
-Aa{5} = imclearborder(Aa{end}); % vyčístí objekty z hran 
-%% filtrace za použití k-means
-reg_props = regionprops(Aa{5},'area');%získání velikostí ploch (area) každého objektu
-areas =  [reg_props.Area]';% převede plochy na vektor
-%hist(areas,30) % zobrazí histogram velikostí ploch
-[indx, ~] = kmeans(areas,3);% oddělí objekty do 3 shluků na základě jejich velikostí.
-%jeden shluk zahrnuje větší objekty, druhý shluk menší objekty a &amp;quot;šumovité&amp;quot; objekty (které chceme odstranit)
-% jsou v jednom vlastím shluku.
-% (nefunguje to příliš dobře pouze pro 2 shluky)
-
-%Nevím předem který ze shluků obsahuje ty nejmenší objekty.
-%Vezme největší objekty z každého shluku. Minimum těchto tří objektů
-%je vzato jako limit pro filtrování ()
-min_max = min([max(areas(indx==1)),max(areas(indx==2)),max(areas(indx==3)) ]);
-Aa{6} = bwareafilt(Aa{5},[min_max+1 Inf]);
-%%
-montage(Aa,'bordersize',[1 1],'backgroundcolor','green')
-&lt;/code&gt;&lt;/pre&gt;
-</content:encoded>
-		</item>
-		<item>
 			<title>Filtering binary objects with kmeans</title>
 			<link>http://tesar-tech.github.io/zodoc/zodoc/posts/en/filtering_binary_objects_with_kmeans</link>
 			<description>&lt;p&gt;The task is to process the image to binary representation containing only the wanted shapes like rectangle, square, triangle, circle or a star. K-means algorithm is used to determine the range for filtering the objects by their size.&lt;/p&gt;</description>
@@ -4710,6 +4698,41 @@ montage(Aa,'bordersize',[1 1],'backgroundcolor','green')
 </content:encoded>
 		</item>
 		<item>
+			<title>Filtrování binárních objektů za použití k-means</title>
+			<link>http://tesar-tech.github.io/zodoc/zodoc/posts/cs/filtering_binary_objects_with_kmeans</link>
+			<description>&lt;p&gt;Úkolem je zpracovat obrázek do binární reprezentace tak, aby obsahoval pouze žádoucí tvary jako je obdélník, čtverec, trojúhelník kruh nebo hvězda. K-means algoritmus slouží k určení meze pro filtrování objektů dle jejich velikostí.&lt;/p&gt;</description>
+			<enclosure url="http://tesar-tech.github.io/zodoc/zodoc/posts/imgs_intro/filtering_binary_objects_with_kmeans.png" length="0" type="image" />
+			<guid>http://tesar-tech.github.io/zodoc/zodoc/posts/cs/filtering_binary_objects_with_kmeans</guid>
+			<pubDate>Fri, 16 Nov 2018 00:00:00 GMT</pubDate>
+			<content:encoded>&lt;p&gt;Úkolem je zpracovat obrázek do binární reprezentace tak, aby obsahoval pouze žádoucí tvary jako je obdélník, čtverec, trojúhelník kruh nebo hvězda. K-means algoritmus slouží k určení meze pro filtrování objektů dle jejich velikostí.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-matlab"&gt;A = imread('tvary.png');
+Aa = {};
+Aa{1} =A; %barevný obrázek
+Ag =imadjust(rgb2gray(A));% upraví kontrast a převede na šedotón
+Aa{2} = Ag;
+Aa{3} = imbinarize(Ag,'adaptive','ForegroundPolarity','dark','Sensitivity',0.55); %na černobílý obrázek
+Aa{4} = imfill(~Aa{end},'holes'); %zaplní díry
+Aa{5} = imclearborder(Aa{end}); % vyčístí objekty z hran 
+%% filtrace za použití k-means
+reg_props = regionprops(Aa{5},'area');%získání velikostí ploch (area) každého objektu
+areas =  [reg_props.Area]';% převede plochy na vektor
+%hist(areas,30) % zobrazí histogram velikostí ploch
+[indx, ~] = kmeans(areas,3);% oddělí objekty do 3 shluků na základě jejich velikostí.
+%jeden shluk zahrnuje větší objekty, druhý shluk menší objekty a &amp;quot;šumovité&amp;quot; objekty (které chceme odstranit)
+% jsou v jednom vlastím shluku.
+% (nefunguje to příliš dobře pouze pro 2 shluky)
+
+%Nevím předem který ze shluků obsahuje ty nejmenší objekty.
+%Vezme největší objekty z každého shluku. Minimum těchto tří objektů
+%je vzato jako limit pro filtrování ()
+min_max = min([max(areas(indx==1)),max(areas(indx==2)),max(areas(indx==3)) ]);
+Aa{6} = bwareafilt(Aa{5},[min_max+1 Inf]);
+%%
+montage(Aa,'bordersize',[1 1],'backgroundcolor','green')
+&lt;/code&gt;&lt;/pre&gt;
+</content:encoded>
+		</item>
+		<item>
 			<title>Animation of binary image with variable threshold</title>
 			<link>http://tesar-tech.github.io/zodoc/zodoc/posts/cs/animation_of_binary_image_with_variable_threshold</link>
 			<enclosure url="http://tesar-tech.github.io/zodoc/zodoc/posts/imgs_intro/animation_of_binary_image_with_variable_threshold.gif" length="0" type="image" />
@@ -4728,29 +4751,6 @@ for ii = 1:5:256
         imwrite(A,map,gifName,'gif','WriteMode','append','DelayTime',0.001);
     end 
  end
-&lt;/code&gt;&lt;/pre&gt;
-</content:encoded>
-		</item>
-		<item>
-			<title>Klasifikace obrázků s pomocí alexnet</title>
-			<link>http://tesar-tech.github.io/zodoc/zodoc/posts/cs/classify_by_alexnet</link>
-			<description>&lt;p&gt;Testovaný obrázek je klasifikován jako sedmikráska (daisy), což není správně, jelikož žlutý květ na obrázku náleží topinambuře. Nicméně topinambura není jednou z tříd do které alexnet klasifikuje (je jich celkem 1000) a sedmikrásce je vcelku podobná, takže klasifikace není zcela špatná. Pět klasifikací s nejvyšším skóre je vyobrazeno v tabulce.&lt;/p&gt;</description>
-			<enclosure url="http://tesar-tech.github.io/zodoc/zodoc/posts/imgs_intro/classify_by_alexnet.jpg" length="0" type="image" />
-			<guid>http://tesar-tech.github.io/zodoc/zodoc/posts/cs/classify_by_alexnet</guid>
-			<pubDate>Thu, 15 Nov 2018 00:00:00 GMT</pubDate>
-			<content:encoded>&lt;p&gt;Testovaný obrázek je klasifikován jako sedmikráska (daisy), což není správně, jelikož žlutý květ na obrázku náleží topinambuře. Nicméně topinambura není jednou z tříd do které alexnet klasifikuje (je jich celkem 1000) a sedmikrásce je vcelku podobná, takže klasifikace není zcela špatná. Pět klasifikací s nejvyšším skóre je vyobrazeno v tabulce.&lt;/p&gt;
-&lt;pre&gt;&lt;code class="language-matlab"&gt;net = alexnet;
-A = imread('kytka256.jpg');
-A_resized = imresize(A,[227 227]); %změnit velikost na 227px 227px pro vstup cnn
-[label,score] = classify(net,A_resized); % klasifikace obrázku
-
-[maxvalues, ind] = maxk(score(:), 5); %zíkání 5 klasifikací s nejvyšším skóre
-
-subplot 121; imshow(A_resized); %zobrazit původní obrázek
-title(string(label) + &amp;quot;, &amp;quot; + num2str(max(score)*100,3) + &amp;quot; %&amp;quot;); % zobrazit klasifikaci a procenta
-
-names=(net.Layers(end).ClassNames(ind)); % získání jmen pro klasifikace
-uitable('Data',[names,num2cell(maxvalues*100)],'Position',[290 150 150 130],'ColumnName',{'Class name','Score %'});% vytvoření tabulky
 &lt;/code&gt;&lt;/pre&gt;
 </content:encoded>
 		</item>
