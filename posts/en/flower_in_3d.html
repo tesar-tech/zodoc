@@ -184,6 +184,7 @@ Published on Friday, August 9, 2019<br>    </div> -->
                             <a role="button" href="/tags/matlab" class="btn btn-default btn-xs btn-technology">matlab</a>
                 <a role="button" href="/tags/colors" class="btn btn-default btn-xs ">colors</a>
                 <a role="button" href="/tags/3D" class="btn btn-default btn-xs ">3D</a>
+                <a role="button" href="/tags/mesh" class="btn btn-default btn-xs ">mesh</a>
         </div>     
               
           
@@ -202,15 +203,14 @@ Published on Friday, August 9, 2019<br>    </div> -->
 
 <p>Usage of <code>mesh</code> function in matlab to display image of flower in 3D. Brighter locations are displayed as higher peaks. Color of mesh depends on used colormap (parula for this image).</p>
 <pre><code class="language-matlab">A = imread('kytka256.jpg');
-Ag = rgb2gray(A);
-mesh(Ag)
-axis off;
-axis vis3d;grid off
+Ag = rgb2gray(A);%convert to gray
+mesh(Ag) 
+axis off;axis vis3d;grid off
 
-while(true)%% bude se točit pořád
-    for ii = 1:360
-        view(ii,45)
-        pause(0.01)
+while(true)%% infinite loop
+    for ii = 1:360 %change azimuth of view from 1 ° to 360 °
+        view(ii,45) % set elevation of view to 45 °
+        pause(0.01) % wait 10 miliseconds
     end
 end
 </code></pre>

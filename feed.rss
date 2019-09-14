@@ -5,8 +5,8 @@
 		<link>http://zodoc.tech/</link>
 		<description>Image processing and deep learning samples</description>
 		<copyright>2019</copyright>
-		<pubDate>Sun, 08 Sep 2019 08:26:59 GMT</pubDate>
-		<lastBuildDate>Sun, 08 Sep 2019 08:26:59 GMT</lastBuildDate>
+		<pubDate>Sat, 14 Sep 2019 07:14:54 GMT</pubDate>
+		<lastBuildDate>Sat, 14 Sep 2019 07:14:54 GMT</lastBuildDate>
 		<item>
 			<title>Flower in 3D</title>
 			<link>http://zodoc.tech/posts/en/flower_in_3d</link>
@@ -16,15 +16,14 @@
 			<pubDate>Fri, 09 Aug 2019 00:00:00 GMT</pubDate>
 			<content:encoded>&lt;p&gt;Usage of &lt;code&gt;mesh&lt;/code&gt; function in matlab to display image of flower in 3D. Brighter locations are displayed as higher peaks. Color of mesh depends on used colormap (parula for this image).&lt;/p&gt;
 &lt;pre&gt;&lt;code class="language-matlab"&gt;A = imread('kytka256.jpg');
-Ag = rgb2gray(A);
-mesh(Ag)
-axis off;
-axis vis3d;grid off
+Ag = rgb2gray(A);%convert to gray
+mesh(Ag) 
+axis off;axis vis3d;grid off
 
-while(true)%% bude se točit pořád
-    for ii = 1:360
-        view(ii,45)
-        pause(0.01)
+while(true)%% infinite loop
+    for ii = 1:360 %change azimuth of view from 1 ° to 360 °
+        view(ii,45) % set elevation of view to 45 °
+        pause(0.01) % wait 10 miliseconds
     end
 end
 &lt;/code&gt;&lt;/pre&gt;
@@ -4733,25 +4732,24 @@ montage(Aa,'bordersize',[1 1],'backgroundcolor','green')
 </content:encoded>
 		</item>
 		<item>
-			<title>Klasifikace obrázků s pomocí alexnet</title>
-			<link>http://zodoc.tech/posts/cs/classify_by_alexnet</link>
-			<description>&lt;p&gt;Testovaný obrázek je klasifikován jako sedmikráska (daisy), což není správně, jelikož žlutý květ na obrázku náleží topinambuře. Nicméně topinambura není jednou z tříd do které alexnet klasifikuje (je jich celkem 1000) a sedmikrásce je vcelku podobná, takže klasifikace není zcela špatná. Pět klasifikací s nejvyšším skóre je vyobrazeno v tabulce.&lt;/p&gt;</description>
-			<enclosure url="http://zodoc.tech/posts/imgs_intro/classify_by_alexnet.jpg" length="0" type="image" />
-			<guid>http://zodoc.tech/posts/cs/classify_by_alexnet</guid>
+			<title>Animation of binary image with variable threshold</title>
+			<link>http://zodoc.tech/posts/cs/animation_of_binary_image_with_variable_threshold</link>
+			<enclosure url="http://zodoc.tech/posts/imgs_intro/animation_of_binary_image_with_variable_threshold.gif" length="0" type="image" />
+			<guid>http://zodoc.tech/posts/cs/animation_of_binary_image_with_variable_threshold</guid>
 			<pubDate>Thu, 15 Nov 2018 00:00:00 GMT</pubDate>
-			<content:encoded>&lt;p&gt;Testovaný obrázek je klasifikován jako sedmikráska (daisy), což není správně, jelikož žlutý květ na obrázku náleží topinambuře. Nicméně topinambura není jednou z tříd do které alexnet klasifikuje (je jich celkem 1000) a sedmikrásce je vcelku podobná, takže klasifikace není zcela špatná. Pět klasifikací s nejvyšším skóre je vyobrazeno v tabulce.&lt;/p&gt;
-&lt;pre&gt;&lt;code class="language-matlab"&gt;net = alexnet;
-A = imread('kytka256.jpg');
-A_resized = imresize(A,[227 227]); %změnit velikost na 227px 227px pro vstup cnn
-[label,score] = classify(net,A_resized); % klasifikace obrázku
-
-[maxvalues, ind] = maxk(score(:), 5); %zíkání 5 klasifikací s nejvyšším skóre
-
-subplot 121; imshow(A_resized); %zobrazit původní obrázek
-title(string(label) + &amp;quot;, &amp;quot; + num2str(max(score)*100,3) + &amp;quot; %&amp;quot;); % zobrazit klasifikaci a procenta
-
-names=(net.Layers(end).ClassNames(ind)); % získání jmen pro klasifikace
-uitable('Data',[names,num2cell(maxvalues*100)],'Position',[290 150 150 130],'ColumnName',{'Class name','Score %'});% vytvoření tabulky
+			<content:encoded>&lt;pre&gt;&lt;code class="language-matlab"&gt;Ag = rgb2gray(imread('kytka256.jpg'));
+firstTime = 1;gifName = 'bw_anim.gif';
+for ii = 1:5:256
+   curr_img = (Ag&amp;lt;ii)*255;% or use imbinarize instead
+   [A,map] = gray2ind(curr_img,2); % change to indexed image
+   
+    if firstTime ==1%save first frame in different manner
+        imwrite(A,map,gifName,'gif','LoopCount',Inf,'DelayTime',0.001);
+    firstTime = 0;
+    else
+        imwrite(A,map,gifName,'gif','WriteMode','append','DelayTime',0.001);
+    end 
+ end
 &lt;/code&gt;&lt;/pre&gt;
 </content:encoded>
 		</item>
