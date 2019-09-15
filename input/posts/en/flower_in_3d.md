@@ -1,6 +1,6 @@
 title: Flower in 3D
 lead: Convert color to third dimension
-Published: 08/09/2019
+Published: 2019-09-08
 Tags: [matlab, colors, 3D, mesh]
 datazooFiles: imgs/kytka256.jpg
 prerequisites: Matlab
