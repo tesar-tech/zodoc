@@ -5,15 +5,71 @@
 		<link>http://zodoc.tech/</link>
 		<description>Image processing and deep learning samples</description>
 		<copyright>2019</copyright>
-		<pubDate>Sat, 14 Sep 2019 07:14:54 GMT</pubDate>
-		<lastBuildDate>Sat, 14 Sep 2019 07:14:54 GMT</lastBuildDate>
+		<pubDate>Sun, 15 Sep 2019 13:44:21 GMT</pubDate>
+		<lastBuildDate>Sun, 15 Sep 2019 13:44:21 GMT</lastBuildDate>
+		<item>
+			<title>Souhvězdí velkého vozu za použítí scatteru v MATLABu</title>
+			<link>http://zodoc.tech/posts/cs/ursa_major_constellation_with_matlab_scatter</link>
+			<description>&lt;p&gt;Proměnná &lt;code&gt;m&lt;/code&gt; znamená &lt;a href="https://cs.wikipedia.org/wiki/Hv%C4%9Bzdn%C3%A1_velikost"&gt;hvězdnou velikost&lt;/a&gt;.&lt;/p&gt;</description>
+			<enclosure url="http://zodoc.tech/posts/imgs_intro/ursa_major_constellation_with_matlab_scatter.png" length="0" type="image" />
+			<guid>http://zodoc.tech/posts/cs/ursa_major_constellation_with_matlab_scatter</guid>
+			<pubDate>Sun, 15 Sep 2019 00:00:00 GMT</pubDate>
+			<content:encoded>&lt;p&gt;Proměnná &lt;code&gt;m&lt;/code&gt; znamená &lt;a href="https://cs.wikipedia.org/wiki/Hv%C4%9Bzdn%C3%A1_velikost"&gt;hvězdnou velikost&lt;/a&gt;.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-matlab"&gt;nazvy_hvezd = {'Merak', 'Dubhe','Phecda','Megrez','Alioth','Mizar','Alkaid'};
+m = [2.37, 1.79, 2.44, 3.312, 1.77, 3.88 ,1.86];
+I0 = 500;
+svetelny_tok =power(10, -m/2.5 + log10(I0));
+
+x = [337,316,249,205,146,83,29]; %pozice hvezd z obrazku
+y = [147,205,103,151,131,125,65];
+
+scatter(x,y,svetelny_tok,'w*')
+
+axis([0,384,0,285]);
+set(gca,'Color','k','XTick',[],'YTick',[])
+text(x+5,y-4,nazvy_hvezd,'Color',[0 1 0.8],'FontSize',8)
+hold on;
+poradi = [4,3,1,2,4,5,6,7];
+plot(x(poradi),y(poradi),'LineWidth',1)
+pbaspect([348 285 1])%udrzi pomer stran
+&lt;/code&gt;&lt;/pre&gt;
+</content:encoded>
+		</item>
+		<item>
+			<title>Part of Ursa Major constellation created with MATLAB scatter</title>
+			<link>http://zodoc.tech/posts/en/ursa_major_constellation_with_matlab_scatter</link>
+			<description>&lt;p&gt;Variable &lt;code&gt;m&lt;/code&gt; means &lt;a href="https://en.wikipedia.org/wiki/Apparent_magnitude"&gt;apparent magnitude&lt;/a&gt;.&lt;/p&gt;</description>
+			<enclosure url="http://zodoc.tech/posts/imgs_intro/ursa_major_constellation_with_matlab_scatter.png" length="0" type="image" />
+			<guid>http://zodoc.tech/posts/en/ursa_major_constellation_with_matlab_scatter</guid>
+			<pubDate>Sun, 15 Sep 2019 00:00:00 GMT</pubDate>
+			<content:encoded>&lt;p&gt;Variable &lt;code&gt;m&lt;/code&gt; means &lt;a href="https://en.wikipedia.org/wiki/Apparent_magnitude"&gt;apparent magnitude&lt;/a&gt;.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-matlab"&gt;stars_names = {'Merak', 'Dubhe','Phecda','Megrez','Alioth','Mizar','Alkaid'};
+m = [2.37, 1.79, 2.44, 3.312, 1.77, 3.88 ,1.86];
+F0 = 500;
+flux_density =power(10, -m/2.5 + log10(F0));
+
+x = [337,316,249,205,146,83,29]; %coordinates of stars from an obrazku
+y = [147,205,103,151,131,125,65];
+
+scatter(x,y,flux_density,'w*')
+
+axis([0,384,0,285]);
+set(gca,'Color','k','XTick',[],'YTick',[])
+text(x+5,y-4,stars_names,'Color',[0 1 0.8],'FontSize',8)
+hold on;
+order_for_outline = [4,3,1,2,4,5,6,7];
+plot(x(order_for_outline),y(order_for_outline),'LineWidth',1)
+pbaspect([348 285 1])%keeps aspect ratio
+&lt;/code&gt;&lt;/pre&gt;
+</content:encoded>
+		</item>
 		<item>
 			<title>Flower in 3D</title>
 			<link>http://zodoc.tech/posts/en/flower_in_3d</link>
 			<description>&lt;p&gt;Usage of &lt;code&gt;mesh&lt;/code&gt; function in matlab to display image of flower in 3D. Brighter locations are displayed as higher peaks. Color of mesh depends on used colormap (parula for this image).&lt;/p&gt;</description>
 			<enclosure url="http://zodoc.tech/posts/imgs_intro/flower_in_3d.gif" length="0" type="image" />
 			<guid>http://zodoc.tech/posts/en/flower_in_3d</guid>
-			<pubDate>Fri, 09 Aug 2019 00:00:00 GMT</pubDate>
+			<pubDate>Sun, 08 Sep 2019 00:00:00 GMT</pubDate>
 			<content:encoded>&lt;p&gt;Usage of &lt;code&gt;mesh&lt;/code&gt; function in matlab to display image of flower in 3D. Brighter locations are displayed as higher peaks. Color of mesh depends on used colormap (parula for this image).&lt;/p&gt;
 &lt;pre&gt;&lt;code class="language-matlab"&gt;A = imread('kytka256.jpg');
 Ag = rgb2gray(A);%convert to gray
@@ -4659,44 +4715,6 @@ montage({Aa{6},Aa{7}},'bordersize',[1 1],'backgroundcolor','green')
 </content:encoded>
 		</item>
 		<item>
-			<title>Filtering binary objects with kmeans</title>
-			<link>http://zodoc.tech/posts/en/filtering_binary_objects_with_kmeans</link>
-			<description>&lt;p&gt;The task is to process the image to binary representation containing only the wanted shapes like rectangle, square, triangle, circle or a star. K-means algorithm is used to determine the range for filtering the objects by their size.&lt;/p&gt;</description>
-			<enclosure url="http://zodoc.tech/posts/imgs_intro/filtering_binary_objects_with_kmeans.png" length="0" type="image" />
-			<guid>http://zodoc.tech/posts/en/filtering_binary_objects_with_kmeans</guid>
-			<pubDate>Fri, 16 Nov 2018 00:00:00 GMT</pubDate>
-			<content:encoded>&lt;p&gt;The task is to process the image to binary representation containing only the wanted shapes like rectangle, square, triangle, circle or a star. K-means algorithm is used to determine the range for filtering the objects by their size.&lt;/p&gt;
-&lt;pre&gt;&lt;code class="language-matlab"&gt;A = imread('tvary.png');
-Aa = {};
-Aa{1} =A; %colorful image
-Ag =imadjust(rgb2gray(A));% adujust contrast and convert to grayscale
-Aa{2} = Ag;
-Aa{3} = imbinarize(Ag,'adaptive','ForegroundPolarity','dark','Sensitivity',0.55); %to black&amp;amp;white image
-Aa{4} = imfill(~Aa{end},'holes'); %fill holes
-Aa{5} = imclearborder(Aa{end}); % clear object on borders 
-%% filtration using k-means
-reg_props = regionprops(Aa{5},'area');%get area of every object
-areas =  [reg_props.Area]';% get areas to vector 
-%hist(areas,30) % display histogram of areas
-[indx, ~] = kmeans(areas,3);% separate objects to 3 clusters based on their sizes.
-%one cluster includes biger objects, second smaller objects and &amp;quot;noise&amp;quot; object (that we want to exclude)
-% are in own cluster.
-% (it does not work well for only 2 clusters)
-
-%We don't know in advance which cluster containst the smallest objects
-%take the biggest object from every cluster. Min from these 3 objects is
-%taken as a limit for filtering.
-min_max = min([max(areas(indx==1)),max(areas(indx==2)),max(areas(indx==3)) ]);
-Aa{6} = bwareafilt(Aa{5},[min_max+1 Inf]);
-%%
-montage(Aa,'bordersize',[1 1],'backgroundcolor','green')
-&lt;/code&gt;&lt;/pre&gt;
-&lt;blockquote class="blockquote"&gt;
-&lt;p&gt;Here is the &lt;a href="select_round_objects"&gt;post&lt;/a&gt; about subsequent processiong of result image.&lt;/p&gt;
-&lt;/blockquote&gt;
-</content:encoded>
-		</item>
-		<item>
 			<title>Filtrování binárních objektů za použití k-means</title>
 			<link>http://zodoc.tech/posts/cs/filtering_binary_objects_with_kmeans</link>
 			<description>&lt;p&gt;Úkolem je zpracovat obrázek do binární reprezentace tak, aby obsahoval pouze žádoucí tvary jako je obdélník, čtverec, trojúhelník kruh nebo hvězda. K-means algoritmus slouží k určení meze pro filtrování objektů dle jejich velikostí.&lt;/p&gt;</description>
@@ -4728,28 +4746,6 @@ min_max = min([max(areas(indx==1)),max(areas(indx==2)),max(areas(indx==3)) ]);
 Aa{6} = bwareafilt(Aa{5},[min_max+1 Inf]);
 %%
 montage(Aa,'bordersize',[1 1],'backgroundcolor','green')
-&lt;/code&gt;&lt;/pre&gt;
-</content:encoded>
-		</item>
-		<item>
-			<title>Animation of binary image with variable threshold</title>
-			<link>http://zodoc.tech/posts/cs/animation_of_binary_image_with_variable_threshold</link>
-			<enclosure url="http://zodoc.tech/posts/imgs_intro/animation_of_binary_image_with_variable_threshold.gif" length="0" type="image" />
-			<guid>http://zodoc.tech/posts/cs/animation_of_binary_image_with_variable_threshold</guid>
-			<pubDate>Thu, 15 Nov 2018 00:00:00 GMT</pubDate>
-			<content:encoded>&lt;pre&gt;&lt;code class="language-matlab"&gt;Ag = rgb2gray(imread('kytka256.jpg'));
-firstTime = 1;gifName = 'bw_anim.gif';
-for ii = 1:5:256
-   curr_img = (Ag&amp;lt;ii)*255;% or use imbinarize instead
-   [A,map] = gray2ind(curr_img,2); % change to indexed image
-   
-    if firstTime ==1%save first frame in different manner
-        imwrite(A,map,gifName,'gif','LoopCount',Inf,'DelayTime',0.001);
-    firstTime = 0;
-    else
-        imwrite(A,map,gifName,'gif','WriteMode','append','DelayTime',0.001);
-    end 
- end
 &lt;/code&gt;&lt;/pre&gt;
 </content:encoded>
 		</item>
