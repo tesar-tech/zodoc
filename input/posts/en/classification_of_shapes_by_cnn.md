@@ -16,14 +16,15 @@ A = imread('shapes16.png');%read image with 16 shapes
 
 %divide image into cells
 A_in_cells  = mat2cell(A,[227 227 227 227],[227 227 227 227],[1 1 1]);
+
 ind = 1;
 for ii = 1:4 
     for yy = 1:4
         %compose cells to image
         one_shape = cat(3,A_in_cells{ii,yy,1},A_in_cells{ii,yy,2},A_in_cells{ii,yy,3});
         [label,score] = classify(netTransfer,one_shape);%classification
-        Classified_images{ind} = insertText(ima{ind},[1 1],... %add label
-            cellstr(string(cla(ind)) + " "+ num2str(max(score)*100)+" %"),'FontSize',26);
+        Classified_images{ind} = insertText(one_shape,[1 1],... %add label
+            cellstr(string(label) + " "+ num2str(max(score)*100)+" %"),'FontSize',26);
         ind = ind+1;
     end
 end
