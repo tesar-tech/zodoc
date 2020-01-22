@@ -3,7 +3,7 @@ lead: Use transfer learned Alexnet to classify shapes
 Published: 2019-02-04
 Tags: [matlab, classification, shapes,alexnet, transfer learning]
 prerequisites: [Matlab]
-datazooFiles: shapes_transfer_learning_test.png
+datazooFiles: imgs/shapes16.png
 Authors: [tesar-tech]
 ---
 
