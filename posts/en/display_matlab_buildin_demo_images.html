@@ -147,6 +147,12 @@ Published on Monday, November 23, 2020<br>    </div> -->
 
 <div class="similar-posts" >
                      Similar posts: 
+                    <a class="btn btn-outline-info btn-xs" role="button" href="/posts/en/classification_results_in_barplot">
+                        Classification results in barplot
+                    </a>
+                    <a class="btn btn-outline-info btn-xs" role="button" href="/posts/en/transform_imagedatastore_and_display_most_probable_classes">
+                        Classification results in barplot
+                    </a>
                     <a class="btn btn-outline-info btn-xs" role="button" href="/posts/en/ursa_major_constellation_with_matlab_scatter">
                         Part of Ursa Major constellation created with MATLAB scatter
                     </a>
@@ -155,12 +161,6 @@ Published on Monday, November 23, 2020<br>    </div> -->
                     </a>
                     <a class="btn btn-outline-info btn-xs" role="button" href="/posts/en/classification_of_shapes_by_cnn">
                         Classification of shapes by CNN
-                    </a>
-                    <a class="btn btn-outline-info btn-xs" role="button" href="/posts/en/classification_of_handwritten_digits">
-                        Classification of handwritten digits
-                    </a>
-                    <a class="btn btn-outline-info btn-xs" role="button" href="/posts/en/transfer_learning_with_alexnet">
-                        Transfer Learning With AlexNet
                     </a>
                     </div>
    
@@ -195,6 +195,7 @@ Published on Monday, November 23, 2020<br>    </div> -->
                                 <div id="content" class="col-md-12">
                                         
 
+<p>(There are total of 109 images in Matlab 2020b)</p>
 <pre><code class="language-matlab">imds = imageDatastore( fullfile(matlabroot, '\toolbox\images\imdata'));%get images from path
 imds.ReadFcn = &#64;readWithFilename;%custom read function (to insert filename)
 montage(imds)% display images
