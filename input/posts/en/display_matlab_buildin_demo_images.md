@@ -5,7 +5,7 @@ Tags: [matlab, montage, images,imageDatastore]
 prerequisites: [Matlab]
 Authors: tesar-tech
 ---
-
+(There are total of 109 images in Matlab 2020b)
   
 ``` matlab
 imds = imageDatastore( fullfile(matlabroot, '\toolbox\images\imdata'));%get images from path
