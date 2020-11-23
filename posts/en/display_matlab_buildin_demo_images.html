@@ -5,7 +5,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
 
-        <title>ZODOC - Histogram equalization</title>
+        <title>ZODOC - Display Matlab buildin demo images</title>
         <meta name="description" content="Image processing and deep learning samples" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">        
 
@@ -28,9 +28,9 @@
         <meta name="msapplication-tooltip" content="ZODOC" />
         <meta name="msapplication-starturl" content="/" />
 
-        <meta property="og:title" content="ZODOC - Histogram equalization" />
+        <meta property="og:title" content="ZODOC - Display Matlab buildin demo images" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="http://zodoc.tech/posts/en/histogram_equalization" />
+        <meta property="og:url" content="http://zodoc.tech/posts/en/display_matlab_buildin_demo_images" />
         <!-- TODO: More social graph meta tags -->
 
         <script src="/assets/js/jquery.min.js"></script>
@@ -136,49 +136,35 @@
    
 
    
-    <h1>Histogram equalization</h1>
-        <h2 class="subheading">Enhances the contrast of the image by (adaptive) histogram equalization</h2>
+    <h1>Display Matlab buildin demo images</h1>
+        <h2 class="subheading">Read and display all buildin Matlab images with its file names</h2>
 
     <!-- <div class="meta">        
-Published on Saturday, November 10, 2018<br>    </div> -->
+Published on Monday, November 23, 2020<br>    </div> -->
     <!-- <div>language:en </div> -->
-    <!--         <ul>
-            <li>othera cs </li>
-        </ul>
- -->
+    <!--  -->
 
-        <div class="other-langs" >
-           Other languages: 
-<!--[0]type of translation  -->
-         <a href="/posts/cs/histogram_equalization"><img class="cs-flag"/></a>
-         </div>
 
 <div class="similar-posts" >
                      Similar posts: 
-                    <a class="btn btn-outline-info btn-xs" role="button" href="/posts/en/local_contrast_increase_on_dental_x-ray">
-                        Local contrast increase on dental x-ray
-                    </a>
-                    <a class="btn btn-outline-info btn-xs" role="button" href="/posts/en/histogram_deequalization">
-                        Histogram &quot;deequalization&quot; - contrast decrease
-                    </a>
-                    <a class="btn btn-outline-info btn-xs" role="button" href="/posts/en/display_matlab_buildin_demo_images">
-                        Display Matlab buildin demo images
-                    </a>
                     <a class="btn btn-outline-info btn-xs" role="button" href="/posts/en/ursa_major_constellation_with_matlab_scatter">
                         Part of Ursa Major constellation created with MATLAB scatter
                     </a>
                     <a class="btn btn-outline-info btn-xs" role="button" href="/posts/en/flower_in_3d">
                         Flower in 3D
                     </a>
+                    <a class="btn btn-outline-info btn-xs" role="button" href="/posts/en/classification_of_shapes_by_cnn">
+                        Classification of shapes by CNN
+                    </a>
+                    <a class="btn btn-outline-info btn-xs" role="button" href="/posts/en/classification_of_handwritten_digits">
+                        Classification of handwritten digits
+                    </a>
+                    <a class="btn btn-outline-info btn-xs" role="button" href="/posts/en/transfer_learning_with_alexnet">
+                        Transfer Learning With AlexNet
+                    </a>
                     </div>
    
 
-    <div class="util">
-    <ul class="list-inline">
-        <li class="list-inline-item">Utilizing those files: </li>
-            <li class="list-inline-item"> <u> <a href="https://github.com/tesar-tech/zodoc/raw/master/datazoo/imgs/kytka256.jpg"> kytka256.jpg </a> </u> </li>
-        </ul>
-    </div>
 
     <div class="util">
     <ul class="list-inline">
@@ -190,12 +176,13 @@ Published on Saturday, November 10, 2018<br>    </div> -->
 
         <div class="tags">
                             <a role="button" href="/tags/matlab" class="btn btn-default btn-xs btn-technology">matlab</a>
-                <a role="button" href="/tags/histogram" class="btn btn-default btn-xs ">histogram</a>
-                <a role="button" href="/tags/contrast" class="btn btn-default btn-xs ">contrast</a>
+                <a role="button" href="/tags/montage" class="btn btn-default btn-xs ">montage</a>
+                <a role="button" href="/tags/images" class="btn btn-default btn-xs ">images</a>
+                <a role="button" href="/tags/imageDatastore" class="btn btn-default btn-xs ">imageDatastore</a>
         </div>     
               
           
-<img src="/posts/imgs_intro/histogram_equalization.jpg" alt="" >
+<img src="/posts/imgs_intro/display_matlab_buildin_demo_images.png" alt="" >
 </div>
                                         </div>
                                 </div>
@@ -208,22 +195,15 @@ Published on Saturday, November 10, 2018<br>    </div> -->
                                 <div id="content" class="col-md-12">
                                         
 
-<pre><code class="language-matlab">B=imread('pout.tif'); % pout.tif is Matlab built-in image 
+<pre><code class="language-matlab">imds = imageDatastore( fullfile(matlabroot, '\toolbox\images\imdata'));%get images from path
+imds.ReadFcn = &#64;readWithFilename;%custom read function (to insert filename)
+montage(imds)% display images
 
-subplot(3,2,1);imshow(B)
-subplot(3,2,2);imhist(B) %show image histogram
-
-% image equalization
-B_equalized = histeq(B);
-subplot(3,2,3);imshow(B_equalized)%equalize image histogram
-subplot(3,2,4);imhist(B_equalized)
-
-% adaptive image equalization
-B_adaptive_equalized = adapthisteq(B,'NumTiles',[2 2]);
-% parameter [m n] specifies number of tiles image is divided into for processing
-
-subplot(3,2,5), imshow(B_adaptive_equalized)
-subplot(3,2,6), imhist(B_adaptive_equalized) 
+function img = readWithFilename(path)
+img = imresize(mat2gray(imread(path)),[NaN 800]);% all images are roughtly same
+[~,name,ext] = fileparts(path);% get file name
+img = insertText(img,[1 1],[name,ext],'FontSize',80); % insert file name to image
+end
 </code></pre>
 
 
@@ -233,7 +213,7 @@ subplot(3,2,6), imhist(B_adaptive_equalized)
   
  
 </ul>
-      <div class="alert alert-info"> <a href="https://github.com/tesar-tech/zodoc/blob/master/input/posts/en/histogram_equalization.md"> <i class="fa fa-file"></i> </a> Something is wrong? Let us know right <a href="https://github.com/tesar-tech/zodoc/issues/new?title=Histogram equalization&amp;body=https://zodoc.tech/posts/en/histogram_equalization.html%0A[Delete this and describe the issue!]"> here <i class="fa fa-github"></i> </a></div>
+      <div class="alert alert-info"> <a href="https://github.com/tesar-tech/zodoc/blob/master/input/posts/en/display_matlab_buildin_demo_images.md"> <i class="fa fa-file"></i> </a> Something is wrong? Let us know right <a href="https://github.com/tesar-tech/zodoc/issues/new?title=Display Matlab buildin demo images&amp;body=https://zodoc.tech/posts/en/display_matlab_buildin_demo_images.html%0A[Delete this and describe the issue!]"> here <i class="fa fa-github"></i> </a></div>
  
 
 
