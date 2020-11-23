@@ -1,13 +1,15 @@
 title: Classification results in barplot
 lead: Transform (scale) image using transform function and classify image. Show results in bar plot.
 Published: 2020-11-23
-Tags: [matlab,imageDatastore, transform, barplot]
-prerequisites: [Matlab]
+Tags: [matlab,classification,imageDatastore, transform, barplot]
+prerequisites: [Matlab, Alexnet matlab add-on]
 Authors: tesar-tech
 ---
 Easy way hot to show classification results.
   
 ``` matlab
+net = alexnet;
+
 imds = imageDatastore('football.jpg');%buildin matlab image
 imdsT = transform(imds,@(img) imresize(img,[227 227]));%anonymous transform function
 
