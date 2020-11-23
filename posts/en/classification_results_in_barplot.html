@@ -150,17 +150,17 @@ Published on Monday, November 23, 2020<br>    </div> -->
                     <a class="btn btn-outline-info btn-xs" role="button" href="/posts/en/display_matlab_buildin_demo_images">
                         Display Matlab buildin demo images
                     </a>
-                    <a class="btn btn-outline-info btn-xs" role="button" href="/posts/en/ursa_major_constellation_with_matlab_scatter">
-                        Part of Ursa Major constellation created with MATLAB scatter
-                    </a>
-                    <a class="btn btn-outline-info btn-xs" role="button" href="/posts/en/flower_in_3d">
-                        Flower in 3D
-                    </a>
                     <a class="btn btn-outline-info btn-xs" role="button" href="/posts/en/classification_of_shapes_by_cnn">
                         Classification of shapes by CNN
                     </a>
                     <a class="btn btn-outline-info btn-xs" role="button" href="/posts/en/classification_of_handwritten_digits">
                         Classification of handwritten digits
+                    </a>
+                    <a class="btn btn-outline-info btn-xs" role="button" href="/posts/en/training_of_convolutional_neural_network_for_classification_of_handwritten_digits">
+                        Training of convolutional neural network for classification of handwritten digits
+                    </a>
+                    <a class="btn btn-outline-info btn-xs" role="button" href="/posts/en/classification_of_handwritten_digit">
+                        Classification of handwritten digit with CNN
                     </a>
                     </div>
    
@@ -170,12 +170,14 @@ Published on Monday, November 23, 2020<br>    </div> -->
     <ul class="list-inline">
         <li class="list-inline-item">Prerequisites: </li>
             <li class="list-inline-item"> <u> <a href="/prerequisites#matlab">Matlab  </a> </u> </li>
+            <li class="list-inline-item"> <u> <a href="/prerequisites#alexnet-matlab-add-on">Alexnet matlab add-on  </a> </u> </li>
         </ul>
     </div>
 
 
         <div class="tags">
                             <a role="button" href="/tags/matlab" class="btn btn-default btn-xs btn-technology">matlab</a>
+                <a role="button" href="/tags/classification" class="btn btn-default btn-xs ">classification</a>
                 <a role="button" href="/tags/imageDatastore" class="btn btn-default btn-xs ">imageDatastore</a>
                 <a role="button" href="/tags/transform" class="btn btn-default btn-xs ">transform</a>
                 <a role="button" href="/tags/barplot" class="btn btn-default btn-xs ">barplot</a>
@@ -196,7 +198,9 @@ Published on Monday, November 23, 2020<br>    </div> -->
                                         
 
 <p>Easy way hot to show classification results.</p>
-<pre><code class="language-matlab">imds = imageDatastore('football.jpg');%buildin matlab image
+<pre><code class="language-matlab">net = alexnet;
+
+imds = imageDatastore('football.jpg');%buildin matlab image
 imdsT = transform(imds,&#64;(img) imresize(img,[227 227]));%anonymous transform function
 
 [label,score] = classify(net,imdsT); %classification
