@@ -1,286 +1,50 @@
-﻿
 <!DOCTYPE html>
-<html lang="en">
-        <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
-
-        <title>ZODOC - kmeans</title>
-        <meta name="description" content="Image processing and deep learning samples" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">        
-
-        <link type="application/rss+xml" rel="alternate" title="ZODOC" href="/zodoc/feed.rss" />
-                <link type="application/atom+xml" rel="alternate" title="ZODOC" href="/zodoc/feed.atom" />
-        <link rel="shortcut icon" href="/zodoc/assets/img/favicon.ico" type="image/x-icon">
-        <link rel="icon" href="/zodoc/assets/img/favicon.ico" type="image/x-icon">
-
-        <link href="/zodoc/assets/css/bootstrap.min.css" rel="stylesheet" />
-        <link href="/zodoc/assets/css/highlight.css" rel="stylesheet">
-        <link href="/zodoc/assets/css/clean-blog.css" rel="stylesheet" />
-        <link href="/zodoc/assets/css/master.css" rel="stylesheet" />
-        <link href="/zodoc/assets/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-        <link href='//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-        <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
-        <link href="/zodoc/assets/css/override.css" rel="stylesheet" />
-
-
-        <meta name="application-name" content="ZODOC" />
-        <meta name="msapplication-tooltip" content="ZODOC" />
-        <meta name="msapplication-starturl" content="/zodoc/" />
-
-        <meta property="og:title" content="ZODOC - kmeans" />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="http://tesar-tech.github.io/zodoc/zodoc/tags/kmeans" />
-        <!-- TODO: More social graph meta tags -->
-
-        <script src="/zodoc/assets/js/jquery.min.js"></script>
-        <script src="/zodoc/assets/js/bootstrap.min.js"></script>     
-        <script src="/zodoc/assets/js/highlight.pack.js"></script>   
-        <script src="/zodoc/assets/js/clean-blog.js"></script>
-        <script src="/zodoc/assets/js/d3.v3.min.js"></script>
-        <script src="/zodoc/assets/js/trianglify.min.js"></script>
-        <script src="/zodoc/assets/js/Please-compressed.js"></script>
-        <script src="/zodoc/assets/js/background-check.min.js"></script>
-                
-        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-        <!--[if lt IE 9]>
-                <script src="/zodoc/assets/js/html5shiv.js"></script>
-                <script src="/zodoc/assets/js/respond.min.js"></script>
-        <![endif]-->
-        
-        
-
-
-        </head>
-        <body>
-                
-                <!-- Navigation -->
-                <nav id="navigation_bar" class="navbar navbar-default navbar-custom navbar-fixed-top" >
-                        <div class="container-fluid">
-                                <!-- Brand and toggle get grouped for better mobile display -->
-                                <div class="navbar-header page-scroll">
-                                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
-                                        <span class="sr-only">Toggle navigation</span>
-                                        <span class="icon-bar"></span>
-                                        <span class="icon-bar"></span>
-                                        <span class="icon-bar"></span>
-                                        </button>
-                                        <a class="navbar-brand" href="/zodoc/">
-                                        <img src=" /zodoc/assets/img/logo.png" width="20" height="20" style="float:left" class="d-inline-block align-top" alt="">
-                                        <text style="float:right" >ZODOC</text> 
-                                        </a>
-                                </div>
-                        
-                                <!-- Collect the nav links, forms, and other content for toggling -->
-                                <div class="collapse navbar-collapse" id="navbar-collapse">
-                                        <ul class="nav navbar-nav navbar-right">
-                                                        <li><a href="/zodoc/posts">Archive</a></li>
-        <li><a href="/zodoc/authors">Authors</a></li>
-        <li><a href="/zodoc/tags">Tags</a></li>
-        <li><a href="/zodoc/about">About</a></li>
-        <li><a href="/zodoc/prerequisites">Prerequsites</a></li>
-    <li >
-        <script>
-            $(document).ready(function(){//wait for enter in searchbox
-            $('#searchInput').keypress(function (e) {
-                 var key = e.which;
-                    if(key == 13)  // the enter key code
-                        {
-                        $('#searchbtn').click();
-                        return false;  
-                        }
-                    });
-             });
-            $(document).ready(function(){//redirect to duckduckgo search.
-                $('#searchbtn').on('click', function(e){
-               var searchText =   $('#searchInput').val();
-               var host = "tesar-tech.github.io/zodoc" ; 
-               window.location = "https://duckduckgo.com/?q="+searchText+"+site%3Ahttps%3A%2F%2F"+ host +"&ia=web";
-           });
-         });
-        </script>
-                <div style="padding:13px 0px;;width:200px;" class="input-group stylish-input-group">
-                    <input id="searchInput" type="text" class="form-control"  placeholder="Search" >
-                    <span class="input-group-addon">
-                        <button id="searchbtn" type="submit">
-                            <span class="glyphicon glyphicon-search"></span>
-                        </button>  
-                    </span>
-                </div>
-
-    </li>
-     <li>
-        <a href="https://github.com/tesar-tech/zodoc" > <i class="fa fa-github fa-lg"></i></a>
-    </li>
- 
-                                        </ul>
-                                </div>
-                                <!-- /.navbar-collapse -->
-                        </div>
-                        <!-- /.container -->
-                </nav>
-                
-                <!-- Page Header -->
-                        <!-- if(Model.String(BlogKeys.Image) != null)
-                        {
-                                backgroundImage = $"background-image: url(\"{Model.String(BlogKeys.Image)}\")";
-                        } -->
-                <header class="intro-header" id="intro-header">
-                        <div class="container">
-                                <div class="row">
-                                        <div class="col-md-12">
-<div class="site-heading-tags">
-    <div> <h1> kmeans </h1></div>
-    <hr>
-</div>                                            </div>
-                                </div>
-                        </div>
-                </header>
-                
-                <!-- Main Content -->
-                <div class="container">
-                        <div class="row">
-                                <div id="content" class="col-md-12">
-                                        <div class="container-sm-height">
-    <div class="row row-sm-height">
-        <div class="col-sm-8 right-border col-sm-height">
-            
-                <div class="post-preview">
-                    <a href="/zodoc/posts/en/filtering_binary_objects_with_kmeans">
-                        <h2 class="post-title">Filtering binary objects with kmeans</h2>
-                       
-                    </a>
-
-   
-        <div class="tags">
-                            <a role="button" href="/zodoc/tags/matlab" class="btn btn-default btn-xs btn-technology">matlab</a>
-                <a role="button" href="/zodoc/tags/binary-image" class="btn btn-default btn-xs ">binary image</a>
-                <a role="button" href="/zodoc/tags/shapes" class="btn btn-default btn-xs ">shapes</a>
-                <a role="button" href="/zodoc/tags/kmeans" class="btn btn-default btn-xs ">kmeans</a>
-        </div>     
-              
+<html lang="en"><head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base href="/zodoc/">
+    <link rel="stylesheet" href="app.min.css">
     
-                <table >
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Tomorrow:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/gml.css">
+        </head>
+
+<body class="bg-gray-950 font-tomorrow text-gray-200"><div class="mx-auto max-w-3xl px-4 sm:px-6 xl:max-w-5xl xl:px-0 "><div class="flex h-screen flex-col justify-between"><header class="flex items-center justify-between py-10"><div><a aria-label="BlazorStatic" href="/"><div class="flex items-center justify-between"><div class="mr-3"><img class="w-10" src="img/logo.png" alt="logo"></div>
+                <div class=" h-6 text-2xl font-semibold sm:block text-gray-100">ZODOC</div></div></a></div>
+    <div class="flex items-center space-x-4 leading-5 sm:space-x-6"><a href="" class="hidden hover:underline font-medium text-gray-100 sm:block">Home</a><a href="about" class="hidden hover:underline font-medium text-gray-100 sm:block">About</a><a href="tags" class="hidden hover:underline font-medium text-gray-100 sm:block bg-primary-950 px-2 py-1 rounded-xl" aria-current="page">Tags</a><a href="https://github.com/tesar-tech/zodoc/" class="hidden hover:underline font-medium text-gray-100 sm:block">Github</a><button id="toggle-button" aria-label="Toggle Menu" class="sm:hidden"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-8 w-8 text-gray-100"><path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg></button>
+        <div id="mobile-menu" class="fixed left-0 top-0 z-10 h-full w-full translate-x-full transform   duration-300 ease-in-out bg-gray-950 opacity-[0.98]"><div class="flex justify-end"><button id="close-mobile-menu-button" class="mr-8 mt-11 h-8 w-8" aria-label="Toggle Menu"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="text-gray-100"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg></button></div>
+            <nav class="fixed mt-8 h-full"><div class="px-12 py-4"><a href="" class="text-2xl font-bold tracking-widest text-gray-100">Home</a></div><div class="px-12 py-4"><a href="about" class="text-2xl font-bold tracking-widest text-gray-100">About</a></div><div class="px-12 py-4"><a href="tags" class="text-2xl font-bold tracking-widest text-gray-100 underline" aria-current="page">Tags</a></div><div class="px-12 py-4"><a href="https://github.com/tesar-tech/zodoc/" class="text-2xl font-bold tracking-widest text-gray-100">Github</a></div></nav></div></div></header>
+<script>
+//👎 but what can I do? It's a static html. I can't use C# here.
+ const toggleMobileMenu = () => document.querySelector('#mobile-menu').classList.toggle('translate-x-full');
+ 
+ document.querySelector('#toggle-button').addEventListener('click', toggleMobileMenu);
+ document.querySelector('#close-mobile-menu-button').addEventListener('click', toggleMobileMenu);
+</script>
+        <main class="mb-auto"><div class="divide-y divide-gray-700"><div class="space-y-2 pb-8 pt-6 md:space-y-5"><h1 class="font-sans md:leading-14 text-3xl font-extrabold leading-9 tracking-tight text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl">kmeans</h1>
+        <p class="text-lg leading-7 text-gray-400">
+            Blog posts tagged by
+            <span class="text-primary-300">kmeans</span></p></div>
+    <ul class="divide-y   divide-gray-700"><li class="py-10"><article class=" grid grid-cols-[20fr_80fr]  gap-5 items-center  "><a href="blog/filtering_binary_objects_with_kmeans"><img src="Content/Blog/media/imgs_intro/filtering_binary_objects_with_kmeans.png" class="float-left w-[128px] h-[128px] object-contain" /></a>
+                    <div class="space-y-5 "><div class="space-y-6"><div><h2 class="text-2xl font-bold leading-8 tracking-tight"><a class="text-gray-100" href="blog/filtering_binary_objects_with_kmeans">Filtering binary objects with kmeans</a></h2>
+                                <div class="flex flex-wrap"><a class="text-primary-500 hover:text-primary-400 mr-3 text-sm font-medium uppercase" href="tags/matlab">matlab</a><a class="text-primary-500 hover:text-primary-400 mr-3 text-sm font-medium uppercase" href="tags/binary&#x2B;image">binary image</a><a class="text-primary-500 hover:text-primary-400 mr-3 text-sm font-medium uppercase" href="tags/shapes">shapes</a><a class="text-primary-500 hover:text-primary-400 mr-3 text-sm font-medium uppercase" href="tags/kmeans">kmeans</a></div></div>
+                            <div class="prose max-w-none text-gray-400">Binarize image, fill holes, clear border and separate unwanted small objects with help of k-means algorithm</div></div></div></article></li></ul></div></main>
+
+        <footer><div class="mt-16 flex flex-col items-center"><div class="mb-3 flex space-x-4"><a class="text-sm text-gray-500 transition hover:text-gray-600" target="_blank" rel="noopener noreferrer" href="https://github.com/tesar-tech/zodoc/"><span class="sr-only">github</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="hover:text-primary-400 h-6 w-6 fill-current text-gray-200"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path></svg></a>
                    
-                    <tr>
-                    
-                    <td style="background:rgb(235, 235, 235)"> 
-                     <img src="/zodoc/posts/imgs_intro/filtering_binary_objects_with_kmeans.png" style="float:left;width:128px;height:128px;object-fit: contain;">
-                    </td>
-                    <td style="padding-left: 10px">
-                            <div style="margin:0 0 0 130;float:right;" >Binarize image, fill holes, clear border and separate unwanted small objects with help of k-means algorithm</div>
-                        </td>
-               </tr>
-                </table>    
-
-                    <!-- <p class="post-meta">Posted on Friday, November 16, 2018</p> -->
-                   
-                    <!-- <p>The task is to process the image to binary representation containing only the wanted shapes like rectangle, square, triangle, circle or a star. K-means algorithm is used to determine the range for filtering the objects by their size.</p>              -->
-                </div>       
-
-
-            <nav>
-                <ul class="pager">
-                    <li class="previous">                
-                    </li>
-                    <li class="next">
-                    </li>
-                </ul>
-            </nav>
-            <hr class="visible-xs-block" />
-        </div>
-		
-        <div class="col-sm-4 col-sm-height">
-                <a role="button" href="/zodoc/tags/matlab" class="btn btn-default btn-xs">matlab (25)</a>
-                <a role="button" href="/zodoc/tags/binary-image" class="btn btn-default btn-xs">binary image (6)</a>
-                <a role="button" href="/zodoc/tags/classification" class="btn btn-default btn-xs">classification (6)</a>
-                <a role="button" href="/zodoc/tags/shapes" class="btn btn-default btn-xs">shapes (5)</a>
-                <a role="button" href="/zodoc/tags/colors" class="btn btn-default btn-xs">colors (4)</a>
-                <a role="button" href="/zodoc/tags/alexnet" class="btn btn-default btn-xs">alexnet (4)</a>
-                <a role="button" href="/zodoc/tags/handwritten" class="btn btn-default btn-xs">handwritten (4)</a>
-                <a role="button" href="/zodoc/tags/digits" class="btn btn-default btn-xs">digits (4)</a>
-                <a role="button" href="/zodoc/tags/RGB" class="btn btn-default btn-xs">RGB (3)</a>
-                <a role="button" href="/zodoc/tags/histogram" class="btn btn-default btn-xs">histogram (3)</a>
-                <a role="button" href="/zodoc/tags/contrast" class="btn btn-default btn-xs">contrast (3)</a>
-                <a role="button" href="/zodoc/tags/transfer-learning" class="btn btn-default btn-xs">transfer learning (3)</a>
-                <a role="button" href="/zodoc/tags/MNIST" class="btn btn-default btn-xs">MNIST (3)</a>
-                <a role="button" href="/zodoc/tags/imageset" class="btn btn-default btn-xs">imageset (2)</a>
-                <a role="button" href="/zodoc/tags/random" class="btn btn-default btn-xs">random (2)</a>
-                <a role="button" href="/zodoc/tags/training" class="btn btn-default btn-xs">training (1)</a>
-                <a role="button" href="/zodoc/tags/ImageNet" class="btn btn-default btn-xs">ImageNet (1)</a>
-                <a role="button" href="/zodoc/tags/classes" class="btn btn-default btn-xs">classes (1)</a>
-                <a role="button" href="/zodoc/tags/segmentation" class="btn btn-default btn-xs">segmentation (1)</a>
-                <a role="button" href="/zodoc/tags/hsv" class="btn btn-default btn-xs">hsv (1)</a>
-                <a role="button" href="/zodoc/tags/kmeans" class="btn btn-primary btn-xs">kmeans (1)</a>
-                <a role="button" href="/zodoc/tags/animation" class="btn btn-default btn-xs">animation (1)</a>
-                <a role="button" href="/zodoc/tags/gif" class="btn btn-default btn-xs">gif (1)</a>
-                <a role="button" href="/zodoc/tags/dental" class="btn btn-default btn-xs">dental (1)</a>
-                <a role="button" href="/zodoc/tags/x-ray" class="btn btn-default btn-xs">x-ray (1)</a>
-                <a role="button" href="/zodoc/tags/indexed-image" class="btn btn-default btn-xs">indexed image (1)</a>
-                <a role="button" href="/zodoc/tags/negative" class="btn btn-default btn-xs">negative (1)</a>
-                <a role="button" href="/zodoc/tags/edges" class="btn btn-default btn-xs">edges (1)</a>
-                <a role="button" href="/zodoc/tags/sharpness" class="btn btn-default btn-xs">sharpness (1)</a>
-                <a role="button" href="/zodoc/tags/filters" class="btn btn-default btn-xs">filters (1)</a>
-                <a role="button" href="/zodoc/tags/gaussian" class="btn btn-default btn-xs">gaussian (1)</a>
-                <a role="button" href="/zodoc/tags/blur" class="btn btn-default btn-xs">blur (1)</a>
-                <a role="button" href="/zodoc/tags/super-resolution" class="btn btn-default btn-xs">super-resolution (1)</a>
-                <a role="button" href="/zodoc/tags/vdsr" class="btn btn-default btn-xs">vdsr (1)</a>
-                <a role="button" href="/zodoc/tags/3D" class="btn btn-default btn-xs">3D (1)</a>
-        </div>
-    </div>
-</div>
-                                </div>
-                        </div>
-                </div>
-                
-                <hr>
-                
-                <!-- Footer -->
-                <footer>
-                        <div class="container">
-        <div class="row">
-                <div class="col-md-12 text-center">
-                    <p class="copyright text-muted">
-                        Copyright © 2019
-                        <br />
-                            <a href="/zodoc/feed.rss"><i class="fa fa-rss"></i> RSS Feed</a>
-                        |
-                            <a href="/zodoc/feed.atom"><i class="fa fa-rss"></i> Atom Feed</a>
-                        <br />
-                        <strong><a href="https://wyam.io">Generated by Wyam</a></strong>
-                    </p>
-                </div>
-        </div>
-</div>
-
-                </footer> 
-
-                
-                <script>hljs.initHighlightingOnLoad();</script>
-
-             
-                        <script type="text/javascript">                
-                                // Header background                        
-                                var colors = Please.make_color({
-                                        colors_returned: 3,
-                                        saturation: .6
-                                });
-                                var t = new Trianglify({
-                                        x_gradient:colors,
-                                        y_gradient: ["#FFFFFF"]
-                                });
-                                var header = document.getElementById("navigation_bar");
-                                var pattern = t.generate(header.clientWidth, header.clientHeight);
-                                header.setAttribute('style', 'background-image: ' + pattern.dataUrl);                        
-                        </script>
-
-                <script>
-                        BackgroundCheck.init({
-                                targets: '.intro-header,.navbar',
-                                images: '.intro-header'
-                        });
-                </script>
+                    <a class="text-sm text-gray-500 transition hover:text-gray-600" target="_blank" rel="noopener noreferrer" href="https://twitter.com/tesar-tech"><span class="sr-only">twitter</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="hover:text-primary-400 h-6 w-6 fill-current text-gray-200"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"></path></svg></a></div>
+                <div class="mb-2 flex space-x-2 text-sm text-gray-400"><div class="flex gap-1">
+                    built with     
+                    <a target="_blank" rel="noopener noreferrer" href="https://github.com/tesar-tech/BlazorStatic"> Blazor Static</a></div> 
+                    <div>•</div>
+                    <div>© 2023</div></div></div></footer></div></div>
         </body>
-</html>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/matlab.min.js"></script>
+
+<script>hljs.highlightAll();</script></html>
