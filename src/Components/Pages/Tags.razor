@@ -5,13 +5,13 @@
 @using BlazorStatic.Services
 @using System.Net
 @using System.Text.Encodings.Web
-@inject BlogService<FrontMatterZodoc> BlazorStaticService
+@inject BlogService<FrontMatterZodoc> BlogService
 
 @if (TagName == null)
 {
     <div class="flex flex-wrap justify-between gap-1">
         @{
-            var tagsWithCount = BlazorStaticService.BlogPosts
+            var tagsWithCount = BlogService.BlogPosts
                 .SelectMany(x => x.FrontMatter.Tags)
                 .GroupBy(x => x)
                 .Select(group => new { Tag = group.Key, Count = group.Count() })
@@ -19,7 +19,7 @@
 
             foreach (var tag in tagsWithCount)
             {
-                <a class="text-primary-500 hover:text-primary-400 mr-3 text-sm font-medium uppercase" href="@BlazorStaticService.Options.TagsPageUrl/@WebUtility.HtmlEncode(tag.Tag)">@tag.Tag (@tag.Count)</a>
+                <a class="text-primary-500 hover:text-primary-400 mr-3 text-sm font-medium uppercase" href="@BlogService.Options.TagsPageUrl/@WebUtility.HtmlEncode(tag.Tag)">@tag.Tag (@tag.Count)</a>
             }
         }
     </div>
@@ -48,7 +48,7 @@
     {
         if (string.IsNullOrWhiteSpace(TagName)) return;
         
-        posts = BlazorStaticService.BlogPosts.Where(x => x.FrontMatter.Tags.Contains(WebUtility.UrlDecode(TagName))).ToList();
+        posts = BlogService.BlogPosts.Where(x => x.FrontMatter.Tags.Contains(WebUtility.UrlDecode(TagName))).ToList();
     }
 
 }

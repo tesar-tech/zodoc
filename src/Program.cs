@@ -9,7 +9,7 @@ using Zodoc.Components;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddBlazorStaticService(opt => {
-        opt.SuppressFileGeneration = true;
+        opt.SuppressFileGeneration = false;
         opt.IgnoredPathsOnContentCopy.AddRange(new[] { "app.css" });//pre-build version for tailwind
         opt.FrontMatterDeserializer = new DeserializerBuilder()
             .WithTypeConverter(new SingleOrArrayConverter<List<string>>())
@@ -19,8 +19,7 @@ builder.Services.AddBlazorStaticService(opt => {
     )
     .AddBlogService<FrontMatterZodoc>(opt => {
         opt.ContentPath = "Content/Blog/en";
-        opt.AddPosts = true;
-        opt.MediaFolder = "../media";
+        opt.MediaFolderRelativeToContentPath = "../media";
         opt.AfterBlogParsedAndAddedAction = () => {
             const string path = "Content/Blog/media/imgs_intro";
             var extensions = new[] { "*.jpg", "*.png", "*.gif" };
@@ -33,12 +32,12 @@ builder.Services.AddBlazorStaticService(opt => {
             {
                 if (imagesIntro.TryGetValue(blogPost.FileNameNoExtension, out var imagePath))
                 {
-                    blogPost.FrontMatter.ImgIntroUrl = Path.Combine(path, imagePath ?? "no_image.png");
+                    blogPost.FrontMatter.ImgIntroUrl = $"{path}/{imagePath ?? "no_image.png"}";
                 }
                 else
                 {
                     Console.WriteLine($"Intro image not found for post {blogPost.FileNameNoExtension} in {path}. Using default image.");
-                    blogPost.FrontMatter.ImgIntroUrl = Path.Combine(path, "no_image.png");
+                    blogPost.FrontMatter.ImgIntroUrl =  $"{path}/no_image.png";
                 }
             }
         };

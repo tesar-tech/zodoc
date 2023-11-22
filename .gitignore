@@ -1,6 +1,8 @@
-/output/
+/src/output/
 /.idea/
 bin/
 obj/
 /src/wwwroot/app.min.css
 
+
+/Zodoc.sln.DotSettings.user
