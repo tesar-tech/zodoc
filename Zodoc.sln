@@ -5,8 +5,6 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zodoc", "src\Zodoc.csproj", "{E10F1FC5-4101-45A5-AB3E-6BD0C347789D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorStatic", "..\BlazorStatic\src\BlazorStatic.csproj", "{A11694EA-78F4-4702-9D97-A5C2212C8EF3}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,9 +18,5 @@ Global
 		{E10F1FC5-4101-45A5-AB3E-6BD0C347789D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E10F1FC5-4101-45A5-AB3E-6BD0C347789D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E10F1FC5-4101-45A5-AB3E-6BD0C347789D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A11694EA-78F4-4702-9D97-A5C2212C8EF3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A11694EA-78F4-4702-9D97-A5C2212C8EF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A11694EA-78F4-4702-9D97-A5C2212C8EF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A11694EA-78F4-4702-9D97-A5C2212C8EF3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
