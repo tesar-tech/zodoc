@@ -1,0 +1,52 @@
+@using System.Globalization
+@using Markdig
+@using BlazorStatic
+@using BlazorStatic.Services
+@using System.Net
+@inject BlogService<FrontMatterZodoc> BlogService
+
+<ul class="divide-y   divide-gray-700">
+        @foreach (var post in posts )
+        {
+            <li class="py-10">
+                <article class=" grid grid-cols-[20fr_80fr]  gap-5 items-center  ">
+                     <a  href="@BlogService.Options.BlogPageUrl/@(post.FileNameNoExtension)">
+                     <img src="@post.FrontMatter.ImgIntroUrl" class="float-left w-[128px] h-[128px] object-contain">
+                     </a>
+                    <div class="space-y-5 xl:col-span-3">
+                        <div class="space-y-6">
+                            <div>
+                                <h2 class="text-2xl font-bold leading-8 tracking-tight">
+                                    <a class="text-gray-100" href="@BlogService.Options.BlogPageUrl/@(post.FileNameNoExtension)">@post.FrontMatter.Title</a>
+                                </h2>
+                                <div class="flex flex-wrap">
+                                    @foreach (var tag in post.FrontMatter.Tags)
+                                    {
+                                        <a class="text-primary-500 hover:text-primary-400 mr-3 text-sm font-medium uppercase" href="@BlogService.Options.TagsPageUrl/@WebUtility.UrlEncode(tag)">@tag</a>
+                                    }
+                                </div>
+                            </div>
+                            <div class="prose max-w-none text-gray-400">
+                                @((MarkupString)post.FrontMatter.Lead)
+                            </div>
+                        </div>
+                      
+                    </div>
+                    
+                </article>
+            </li>
+        }
+    </ul>
+
+
+@code {
+    List<Post<FrontMatterZodoc>> posts = new();
+
+
+    [Parameter] public List<Post<FrontMatterZodoc>>? Posts { get; set; }
+    protected override void OnInitialized()
+    {
+        posts = Posts ?? BlogService.BlogPosts.OrderByDescending(x=>x.FrontMatter.Published).ToList();
+        base.OnInitialized();
+    }
+}

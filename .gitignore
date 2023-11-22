@@ -1,4 +1,6 @@
-[Oo]utput/
-/*.wyam.packages.xml
-/*.wyam.hash
-/*.wyam.dll
+/output/
+/.idea/
+bin/
+obj/
+/src/wwwroot/app.min.css
+
