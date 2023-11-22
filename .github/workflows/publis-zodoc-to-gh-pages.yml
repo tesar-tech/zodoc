@@ -51,3 +51,10 @@ jobs:
       uses: JamesIves/github-pages-deploy-action@v4
       with:
         FOLDER: ${{ env.WEBAPP_PATH }}/output
+
+    - uses: jsmrcaga/action-netlify-deploy@v2.0.0
+      with:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_DEPLOY_TO_PROD: true
+          NETLIFY_SITE_ID: ee91412c-0957-4809-8d97-a7ccc636d881
+          build_directory: ${{ env.WEBAPP_PATH }}/output
