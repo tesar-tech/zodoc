@@ -42,10 +42,10 @@ jobs:
 
     - name: Build
       run: dotnet build --no-restore
-      
+
     - name: Run webapp and generate static files
       run: |
-        dotnet run --project ${{ env.WEBAPP_PATH }}/${{WEBAPP_CSPROJ}} --no-build 
+        dotnet run --project ${{ env.WEBAPP_PATH }}/${{env.WEBAPP_CSPROJ}} --no-build 
     
     - name: Deploy to GitHub Pages 
       uses: JamesIves/github-pages-deploy-action@v4
