@@ -52,12 +52,11 @@ jobs:
     - name: Deploy to netlify-deploy branch
       # if: github.ref == 'refs/heads/master'  
       run: |
-        git checkout -b ${{ env.NETLIFY_DEPLOY_BRANCH }}
+        git checkout --orphan ${{ env.NETLIFY_DEPLOY_BRANCH }}
         git rm -rf .
         cp -r ${{ env.WEBAPP_PATH }}/output/* .
         git add .
-        git commit -m "Deploying to ${{ env.NETLIFY_DEPLOY_BRANCH }} branch"
+        git commit -m "deploy from github actions"
         git push origin ${{ env.NETLIFY_DEPLOY_BRANCH }} --force
       env:
-         
           NETLIFY_DEPLOY_BRANCH: netlify-deploy
