@@ -52,9 +52,19 @@ jobs:
       with:
         FOLDER: ${{ env.WEBAPP_PATH }}/output
 
-    - uses: jsmrcaga/action-netlify-deploy@v2.0.0
-      with:
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          NETLIFY_DEPLOY_TO_PROD: true
-          NETLIFY_SITE_ID: ee91412c-0957-4809-8d97-a7ccc636d881
-          build_directory: ${{ env.WEBAPP_PATH }}/output
+
+
+    - name: Deploy to deploy01 branch
+      run: |
+        git config --global user.name 'Your Name'
+        git config --global user.email 'your-email@example.com'
+        git checkout -b deploy01
+        # Clear out existing contents
+        git rm -rf .
+        # Copy build output to root of the repository
+        cp -r ${{ env.WEBAPP_PATH }}/output/* .
+        git add .
+        git commit -m "Deploying to deploy01 branch"
+        git push origin deploy01 --force
+      env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
