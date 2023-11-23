@@ -45,6 +45,8 @@ jobs:
     - name: Deploy to netlify-deploy branch 
       # if: github.ref == 'refs/heads/master'  
       run: |
+        git config  user.email "deploy@zodoc.tech"
+        git config  user.name "Deploy Bot"
         git checkout --orphan ${{ env.NETLIFY_DEPLOY_BRANCH }}
         git rm -rf .
         cp -r ${{ env.WEBAPP_PATH }}/output/* .
