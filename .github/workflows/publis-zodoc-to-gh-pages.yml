@@ -56,4 +56,4 @@ jobs:
         git rm -rf .
         cp -r ${{ env.WEBAPP_PATH }}/output/* .
         git add . && git commit -m "deploy from gh actions"
-        git push 
+        git push origin
