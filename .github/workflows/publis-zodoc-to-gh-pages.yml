@@ -43,7 +43,7 @@ jobs:
         FOLDER: ${{ env.WEBAPP_PATH }}/output
 
     - name: Deploy to netlify-deploy branch 
-      # if: github.ref == 'refs/heads/master'  
+      if: github.ref == 'refs/heads/master'  
       run: |
         git config  user.email "deploy@zodoc.tech"
         git config  user.name "Deploy Bot"
