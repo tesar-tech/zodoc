@@ -27,10 +27,10 @@ jobs:
         cd ${{ env.WEBAPP_PATH }}
         tailwindcss --input ./wwwroot/app.css  --output ./wwwroot/app.min.css  --minify
 
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v3
-      with:
-        dotnet-version: 8.0.x
+#    - name: Setup .NET
+#      uses: actions/setup-dotnet@v3
+#      with:
+#        dotnet-version: 8.0.x
 
       # for master branch, keep the base href as /, but otherwise change it to repo name (for gh pages)
     - name: Change <base href="" /> in App.razor to match gh repo name
