@@ -1,0 +1,25 @@
+﻿@page "/about"
+@using BlazorStatic
+@inject BlazorStaticHelpers BlazorStaticHelpers
+
+<article class="prose prose-invert">
+    
+@((MarkupString)htmlContent)
+</article>
+
+@code {
+
+    string htmlContent = "";
+    protected override async Task OnInitializedAsync()
+    {
+        var file = Directory.GetFiles("Content","about.md").FirstOrDefault();
+        if(file is null) return;
+
+        (htmlContent, _) =  await BlazorStaticHelpers.
+            ParseMarkdownFile<AboutFrontMatter>(file,("media","Content/media"));        
+    }
+    class AboutFrontMatter
+    {
+        public string Title { get; set; } = "";
+    }
+}

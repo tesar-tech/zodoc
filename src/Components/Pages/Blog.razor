@@ -1,0 +1,139 @@
+@page "/"
+@page "/blog/{fileName}"
+@using Microsoft.Extensions.Options
+@using System.Globalization
+@using BlazorStatic
+@using BlazorStatic.Services
+@using System.Net
+@inject IOptions<AppSettings> AppSettings
+@inject BlogService<FrontMatterZodoc> BlogService
+@using Zodoc.Components.Blog
+
+
+@* No filename -> show latest posts *@
+@if (string.IsNullOrWhiteSpace(FileName))
+{
+    <div class="divide-y divide-gray-700">
+        <div class="space-y-2 pb-8 pt-6 md:space-y-5">
+            <h1 class="text-3xl  text-gray-100">Image processing and deep learning samples</h1>
+        </div>
+
+        <PostsList/>
+    </div>
+    return;
+}
+
+@* Show specific post by filename param *@
+@if (post == null)
+{
+    <div>Post not found 🤷 </div>
+    return;
+}
+<article>
+    <div class="xl:divide-y  xl:divide-gray-700">
+        <header class="pt-6 xl:pb-6">
+            <div class="space-y-1 text-center">
+                <dl class="space-y-10">
+                    <div>
+                        <dt class="sr-only">Published on</dt>
+                        <dd class="sr-only text-base font-medium leading-6 text-gray-400">
+                            <time datetime="@post.FrontMatter.Published.ToString("yyyy-MM-ddTHH:mm:ss.fffK", CultureInfo.InvariantCulture)">
+                                @post.FrontMatter.Published.ToString("MMMM d, yyyy", new CultureInfo("en-US"))
+                            </time>
+                        </dd>
+                    </div>
+                </dl>
+                <div class="prose prose-invert mx-auto">
+                    <h1 class="">@post.FrontMatter.Title</h1>
+                </div>
+            </div>
+        </header>
+        <div class="grid-rows-[auto_1fr] divide-y  pb-8 divide-gray-700 xl:grid xl:grid-cols-4 xl:gap-x-6 xl:divide-y-0">
+
+            <dl class="pb-10 pt-6 xl:border-b  xl:pt-11 xl:border-gray-700">
+                <dt class="sr-only">Authors</dt>
+                <dd>
+                    <ul class="flex flex-wrap justify-center gap-4 sm:space-x-12 xl:block xl:space-x-0 xl:space-y-8">
+                        @foreach (var author in post.FrontMatter.Authors)
+                        {
+                            <li class="flex items-center space-x-2">
+                                @* <img alt="avatar" loading="lazy" width="38" height="38" decoding="async" data-nimg="1" class="h-10 w-10 rounded-full" srcset="/_next/image?url=%2Fstatic%2Fimages%2Favatar.png&amp;w=48&amp;q=75 1x, /_next/image?url=%2Fstatic%2Fimages%2Favatar.png&amp;w=96&amp;q=75 2x" src="/_next/image?url=%2Fstatic%2Fimages%2Favatar.png&amp;w=96&amp;q=75" style="color: transparent;"/> *@
+                                <dl class="whitespace-nowrap text-sm font-medium leading-5">
+                                    @author
+                                </dl>
+                            </li>
+                        }
+                    </ul>
+                </dd>
+            </dl>
+            <div class="divide-y  divide-gray-700 xl:col-span-3 xl:row-span-2 xl:pb-0">
+                <div class="prose prose-invert max-w-none pb-8 pt-10">
+                    <img SRC="@post.FrontMatter.ImgIntroUrl" class="mx-auto mb-2"/>
+                    @((MarkupString)post.HtmlContent)
+                </div>
+                <div class="w-full flex flex-col py-2">
+                    <div>
+                        Similar posts
+                    </div>
+                    <div class="flex gap-4 text-sm w-full flex-wrap">
+                        @foreach (var similarPost in similarPosts)
+                        {
+                            <a href="@BlogService.Options.BlogPageUrl/@similarPost.FileNameNoExtension" class=" whitespace-nowrap text-primary-500 hover:text-primary-400">@similarPost.FrontMatter.Title</a>
+                        }
+                    </div>
+                </div>
+                <div class="pb-6 pt-6 text-sm text-gray-300">
+                    <a target="_blank" rel="noopener noreferrer" href="@(AppSettings.Value.BlogPostStorageAddress + "en/" + FileName + ".md")">View on GitHub</a>
+                </div>
+            </div>
+            <footer>
+                <div class=" text-sm font-medium leading-5 divide-gray-700 xl:col-start-1 xl:row-start-2 xl:divide-y">
+                    <div class="py-4 xl:py-8">
+                        <h2 class="text-xs uppercase tracking-wide text-gray-400">Tags</h2>
+                        <div class="flex flex-wrap">
+                            @foreach (var tag in post.FrontMatter.Tags)
+                            {
+                                <a class="text-primary-500 hover:text-primary-400 mr-3 text-sm font-medium uppercase" href="@BlogService.Options.TagsPageUrl/@WebUtility.UrlEncode(tag)">@tag</a>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="pt-4 xl:pt-8">
+                    <a class="text-primary-500 hover:text-primary-400" aria-label="Back to the blog" href="">← Back to the list</a>
+                </div>
+            </footer>
+        </div>
+    </div>
+</article>
+
+
+@code{
+    [Parameter] public string? FileName { get; set; }
+    Post<FrontMatterZodoc>? post;
+    List<Post<FrontMatterZodoc>> similarPosts = new();
+
+    protected override void OnInitialized()
+    {
+        if (string.IsNullOrWhiteSpace(FileName)) return;
+
+
+        post = BlogService.BlogPosts.FirstOrDefault(x => x.FileNameNoExtension == FileName);
+
+        if (post == null) return;
+
+        var currentPostTags = post.FrontMatter.Tags;
+
+        var sp = BlogService.BlogPosts
+            .Where(p => p.FileNameNoExtension != post.FileNameNoExtension)// Exclude the current post
+            .Select(p => new
+            {
+                Post = p,
+                SimilarityScore = post.FrontMatter.Tags.Intersect(currentPostTags).Count()
+            });
+        
+         similarPosts =    sp.OrderByDescending(x => x.SimilarityScore)
+            .Take(5)
+            .Select(x => x.Post)
+            .ToList();
+    }
+}
