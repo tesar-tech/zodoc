@@ -1,5 +1,5 @@
 
-name: Build and publish to gh pages
+name: Build and publish netlify (master) or github pages (other branches)
 
 on:
   push:
@@ -10,7 +10,7 @@ env:
   WEBAPP_CSPROJ: Zodoc.csproj
 
 jobs:
-  deploy-to-gh-pages:
+  deploy:
     permissions:
       contents: write 
     runs-on: ubuntu-latest
@@ -32,39 +32,32 @@ jobs:
       with:
         dotnet-version: 8.0.x
 
+      # for master branch, keep the base href as /, but otherwise change it to repo name (for gh pages)
     - name: Change <base href="" /> in App.razor to match gh repo name
+      if: github.ref != 'refs/heads/master' 
       run: |
         REPO_NAME=$(echo "${{ github.repository }}" | awk -F '/' '{print $NF}')
         sed -i 's/<base href="\/" \/>/<base href="\/'$REPO_NAME'\/" \/>/g' ${{ env.WEBAPP_PATH }}/Components/App.razor
 
-    - name: Restore dependencies
-      run: dotnet restore
-
-    - name: Build
-      run: dotnet build --no-restore
-
     - name: Run webapp and generate static files
       run: |
-        dotnet run --project ${{ env.WEBAPP_PATH }}/${{env.WEBAPP_CSPROJ}} --no-build 
+        dotnet run --project ${{ env.WEBAPP_PATH }}/${{env.WEBAPP_CSPROJ}} 
     
-    - name: Deploy to GitHub Pages 
+    - name: Deploy to GitHub Pages  
+      if: github.ref != 'refs/heads/master'  
       uses: JamesIves/github-pages-deploy-action@v4
       with:
         FOLDER: ${{ env.WEBAPP_PATH }}/output
 
-
-
-    - name: Deploy to deploy01 branch
+    - name: Deploy to netlify-deploy branch
+      # if: github.ref == 'refs/heads/master'  
       run: |
-        git config --global user.name 'Your Name'
-        git config --global user.email 'your-email@example.com'
-        git checkout -b deploy01
-        # Clear out existing contents
+        git checkout -b ${{ env.NETLIFY_DEPLOY_BRANCH }}
         git rm -rf .
-        # Copy build output to root of the repository
         cp -r ${{ env.WEBAPP_PATH }}/output/* .
         git add .
-        git commit -m "Deploying to deploy01 branch"
-        git push origin deploy01 --force
+        git commit -m "Deploying to ${{ env.NETLIFY_DEPLOY_BRANCH }} branch"
+        git push origin ${{ env.NETLIFY_DEPLOY_BRANCH }} --force
       env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+         
+          NETLIFY_DEPLOY_BRANCH: netlify-deploy
