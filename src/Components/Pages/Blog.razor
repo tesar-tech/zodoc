@@ -5,7 +5,6 @@
 @using BlazorStatic
 @using BlazorStatic.Services
 @using System.Net
-@inject IOptions<AppSettings> AppSettings
 @inject BlogService<FrontMatterZodoc> BlogService
 @using Zodoc.Components.Blog
 
@@ -83,7 +82,7 @@
                     </div>
                 </div>
                 <div class="pb-6 pt-6 text-sm text-gray-300">
-                    <a target="_blank" rel="noopener noreferrer" href="@(AppSettings.Value.BlogPostStorageAddress + "en/" + FileName + ".md")">View on GitHub</a>
+                    <a target="_blank" rel="noopener noreferrer" href="@(WebsiteKeys.BlogPostStorageAddress + "en/" + FileName + ".md")">View on GitHub</a>
                 </div>
             </div>
             <footer>
