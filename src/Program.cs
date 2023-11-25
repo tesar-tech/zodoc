@@ -50,11 +50,6 @@ builder.Services.AddBlazorStaticService(opt => {
 // Add services to the container.
 builder.Services.AddRazorComponents();
 
-builder.Services.AddOptions<AppSettings>()
-    .BindConfiguration(nameof(AppSettings))
-    .ValidateDataAnnotations()
-    .ValidateOnStart();
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -82,15 +77,11 @@ app.MapRazorComponents<App>();
 app.UseBlog<FrontMatterZodoc>();
 app.UseBlazorStaticGenerator(shutdownApp: !app.Environment.IsDevelopment());
 
-
-
 app.Run();
 
-public class AppSettings
+public static class WebsiteKeys
 {
-    [Required]
-    public required string BlogPostStorageAddress { get; init; }
-
-    [Required]
-    public required string GitHubRepo { get; init; }
+    public const string BlogPostStorageAddress = "https://github.com/tesar-tech/zodoc/tree/master/src/Content/Blog/";
+    public const string GitHubRepo = "https://github.com/tesar-tech/zodoc/";
 }
+

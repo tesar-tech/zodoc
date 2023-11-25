@@ -40,7 +40,7 @@ jobs:
       if: github.ref != 'refs/heads/master'  
       uses: JamesIves/github-pages-deploy-action@v4
       with:
-        FOLDER: ${{ env.WEBAPP_PATH }}/output
+        folder: ${{ env.WEBAPP_PATH }}/output
 
     - name: Deploy to netlify-deploy branch 
       if: github.ref == 'refs/heads/master'  

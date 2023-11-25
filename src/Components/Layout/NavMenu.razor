@@ -58,19 +58,14 @@
 
 @code
 {
-    [Inject] IOptions<AppSettings> AppSettings { get; set; } = null!;
-    List<(string name, string link)> menuItems = null!;
-    protected override void OnInitialized() { 
-        base.OnInitialized(); 
-        menuItems =new()
+    List<(string name, string link)> menuItems =new()
         {
             ("Home", ""),
             ("About", "about"),
             ("Tags", "tags"),
-            ("Github",AppSettings.Value.GitHubRepo ),
+            ("Github",WebsiteKeys.GitHubRepo ),
         };
         
-    }
     
     
     
