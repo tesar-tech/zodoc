@@ -18,12 +18,9 @@
     <Folder Include="Content\Blog\" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\BlazorStatic\src\BlazorStatic.csproj" />
-  </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="BlazorStatic" Version="1.0.0-beta.2" />
+    <PackageReference Include="BlazorStatic" Version="1.0.0-beta.4" />
   </ItemGroup>
 
 </Project>

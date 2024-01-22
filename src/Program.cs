@@ -1,12 +1,13 @@
 using BlazorStatic;
 using Microsoft.Extensions.FileProviders;
-using System.ComponentModel.DataAnnotations;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
 using Zodoc;
 using Zodoc.Components;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.WebHost.UseStaticWebAssets();
 
 builder.Services.AddBlazorStaticService(opt => {
         opt.SuppressFileGeneration = false;
@@ -22,6 +23,7 @@ builder.Services.AddBlazorStaticService(opt => {
         opt.MediaFolderRelativeToContentPath = "../media";
         opt.AfterBlogParsedAndAddedAction = () => {
             const string path = "Content/Blog/media/imgs_intro";
+            //Taking care of intro images
             var extensions = new[] { "*.jpg", "*.png", "*.gif" };
             var imageFiles = extensions.SelectMany(ext => Directory.GetFiles(path, ext));
             var imagesIntro = imageFiles
