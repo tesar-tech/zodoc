@@ -1,0 +1,49 @@
+{
+  "Files": [
+    {
+      "Id": "/home/runner/work/zodoc/zodoc/src/wwwroot/app.css",
+      "PackagePath": "staticwebassets/app.css"
+    },
+    {
+      "Id": "/home/runner/work/zodoc/zodoc/src/wwwroot/app.min.css",
+      "PackagePath": "staticwebassets/app.min.css"
+    },
+    {
+      "Id": "/home/runner/work/zodoc/zodoc/src/wwwroot/favicon.ico",
+      "PackagePath": "staticwebassets/favicon.ico"
+    },
+    {
+      "Id": "/home/runner/work/zodoc/zodoc/src/wwwroot/img/cs-flag.png",
+      "PackagePath": "staticwebassets/img/cs-flag.png"
+    },
+    {
+      "Id": "/home/runner/work/zodoc/zodoc/src/wwwroot/img/en-flag.png",
+      "PackagePath": "staticwebassets/img/en-flag.png"
+    },
+    {
+      "Id": "/home/runner/work/zodoc/zodoc/src/wwwroot/img/favicon.ico",
+      "PackagePath": "staticwebassets/img/favicon.ico"
+    },
+    {
+      "Id": "/home/runner/work/zodoc/zodoc/src/wwwroot/img/logo.png",
+      "PackagePath": "staticwebassets/img/logo.png"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.Zodoc.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.build.Zodoc.props",
+      "PackagePath": "build\\Zodoc.props"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.buildMultiTargeting.Zodoc.props",
+      "PackagePath": "buildMultiTargeting\\Zodoc.props"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.buildTransitive.Zodoc.props",
+      "PackagePath": "buildTransitive\\Zodoc.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "dgSpecHash": "Xm986PrDw42KPeI6g9oWt2lLchHth0cCjRxKu+/s7B4aWBh3P0q1PmaXLPKXZtWOGoEB59LoogOPf13E4Skstg==",
+  "success": true,
+  "projectFilePath": "/home/runner/work/zodoc/zodoc/src/Zodoc.csproj",
+  "expectedPackageFiles": [
+    "/home/runner/.nuget/packages/blazorstatic/1.0.0-beta.4/blazorstatic.1.0.0-beta.4.nupkg.sha512",
+    "/home/runner/.nuget/packages/markdig/0.33.0/markdig.0.33.0.nupkg.sha512",
+    "/home/runner/.nuget/packages/microsoft.extensions.dependencyinjection/8.0.0/microsoft.extensions.dependencyinjection.8.0.0.nupkg.sha512",
+    "/home/runner/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/8.0.0/microsoft.extensions.dependencyinjection.abstractions.8.0.0.nupkg.sha512",
+    "/home/runner/.nuget/packages/yamldotnet/13.7.1/yamldotnet.13.7.1.nupkg.sha512"
+  ],
+  "logs": []
+}

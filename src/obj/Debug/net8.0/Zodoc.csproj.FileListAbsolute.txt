@@ -1,0 +1,180 @@
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/appsettings.json
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Zodoc.staticwebassets.runtime.json
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/about.md
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/cs/animation_of_binary_image_with_variable_threshold.md
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/cs/classification_of_handwritten_digit.md
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/cs/classify_by_alexnet.md
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/cs/compare_sharpness.md
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/cs/creating_an_image_set_with_various_shapes.md
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/cs/filtering_binary_objects_with_kmeans.md
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/cs/handwritten_to_digital.md
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/cs/histogram_deequalization.md
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/cs/histogram_equalization.md
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/cs/imagenet_classes.md
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/cs/image_segmentation_in_hsv_color_space.md
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/cs/increase_image_resolution_with_cnn.md
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/cs/local_contrast_increase_on_dental_x-ray.md
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/cs/negative_image.md
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/cs/randomly_two-color_image.md
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/cs/reduce_the_number_of_colors_by_converting_to_indexed_image.md
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/cs/selective_blur.md
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/cs/select_round_objects.md
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/cs/split_and_colorize_channels_of_color_image.md
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/cs/split_and_display_channels_of_color_image.md
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/cs/training_of_convolutional_neural_network_for_classification_of_handwritten_digits.md
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/cs/transfer_learning_with_alexnet.md
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/cs/ursa_major_constellation_with_matlab_scatter.md
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/en - Copy/animation_of_binary_image_with_variable_threshold.md
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/en - Copy/classification_of_handwritten_digit.md
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/en - Copy/classification_of_handwritten_digits.md
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/en - Copy/classification_of_shapes_by_cnn.md
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/en - Copy/classification_results_in_barplot.md
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/en - Copy/classify_by_alexnet.md
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/en - Copy/compare_sharpness.md
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/en - Copy/creating_an_image_set_with_various_shapes.md
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/en - Copy/display_matlab_buildin_demo_images.md
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/en - Copy/filtering_binary_objects_with_kmeans.md
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/en - Copy/flower_in_3d.md
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/en - Copy/handwritten_to_digital.md
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/en - Copy/histogram_deequalization.md
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/en - Copy/histogram_equalization.md
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/en - Copy/imagenet_classes.md
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/en - Copy/image_segmentation_in_hsv_color_space.md
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/en - Copy/increase_image_resolution_with_cnn.md
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/en - Copy/local_contrast_increase_on_dental_x-ray.md
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/en - Copy/negative_image.md
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/en - Copy/randomly_two-color_image.md
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/en - Copy/reduce_the_number_of_colors_by_converting_to_indexed_image.md
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/en - Copy/selective_blur.md
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/en - Copy/select_round_objects.md
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/en - Copy/split_and_colorize_channels_of_color_image.md
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/en - Copy/split_and_display_channels_of_color_image.md
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/en - Copy/training_of_convolutional_neural_network_for_classification_of_handwritten_digits.md
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/en - Copy/transfer_learning_with_alexnet.md
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/en - Copy/ursa_major_constellation_with_matlab_scatter.md
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/en/animation_of_binary_image_with_variable_threshold.md
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/en/classification_of_handwritten_digit.md
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/en/classification_of_handwritten_digits.md
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/en/classification_of_shapes_by_cnn.md
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/en/classification_results_in_barplot.md
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/en/classify_by_alexnet.md
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/en/compare_sharpness.md
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/en/creating_an_image_set_with_various_shapes.md
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/en/display_matlab_buildin_demo_images.md
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/en/filtering_binary_objects_with_kmeans.md
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/en/flower_in_3d.md
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/en/handwritten_to_digital.md
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/en/histogram_deequalization.md
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/en/histogram_equalization.md
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/en/imagenet_classes.md
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/en/image_segmentation_in_hsv_color_space.md
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/en/increase_image_resolution_with_cnn.md
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/en/local_contrast_increase_on_dental_x-ray.md
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/en/negative_image.md
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/en/randomly_two-color_image.md
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/en/reduce_the_number_of_colors_by_converting_to_indexed_image.md
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/en/selective_blur.md
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/en/select_round_objects.md
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/en/split_and_colorize_channels_of_color_image.md
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/en/split_and_display_channels_of_color_image.md
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/en/training_of_convolutional_neural_network_for_classification_of_handwritten_digits.md
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/en/transfer_learning_with_alexnet.md
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/en/ursa_major_constellation_with_matlab_scatter.md
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/media/2017-12-04-17-47-57.png
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/media/2017-12-04-17-53-38.png
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/media/2017-12-04-17-59-08.png
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/media/2017-12-18-14-54-00.png
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/media/2017-12-18-14-57-53.png
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/media/2018-10-02-20-49-00.png
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/media/2018-11-04-10-20-30.jpg
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/media/2018-11-12-10-51-46.png
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/media/2018-11-13-10-20-40.gif
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/media/2018-11-14-23-41-30.png
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/media/binarized.png
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/media/brightness.png
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/media/bw_anim.gif
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/media/colorizedChannels.png
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/media/croped.png
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/media/drawcir.png
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/media/hist.png
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/media/hist2_pout.png
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/media/hist4_zubr.png
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/media/hist5_zubr_adeq.png
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/media/imgs_intro/animation_of_binary_image_with_variable_threshold.gif
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/media/imgs_intro/classification_of_handwritten_digit.jpg
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/media/imgs_intro/classification_of_handwritten_digits.gif
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/media/imgs_intro/classification_of_shapes_by_cnn.jpg
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/media/imgs_intro/classification_results_in_barplot.png
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/media/imgs_intro/classify_by_alexnet.jpg
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/media/imgs_intro/compare_sharpness.jpg
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/media/imgs_intro/creating_an_image_set_with_various_shapes.jpg
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/media/imgs_intro/display_matlab_buildin_demo_images.png
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/media/imgs_intro/filtering_binary_objects_with_kmeans.png
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/media/imgs_intro/flower_in_3d.gif
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/media/imgs_intro/handwritten_to_digital.png
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/media/imgs_intro/histogram_deequalization.png
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/media/imgs_intro/histogram_equalization.jpg
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/media/imgs_intro/imagenet_classes.jpg
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/media/imgs_intro/image_segmentation_in_hsv_color_space.png
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/media/imgs_intro/increase_image_resolution_with_cnn.gif
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/media/imgs_intro/local_contrast_increase_on_dental_x-ray.gif
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/media/imgs_intro/negative_image.png
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/media/imgs_intro/no_image.png
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/media/imgs_intro/randomly_two-color_image.png
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/media/imgs_intro/reduce_the_number_of_colors_by_converting_to_indexed_image.jpg
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/media/imgs_intro/selective_blur.png
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/media/imgs_intro/select_round_objects.png
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/media/imgs_intro/split_and_colorize_channels_of_color_image.jpg
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/media/imgs_intro/split_and_display_channels_of_color_image.jpg
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/media/imgs_intro/training_of_convolutional_neural_network_for_classification_of_handwritten_digits.png
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/media/imgs_intro/transfer_learning_with_alexnet.png
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/media/imgs_intro/ursa_major_constellation_with_matlab_scatter.png
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/media/img_repetitive_canvas.png
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/media/kytka.png
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/media/kytka1_gauss_autofocus.png
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/media/kytka256.jpg
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/media/kytka_index.jpg
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/media/moving_stripe.gif
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/media/negative.png
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/media/oko.jpg
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/media/plotedges.png
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/media/podzimni_kvetena_focus_test.mp4
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/media/pvj1.png
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/media/replaced.png
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/media/scaledDown.png
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/media/scaledUp.png
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/media/spect1.png
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/media/spect2.png
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/media/spect3_corr_iron.png
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/media/zubRtg.png
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/Blog/media/zubr_anim.gif
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Content/media/post_screenshot.png
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Zodoc
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Zodoc.deps.json
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Zodoc.runtimeconfig.json
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Zodoc.dll
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Zodoc.pdb
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/BlazorStatic.dll
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/Markdig.dll
+/home/runner/work/zodoc/zodoc/src/bin/Debug/net8.0/YamlDotNet.dll
+/home/runner/work/zodoc/zodoc/src/obj/Debug/net8.0/Zodoc.csproj.AssemblyReference.cache
+/home/runner/work/zodoc/zodoc/src/obj/Debug/net8.0/Zodoc.GeneratedMSBuildEditorConfig.editorconfig
+/home/runner/work/zodoc/zodoc/src/obj/Debug/net8.0/Zodoc.AssemblyInfoInputs.cache
+/home/runner/work/zodoc/zodoc/src/obj/Debug/net8.0/Zodoc.AssemblyInfo.cs
+/home/runner/work/zodoc/zodoc/src/obj/Debug/net8.0/Zodoc.csproj.CoreCompileInputs.cache
+/home/runner/work/zodoc/zodoc/src/obj/Debug/net8.0/Zodoc.MvcApplicationPartsAssemblyInfo.cache
+/home/runner/work/zodoc/zodoc/src/obj/Debug/net8.0/Zodoc.sourcelink.json
+/home/runner/work/zodoc/zodoc/src/obj/Debug/net8.0/staticwebassets.build.json
+/home/runner/work/zodoc/zodoc/src/obj/Debug/net8.0/staticwebassets.development.json
+/home/runner/work/zodoc/zodoc/src/obj/Debug/net8.0/staticwebassets/msbuild.Zodoc.Microsoft.AspNetCore.StaticWebAssets.props
+/home/runner/work/zodoc/zodoc/src/obj/Debug/net8.0/staticwebassets/msbuild.build.Zodoc.props
+/home/runner/work/zodoc/zodoc/src/obj/Debug/net8.0/staticwebassets/msbuild.buildMultiTargeting.Zodoc.props
+/home/runner/work/zodoc/zodoc/src/obj/Debug/net8.0/staticwebassets/msbuild.buildTransitive.Zodoc.props
+/home/runner/work/zodoc/zodoc/src/obj/Debug/net8.0/staticwebassets.pack.json
+/home/runner/work/zodoc/zodoc/src/obj/Debug/net8.0/scopedcss/bundle/Zodoc.styles.css
+/home/runner/work/zodoc/zodoc/src/obj/Debug/net8.0/Zodoc.csproj.CopyComplete
+/home/runner/work/zodoc/zodoc/src/obj/Debug/net8.0/Zodoc.dll
+/home/runner/work/zodoc/zodoc/src/obj/Debug/net8.0/refint/Zodoc.dll
+/home/runner/work/zodoc/zodoc/src/obj/Debug/net8.0/Zodoc.pdb
+/home/runner/work/zodoc/zodoc/src/obj/Debug/net8.0/Zodoc.genruntimeconfig.cache
+/home/runner/work/zodoc/zodoc/src/obj/Debug/net8.0/ref/Zodoc.dll
